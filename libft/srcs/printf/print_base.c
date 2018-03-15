@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 15:38:20 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 08:28:03 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 18:06:25 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,21 @@ void	print_base_pre(t_pf_env *e, char type, long val)
 {
 	if (e->flag.hash && e->out[0] != '\0' && val != 0)
 	{
-		(type == 'o' || type == 'O') ? put_buff('0', e) : 0;
-		(type == 'x') ? put_sbuff("0x", e) : 0;
-		(type == 'X') ? put_sbuff("0X", e) : 0;
-//		e->ret += (type == 'o' || type == 'O') ? write(1, "0", 1) : 0;
-//		e->ret += (type == 'x') ? write(1, "0x", 2) : 0;
-//		e->ret += (type == 'X') ? write(1, "0X", 2) : 0;
+		(type == 'o' || type == 'O') ? fill_buff('0', e) : 0;
+		(type == 'x') ? fill_sbuff("0x", e) : 0;
+		(type == 'X') ? fill_sbuff("0X", e) : 0;
 		type == 'a' || type == 'A' ? e->flag.width -= 2 : 0;
 	}
 	else if ((type == 'o' || type == 'O') && e->flag.hash && e->flag.prec >= 0)
-		put_buff('0', e);
-//		e->ret += write(1, "0", 1);
+		fill_buff('0', e);
 	else if (type == 'a' || type == 'A')
 	{
 		if (e->flag.plus || e->flag.sp)
 		{
-			e->flag.sp ? put_buff(' ', e) : put_buff('+', e);
-//			e->ret += e->flag.sp ? write(1, " ", 1) : write(1, "+", 1);
+			e->flag.sp ? fill_buff(' ', e) : fill_buff('+', e);
 			e->flag.width--;
 		}
-		type == 'a' ? put_sbuff("0x", e) : put_sbuff("0X", e);
-//		e->ret += type == 'a' ? write(1, "0x", 2) : write(1, "0X", 2);
+		type == 'a' ? fill_sbuff("0x", e) : fill_sbuff("0X", e);
 		e->flag.width -= 2;
 	}
 }
@@ -56,18 +50,15 @@ void	print_base_width(t_pf_env *e, char type)
 	if (e->flag.prec >= 0)
 	{
 		while (e->flag.width > e->flag.prec + ++i && e->flag.width > len + i)
-			put_buff(' ', e);
-//			e->ret += write(1, " ", 1);
+			fill_buff(' ', e);
 		while (e->flag.width > len + i++)
-			put_buff('0', e);
-//			e->ret += write(1, "0", 1);
+			fill_buff('0', e);
 	}
 	else
 	{
 		while (e->flag.width > len + ++i)
 			(e->flag.zero == 1 ?
-			put_buff('0', e) : put_buff(' ', e));
-//			write(1, "0", 1) : write(1, " ", 1));
+			fill_buff('0', e) : fill_buff(' ', e));
 	}
 }
 
@@ -103,22 +94,19 @@ void	print_base(t_pf_env *e, char type, long val)
 	{
 		print_base_pre(e, type, val);
 		print_base_width(e, type);
-		put_sbuff(e->out, e);
-//		e->ret += write(1, e->out, ft_strlen(e->out));
+		fill_sbuff(e->out, e);
 	}
 	else if (e->flag.minus)
 	{
 		print_base_pre(e, type, val);
-//		e->ret += write(1, e->out, ft_strlen(e->out));
-		put_sbuff(e->out, e);
+		fill_sbuff(e->out, e);
 		print_base_width(e, type);
 	}
 	else
 	{
 		print_base_width(e, type);
 		print_base_pre(e, type, val);
-		put_sbuff(e->out, e);
-//		e->ret += write(1, e->out, ft_strlen(e->out));
+		fill_sbuff(e->out, e);
 	}
 	++e->i;
 	free(e->out);

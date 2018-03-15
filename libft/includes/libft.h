@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:40 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 10:16:52 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 18:24:24 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <stdarg.h>
 # include <wchar.h>
 
-# define PF_BUFF_SIZE 64
-# define BUFF_SIZE 32
-# define FD_SIZE 1
+# define PF_BUFF_SIZE	64
+# define GNL_BUFF_SIZE	32
+# define GNL_OPEN_SIZE	1
 
 typedef struct	s_list
 {
@@ -134,13 +134,13 @@ typedef enum	e_pf_mod
 typedef	struct	s_pf_env
 {
 	va_list		ap;
+	char		buff[PF_BUFF_SIZE];
 	char		*out;
 	t_pf_flag	flag;
 	t_pf_mod	mod;
 	int			i;
 	int			b;
 	int			ret;
-	char		buff[PF_BUFF_SIZE];
 }				t_pf_env;
 
 /*
@@ -148,8 +148,9 @@ typedef	struct	s_pf_env
 */
 
 int				ft_printf(const char *restrict fmt, ...);
-void			put_buff(const char c, t_pf_env *e);
-void			put_sbuff(const char *str, t_pf_env *e);
+void			fill_buff(const char c, t_pf_env *e);
+void			fill_sbuff(const char *str, t_pf_env *e);
+void			print_buff(t_pf_env *e);
 
 /*
 **				parse_arg

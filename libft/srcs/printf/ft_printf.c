@@ -6,27 +6,30 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 15:35:00 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 08:45:01 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 18:04:52 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	put_buff(const char c, t_pf_env *e)
+void	fill_buff(const char c, t_pf_env *e)
 {
 	e->buff[e->b++] = c;
 	if (e->b == PF_BUFF_SIZE)
-	{
-		e->ret += write(1, e->buff, PF_BUFF_SIZE);
-		ft_bzero(&e->buff, PF_BUFF_SIZE);
-		e->b = 0;
-	}
+		print_buff(e);
 }
 
-void	put_sbuff(const char *str, t_pf_env *e)
+void	fill_sbuff(const char *str, t_pf_env *e)
 {
 	while (*str)
-		put_buff(*str++, e);
+		fill_buff(*str++, e);
+}
+
+void	print_buff(t_pf_env *e)
+{
+		e->ret += write(1, e->buff, e->b);
+		ft_bzero(&e->buff, PF_BUFF_SIZE);
+		e->b = 0;
 }
 
 int		ft_printf(const char *restrict fmt, ...)
@@ -45,16 +48,13 @@ int		ft_printf(const char *restrict fmt, ...)
 		}
 		else if (fmt[e.i] == '%' && fmt[e.i + 1] == '%')
 		{
-			put_buff('%', &e);
-//			e.ret += write(1, "%", 1);
+			fill_buff('%', &e);
 			e.i += 2;
 		}
 		else
-			put_buff(fmt[e.i++], &e);
-//			e.ret += write(1, &fmt[e.i++], 1);
+			fill_buff(fmt[e.i++], &e);
 	}
-	if (e.b)
-		e.ret += write(1, e.buff, e.b);
+	print_buff(&e);
 	va_end(e.ap);
 	return (e.ret);
 }

@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 15:40:41 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 09:34:27 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 18:11:18 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	put_wchar(t_pf_env *e, char c)
 {
-	put_buff(c, e);
-//	write(1, &c, 1);
+	fill_buff(c, e);
 }
 
 void	put_wc(t_pf_env *e, wchar_t c)
@@ -43,15 +42,13 @@ void	put_wc(t_pf_env *e, wchar_t c)
 		put_wchar(e, (c & 0x3F) + 0x80);
 		e->ret -= 3;
 	}
-//	++e->ret;
 }
 
 void	print_wchar_minus(t_pf_env *e, wchar_t wc)
 {
 	put_wc(e, wc);
 	while (e->flag.width-- > 1)
-		put_buff(' ', e);
-//		e->ret += write(1, " ", 1);
+		fill_buff(' ', e);
 }
 
 void	print_wchar(t_pf_env *e, wchar_t wc)
@@ -62,8 +59,7 @@ void	print_wchar(t_pf_env *e, wchar_t wc)
 	{
 		while (e->flag.width-- > 1)
 			(e->flag.zero ?
-			put_buff('0', e) : put_buff(' ', e));
-//			write(1, "0", 1) : write(1, " ", 1));
+			fill_buff('0', e) : fill_buff(' ', e));
 		put_wc(e, wc);
 	}
 	++e->i;

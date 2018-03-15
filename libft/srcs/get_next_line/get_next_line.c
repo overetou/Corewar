@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 18:34:21 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 05:21:12 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 18:17:29 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_new_line(char **s, char **line, int fd, int ret)
 	}
 	else if (s[fd][len] == '\0')
 	{
-		if (ret == BUFF_SIZE)
+		if (ret == GNL_BUFF_SIZE)
 			return (get_next_line(fd, line));
 		*line = ft_strdup(s[fd]);
 		ft_strdel(&s[fd]);
@@ -41,14 +41,14 @@ int		ft_new_line(char **s, char **line, int fd, int ret)
 
 int		get_next_line(const int fd, char **line)
 {
-	static char	*s[FD_SIZE];
-	char		buf[BUFF_SIZE + 1];
+	static char	*s[GNL_OPEN_SIZE];
+	char		buf[GNL_BUFF_SIZE + 1];
 	char		*tmp;
 	int			ret;
 
 	if (fd < 0 || line == NULL)
 		return (-1);
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+	while ((ret = read(fd, buf, GNL_BUFF_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
 		if (s[fd] == NULL)

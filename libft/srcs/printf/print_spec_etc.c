@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 15:40:28 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 08:09:26 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 18:09:52 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,16 @@ void	spec_percent(t_pf_env *e)
 {
 	if (e->flag.minus)
 	{
-		put_buff('%', e);
-//		e->ret += write(1, "%", 1);
+		fill_buff('%', e);
 		while (e->flag.width-- > 1)
-			put_buff(' ', e);
-//			e->ret += write(1, " ", 1);
+			fill_buff(' ', e);
 	}
 	else
 	{
 		while (e->flag.width-- > 1)
 			(e->flag.zero ?
-			put_buff('0', e) : put_buff(' ', e));
-//			write(1, "0", 1) : write(1, " ", 1));
-		put_buff('%', e);
-//		e->ret += write(1, "%", 1);
+			fill_buff('0', e) : fill_buff(' ', e));
+		fill_buff('%', e);
 	}
 	++e->i;
 }

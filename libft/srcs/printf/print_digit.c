@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 15:39:05 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 09:00:17 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 18:08:28 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ void	print_digit_sign(t_pf_env *e)
 {
 	if (e->flag.plus || e->flag.sp)
 		(e->flag.plus == 1 ?
-		put_buff('+', e) : put_buff(' ', e));
-//		write(1, "+", 1) : write(1, " ", 1));
+		fill_buff('+', e) : fill_buff(' ', e));
 	else if (e->flag.neg)
-		put_buff('-', e);
-//		e->ret += write(1, "-", 1);
+		fill_buff('-', e);
 }
 
 void	print_digit_width(t_pf_env *e)
@@ -35,18 +33,15 @@ void	print_digit_width(t_pf_env *e)
 	if (e->flag.prec >= 0)
 	{
 		while (e->flag.width - ++i > len)
-			put_buff(' ', e);
-//			e->ret += write(1, " ", 1);
+			fill_buff(' ', e);
 		i = -1;
 		while ((int)ft_strlen(e->out) < len - ++i)
-			put_buff('0', e);
-//			e->ret += write(1, "0", 1);
+			fill_buff('0', e);
 	}
 	else
 		while (e->flag.width - ++i > len)
 			(e->flag.zero == 1 ?
-			put_buff('0', e) : put_buff(' ', e));
-//			write(1, "0", 1) : write(1, " ", 1));
+			fill_buff('0', e) : fill_buff(' ', e));
 }
 
 void	check_digit_sign(t_pf_env *e)
@@ -95,22 +90,19 @@ void	print_digit(t_pf_env *e)
 	{
 		print_digit_sign(e);
 		print_digit_width(e);
-		put_sbuff(e->out, e);
-//		e->ret += write(1, e->out, ft_strlen(e->out));
+		fill_sbuff(e->out, e);
 	}
 	else if (e->flag.minus)
 	{
 		print_digit_sign(e);
-		put_sbuff(e->out, e);
-//		e->ret += write(1, e->out, ft_strlen(e->out));
+		fill_sbuff(e->out, e);
 		print_digit_width(e);
 	}
 	else
 	{
 		print_digit_width(e);
 		print_digit_sign(e);
-		put_sbuff(e->out, e);
-//		e->ret += write(1, e->out, ft_strlen(e->out));
+		fill_sbuff(e->out, e);
 	}
 	++e->i;
 	free(e->out);
