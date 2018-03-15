@@ -6,7 +6,7 @@
 /*   By: kenguyen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 18:42:27 by kenguyen          #+#    #+#             */
-/*   Updated: 2017/11/14 15:39:25 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 20:31:06 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int	ft_strequ(char const *s1, char const *s2)
 	{
 		if (s1[i] != s2[i])
 			return (0);
-		i++;
+		++i;
 	}
-	if (s1[i] == s2[i])
-		return (1);
-	return (0);
+	return (s1[i] == s2[i]);
 }

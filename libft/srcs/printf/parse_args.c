@@ -6,23 +6,11 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 15:38:06 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/05 00:06:04 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 18:37:45 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-
-void	init_flag(t_pf_flag *flag)
-{
-	flag->sp = 0;
-	flag->plus = 0;
-	flag->neg = 0;
-	flag->minus = 0;
-	flag->hash = 0;
-	flag->zero = 0;
-	flag->prec = -1;
-	flag->width = 0;
-}
 
 void	get_mod(const char *restrict fmt, t_pf_env *e)
 {
@@ -64,7 +52,8 @@ void	get_prec(const char *restrict fmt, t_pf_env *e)
 
 void	get_flag(const char *restrict fmt, t_pf_env *e)
 {
-	init_flag(&e->flag);
+	ft_bzero(&e->flag, sizeof(e->flag));
+	e->flag.prec = -1;
 	e->mod = pf_nomod;
 	while (ft_strchr(" #+-.0123456789hjlz", fmt[e->i]))
 	{

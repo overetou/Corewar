@@ -6,7 +6,7 @@
 /*   By: kenguyen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 17:01:26 by kenguyen          #+#    #+#             */
-/*   Updated: 2017/11/14 17:02:25 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 20:26:23 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 int			ft_str_is_lowercase(char *str)
 {
 	int		i;
-	char	cur;
 
-	i = 0;
-	while (str[i])
-	{
-		cur = str[i];
-		if (!(cur >= 'a' && cur <= 'z'))
+	i = -1;
+	while (str[++i])
+		if (!(str[i] >= 'a' && str[i] <= 'z'))
 			return (0);
-		i++;
-	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: kenguyen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/18 19:31:26 by kenguyen          #+#    #+#             */
-/*   Updated: 2017/11/14 17:02:08 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 20:25:59 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@ int			ft_str_is_uppercase(char *str)
 {
 	int		i;
 
-	i = 0;
-	while (str[i])
-	{
+	i = -1;
+	while (str[++i])
 		if (!(str[i] >= 'A' && str[i] <= 'Z'))
 			return (0);
-		i++;
-	}
 	return (1);
 }

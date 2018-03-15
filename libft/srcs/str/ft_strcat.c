@@ -6,7 +6,7 @@
 /*   By: kenguyen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 18:43:28 by kenguyen          #+#    #+#             */
-/*   Updated: 2017/11/14 15:38:54 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 20:28:34 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,10 @@ char	*ft_strcat(char *s1, const char *s2)
 	size_t i;
 	size_t j;
 
-	i = 0;
-	j = 0;
-	while (s1[i])
-		i++;
-	while (s2[j])
-	{
+	i = ft_strlen(s1);
+	j = -1;
+	while (s2[++j])
 		s1[i + j] = s2[j];
-		j++;
-	}
 	s1[i + j] = '\0';
 	return (s1);
 }

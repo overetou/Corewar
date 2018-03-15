@@ -6,7 +6,7 @@
 /*   By: kenguyen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/18 19:27:17 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/12 19:04:27 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 20:26:44 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,12 @@
 int				ft_str_is_numeric(char *str)
 {
 	int		i;
-	char	cur;
 
-	i = 0;
+	i = -1;
 	if (str[0] == '-')
-		i++;
-	while (str[i])
-	{
-		cur = str[i];
-		if (!(cur >= '0' && cur <= '9'))
+		++i;
+	while (str[++i])
+		if (!(str[i] >= '0' && str[i] <= '9'))
 			return (0);
-		i++;
-	}
 	return (1);
 }

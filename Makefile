@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/15 07:59:20 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/03/15 20:53:12 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJ_DIR	= objs/
 INC_DIR	= includes/
 LIB_DIR	= libft/
 
-LIBFT_LIB = $(LIB_DIR)libftprintf.a
+LIBFT_LIB = $(LIB_DIR)libft.a
 
 SRCS	= $(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS	= $(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
@@ -41,14 +41,14 @@ SUCCESS	= $(C_GREEN)SUCCESS$(C_NO)
 OK		= $(C_YELL)OK$(C_NO)
 RM		= $(C_RED)OK$(C_NO)
 
-all: $(NAME)
+all: lib $(NAME)
 
-$(NAME): lib $(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
+$(NAME): $(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME) \
 		-I $(INC_DIR) -I $(LIB_DIR)$(INC_DIR) \
 		$(LIBFT_LIB) $(FLAGS)
 	@echo "Compiling" [ $(NAME) ] $(SUCCESS)
-	@./a.out
+	@./a.out | cat -e
 
 lib:
 	@make -j -C $(LIB_DIR)

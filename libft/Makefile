@@ -6,11 +6,11 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/15 07:23:37 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/03/15 20:11:27 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= libftprintf.a
+NAME	= libft.a
 
 CC		= gcc
 FLAGS	= -Wall -Wextra -Werror #$(DFLAGS)
@@ -138,18 +138,12 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INC_DIR)$(INC_BASE)
 	@printf "\r\033[38;5;11mLinking [ %s ]\033[0m\033[K" "$<"
 
 clean:
-	@if [ -e $(OBJ_DIR) ]; \
-	then \
-			rm -rf $(OBJ_DIR); \
-			echo "Cleaning" [ $(CUR_DIR)objs ] $(RM); \
-	fi;
+	@if [ -e $(OBJ_DIR) ]; then rm -rf $(OBJ_DIR); \
+	echo "Cleaning" [ $(CUR_DIR)objs ] $(RM); fi;
 
 fclean: clean
-	@if [ -e $(NAME) ]; \
-	then \
-			rm -rf $(NAME); \
-			echo "Delete" [ $(NAME) ] $(RM); \
-	fi;
+	@if [ -e $(NAME) ]; then rm -rf $(NAME); \
+	echo "Delete" [ $(NAME) ] $(RM); fi;
 
 re: fclean
 	@make $(NAME)

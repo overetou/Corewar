@@ -3,31 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kenguyen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 18:15:11 by kenguyen          #+#    #+#             */
-/*   Updated: 2017/11/14 15:33:22 by kenguyen         ###   ########.fr       */
+/*   Created: 2018/03/15 19:47:29 by kenguyen          #+#    #+#             */
+/*   Updated: 2018/03/15 19:47:35 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	const unsigned char *src1;
-	const unsigned char *src2;
+	unsigned char *src1;
+	unsigned char *src2;
 
-	src1 = s1;
-	src2 = s2;
+	src1 = (unsigned char*)s1;
+	src2 = (unsigned char*)s2;
 	while (n--)
 	{
 		if (*src1 != *src2)
 			return (*src1 - *src2);
-		else
-		{
-			src1++;
-			src2++;
-		}
+		++src1;
+		++src2;
 	}
 	return (0);
 }
