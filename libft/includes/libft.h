@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:40 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 03:12:12 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 05:21:20 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 # include <stdarg.h>
 # include <wchar.h>
 
+# define PF_BUFF_SIZE 4096
 # define BUFF_SIZE 32
-# define FD_SIZE 0
+# define FD_SIZE 1
 
 typedef struct	s_list
 {
@@ -139,7 +140,7 @@ typedef	struct	s_pf_env
 	int			i;
 	int			b;
 	int			ret;
-	char		buff[4096];
+	char		buff[PF_BUFF_SIZE];
 }				t_pf_env;
 
 /*

@@ -6,14 +6,15 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 02:18:00 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 03:14:09 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 05:19:16 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
+#include <stdio.h>
 
 int			main(void)
 {
-	ft_printf("salut");
+	ft_printf("%s\n", "def");
 	return (0);
 }

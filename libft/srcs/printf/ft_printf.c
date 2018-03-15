@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 15:35:00 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 03:23:35 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 05:22:54 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	add_buff(const char c, t_pf_env *e)
 {
-	if (e->b > 4096)
+	if (e->b >= PF_BUFF_SIZE)
 	{
-		e->ret = write(1, e->buff, ft_strlen(e->buff));
-		ft_bzero(&e->buff, 4096);
+		e->ret += write(1, e->buff, ft_strlen(e->buff));
+		write(1, "|", 1);
+		ft_bzero(&e->buff, PF_BUFF_SIZE);
 		e->b = 0;
 	}
 	e->buff[e->b++] = c;
@@ -52,9 +53,9 @@ int		ft_printf(const char *restrict fmt, ...)
 			e.ret += write(1, &fmt[e.i++], 1);*/
 //		add_buff(fmt[e.i++], &e);
 //	}
-	add_sbuff("salut", &e);
+	add_sbuff("123456789abcdef", &e);
 	if (e.b)
-		e.ret = write(1, e.buff, ft_strlen(e.buff));
+		e.ret += write(1, e.buff, ft_strlen(e.buff));
 	va_end(e.ap);
 	return (e.ret);
 }
