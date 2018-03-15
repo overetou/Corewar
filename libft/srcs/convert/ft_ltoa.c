@@ -6,17 +6,14 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 15:34:45 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/02/14 02:38:54 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 09:19:43 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_pow(int nb)
+static int	ft_pow(long nb, int len)
 {
-	int len;
-
-	len = 0;
 	while (nb > 9)
 	{
 		nb /= 10;
@@ -36,7 +33,7 @@ char		*ft_ltoa(long n)
 	len = 1;
 	n < 0 ? ++len : 0;
 	nb = n < 0 ? -n : n;
-	len = ft_pow(nb);
+	len = ft_pow(nb, len);
 	if (!(s = (char*)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	s[len] = '\0';

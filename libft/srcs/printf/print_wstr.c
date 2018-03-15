@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 15:40:50 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/05 00:07:53 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 08:10:07 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	put_wstr_c(t_pf_env *e, char c)
 {
-	e->ret += write(1, &c, 1);
+	put_buff(c, e);
+//	e->ret += write(1, &c, 1);
 }
 
 void	put_wstr(t_pf_env *e, wchar_t c)
@@ -78,8 +79,9 @@ void	print_wstr_minus(t_pf_env *e, wchar_t *wc, int len)
 			put_wstr(e, wc[i]);
 	}
 	while (e->flag.width-- > len)
-		e->ret += (e->flag.zero == 1 ?
-		write(1, "0", 1) : write(1, " ", 1));
+		(e->flag.zero == 1 ?
+		put_buff('0', e) : put_buff(' ', e));
+//		write(1, "0", 1) : write(1, " ", 1));
 }
 
 void	print_wstr(t_pf_env *e, wchar_t *wc)
@@ -94,8 +96,9 @@ void	print_wstr(t_pf_env *e, wchar_t *wc)
 	else
 	{
 		while (e->flag.width-- > len)
-			e->ret += (e->flag.zero == 1 ?
-			write(1, "0", 1) : write(1, " ", 1));
+			(e->flag.zero == 1 ?
+			put_buff('0', e) : put_buff(' ', e));
+//			write(1, "0", 1) : write(1, " ", 1));
 		if (e->flag.prec >= 0)
 			while (wc[++i] != 0 && i * 4 < e->flag.prec)
 				put_wstr(e, wc[i]);

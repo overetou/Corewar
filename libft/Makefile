@@ -6,11 +6,11 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/15 04:34:20 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/03/15 07:23:37 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= libft.a
+NAME	= libftprintf.a
 
 CC		= gcc
 FLAGS	= -Wall -Wextra -Werror #$(DFLAGS)

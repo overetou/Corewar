@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 15:40:09 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/05 00:06:51 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 08:13:28 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	print_ptraddr_width(t_pf_env *e)
 
 	len = ft_strlen(e->out);
 	while (e->flag.width-- > len)
-		e->ret += write(1, " ", 1);
+		put_buff(' ', e);
+//		e->ret += write(1, " ", 1);
 }
 
 void	print_ptraddr(t_pf_env *e, char type)
@@ -54,13 +55,15 @@ void	print_ptraddr(t_pf_env *e, char type)
 		ft_strlower(e->out);
 	if (e->flag.minus)
 	{
-		e->ret += write(1, e->out, ft_strlen(e->out));
+		put_sbuff(e->out, e);
+//		e->ret += write(1, e->out, ft_strlen(e->out));
 		print_ptraddr_width(e);
 	}
 	else
 	{
 		print_ptraddr_width(e);
-		e->ret += write(1, e->out, ft_strlen(e->out));
+		put_sbuff(e->out, e);
+//		e->ret += write(1, e->out, ft_strlen(e->out));
 	}
 	++e->i;
 	free(e->out);
