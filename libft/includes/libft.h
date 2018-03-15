@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:40 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 07:49:42 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 10:16:52 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdarg.h>
 # include <wchar.h>
 
-# define PF_BUFF_SIZE 4096
+# define PF_BUFF_SIZE 64
 # define BUFF_SIZE 32
 # define FD_SIZE 1
 
