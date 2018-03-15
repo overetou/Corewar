@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:40 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 05:21:20 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/15 05:57:48 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ typedef	struct	s_pf_env
 */
 
 int				ft_printf(const char *restrict fmt, ...);
+void			add_buff(const char c, t_pf_env *e);
+void			add_sbuff(const char *str, t_pf_env *e);
 
 /*
 **				parse_arg
