@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:40 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/17 01:26:46 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/17 01:42:06 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ char			*ft_ultoa(unsigned long n);
 char			*ft_uitoa_base(unsigned int n, int base);
 char			*ft_ultoa_base(unsigned long n, int base);
 int				get_next_line(int const fd, char **line);
-t_list			*ft_lstnew(const void *content, size_t content_size);
-t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-void			ft_lstdelone(t_list **lst, void (*del)(void *, size_t));
-void			ft_lstdel(t_list **lst, void (*del)(void *, size_t));
-void			ft_lstadd(t_list **lst, t_list *new);
-void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
@@ -100,12 +94,27 @@ int				ft_str_is_lowercase(char *str);
 int				ft_str_is_numeric(char *str);
 int				ft_str_is_uppercase(char *str);
 
+/*
+**				lst
+*/
+
 typedef struct	s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
 }				t_list;
+
+t_list			*ft_lstnew(const void *content, size_t content_size);
+t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+void			ft_lstdelone(t_list **lst, void (*del)(void *, size_t));
+void			ft_lstdel(t_list **lst, void (*del)(void *, size_t));
+void			ft_lstadd(t_list **lst, t_list *new);
+void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+
+/*
+**				ft_printf
+*/
 
 typedef struct	s_pf_flag
 {
@@ -141,10 +150,6 @@ typedef	struct	s_pf_env
 	int			b;
 	int			ret;
 }				t_pf_env;
-
-/*
-**				ft_printf
-*/
 
 int				ft_printf(const char *restrict fmt, ...);
 
