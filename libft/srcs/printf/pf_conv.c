@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_spec.c                                       :+:      :+:    :+:   */
+/*   pf_conv.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/07 15:40:19 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 09:03:33 by kenguyen         ###   ########.fr       */
+/*   Created: 2018/03/16 23:14:26 by kenguyen          #+#    #+#             */
+/*   Updated: 2018/03/16 23:14:51 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	spec_base(t_pf_env *e, char type)
+void	conv_base(t_pf_env *e, char type)
 {
 	long			tmp;
 	unsigned long	val;
@@ -37,7 +37,7 @@ void	spec_base(t_pf_env *e, char type)
 	print_base(e, type, (long)val);
 }
 
-void	spec_char(t_pf_env *e, char type)
+void	conv_char(t_pf_env *e, char type)
 {
 	char	*stmp;
 	int		ctmp;
@@ -58,7 +58,7 @@ void	spec_char(t_pf_env *e, char type)
 	}
 }
 
-void	spec_unsint(t_pf_env *e, char type)
+void	conv_unsint(t_pf_env *e, char type)
 {
 	long tmp;
 
@@ -79,7 +79,7 @@ void	spec_unsint(t_pf_env *e, char type)
 	print_digit(e);
 }
 
-void	spec_int(t_pf_env *e)
+void	conv_int(t_pf_env *e)
 {
 	long tmp;
 	long i;

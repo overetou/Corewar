@@ -1,43 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_wstr.c                                       :+:      :+:    :+:   */
+/*   pf_print_wstr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/07 15:40:50 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 18:11:55 by kenguyen         ###   ########.fr       */
+/*   Created: 2018/03/16 23:18:28 by kenguyen          #+#    #+#             */
+/*   Updated: 2018/03/17 00:15:13 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	put_wstr_c(t_pf_env *e, char c)
-{
-	fill_buff(c, e);
-}
-
 void	put_wstr(t_pf_env *e, wchar_t c)
 {
 	if (c <= 0x7F)
-		put_wstr_c(e, c);
+		fill_buff(c, e);
 	else if (c <= 0x7FF)
 	{
-		put_wstr_c(e, (c >> 6) + 0xC0);
-		put_wstr_c(e, (c & 0x3F) + 0x80);
+		fill_buff((c >> 6) + 0xC0, e);
+		fill_buff((c & 0x3F) + 0x80, e);
 	}
 	else if (c <= 0xFFFF)
 	{
-		put_wstr_c(e, ((c >> 12) + 0xE0));
-		put_wstr_c(e, ((c >> 6) & 0x3F) + 0x80);
-		put_wstr_c(e, (c & 0x3F) + 0x80);
+		fill_buff((c >> 12) + 0xE0, e);
+		fill_buff(((c >> 6) & 0x3F) + 0x80, e);
+		fill_buff((c & 0x3F) + 0x80, e);
 	}
 	else if (c <= 0x10FFFF)
 	{
-		put_wstr_c(e, (c >> 18) + 0xF0);
-		put_wstr_c(e, ((c >> 12) & 0x3F) + 0x80);
-		put_wstr_c(e, ((c >> 6) & 0x3F) + 0x80);
-		put_wstr_c(e, (c & 0x3F) + 0x80);
+		fill_buff((c >> 18) + 0xF0, e);
+		fill_buff(((c >> 12) & 0x3F) + 0x80, e);
+		fill_buff(((c >> 6) & 0x3F) + 0x80, e);
+		fill_buff((c & 0x3F) + 0x80, e);
 	}
 }
 
@@ -78,8 +73,7 @@ void	print_wstr_minus(t_pf_env *e, wchar_t *wc, int len)
 			put_wstr(e, wc[i]);
 	}
 	while (e->flag.width-- > len)
-		(e->flag.zero == 1 ?
-		fill_buff('0', e) : fill_buff(' ', e));
+		(e->flag.zero == 1 ? fill_buff('0', e) : fill_buff(' ', e));
 }
 
 void	print_wstr(t_pf_env *e, wchar_t *wc)
@@ -94,8 +88,7 @@ void	print_wstr(t_pf_env *e, wchar_t *wc)
 	else
 	{
 		while (e->flag.width-- > len)
-			(e->flag.zero == 1 ?
-			fill_buff('0', e) : fill_buff(' ', e));
+			(e->flag.zero == 1 ? fill_buff('0', e) : fill_buff(' ', e));
 		if (e->flag.prec >= 0)
 			while (wc[++i] != 0 && i * 4 < e->flag.prec)
 				put_wstr(e, wc[i]);

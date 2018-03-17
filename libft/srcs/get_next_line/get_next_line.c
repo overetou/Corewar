@@ -6,13 +6,13 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 18:34:21 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 20:14:27 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/17 00:58:00 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-int		ft_new_line(char **s, char **line, int fd, int ret)
+int		get_new_line(char **s, char **line, int fd, int ret)
 {
 	char	*tmp;
 	int		len;
@@ -41,7 +41,7 @@ int		ft_new_line(char **s, char **line, int fd, int ret)
 
 int		get_next_line(const int fd, char **line)
 {
-	static char	*s[GNL_OPEN_SIZE];
+	static char	*s[0];
 	char		buf[GNL_BUFF_SIZE + 1];
 	char		*tmp;
 	int			ret;
@@ -63,5 +63,5 @@ int		get_next_line(const int fd, char **line)
 		return (-1);
 	else if (ret == 0 && (s[fd] == NULL || s[fd][0] == '\0'))
 		return (0);
-	return (ft_new_line(s, line, fd, ret));
+	return (get_new_line(s, line, fd, ret));
 }

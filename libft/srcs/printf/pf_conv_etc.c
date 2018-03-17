@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_spec_etc.c                                   :+:      :+:    :+:   */
+/*   pf_conv_etc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/07 15:40:28 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 18:09:52 by kenguyen         ###   ########.fr       */
+/*   Created: 2018/03/16 23:14:56 by kenguyen          #+#    #+#             */
+/*   Updated: 2018/03/17 00:01:04 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	spec_ptraddr(t_pf_env *e, char type)
+void	conv_ptraddr(t_pf_env *e, char type)
 {
 	long			tmp;
 	unsigned long	addr;
@@ -26,7 +26,7 @@ void	spec_ptraddr(t_pf_env *e, char type)
 	print_ptraddr(e, type);
 }
 
-void	spec_wchar(t_pf_env *e, char type)
+void	conv_wchar(t_pf_env *e, char type)
 {
 	wchar_t *ws;
 	wchar_t wc;
@@ -48,7 +48,7 @@ void	spec_wchar(t_pf_env *e, char type)
 	}
 }
 
-void	spec_percent(t_pf_env *e)
+void	conv_percent(t_pf_env *e)
 {
 	if (e->flag.minus)
 	{
@@ -59,8 +59,7 @@ void	spec_percent(t_pf_env *e)
 	else
 	{
 		while (e->flag.width-- > 1)
-			(e->flag.zero ?
-			fill_buff('0', e) : fill_buff(' ', e));
+			(e->flag.zero ? fill_buff('0', e) : fill_buff(' ', e));
 		fill_buff('%', e);
 	}
 	++e->i;

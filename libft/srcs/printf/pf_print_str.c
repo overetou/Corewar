@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_str.c                                        :+:      :+:    :+:   */
+/*   pf_print_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/07 15:40:35 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 18:10:37 by kenguyen         ###   ########.fr       */
+/*   Created: 2018/03/16 23:18:15 by kenguyen          #+#    #+#             */
+/*   Updated: 2018/03/17 00:18:03 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	print_str_width(t_pf_env *e)
 
 	len = ft_strlen(e->out);
 	while (e->flag.width-- > len)
-		(e->flag.zero == 1 ?
-		fill_buff('0', e) : fill_buff(' ', e));
+		(e->flag.zero == 1 ? fill_buff('0', e) : fill_buff(' ', e));
 }
 
 void	print_null_str(t_pf_env *e)
@@ -28,8 +27,7 @@ void	print_null_str(t_pf_env *e)
 
 	len = (e->flag.prec < 0 ? 6 : e->flag.prec);
 	while (e->flag.width-- > len)
-		(e->flag.zero == 1 ?
-		fill_buff('0', e) : fill_buff(' ', e));
+		(e->flag.zero == 1 ? fill_buff('0', e) : fill_buff(' ', e));
 	fill_sbuff("(null)", e);
 	++e->i;
 }

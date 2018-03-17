@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/15 20:11:27 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/03/17 01:05:07 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,17 +58,18 @@ output/ft_putnbr.c\
 output/ft_putstr_fd.c\
 output/ft_putstr.c\
 printf/ft_printf.c\
-printf/parse_args.c\
-printf/print_base.c\
-printf/print_char.c\
-printf/print_digit.c\
-printf/print_invalid.c\
-printf/print_ptraddr.c\
-printf/print_spec.c\
-printf/print_spec_etc.c\
-printf/print_str.c\
-printf/print_wchar.c\
-printf/print_wstr.c\
+printf/pf_conv.c\
+printf/pf_conv_etc.c\
+printf/pf_fill_buff.c\
+printf/pf_parse_args.c\
+printf/pf_print_base.c\
+printf/pf_print_char.c\
+printf/pf_print_digit.c\
+printf/pf_print_invalid.c\
+printf/pf_print_ptraddr.c\
+printf/pf_print_str.c\
+printf/pf_print_wchar.c\
+printf/pf_print_wstr.c\
 str/ft_str_is_lowercase.c\
 str/ft_str_is_numeric.c\
 str/ft_str_is_uppercase.c\

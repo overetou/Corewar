@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:40 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 18:54:06 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/17 00:29:43 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 # define PF_BUFF_SIZE	64
 # define GNL_BUFF_SIZE	32
-# define GNL_OPEN_SIZE	1
 
 typedef struct	s_list
 {
@@ -148,6 +147,11 @@ typedef	struct	s_pf_env
 */
 
 int				ft_printf(const char *restrict fmt, ...);
+
+/*
+**				fill_buff
+*/
+
 void			fill_buff(const char c, t_pf_env *e);
 void			fill_sbuff(const char *str, t_pf_env *e);
 void			print_buff(t_pf_env *e);
@@ -156,23 +160,22 @@ void			print_buff(t_pf_env *e);
 **				parse_arg
 */
 
-void			init_flag(t_pf_flag *flag);
-void			get_flag(const char *restrict fmt, t_pf_env *e);
-void			get_prec(const char *restrict fmt, t_pf_env *e);
-void			get_mod(const char *restrict fmt, t_pf_env *e);
-void			get_spec(const char *restrict fmt, t_pf_env *e);
+void			parse_flag(const char *restrict fmt, t_pf_env *e);
+void			parse_prec(const char *restrict fmt, t_pf_env *e);
+void			parse_mod(const char *restrict fmt, t_pf_env *e);
+void			parse_conv(const char *restrict fmt, t_pf_env *e);
 
 /*
-**				get_spec
+**				get_conv
 */
 
-void			spec_int(t_pf_env *e);
-void			spec_unsint(t_pf_env *e, char type);
-void			spec_char(t_pf_env *e, char type);
-void			spec_wchar(t_pf_env *e, char type);
-void			spec_base(t_pf_env *e, char type);
-void			spec_ptraddr(t_pf_env *e, char type);
-void			spec_percent(t_pf_env *e);
+void			conv_int(t_pf_env *e);
+void			conv_unsint(t_pf_env *e, char type);
+void			conv_char(t_pf_env *e, char type);
+void			conv_wchar(t_pf_env *e, char type);
+void			conv_base(t_pf_env *e, char type);
+void			conv_ptraddr(t_pf_env *e, char type);
+void			conv_percent(t_pf_env *e);
 
 /*
 **				print_digit
@@ -210,11 +213,11 @@ void			print_str_width(t_pf_env *e);
 
 void			print_wchar(t_pf_env *e, wchar_t wc);
 void			print_wchar_minus(t_pf_env *e, wchar_t wc);
+void			put_wchar(t_pf_env *e, wchar_t c);
 void			print_wstr(t_pf_env *e, wchar_t *wc);
 void			print_wstr_minus(t_pf_env *e, wchar_t *wc, int len);
 int				get_wstr_len(wchar_t *wc);
 void			put_wstr(t_pf_env *e, wchar_t c);
-void			put_wstr_c(t_pf_env *e, char c);
 
 /*
 **				print_ptraddr

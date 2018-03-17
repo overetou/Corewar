@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_digit.c                                      :+:      :+:    :+:   */
+/*   pf_print_digit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/07 15:39:05 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 18:08:28 by kenguyen         ###   ########.fr       */
+/*   Created: 2018/03/16 23:17:53 by kenguyen          #+#    #+#             */
+/*   Updated: 2018/03/17 00:18:36 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	print_digit_sign(t_pf_env *e)
 {
 	if (e->flag.plus || e->flag.sp)
-		(e->flag.plus == 1 ?
-		fill_buff('+', e) : fill_buff(' ', e));
+		(e->flag.plus == 1 ? fill_buff('+', e) : fill_buff(' ', e));
 	else if (e->flag.neg)
 		fill_buff('-', e);
 }
@@ -40,8 +39,7 @@ void	print_digit_width(t_pf_env *e)
 	}
 	else
 		while (e->flag.width - ++i > len)
-			(e->flag.zero == 1 ?
-			fill_buff('0', e) : fill_buff(' ', e));
+			(e->flag.zero == 1 ? fill_buff('0', e) : fill_buff(' ', e));
 }
 
 void	check_digit_sign(t_pf_env *e)

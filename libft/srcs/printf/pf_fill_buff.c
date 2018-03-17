@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pf_fill_buff.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/15 02:18:00 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/16 15:48:47 by kenguyen         ###   ########.fr       */
+/*   Created: 2018/03/16 23:28:25 by kenguyen          #+#    #+#             */
+/*   Updated: 2018/03/16 23:28:27 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <corewar.h>
-#include <stdio.h>
+#include <libft.h>
 
-int			main(void)
+void	fill_buff(const char c, t_pf_env *e)
 {
-/*
-	int ret;
-	unsigned char test = 0;
-	int test1 = USHRT_MAX;
-	printf("real printf = %hhO, %hhO", test, (unsigned char)test1);
-	printf("\n");
-	ret = ft_printf("\nfake printf = %hhO, %hhO\n", test, (unsigned char)test1);
-//	printf("\nret = %d\n", ret);
-*/
-	char test[] = "123";
-	ft_printf("%s\n", ft_strrev(test));
-	return (0);
+	e->buff[e->b++] = c;
+	if (e->b == PF_BUFF_SIZE)
+		print_buff(e);
+}
+
+void	fill_sbuff(const char *str, t_pf_env *e)
+{
+	while (*str)
+		fill_buff(*str++, e);
+}
+
+void	print_buff(t_pf_env *e)
+{
+		e->ret += write(1, e->buff, e->b);
+		e->b = 0;
 }
