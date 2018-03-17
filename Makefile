@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/17 01:10:23 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/03/17 01:17:25 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,6 @@ $(NAME): $(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 		-I $(INC_DIR) -I $(LIB_DIR)$(INC_DIR) \
 		$(LIBFT_LIB) $(FLAGS)
 	@echo "Compiling" [ $(NAME) ] $(SUCCESS)
-	@./a.out | cat -e
 
 lib:
 	@make -j -C $(LIB_DIR)

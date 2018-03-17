@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:40 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/17 00:29:43 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/17 01:26:46 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,6 @@
 
 # define PF_BUFF_SIZE	64
 # define GNL_BUFF_SIZE	32
-
-typedef struct	s_list
-{
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
-}				t_list;
 
 /*
 **				libft
@@ -44,9 +37,9 @@ char			*ft_ultoa_base(unsigned long n, int base);
 int				get_next_line(int const fd, char **line);
 t_list			*ft_lstnew(const void *content, size_t content_size);
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
-void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
-void			ft_lstadd(t_list **alst, t_list *new);
+void			ft_lstdelone(t_list **lst, void (*del)(void *, size_t));
+void			ft_lstdel(t_list **lst, void (*del)(void *, size_t));
+void			ft_lstadd(t_list **lst, t_list *new);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
@@ -106,6 +99,13 @@ void			ft_strlower(char *s);
 int				ft_str_is_lowercase(char *str);
 int				ft_str_is_numeric(char *str);
 int				ft_str_is_uppercase(char *str);
+
+typedef struct	s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}				t_list;
 
 typedef struct	s_pf_flag
 {
