@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 18:34:21 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/17 00:58:00 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/19 19:26:45 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		get_new_line(char **s, char **line, int fd, int ret)
 
 int		get_next_line(const int fd, char **line)
 {
-	static char	*s[0];
+	static char	*s[1];
 	char		buf[GNL_BUFF_SIZE + 1];
 	char		*tmp;
 	int			ret;
