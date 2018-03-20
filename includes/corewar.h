@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 02:22:30 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/15 02:23:11 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/20 18:42:13 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct	s_op
 	char 					*full_name;
 	int						has_ocp;
 	int						dir_size;
-	struct s_op				*next;
 }				t_op;
 
 typedef struct	s_param
@@ -64,6 +63,9 @@ typedef struct  s_champ
     t_label   *label;
 }               t_champ;
 
-t_op    *new_op(t_op *op2);
+t_op    g_op_tab[17];
+
+t_champ		*parse(int fd);
+t_champ		*new_champ(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/17 01:05:07 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/03/20 20:22:54 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ DFLAGS	= -g3 -fsanitize=address
 SRC_BASE = \
 char/ft_isalnum.c\
 char/ft_isalpha.c\
+char/ft_isblank.c\
 char/ft_isascii.c\
 char/ft_isdigit.c\
 char/ft_isprint.c\

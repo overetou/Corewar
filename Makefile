@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/17 01:17:25 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/03/20 18:41:29 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,10 @@ FLAGS	= -Wall -Wextra -Werror #$(DFLAGS)
 DFLAGS	= -g3 -fsanitize=address
 
 SRC_BASE = \
-main.c
+main.c\
+op.c\
+parsing.c\
+champ.c
 
 INC_BASE = corewar.h
 

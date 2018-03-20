@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isblank.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/20 14:41:32 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/20 18:45:47 by ysingaye         ###   ########.fr       */
+/*   Created: 2018/03/20 19:13:24 by ysingaye          #+#    #+#             */
+/*   Updated: 2018/03/20 19:14:05 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "corewar.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+int	ft_isblank(int c)
 {
-    int fd;
-
-    if (argc < 1)
-        return (0); //exit("u");
-    fd = open(argv[1], O_RDONLY);
-    if (fd < 0)
-        return (0); //exit("o");
-    new_champ(fd);
+	return (c == ' ' || c == '\t' || c == '\n');
 }

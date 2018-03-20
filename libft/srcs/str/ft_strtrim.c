@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kenguyen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 18:37:42 by kenguyen          #+#    #+#             */
-/*   Updated: 2017/11/14 15:34:10 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/20 19:14:07 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_isblank(int c)
-{
-	return (c == ' ' || c == '\t' || c == '\n');
-}
 
 char		*ft_strtrim(char const *s)
 {
