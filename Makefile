@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= a.out
+NAME	= asm
 
 CC		= gcc
 FLAGS	= -Wall -Wextra -Werror #$(DFLAGS)
