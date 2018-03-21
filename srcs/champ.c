@@ -6,11 +6,11 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 17:58:57 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/21 15:21:40 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/21 16:40:14 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 // void	add_champ_name(t_champ *champ, int fd, char **line)
 // {

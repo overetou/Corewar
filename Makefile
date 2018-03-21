@@ -6,21 +6,20 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/21 13:27:49 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/03/21 16:35:41 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
 
 CC		= gcc
-FLAGS	= -Wall -Wextra -Werror #$(DFLAGS)
+FLAGS	= -Wall -Wextra -Werror $(DFLAGS)
 DFLAGS	= -g3 -fsanitize=address
 
 SRC_BASE = \
 main.c\
 op.c\
 parsing.c\
-champ.c\
 error.c
 
 INC_BASE = corewar.h
@@ -52,6 +51,7 @@ $(NAME): $(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 		-I $(INC_DIR) -I $(LIB_DIR)$(INC_DIR) \
 		$(LIBFT_LIB) $(FLAGS)
 	@echo "Compiling" [ $(NAME) ] $(SUCCESS)
+	@./asm ex.s | cat -e
 
 lib:
 	@make -j -C $(LIB_DIR)
