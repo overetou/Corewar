@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 17:58:57 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/21 14:42:41 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:21:40 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int		set_champ_name_comment(t_champ *champ, char **line, char *str)
 		i = ft_strlen(str);
 		while (ft_isblank((*line)[i]))
 			++i;
-		name = ft_strndup((*line) + i + 1, ft_strcspn((*line) + i + 1, "\""));
+		//ft_printf(ft_strcspn((*line) + i + 1, "\""));
+		name = ft_strsub(*line, i + 1, ft_strcspn((*line) + i + 1, "\""));
 	}
 	if (!name)
 		return (0);
@@ -86,12 +87,12 @@ int		add_champ_name_comment(t_champ *champ, int fd, char **line)
 		nbr_line++;
 		if (champ->name && (find =
 			set_champ_name_comment(champ, line, NAME_CMD_STRING)))
-			ft_error(nbr_line, line);
+			ft_error(nbr_line, *line);
 		if (!find && champ->comment && (find =
 			set_champ_name_comment(champ, line, COMMENT_CMD_STRING)))
-			ft_error(nbr_line, line);
+			ft_error(nbr_line, *line);
 		if (!find && !ft_strchr("#\0", **line))
-			ft_error(nbr_line, line);
+			ft_error(nbr_line, *line);
 		ft_strdel(line);
 		if (champ->name && champ->comment)
 			break ;
@@ -105,10 +106,8 @@ int		add_champ_name_comment(t_champ *champ, int fd, char **line)
 //
 // }
 
-t_champ	*new_champ(int fd)
+t_champ	*new_champ(t_champ *champ)
 {
-	char *line;
-	t_champ	*champ;
 	int nbr_line;
 
 	if (!(champ = (t_champ*)malloc(sizeof(t_champ))))
@@ -117,10 +116,9 @@ t_champ	*new_champ(int fd)
 	champ->comment = NULL;
 	champ->cmd = NULL;
 	champ->label = NULL;
-	line = NULL;
-	nbr_line = add_champ_name_comment(champ, fd, &line);
+	nbr_line = add_champ_name_comment(champ);
 	if (!champ->name || !champ->comment)
-		ft_error(nbr_line, &line);
+		ft_error(nbr_line, line);
 	ft_printf("%s\n%s\n%s\n", champ->name, champ->comment, line);
 	//add_champ_cmd(champ, fd, &line);
 	return (NULL);

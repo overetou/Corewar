@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 02:22:30 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/21 13:26:31 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:18:39 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct  s_label
 
 typedef struct  s_champ
 {
+	char	*file;
 	char    *name;
     char    *comment;
     t_cmd   *cmd;
@@ -67,6 +68,6 @@ t_op    g_op_tab[17];
 
 t_champ		*parse(int fd);
 t_champ		*new_champ(int fd);
-void		ft_error(int nbr_line, char **line);
+void		ft_error(int line, char *message);
 
 #endif
