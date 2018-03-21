@@ -14,13 +14,13 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-void    write_in_hexa(int to_write, int fd)
+void    write_bin(int to_write, int fd)
 {
     int test;
 
     if (to_write)
     {
-        write_in_hexa((to_write / 256), fd);
+        write_bin((to_write / 256), fd);
         test = to_write % 256;
         write(fd, &test, 1);
     }
@@ -31,7 +31,7 @@ int main()
     int fd;
 
     fd = open("exemple.txt", O_WRONLY);
-    write_in_hexa(64251, fd);
+    write_bin(64251, fd);
     close(fd);
     return (0);
 }
