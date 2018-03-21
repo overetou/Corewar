@@ -6,14 +6,14 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/21 14:37:40 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/03/21 16:35:47 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libft.a
 
 CC		= gcc
-FLAGS	= -Wall -Wextra -Werror #$(DFLAGS)
+FLAGS	= -Wall -Wextra -Werror $(DFLAGS)
 DFLAGS	= -g3 -fsanitize=address
 
 SRC_BASE = \

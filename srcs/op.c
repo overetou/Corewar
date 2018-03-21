@@ -6,11 +6,11 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:39:11 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/20 17:46:42 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/21 16:40:43 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 t_op    g_op_tab[17] =
 {

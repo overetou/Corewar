@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 02:22:30 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/21 15:18:39 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/21 16:44:58 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 # define COREWAR_H
 
 # include <libft.h>
+# include <fcntl.h>
 # include "op.h"
 
 /*
-**				corewar
-*/
+ **				corewar
+ */
 
 typedef struct	s_op
 {
@@ -51,23 +52,23 @@ typedef struct	s_cmd
 typedef struct  s_label
 {
 	char    *name;
-    t_cmd   *cmd;
-    struct	s_label   *next;
+	t_cmd   *cmd;
+	struct	s_label   *next;
 }				t_label;
 
 typedef struct  s_champ
 {
+	int		i;
 	char	*file;
-	char    *name;
-    char    *comment;
-    t_cmd   *cmd;
-    t_label   *label;
+	char	 *name;
+	char	*comment;
+	t_cmd	*cmd;
+	t_label	*label;
 }               t_champ;
 
 t_op    g_op_tab[17];
 
-t_champ		*parse(int fd);
-t_champ		*new_champ(int fd);
+void		parse(t_champ *champ);
 void		ft_error(int line, char *message);
 
 #endif
