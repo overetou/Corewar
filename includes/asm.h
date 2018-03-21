@@ -38,6 +38,8 @@ typedef struct	s_param
 	char				code;
 	int					value;
 	int					nbr_octet;
+	char				*label;
+
 	struct s_param		*next;
 }				t_param;
 
