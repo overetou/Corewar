@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:40 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/20 20:22:41 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/21 14:38:00 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char			*ft_strchr(const char *s, int c);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 char			*ft_strcpy(char *dst, const char *src);
+size_t			ft_strcspn(const char *str1, const char *str2);
 char			*ft_strdup(const char *str);
 char			*ft_strndup(const char *s1, size_t n);
 size_t			ft_strlen(const char *s);

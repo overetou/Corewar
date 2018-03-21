@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/20 20:22:54 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/03/21 14:37:40 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ str/ft_strchr.c\
 str/ft_strclr.c\
 str/ft_strcmp.c\
 str/ft_strcpy.c\
+str/ft_strcspn.c\
 str/ft_strdel.c\
 str/ft_strdup.c\
 str/ft_strequ.c\

@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_strcspn.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/20 15:47:41 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/21 13:20:08 by ysingaye         ###   ########.fr       */
+/*   Created: 2018/03/21 14:28:28 by ysingaye          #+#    #+#             */
+/*   Updated: 2018/03/21 14:38:19 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include <libft.h>
 
-// t_champ *parse(int fd)
-// {
-//
-// }
+size_t	ft_strcspn(const char *str1, const char *str2)
+{
+	int i;
+
+	i = 0;
+	while (str1[i] && !ft_strchr(str2, str1[i]))
+		i++;
+	return (i);
+}

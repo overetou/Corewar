@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 17:58:57 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/20 20:44:22 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/21 14:42:41 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,38 +48,55 @@
 // 	*line = trim;
 // }
 
-void	add_champ_name(t_champ *champ, int fd, char **line)
+int		set_champ_name_comment(t_champ *champ, char **line, char *str)
 {
-	int i;
+	char	*name;
+	int 	i;
 
-	while (get_next_line(fd, line) > 0)
+	name = NULL;
+	if (!ft_strncmp(*line, str, ft_strlen(str)))
 	{
-		i = 0;
+		i = ft_strlen(str);
 		while (ft_isblank((*line)[i]))
 			++i;
-		if (!ft_strncmp((*line) + i, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
-		{
-			i += ft_strlen(NAME_CMD_STRING);
-			while (ft_isblank((*line)[i]))
-				++i;
-			champ->name = ft_strndup((*line) + i + 1, ft_strlen((*line) + i + 1) - 1);
-		}
-		else if (!ft_strncmp((*line) + i, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)))
-		{
-			i += ft_strlen(COMMENT_CMD_STRING);
-			while (ft_isblank((*line)[i]))
-				++i;
-			champ->comment = ft_strndup((*line) + i + 1, ft_strlen((*line) + i + 1) - 1);
-		}
-		else if (!ft_strchr("#\0", (*line)[i]))
-		{
-			ft_printf("%s\n", *line);
-			exit (0);
-		}
+		name = ft_strndup((*line) + i + 1, ft_strcspn((*line) + i + 1, "\""));
+	}
+	if (!name)
+		return (0);
+	else if (ft_strequ(str, NAME_CMD_STRING))
+		champ->name = name;
+	else if (ft_strequ(str, COMMENT_CMD_STRING))
+		champ->comment = name;
+	return (1);
+}
+
+int		add_champ_name_comment(t_champ *champ, int fd, char **line)
+{
+	int nbr_line;
+	int find;
+	char	*tmp;
+
+	nbr_line = 0;
+	while (get_next_line(fd, line) > 0)
+	{
+		tmp = *line;
+		*line = ft_strtrim(tmp);
+		ft_strdel(&tmp);
+		find = 0;
+		nbr_line++;
+		if (champ->name && (find =
+			set_champ_name_comment(champ, line, NAME_CMD_STRING)))
+			ft_error(nbr_line, line);
+		if (!find && champ->comment && (find =
+			set_champ_name_comment(champ, line, COMMENT_CMD_STRING)))
+			ft_error(nbr_line, line);
+		if (!find && !ft_strchr("#\0", **line))
+			ft_error(nbr_line, line);
 		ft_strdel(line);
 		if (champ->name && champ->comment)
 			break ;
 	}
+	return (nbr_line);
 }
 
 
@@ -92,6 +109,7 @@ t_champ	*new_champ(int fd)
 {
 	char *line;
 	t_champ	*champ;
+	int nbr_line;
 
 	if (!(champ = (t_champ*)malloc(sizeof(t_champ))))
 		exit (0);
@@ -100,7 +118,9 @@ t_champ	*new_champ(int fd)
 	champ->cmd = NULL;
 	champ->label = NULL;
 	line = NULL;
-	add_champ_name(champ, fd, &line);
+	nbr_line = add_champ_name_comment(champ, fd, &line);
+	if (!champ->name || !champ->comment)
+		ft_error(nbr_line, &line);
 	ft_printf("%s\n%s\n%s\n", champ->name, champ->comment, line);
 	//add_champ_cmd(champ, fd, &line);
 	return (NULL);

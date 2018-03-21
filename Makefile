@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/20 18:41:29 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/03/21 13:27:49 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC_BASE = \
 main.c\
 op.c\
 parsing.c\
-champ.c
+champ.c\
+error.c
 
 INC_BASE = corewar.h
 
