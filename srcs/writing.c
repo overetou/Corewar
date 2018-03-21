@@ -69,14 +69,3 @@ void    print_label(t_cmd *current, t_param *p, t_label *lab, int fd)
 	}
 	write_bin(count, fd, p->nbr_octet);
 }
-
-int main()
-{
-    int fd;
-    unsigned int test;
-
-    fd = open("exemple.txt", O_WRONLY);
-    write_bin( -1, fd, 2);
-    close(fd);
-    return (0);
-}
