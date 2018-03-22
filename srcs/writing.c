@@ -13,25 +13,59 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <asm.h>
 
-void    write_bin(int to_write, int fd)
+void    write_bin(unsigned int to_write, int fd, int len)
 {
     int test;
 
-    if (to_write)
+    if (len)
     {
-        write_bin((to_write / 256), fd);
+        write_bin((to_write / 256), fd, --len);
         test = to_write % 256;
         write(fd, &test, 1);
     }
 }
 
-int main()
+int		get_cmd_size(t_cmd *cmd)
 {
-    int fd;
+	int		count;
+	t_param	*digger;
 
-    fd = open("exemple.txt", O_WRONLY);
-    write_bin(64251, fd);
-    close(fd);
-    return (0);
+	count = 1;
+	digger = cmd->param;
+	while (digger)
+	{
+		count += digger->nbr_octet;
+		digger = digger->next;
+	}
+	return (count);
+}
+
+void    print_label(t_cmd *current, t_param *p, t_label *lab, int fd)
+{
+    t_cmd   *digger;
+    t_cmd   *floor;
+    int     count;
+	int		sign;
+
+    lab = find_lab(lab, p->label);
+    if (lab->cmd->index > current->index)
+    {
+        digger = current;
+        floor = lab->cmd;
+		sign = 1;
+    }
+    else
+    {
+        digger = lab->cmd;
+        floor = current;
+		sign = -1;
+    }
+    while (digger != floor)
+	{
+		count += get_cmd_size(digger) * sign;
+		digger = digger->next;
+	}
+	write_bin(count, fd, p->nbr_octet);
 }
