@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:11:29 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/22 16:17:24 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/22 17:13:07 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,21 @@
 void	valid_params(t_param *param, t_op *op)
 {
 	int		i;
-	int		mask;
 
 	i = 0;
 	while (param && i < op->param_numbers)
 	{
-		else if (param->code == REG_CODE && !HAS_REG_PERM(op->perm[i]))
-			ft_error("ERROR HAS_REG_PERM", 0);
+		if (param->code == REG_CODE && !HAS_REG_PERM(op->perm[i]))
+			ft_error(0, "ERROR HAS_REG_PERM");
 		else if (param->code == DIR_CODE && !HAS_DIR_PERM(op->perm[i]))
-			ft_error("ERROR HAS_DIR_PERM", 0);
+			ft_error(0, "ERROR HAS_DIR_PERM");
 		else if (param->code == IND_CODE && !HAS_IND_PERM(op->perm[i]))
-			ft_error("ERROR HAS_IND_PERM", 0);
+			ft_error(0, "ERROR HAS_IND_PERM");
 		i++;
 		param = param->next;
 	}
 	if (i != op->param_numbers)
-		ft_error("ERROR NBR PARAM", 0);
+		ft_error(0, "ERROR NBR PARAM");
 }
 
 void	parse_param(t_cmd *cmd, t_champ *champ)
@@ -46,7 +45,7 @@ void	parse_param(t_cmd *cmd, t_champ *champ)
 	champ->i += len;
 	param = NULL;
 	push_param(&param, new_param(ft_strtrim(tmp), champ, cmd));
-	ft_strdel(tmp);
+	ft_strdel(&tmp);
 	cmd->param = param;
 }
 
@@ -70,13 +69,14 @@ t_cmd	*new_cmd(t_op *op, t_champ *champ, int index)
 	t_cmd	*cmd;
 
 	if (!(cmd = (t_cmd*)malloc(sizeof(t_cmd))))
-		ft_error("ERROR MALLOC CMD", 0);
+		ft_error(0, "ERROR MALLOC CMD");
 	cmd->op = op;
 	cmd->index = index;
 	cmd->next = NULL;
-	while (champ->file[champ->i] && !ft_strchr(champ->file[champ->i], "#\n"))
+	while (champ->file[champ->i] && !ft_strchr("#\n", champ->file[champ->i]))
 		parse_param(cmd, champ);
 	valid_params(cmd->param, op);
 	if (champ->label && !champ->label->cmd)
 		champ->label->cmd = cmd;
+	return (cmd);
 }

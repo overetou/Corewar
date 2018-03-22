@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 02:22:30 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/22 16:42:29 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/22 17:23:48 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,8 @@ void		push_cmd(t_cmd **cmd, t_cmd *new_cmd);
 void		add_label(t_label **label, t_label *new_label);
 t_label		*new_label(char *str);
 t_label		*find_label(t_label *label, char *str);
+void		push_param(t_param **param, t_param *new_param);
+t_param		*new_param(char *str, t_champ *champ, t_cmd *cmd);
+void		parse_instruct(t_champ *champ);
 
 #endif

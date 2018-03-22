@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 15:47:41 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/22 15:54:38 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/22 17:23:26 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ void		parse(t_champ *champ)
 	set_name_comment(champ);
 	ft_printf("name = %s\n", champ->name);
 	ft_printf("comment = %s\n", champ->comment);
+	parse_instruct(champ);
 }
