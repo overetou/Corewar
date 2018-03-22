@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:40 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/22 14:40:51 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/22 16:01:46 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void			ft_strsplitdel(char **split);
 size_t			ft_strspn(const char *str1, const char *str2);
 char			*ft_strsub(const char *s, unsigned int start, size_t len);
 char			*ft_strtrim(char const *s);
+char			*ft_strtrim_space(char const *s);
 char			*ft_strrev(char *str);
 void			ft_strlower(char *s);
 int				ft_str_is_lowercase(char *str);

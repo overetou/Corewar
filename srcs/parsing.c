@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 15:47:41 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/21 19:21:00 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/22 17:23:26 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		store_name(t_champ *champ)
 	int tmp;
 
 	champ->i += ft_strlen(NAME_CMD_STRING);
-	while (ft_isblank(champ->file[champ->i]))
+	while (ft_isspace(champ->file[champ->i]))
 		champ->i++;
 	if (champ->file[champ->i] != '"')
 		ft_error(0, "bug name 1");
@@ -35,7 +35,7 @@ void		store_comment(t_champ *champ)
 	int tmp;
 
 	champ->i += ft_strlen(COMMENT_CMD_STRING);
-	while (ft_isblank(champ->file[champ->i]))
+	while (ft_isspace(champ->file[champ->i]))
 		champ->i++;
 	if (champ->file[champ->i] != '"')
 		ft_error(0, "bug on comment 1");
@@ -83,4 +83,5 @@ void		parse(t_champ *champ)
 	set_name_comment(champ);
 	ft_printf("name = %s\n", champ->name);
 	ft_printf("comment = %s\n", champ->comment);
+	parse_instruct(champ);
 }

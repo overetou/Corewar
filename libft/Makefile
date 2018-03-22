@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/22 14:41:14 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/03/22 16:02:10 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,6 +107,7 @@ str/ft_strsplitdel.c\
 str/ft_strspn.c\
 str/ft_strstr.c\
 str/ft_strsub.c\
+str/ft_strtrim_space.c\
 str/ft_strtrim.c
 
 INC_BASE = libft.h

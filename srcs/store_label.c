@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 16:39:17 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/22 14:30:47 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/22 17:20:20 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ t_op	*find_op(t_op *op, char *str)
 	int i;
 
 	i = 0;
-	while (op && op[i] && op[i]->opcode)
+	while (op && op[i].opcode)
 	{
-		if (ft_strequ(str, op[i]->short_name))
-			return (op[i]);
+		if (ft_strequ(str, op[i].short_name))
+			return (&op[i]);
 		i++;
 	}
 	return (NULL);
@@ -32,7 +32,7 @@ void	parse_instruct(t_champ *champ)
 	char	*tmp;
 	int 	index;
 	t_op	*op;
-	int		index;
+	t_cmd	*cmd;
 
 	index = 0;
 	while (champ->file[champ->i])
@@ -49,17 +49,15 @@ void	parse_instruct(t_champ *champ)
 			if (champ->file[champ->i] == LABEL_CHAR)
 			{
 				if (find_label(champ->label, tmp))
-					ft_error("ERROR LABEL EXIST", 0);
+					ft_error(0, "ERROR LABEL EXIST");
 				add_label(&champ->label, new_label(tmp));
 				champ->i++;
 			}
 			else if (ft_isspace(champ->file[champ->i]) && (op = find_op(g_op_tab, tmp)))
-			{
-				new_cmd(op, champ, index);
-			}
+				push_cmd(&cmd, new_cmd(op, champ, index));
 			else
-				ft_error("OP UNEXIST", 0);
-			ft_strdel(tmp);
+				ft_error(0, "OP UNEXIST");
+			ft_strdel(&tmp);
 		}
 	}
 }
