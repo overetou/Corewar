@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 02:22:30 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/21 16:44:58 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/22 14:18:09 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct	s_param
 	int					value;
 	int					nbr_octet;
 	char				*label;
-
 	struct s_param		*next;
 }				t_param;
 
@@ -62,7 +61,7 @@ typedef struct  s_champ
 {
 	int		i;
 	char	*file;
-	char	 *name;
+	char	*name;
 	char	*comment;
 	t_cmd	*cmd;
 	t_label	*label;
@@ -72,5 +71,6 @@ t_op    g_op_tab[17];
 
 void		parse(t_champ *champ);
 void		ft_error(int line, char *message);
+void		store_hash(t_champ *champ);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 15:47:41 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/21 16:40:08 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/21 19:21:00 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ void		set_name_comment(t_champ *champ)
 	{
 		while (ft_isblank(champ->file[champ->i]))
 			champ->i++;
-		if (ft_strnequ(&champ->file[champ->i], NAME_CMD_STRING, 
+		if (ft_strnequ(&champ->file[champ->i], NAME_CMD_STRING,
 			ft_strlen(NAME_CMD_STRING)))
 			store_name(champ);
-		else if (ft_strnequ(&champ->file[champ->i], COMMENT_CMD_STRING, 
+		else if (ft_strnequ(&champ->file[champ->i], COMMENT_CMD_STRING,
 			ft_strlen(COMMENT_CMD_STRING)))
 			store_comment(champ);
-		else if (champ->file[champ->i] == '#')
+		else if (champ->file[champ->i] == COMMENT_CHAR)
 			store_hash(champ);
 		else
 			ft_error(0, "bug on parsing");

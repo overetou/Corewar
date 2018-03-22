@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/21 16:35:47 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/03/22 14:41:14 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,14 @@ FLAGS	= -Wall -Wextra -Werror $(DFLAGS)
 DFLAGS	= -g3 -fsanitize=address
 
 SRC_BASE = \
+char/ft_charcspn.c\
 char/ft_isalnum.c\
 char/ft_isalpha.c\
 char/ft_isblank.c\
 char/ft_isascii.c\
 char/ft_isdigit.c\
 char/ft_isprint.c\
+char/ft_isspace.c\
 char/ft_tolower.c\
 char/ft_toupper.c\
 convert/ft_atoi.c\
@@ -102,6 +104,7 @@ str/ft_strrchr.c\
 str/ft_strrev.c\
 str/ft_strsplit.c\
 str/ft_strsplitdel.c\
+str/ft_strspn.c\
 str/ft_strstr.c\
 str/ft_strsub.c\
 str/ft_strtrim.c
