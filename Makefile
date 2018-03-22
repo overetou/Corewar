@@ -22,7 +22,7 @@ op.c\
 parsing.c\
 error.c
 
-INC_BASE = corewar.h
+INC_BASE = asm.h
 
 CUR_DIR	= Corewar/
 SRC_DIR	= srcs/
