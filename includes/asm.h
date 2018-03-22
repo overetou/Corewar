@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 02:22:30 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/22 14:18:09 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/22 16:42:29 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 /*
  **				corewar
  */
+
+ # define HAS_REG_PERM(x) ((x | T_DIR | T_IND) == (T_REG | T_DIR | T_IND))
+ # define HAS_DIR_PERM(x) ((T_REG | x | T_IND) == (T_REG | T_DIR | T_IND))
+ # define HAS_IND_PERM(x) ((T_REG | T_DIR | x) == (T_REG | T_DIR | T_IND))
 
 typedef struct	s_op
 {
@@ -72,5 +76,10 @@ t_op    g_op_tab[17];
 void		parse(t_champ *champ);
 void		ft_error(int line, char *message);
 void		store_hash(t_champ *champ);
+t_cmd		*new_cmd(t_op *op, t_champ *champ, int index);
+void		push_cmd(t_cmd **cmd, t_cmd *new_cmd);
+void		add_label(t_label **label, t_label *new_label);
+t_label		*new_label(char *str);
+t_label		*find_label(t_label *label, char *str);
 
 #endif
