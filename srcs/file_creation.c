@@ -37,9 +37,16 @@ void	print_header(int fd, t_champ *champ)
 	write_bin(0, fd, COMMENT_LENGTH - ft_strlen(champ->comment));
 }
 
-void	print_params(t_param *param, t_cmd *cmd)
+void	print_params(t_param *param, t_cmd *cmd, int fd)
 {
-	
+	while (param)
+	{
+		if (param->label)
+			print_label(cmd, param, param->label, fd);
+		else
+			write_bin(param->value, param->nbr_octet);
+		param = param->next;
+	}
 }
 
 void	print_cmd(int fd, t_champ *champ, t_cmd *cmd)
@@ -49,7 +56,7 @@ void	print_cmd(int fd, t_champ *champ, t_cmd *cmd)
 		ft_putchar_fd(cmd->op->opcode, fd);
 		if (cmd->op->has_ocp)
 			write_bin(assemble_ocp(cmd), fd);
-		print_params(cmd->param, cmd);
+		print_params(cmd->param, cmd, fd);
 		cmd = cmd->next;
 	}
 }
