@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 16:39:17 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/22 17:20:20 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/26 15:49:03 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void	parse_instruct(t_champ *champ)
 		else
 		{
 			len = ft_strspn(&champ->file[champ->i], LABEL_CHARS);
+			ft_printf("nbr = %d\n", len);
 			tmp = ft_strsub(champ->file, champ->i, len);
+			ft_printf("name = %s\n", tmp);
 			champ->i += len;
 			if (champ->file[champ->i] == LABEL_CHAR)
 			{
@@ -54,10 +56,15 @@ void	parse_instruct(t_champ *champ)
 				champ->i++;
 			}
 			else if (ft_isspace(champ->file[champ->i]) && (op = find_op(g_op_tab, tmp)))
+			{
+				ft_printf("test start\n");
 				push_cmd(&cmd, new_cmd(op, champ, index));
+				ft_printf("test end\n");
+			}
 			else
 				ft_error(0, "OP UNEXIST");
 			ft_strdel(&tmp);
 		}
+		ft_printf("test %d\n", champ->i);
 	}
 }

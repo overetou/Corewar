@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 18:51:26 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/22 17:15:11 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/26 15:44:05 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	set_int_param(char *str, t_param *param, int code)
 	int i;
 
 	i = 0;
+	ft_printf("%s\n", str);
 	if (str[i] == '-')
 		i++;
 	while (ft_isdigit(str[i]))
@@ -43,26 +44,24 @@ void	set_int_param(char *str, t_param *param, int code)
 	param->label = NULL;
 }
 
-void	set_label_param(char *str, t_param *param, t_champ *champ, int code)
+void	set_label_param(char *str, t_param *param, int code)
 {
 	int i;
 
 	i = ft_strspn(str, LABEL_CHARS);
 	if (str[i])
 		ft_error(0, "SYNTAX ERROR");
-	if (!find_label(champ->label, str))
-		ft_error(0, "LABEL UNKNOW");
 	param->value = 0;
 	param->code = code;
 	param->label = str;
 }
 
-void	set_direct_param(char *str, t_param *param, t_champ *champ, t_cmd *cmd)
+void	set_direct_param(char *str, t_param *param, t_cmd *cmd)
 {
 	if (!cmd->op->dir_size)
 		param->nbr_octet = 4;
 	if (str[0] == LABEL_CHAR)
-		set_label_param(&str[1], param, champ, DIR_CODE);
+		set_label_param(&str[1], param, DIR_CODE);
 	else
 		set_int_param(str, param, DIR_CODE);
 }
@@ -84,7 +83,7 @@ void	set_registre_param(char *str, t_param *param)
 	param->label = NULL;
 }
 
-t_param	*new_param(char *str, t_champ *champ, t_cmd *cmd)
+t_param	*new_param(char *str, t_cmd *cmd)
 {
 	int i;
 	t_param	*param;
@@ -93,12 +92,14 @@ t_param	*new_param(char *str, t_champ *champ, t_cmd *cmd)
 		ft_error(0, "ERROR MALLOC PARAM");
 	i = 0;
 	param->nbr_octet = 2;
+	if (!str || !*str)
+		ft_error(0, "PARAM NULL");
 	if (str[i] == 'r')
 		set_registre_param(&str[i + 1], param);
 	else if (str[i] == DIRECT_CHAR)
-		set_direct_param(&str[i + 1], param, champ, cmd);
+		set_direct_param(&str[i + 1], param, cmd);
 	else if (str[i] == LABEL_CHAR)
-		set_label_param(&str[i + 1], param, champ, IND_CODE);
+		set_label_param(&str[i + 1], param, IND_CODE);
 	else
 		set_int_param(str, param, IND_CODE);
 	return (param);
