@@ -6,17 +6,18 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/26 15:15:48 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/03/26 15:57:57 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= asm
+ASM			= asm
+VM			= corewar
 
-CC		= gcc
-FLAGS	= -Wall -Wextra -Werror #$(DFLAGS)
-DFLAGS	= -g3 -fsanitize=address
+CC			= gcc
+FLAGS		= -Wall -Wextra -Werror #$(DFLAGS)
+DFLAGS		= -g3 -fsanitize=address
 
-SRC_BASE = \
+SRC_ASM		= \
 main.c\
 op.c\
 parsing.c\
@@ -26,62 +27,70 @@ param.c\
 store_label.c\
 error.c
 
-INC_BASE = asm.h
+SRC_VM		= \
+vm.c
 
-CUR_DIR	= Corewar/
-SRC_DIR	= srcs/
-OBJ_DIR	= objs/
-INC_DIR	= includes/
-LIB_DIR	= libft/
+LIB_DIR		= libft/
+INC_DIR		= includes/
 
-LIBFT_LIB = $(LIB_DIR)libft.a
+SRC_DIR_ASM	= srcs_asm/
+SRC_DIR_VM	= srcs_vm/
 
-SRCS	= $(addprefix $(SRC_DIR), $(SRC_BASE))
-OBJS	= $(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
+OBJ_DIR_ASM	= objs_asm/
+OBJ_DIR_VM	= objs_vm/
 
-C_NO	= "\033[00m"
-C_GREEN	= "\033[32m"
-C_RED	= "\033[31m"
-C_YELL	= "\033[33m"
+LIBFT_LIB	= $(LIB_DIR)libft.a
 
-SUCCESS	= $(C_GREEN)SUCCESS$(C_NO)
-OK		= $(C_YELL)OK$(C_NO)
-RM		= $(C_RED)OK$(C_NO)
+SRCS_ASM	= $(addprefix $(SRC_DIR_ASM), $(SRC_ASM))
+SRCS_VM		= $(addprefix $(SRC_DIR_VM), $(SRC_VM))
 
-all: lib $(NAME)
+OBJS_ASM	= $(addprefix $(OBJ_DIR_ASM), $(SRC_ASM:.c=.o))
+OBJS_VM		= $(addprefix $(OBJ_DIR_VM), $(SRC_VM:.c=.o))
 
-$(NAME): $(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
-	@$(CC) $(OBJS) -o $(NAME) \
-		-I $(INC_DIR) -I $(LIB_DIR)$(INC_DIR) \
-		$(LIBFT_LIB) $(FLAGS)
-	@echo "Compiling" [ $(NAME) ] $(SUCCESS)
-	#@./asm ex.s | cat -e
+HEADER		= -I $(INC_DIR) -I $(LIB_DIR)$(INC_DIR)
+
+C_NO		= "\033[00m"
+C_GREEN		= "\033[32m"
+C_RED		= "\033[31m"
+C_YELL		= "\033[33m"
+
+SUCCESS		= $(C_GREEN)SUCCESS$(C_NO)
+OK			= $(C_YELL)OK$(C_NO)
+RM			= $(C_RED)OK$(C_NO)
+
+all: lib $(ASM) $(VM)
 
 lib:
 	@make -j -C $(LIB_DIR)
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(dir $(OBJS))
+$(ASM): $(LIBFT_LIB) $(OBJS_ASM)
+	@$(CC) $(FLAGS) $(OBJS_ASM) $(LIBFT_LIB) -o $@
+	@echo "Compiling" [ $@ ] $(SUCCESS)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INC_DIR)$(INC_BASE)
-	@$(CC) $(FLAGS) -I $(INC_DIR) -I $(LIB_DIR)$(INC_DIR) -c $< -o $@
+$(OBJ_DIR_ASM)%.o: $(SRC_DIR_ASM)%.c
+	@mkdir -p $(OBJ_DIR_ASM)
+	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
 	@echo "Linking" [ $< ] $(OK)
 
-cleanlib:
+$(VM): $(LIBFT_LIB) $(OBJS_VM)
+	@$(CC) $(FLAGS) $(OBJS_VM) $(LIBFT_LIB) -o $@
+	@echo "Compiling" [ $@ ] $(SUCCESS)
+
+$(OBJ_DIR_VM)%.o: $(SRC_DIR_VM)%.c
+	@mkdir -p $(OBJ_DIR_VM)
+	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
+	@echo "Linking" [ $< ] $(OK)
+
+clean:
 	@make -C $(LIB_DIR) clean
+	@rm -rf $(OBJ_DIR_ASM) $(OBJ_DIR_VM)
+	@echo "Cleaning" [ objs_asm \& objs_vm ] $(RM)
 
-fcleanlib:
+fclean: clean
 	@make -C $(LIB_DIR) fclean
-
-clean: cleanlib
-	@rm -rf $(OBJ_DIR)
-	@echo "Cleaning" [ $(CUR_DIR)objs ] $(RM)
-
-fclean: clean fcleanlib
-	@rm -rf $(NAME)
-	@echo "Delete" [ $(NAME) ] $(RM)
+	@rm -rf $(ASM) $(VM)
+	@echo "Delete" [ asm \& corewar ] $(RM)
 
 re: fclean all
 
-.PHONY: fclean clean fcleanlib cleanlib re lib
+.PHONY: all fclean clean re lib
