@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 15:47:41 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/26 15:17:31 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/26 18:00:20 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void		store_name(t_champ *champ)
 	while (ft_isspace(champ->file[champ->i]))
 		champ->i++;
 	if (champ->file[champ->i] != '"')
-		ft_error(0, "bug name 1");
+		ft_error(champ, "bug name 1");
 	if (!ft_strchr(&champ->file[++champ->i], '"'))
-		ft_error(0, "bug name 2");
+		ft_error(champ, "bug name 2");
 	tmp = ft_strcspn(&champ->file[champ->i], "\"");
 	champ->name = ft_strsub(champ->file, champ->i, tmp);
 	if (ft_strlen(champ->name) > PROG_NAME_LENGTH)
-		ft_error(0, "bug on length prog");
+		ft_error(champ, "bug on length prog");
 	champ->i += tmp;
 }
 
@@ -38,13 +38,13 @@ void		store_comment(t_champ *champ)
 	while (ft_isspace(champ->file[champ->i]))
 		champ->i++;
 	if (champ->file[champ->i] != '"')
-		ft_error(0, "bug on comment 1");
+		ft_error(champ, "bug on comment 1");
 	if (!ft_strchr(&champ->file[++champ->i], '"'))
-		ft_error(0, "bug on comment 2");
+		ft_error(champ, "bug on comment 2");
 	tmp = ft_strcspn(&champ->file[champ->i], "\"");
 	champ->comment = ft_strsub(champ->file, champ->i, tmp);
 	if (ft_strlen(champ->comment) > COMMENT_LENGTH)
-		ft_error(0, "bug on length comment");
+		ft_error(champ, "bug on length comment");
 	champ->i += tmp;
 }
 
@@ -69,7 +69,7 @@ void		set_name_comment(t_champ *champ)
 		else if (champ->file[champ->i] == COMMENT_CHAR)
 			store_hash(champ);
 		else
-			ft_error(0, "bug on parsing");
+			ft_error(champ, "bug on parsing");
 		champ->i++;
 	}
 }
@@ -81,9 +81,5 @@ void		parse(t_champ *champ)
 	champ->cmd = NULL;
 	champ->label = NULL;
 	set_name_comment(champ);
-	ft_printf("name = %s\n", champ->name);
-	ft_printf("comment = %s\n", champ->comment);
-	ft_printf("BEGIN\n");
 	parse_instruct(champ);
-	ft_printf("END\n");
 }

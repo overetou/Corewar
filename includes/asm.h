@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 02:22:30 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/26 15:40:40 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/26 18:04:27 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,21 @@ typedef struct  s_champ
 t_op    g_op_tab[17];
 
 void		parse(t_champ *champ);
-void		ft_error(int line, char *message);
+void		ft_error(t_champ *champ, char *message);
 void		store_hash(t_champ *champ);
 t_cmd		*new_cmd(t_op *op, t_champ *champ, int index);
 void		push_cmd(t_cmd **cmd, t_cmd *new_cmd);
 void		add_label(t_label **label, t_label *new_label);
-t_label		*new_label(char *str);
+t_label		*new_label(char *str, t_champ *champ);
 t_label		*find_label(t_label *label, char *str);
 void		push_param(t_param **param, t_param *new_param);
-t_param		*new_param(char *str, t_cmd *cmd);
+t_param		*new_param(char *str, t_cmd *cmd, t_champ *champ);
 void		parse_instruct(t_champ *champ);
+
+void		write_bin(unsigned int to_write, int fd, int len);
+void		print_label(t_cmd *current, t_param *p, t_label *lab, int fd);
+int			create_cor_file(char *file_name);
+int			assemble_ocp(t_cmd *cmd);
+void		manage_file_creation(t_champ *champ, char *filename);
 
 #endif

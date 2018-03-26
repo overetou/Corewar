@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 14:56:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/21 14:56:59 by overetou         ###   ########.fr       */
+/*   Updated: 2018/03/26 17:58:04 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int     left_shift(int to_shift, int cycles)
 {
     while (cycles)
     {
-        to_shift << 2;
+        to_shift = to_shift << 2;
         cycles--;
     }
     return (to_shift);

@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/26 15:57:57 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/03/26 17:38:28 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,10 @@ cmd.c\
 label.c\
 param.c\
 store_label.c\
-error.c
+error.c\
+file_creation.c\
+writing.c\
+processing.c
 
 SRC_VM		= \
 vm.c

@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:58:53 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/21 15:58:54 by overetou         ###   ########.fr       */
+/*   Updated: 2018/03/26 17:57:37 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void    print_label(t_cmd *current, t_param *p, t_label *lab, int fd)
     int     count;
 	int		sign;
 
-    lab = find_lab(lab, p->label);
+    lab = find_label(lab, p->label);
     if (lab->cmd->index > current->index)
     {
         digger = current;
@@ -62,6 +62,7 @@ void    print_label(t_cmd *current, t_param *p, t_label *lab, int fd)
         floor = current;
 		sign = -1;
     }
+	count = 0;
     while (digger != floor)
 	{
 		count += get_cmd_size(digger) * sign;

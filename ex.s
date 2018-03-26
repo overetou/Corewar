@@ -1,9 +1,10 @@
+.name  	 "zork"  #.comment "just a basic living prog"
 
-	.name  "zork"  #.comment justa basic 	living prog "
 
-	.comment     "just a basic 	living prog"
 
-l2:	sti	r1,%:live,%2
-	and	r1,%0,r1
+.comment     "Lorem ipsum dolor sit amet."
+
+l2:	sti	r1,%2,%0
+and	r1,%0,r1
 live:	live	%1
-	zjmp	%:live
+zjmp	%2
