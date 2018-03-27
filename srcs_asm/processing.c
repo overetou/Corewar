@@ -12,32 +12,26 @@
 
 #include "asm.h"
 
-int     left_shift(int to_shift, int cycles)
-{
-    while (cycles)
-    {
-        to_shift = to_shift << 2;
-        cycles--;
-    }
-    return (to_shift);
-}
-
 int     assemble_ocp(t_cmd *cmd)
 {
-    int     param_nb;
     t_param *head;
     int     ocp;
-    int     mask;
+    int     i;
 
     ocp = 0;
-    param_nb = cmd->op->param_numbers;
+    i = 0;
     head = cmd->param;
-    while (param_nb)
+    while (head)
     {
-        mask = left_shift(head->code, param_nb);
-        ocp = ocp | mask;
+        ocp = ocp | head->code;
+        ocp = ocp << 2;
         head = head->next;
-        param_nb--;
+        i++;
+    }
+    while (i < 3)
+    {
+        ocp = ocp << 2;
+        i++;
     }
     return (ocp);
 }

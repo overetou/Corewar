@@ -56,16 +56,15 @@ void    print_label(t_cmd *current, t_param *p, t_label *lab, int fd)
     {
         digger = current;
         floor = lab->cmd;
-        count = 1;
 		sign = 1;
     }
     else
     {
         digger = lab->cmd;
         floor = current;
-        count = 0;
 		sign = -1;
     }
+    count = 0;
     while (digger != floor)
 	{
 		count += get_cmd_size(digger) * sign;
