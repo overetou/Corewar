@@ -30,7 +30,7 @@ void	print_header(int fd, t_champ *champ)
 {
 	write_bin(COREWAR_EXEC_MAGIC, fd, 4);
 	ft_putstr_fd(champ->name, fd);
-	write_bin(0, fd, PROG_NAME_LENGTH - ft_strlen(champ->name) + 4);
+	write_bin(0, fd, PROG_NAME_LENGTH + 6 - ft_strlen(champ->name));
 	ft_putstr_fd(champ->comment, fd);
 	write_bin(0, fd, COMMENT_LENGTH - ft_strlen(champ->comment));
 }

@@ -34,6 +34,8 @@ int		get_cmd_size(t_cmd *cmd)
 
 	count = 1;
 	digger = cmd->param;
+    if (cmd->op->has_ocp)
+        count++;
 	while (digger)
 	{
 		count += digger->nbr_octet;
