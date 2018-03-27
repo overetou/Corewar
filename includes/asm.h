@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 02:22:30 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/26 18:04:27 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/27 14:40:56 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ void		print_label(t_cmd *current, t_param *p, t_label *lab, int fd);
 int			create_cor_file(char *file_name);
 int			assemble_ocp(t_cmd *cmd);
 void		manage_file_creation(t_champ *champ, char *filename);
+void		valid_labels(t_champ *champ);
 
 #endif

@@ -6,12 +6,30 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 18:59:30 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/26 17:06:59 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/27 14:40:42 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
+void	valid_labels(t_champ *champ)
+{
+	t_cmd	*cmd;
+	t_param	*param;
+
+	cmd = champ->cmd;
+	while (cmd)
+	{
+		param = cmd->param;
+		while (param)
+		{
+			if (param->label && !find_label(champ->label, param->label))
+				ft_error(champ, "ERROR LABEL UNEXIST");
+			param = param->next;
+		}
+		cmd = cmd->next;
+	}
+}
 
 t_label	*find_label(t_label *label, char *str)
 {
