@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 15:47:41 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/26 18:00:20 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/27 14:43:50 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ void		parse(t_champ *champ)
 	champ->label = NULL;
 	set_name_comment(champ);
 	parse_instruct(champ);
+	valid_labels(champ);
 }
