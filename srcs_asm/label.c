@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 18:59:30 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/27 14:40:42 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/27 18:19:28 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void	valid_labels(t_champ *champ)
 		{
 			if (param->label && !find_label(champ->label, param->label))
 				ft_error(champ, "ERROR LABEL UNEXIST");
+			champ->file_size += param->nbr_octet;
 			param = param->next;
 		}
+		champ->file_size++;
 		cmd = cmd->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 02:22:30 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/27 14:40:56 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/27 18:17:31 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct  s_label
 typedef struct  s_champ
 {
 	int		i;
+	int		file_size;
 	char	*file;
 	char	*name;
 	char	*comment;
