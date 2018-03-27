@@ -33,7 +33,7 @@ void	parse_instruct(t_champ *champ)
 	int 	index;
 	t_op	*op;
 
-	index = 0;
+	index = 1;
 	while (champ->file[champ->i])
 	{
 		while (ft_isblank(champ->file[champ->i]))
@@ -53,7 +53,7 @@ void	parse_instruct(t_champ *champ)
 				champ->i++;
 			}
 			else if (ft_isspace(champ->file[champ->i]) && (op = find_op(g_op_tab, tmp)))
-				push_cmd(&champ->cmd, new_cmd(op, champ, index));
+				push_cmd(&champ->cmd, new_cmd(op, champ, index++));
 			else if (champ->file[champ->i])
 				ft_error(champ, "OP UNEXIST");
 			ft_strdel(&tmp);

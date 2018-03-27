@@ -41,7 +41,10 @@ void	parse_param(t_cmd *cmd, t_champ *champ)
 	while (ft_isspace(champ->file[champ->i]))
 		champ->i++;
 	len = ft_charcspn(&champ->file[champ->i], SEPARATOR_CHAR);
-	len2 = ft_strcspn(&champ->file[champ->i], "\n#");
+	len2 = ft_strcspn(&champ->file[champ->i], "\n");
+	if (len2 < len)
+		len = len2;
+	len2 = ft_charcspn(&champ->file[champ->i], COMMENT_CHAR);
 	if (len2 < len)
 		len = len2;
 	tmp = ft_strsub(champ->file, champ->i, len);

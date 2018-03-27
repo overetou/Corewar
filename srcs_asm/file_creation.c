@@ -23,7 +23,6 @@ int		create_cor_file(char *file_name)
 	ft_strncpy(name, file_name, name_size - 4);
 	ft_strcpy(name + name_size - 4, ".cor");
 	fd = open(name, O_TRUNC | O_CREAT | O_RDWR, 777);
-	//ft_printf("test\n");
 	return (fd);
 }
 

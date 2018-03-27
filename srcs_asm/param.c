@@ -89,6 +89,7 @@ t_param	*new_param(char *str, t_cmd *cmd, t_champ *champ)
 	if (!(param = (t_param*)malloc(sizeof(t_param))))
 		ft_error(champ, "ERROR MALLOC PARAM");
 	param->nbr_octet = 2;
+	param->next = NULL;
 	if (!str || !*str)
 		ft_error(champ, "PARAM NULL");
 	if (str[0] == 'r')
