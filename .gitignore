@@ -8,7 +8,6 @@ asm
 corewar
 libft/objs
 libft.a
-vm_champs
 
 #other
 test.txt
