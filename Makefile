@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/26 17:38:28 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/03/28 19:45:41 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,10 @@ processing.c
 SRC_VM		= \
 vm.c
 
+SRC_INC		= \
+asm.h\
+op.h
+
 LIB_DIR		= libft/
 INC_DIR		= includes/
 
@@ -43,6 +47,8 @@ OBJ_DIR_ASM	= objs_asm/
 OBJ_DIR_VM	= objs_vm/
 
 LIBFT_LIB	= $(LIB_DIR)libft.a
+
+SRCS_INC	= $(addprefix $(INC_DIR), $(SRC_INC))
 
 SRCS_ASM	= $(addprefix $(SRC_DIR_ASM), $(SRC_ASM))
 SRCS_VM		= $(addprefix $(SRC_DIR_VM), $(SRC_VM))
@@ -70,7 +76,7 @@ $(ASM): $(LIBFT_LIB) $(OBJS_ASM)
 	@$(CC) $(FLAGS) $(OBJS_ASM) $(LIBFT_LIB) -o $@
 	@echo "Compiling" [ $@ ] $(SUCCESS)
 
-$(OBJ_DIR_ASM)%.o: $(SRC_DIR_ASM)%.c
+$(OBJ_DIR_ASM)%.o: $(SRC_DIR_ASM)%.c $(SRCS_INC)
 	@mkdir -p $(OBJ_DIR_ASM)
 	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
 	@echo "Linking" [ $< ] $(OK)
@@ -79,7 +85,7 @@ $(VM): $(LIBFT_LIB) $(OBJS_VM)
 	@$(CC) $(FLAGS) $(OBJS_VM) $(LIBFT_LIB) -o $@
 	@echo "Compiling" [ $@ ] $(SUCCESS)
 
-$(OBJ_DIR_VM)%.o: $(SRC_DIR_VM)%.c
+$(OBJ_DIR_VM)%.o: $(SRC_DIR_VM)%.c $(SRCS_INC)
 	@mkdir -p $(OBJ_DIR_VM)
 	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
 	@echo "Linking" [ $< ] $(OK)
