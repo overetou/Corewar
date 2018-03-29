@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/28 19:45:41 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/03/29 17:13:56 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ vm.c
 
 SRC_INC		= \
 asm.h\
+vm.h\
 op.h
 
 LIB_DIR		= libft/
