@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/29 17:24:05 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/29 17:47:58 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef struct			s_process
 {
+	int					reg[REG_NUMBER];
 	char				*name;
 	char				carry;
 	int					index;
@@ -37,6 +38,7 @@ typedef struct			s_arena
 {
 	unsigned char		tab[MEM_SIZE];
 	int					cycles;
+	int					winner;
 	void				(*f[17])(t_param, struct s_arena, t_process);
 	t_process			*process;
 }						t_arena;
