@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 14:41:32 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/28 20:15:57 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/03/29 20:39:23 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,12 @@ char	*read_file(char *file_name)
 	return (str);
 }
 
-void	read_name(char *str)
+void	ft_strendcmp(const char *s1, const char *s2)
 {
-	int	end;
+	int	i;
 
-	end = ft_strlen(str) - 1;
-	if (end > 0 && str[end - 1] == '.' && str[end] == 's')
-		return ;
-	else
+	i = ft_strlen(s1) - ft_strlen(s2);
+	if (ft_strcmp(s1 + i, s2))
 		ft_error(NULL, "ERROR on NAME");
 }
 
@@ -49,7 +47,7 @@ int		main(int argc, char **argv)
 	ft_bzero(&champ, sizeof(champ));
 	if (argc-- < 2)
 		ft_error(NULL, "Usage");
-	read_name(argv[argc]);
+	ft_strendcmp(argv[argc], ".s");
 	champ.file = read_file(argv[argc]);
 	parse(&champ);
 	manage_file_creation(&champ, argv[argc]);

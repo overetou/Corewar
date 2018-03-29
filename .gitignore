@@ -8,6 +8,7 @@ asm
 corewar
 libft/objs
 libft.a
+a.out
 
 #other
 test.*
