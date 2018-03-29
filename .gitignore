@@ -10,5 +10,6 @@ libft/objs
 libft.a
 
 #other
-test.txt
+test.*
 ex.s
+.json
