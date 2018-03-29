@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/29 19:58:54 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/29 21:34:21 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct			s_player
 	char				*name;
 	char				*comment;
 	int					nbr_live;
+	int					last_live;
 	struct s_player		*next;
 }						t_player;
 
@@ -50,6 +51,7 @@ typedef struct			s_arena
 	int					winner;
 	void				(*f[17])(t_param, struct s_arena, t_process);
 	t_process			*process;
+	t_player			*player;
 }						t_arena;
 
 void		ft_live(t_param *param, t_arena *arena, t_process *process);
