@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:58:53 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/26 17:57:37 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/03/30 16:06:22 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 
 void    write_bin(unsigned int to_write, int fd, int len)
 {
-    int test;
+    int c;
 
     if (len)
     {
         write_bin((to_write / 256), fd, --len);
-        test = to_write % 256;
-        write(fd, &test, 1);
+        c = to_write % 256;
+        write(fd, &c, 1);
     }
 }
 
