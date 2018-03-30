@@ -37,12 +37,12 @@ typedef struct			s_process
 	struct s_process	*next;
 }						t_process;
 
-typedef struct			s_operarium
+typedef struct			s_op
 {
 	int					opcode;
-	int					octet_quantity;
-	struct s_operarium	*next;
-}						t_operarium;
+	int					ind_option;
+	struct s_op	*next;
+}						t_op;
 
 typedef struct	s_param
 {
@@ -59,7 +59,7 @@ typedef struct			s_arena
 	void				(*f[17])(t_param, struct s_arena, t_process);
 	t_process			*process;
 	t_player			*players;
-	t_operarium			*operarium;
+	t_op			*op;
 }						t_arena;
 
 void		ft_live(t_param *param, t_arena *arena, t_process *process);
@@ -81,5 +81,6 @@ void		ft_lld(t_param *param, t_arena *arena, t_process *process);
 void		ft_lldi(t_param *param, t_arena *arena, t_process *process);
 void		ft_lfork(t_param *param, t_arena *arena, t_process *process);
 void		ft_aff(t_param *param, t_arena *arena, t_process *process);
+void		load_params(t_param *param, unsigned char *board, int index, t_op *op);
 
 #endif
