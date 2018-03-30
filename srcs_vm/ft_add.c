@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ld.c                                            :+:      :+:    :+:   */
+/*   ft_add.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/29 21:10:21 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/30 17:03:27 by ysingaye         ###   ########.fr       */
+/*   Created: 2018/03/30 13:58:33 by ysingaye          #+#    #+#             */
+/*   Updated: 2018/03/30 15:18:31 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-/**
-lld WRITE IN 2 octets FOR INDIRECT
-**/
-void	ft_ld(t_param *param, t_arena *arena, t_process *process)
+void	ft_add(t_param *param, t_arena *arena, t_process *process)
 {
-	int value;
+	int value1;
+	int value2;
 
 	process->carry = 0;
-	value = get_param_value(param, process);
+	value1 = get_param_value(param, process);
+	param = param->next;
+	value2 = get_param_value(param, process);
 	param = param->next;
 	validate_reg_nbr(param);
-	// ADD MOD FOR INDIRECT
-	process->reg[param->value - 1] = value;
+	process->reg[param->value - 1] = value1 + value2;
 	process->carry = 1;
 }
