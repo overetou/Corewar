@@ -37,6 +37,13 @@ typedef struct			s_process
 	struct s_process	*next;
 }						t_process;
 
+typedef struct			s_operarium
+{
+	int					opcode;
+	int					octet_quantity;
+	struct s_operarium	*next;
+}						t_operarium;
+
 typedef struct	s_param
 {
 	char				code;
@@ -46,12 +53,13 @@ typedef struct	s_param
 
 typedef struct			s_arena
 {
-	unsigned char		tab[MEM_SIZE];
+	unsigned char		board[MEM_SIZE];
 	int					cycles;
 	int					winner;
 	void				(*f[17])(t_param, struct s_arena, t_process);
 	t_process			*process;
-	t_player			*player;
+	t_player			*players;
+	t_operarium			*operarium;
 }						t_arena;
 
 void		ft_live(t_param *param, t_arena *arena, t_process *process);
