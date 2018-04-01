@@ -36,12 +36,12 @@ int		extract_param_value(int	code, unsigned char *board, int *index)
 		size = 4;
 	else
 		size = 2;
-	code = board[++index];
+	code = board[++(*index)];
 	while (--size)
 	{
-		index++;
+		(*index)++;
 		code = code << 8;
-		mask = board[index];
+		mask = board[(*index)];
 		code = code | mask;
 	}
 	return (code);
@@ -57,13 +57,15 @@ int		cut_ocp(int ocp, int code, int ocp_margin)
 	return (ocp ^ code);
 }
 
-void	load_params(t_param *param, unsigned char *board, int index, t_op *op)
+int	load_params(t_param *param, unsigned char *board, int index, t_op *op)
 {
 	t_param	*head;
 	int		ocp_margin;
+	int		opcode;
 
 	head = param;
-	while (op->opcode != board[index])
+	opcode = board[index];
+	while (op->opcode != opcode)
 		op = op->next;
 	ocp = board[++index];
 	ocp_margin = 3;
@@ -75,4 +77,5 @@ void	load_params(t_param *param, unsigned char *board, int index, t_op *op)
 		head->value = extract_param_value(head->code, board, &index);
 		ocp = cut_ocp(ocp, head->code, ocp_margin--);
 	}
+	return (opcode);
 }

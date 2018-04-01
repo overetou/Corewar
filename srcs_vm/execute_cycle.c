@@ -12,6 +12,23 @@
 
 #include "vm.h"
 
+void	launch_op(t_param *p, t_arena *arena, t_process *process, int opcode)
+{
+	((arena->f)[opcode])(param, arena, process);
+//	if (opcode != operations qui bougnet deja le process)
+//		return ;
+//	else
+//		move_process(process, param);
+}
+
+void	execute_process(t_process *process, t_param *param, t_arena *arena)
+{
+	int	opcode;
+
+	opcode = load_params(param, arena->board, process->index, arena->op);
+	launch_operation(param, arena, process, opcode);
+}
+
 void	execute_cycle(t_arena *arena, t_param *param)
 {
 	t_process	*head;
@@ -25,10 +42,4 @@ void	execute_cycle(t_arena *arena, t_param *param)
 			execute_process(head, param, arena);
 		head = head->next;
 	}
-}
-
-void	execute_process(t_process *process, t_param *param, t_arena *arena)
-{
-	load_params(param, arena->board, process->index, arena->op);
-	//function using function pointers.
 }

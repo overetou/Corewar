@@ -41,15 +41,15 @@ typedef struct			s_op
 {
 	int					opcode;
 	int					ind_option;
-	struct s_op	*next;
+	struct s_op			*next;
 }						t_op;
 
-typedef struct	s_param
+typedef struct			s_param
 {
 	char				code;
 	int					value;
 	struct s_param		*next;
-}				t_param;
+}						t_param;
 
 typedef struct			s_arena
 {
@@ -59,7 +59,7 @@ typedef struct			s_arena
 	void				(*f[17])(t_param, struct s_arena, t_process);
 	t_process			*process;
 	t_player			*players;
-	t_op			*op;
+	t_op				*op;
 }						t_arena;
 
 void		ft_live(t_param *param, t_arena *arena, t_process *process);
