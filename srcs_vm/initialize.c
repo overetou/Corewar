@@ -13,7 +13,7 @@
 
 #include "vm.h"
 
-t_param	*create_three_params()
+t_param	*create_three_params(void)
 {
 	int		x;
 	t_param	*new;
@@ -25,8 +25,14 @@ t_param	*create_three_params()
 	return (new);
 }
 
-void	initialize(t_arena **arena, t_param **param)
+t_op	*hardcode_op(t_op *op)
 {
-	ft_bzero(arena, sizeof(t_arena));
-	param = create_three_params();
+	op[0] = {};
+}
+
+void	initialize(t_arena **arena, t_param **param, t_op *op)
+{
+	ft_bzero(*arena, sizeof(t_arena));
+	*param = create_three_params();
+	arena->op = hardcode_op(op);
 }

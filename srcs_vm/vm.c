@@ -21,13 +21,8 @@ void	ft_strendcmp(const char *s1, const char *s2)
 		exit(0);
 }
 
-void	check_param()
-
-int			main(int argc, char **argv)
+void	check_arg(int argc, char **argv)
 {
-	int i;
-
-	i = 0;
 	if (argc < 2)
 		exit(0);
 	while (argv[++i])
@@ -35,12 +30,20 @@ int			main(int argc, char **argv)
 		if (!ft_strcmp(argv[i], "-n"))
 			printf("vm");
 		else
-		{
 			ft_strendcmp(argv[i], ".cor");
-			add_player(argv[i]);
-		}
 	}
-	initialize()
+}
+
+int			main(int argc, char **argv)
+{
+	int i;
+	t_arena		*arena;
+	t_param		*param;
+	t_op		*op[15];
+
+	i = 0;
+	check_arg(argc, argv);
+	initialize(arena, param, op);
 	ft_printf("ok");
 	return (0);
 }

@@ -21,7 +21,7 @@ int		extract_bin_code(int ocp, int ocp_margin, int ind_option)
 	}
 	if (ocp == 2)
 	{
-		if (ind_option == 4)
+		if (ind_option == DIRFOR)
 			ocp = ind_option;
 	}
 	return (ocp);

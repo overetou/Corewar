@@ -17,10 +17,10 @@
 # include <op.h>
 # include <ncurses.h>
 
-# define REG 1
 # define DIRTWO 2
-# define IND 3
 # define DIRFOR 4
+# define NCURSE 1
+# define AFF	2
 
 typedef struct			s_player
 {
@@ -44,7 +44,6 @@ typedef struct			s_process
 
 typedef struct			s_op
 {
-	int					opcode;
 	int					ind_option;
 	int					has_ocp;
 	int					hardcode;
@@ -67,6 +66,7 @@ typedef struct			s_arena
 	t_process			*process;
 	t_player			*players;
 	t_op				*op;
+	int					aff;
 }						t_arena;
 
 void		ft_live(t_param *param, t_arena *arena, t_process *process);
