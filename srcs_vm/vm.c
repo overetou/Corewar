@@ -23,6 +23,9 @@ void	ft_strendcmp(const char *s1, const char *s2)
 
 void	check_arg(int argc, char **argv)
 {
+	int i;
+
+	i = 0;
 	if (argc < 2)
 		exit(0);
 	while (argv[++i])
@@ -36,12 +39,12 @@ void	check_arg(int argc, char **argv)
 
 int			main(int argc, char **argv)
 {
-	int i;
 	t_arena		*arena;
 	t_param		*param;
-	t_op		*op[15];
+	t_op		op[15];
 
-	i = 0;
+	arena = NULL;
+	param = NULL;
 	check_arg(argc, argv);
 	initialize(arena, param, op);
 	ft_printf("ok");
