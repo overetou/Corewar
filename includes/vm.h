@@ -17,6 +17,11 @@
 # include <op.h>
 # include <ncurses.h>
 
+# define REG 1
+# define DIRTWO 2
+# define IND 3
+# define DIRFOR 4
+
 typedef struct			s_player
 {
 	int					nbr;
@@ -41,6 +46,8 @@ typedef struct			s_op
 {
 	int					opcode;
 	int					ind_option;
+	int					has_ocp;
+	int					hardcode;
 	struct s_op			*next;
 }						t_op;
 
@@ -82,5 +89,7 @@ void		ft_lldi(t_param *param, t_arena *arena, t_process *process);
 void		ft_lfork(t_param *param, t_arena *arena, t_process *process);
 void		ft_aff(t_param *param, t_arena *arena, t_process *process);
 void		load_params(t_param *param, unsigned char *board, int index, t_op *op);
+void		execute_cycle(t_arena *arena, t_param *param);
+void		initialize(t_arena *arena, t_param *param);
 
 #endif

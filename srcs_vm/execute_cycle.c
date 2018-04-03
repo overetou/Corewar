@@ -15,7 +15,7 @@
 void	launch_op(t_param *p, t_arena *arena, t_process *process, int opcode)
 {
 	((arena->f)[opcode])(param, arena, process);
-//	if (opcode != operations qui bougnet deja le process)
+//	if (opcode == operations qui bougnet deja le process)
 //		return ;
 //	else
 //		move_process(process, param);

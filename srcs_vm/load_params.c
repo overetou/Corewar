@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "vm.h"
+
 int		extract_bin_code(int ocp, int ocp_margin, int ind_option)
 {
 	while (margin)
@@ -59,23 +61,28 @@ int		cut_ocp(int ocp, int code, int ocp_margin)
 
 int	load_params(t_param *param, unsigned char *board, int index, t_op *op)
 {
-	t_param	*head;
 	int		ocp_margin;
 	int		opcode;
 
-	head = param;
 	opcode = board[index];
 	while (op->opcode != opcode)
 		op = op->next;
-	ocp = board[++index];
-	ocp_margin = 3;
-	while (ocp)
+	if (op->has_ocp)
 	{
-		head->next = (t_param*)malloc(sizeof(t_param));
-		head = head->next;
-		head->code = extract_bin_code(ocp, ocp_margin, op->ind_option);
-		head->value = extract_param_value(head->code, board, &index);
-		ocp = cut_ocp(ocp, head->code, ocp_margin--);
+		ocp = board[++index];
+		ocp_margin = 3;
+		while (ocp)
+		{
+			param->code = extract_bin_code(ocp, ocp_margin, op->ind_option);
+			param->value = extract_param_value(param->code, board, &index);
+			ocp = cut_ocp(ocp, param->code, ocp_margin--);
+			param = param->next;
+		}
+	}
+	else
+	{
+		param->code = op->hardcode;
+		param->value = extract_param_value(param->code, board, &index);
 	}
 	return (opcode);
 }

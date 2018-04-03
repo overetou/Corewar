@@ -21,6 +21,8 @@ void	ft_strendcmp(const char *s1, const char *s2)
 		exit(0);
 }
 
+void	check_param()
+
 int			main(int argc, char **argv)
 {
 	int i;
@@ -33,8 +35,12 @@ int			main(int argc, char **argv)
 		if (!ft_strcmp(argv[i], "-n"))
 			printf("vm");
 		else
+		{
 			ft_strendcmp(argv[i], ".cor");
+			add_player(argv[i]);
+		}
 	}
+	initialize()
 	ft_printf("ok");
 	return (0);
 }
