@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ldi.c                                           :+:      :+:    :+:   */
+/*   ft_aff.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/30 15:28:11 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/03 19:58:19 by ysingaye         ###   ########.fr       */
+/*   Created: 2018/04/03 18:55:18 by ysingaye          #+#    #+#             */
+/*   Updated: 2018/04/03 20:00:22 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	ft_ldi(t_param *param, t_arena *arena, t_process *process)
+void	print_aff(unsigned int to_write)
 {
-	int value1;
-	int value2;
+	int c;
 
-	process->waitting = 25;
-	value1 = get_param_value(param, process, arena, 1);
-	param = param->next;
-	value2 = get_param_value(param, process, arena, 1);
-	param = param->next;
-	validate_reg_nbr(param);
-	process->reg[param->value - 1] =
-		get_adr_value(arena, ((value1 + value2) % IDX_MOD), REG_SIZE);
+    if (to_write)
+    {
+        print_aff((to_write / 256));
+        c = to_write % 256;
+		ft_printf("%C", c);
+		arena->tab[adr + len] = c;
+    }
+	else
+		ft_putstr("Aff: ");
+}
+
+void	ft_aff(t_param *param, t_arena *arena, t_process *process)
+{
+	unsigned int	value;
+
+	process->waitting = 2;
+	value = get_param_value(param, process, arena, 1);
+	print_aff(value);
+	ft_putchar('\n');
 }
