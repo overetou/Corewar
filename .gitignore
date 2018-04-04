@@ -3,8 +3,10 @@
 .vscode
 *.cor
 objs_asm
+objs_dasm
 objs_vm
 asm
+dasm
 corewar
 libft/objs
 libft.a
