@@ -12,21 +12,14 @@
 
 #include "vm.h"
 
-void	launch_op(t_param *p, t_arena *arena, t_process *process, int opcode)
-{
-	((arena->f)[opcode])(param, arena, process);
-//	if (opcode == operations qui bougnet deja le process)
-//		return ;
-//	else
-//		move_process(process, param);
-}
-
 void	execute_process(t_process *process, t_param *param, t_arena *arena)
 {
 	int	opcode;
 
-	opcode = load_params(param, arena->board, process->index, arena->op);
-	launch_operation(param, arena, process, opcode);
+	opcode = load_params(param, arena->board, process, arena->op);
+	((arena->f)[opcode])(param, arena, process);
+	if (opcode != 9)
+		process->index = process->next_index;
 }
 
 void	execute_cycle(t_arena *arena, t_param *param)
@@ -36,9 +29,8 @@ void	execute_cycle(t_arena *arena, t_param *param)
 	head = arena->process;
 	while (head)
 	{
-		if (head->waitting)
-			(head->waitting)--;
-		else
+		(head->waitting)--;
+		if (waitting < 1)
 			execute_process(head, param, arena);
 		head = head->next;
 	}

@@ -59,22 +59,23 @@ int		cut_ocp(int ocp, int code, int ocp_margin)
 	return (ocp ^ code);
 }
 
-int	load_params(t_param *param, unsigned char *board, int index, t_op *op)
+int	load_params(t_param *param, unsigned char *board, t_process *process, t_op *op)
 {
 	int		ocp_margin;
 	int		opcode;
 
-	opcode = board[index];
+	next_index = process->index;
+	opcode = board[next_index];
 	while (op->opcode != opcode)
 		op = op->next;
 	if (op->has_ocp)
 	{
-		ocp = board[++index];
+		ocp = board[++next_index];
 		ocp_margin = 3;
 		while (ocp)
 		{
 			param->code = extract_bin_code(ocp, ocp_margin, op->ind_option);
-			param->value = extract_param_value(param->code, board, &index);
+			param->value = extract_param_value(param->code, board, &next_index);
 			ocp = cut_ocp(ocp, param->code, ocp_margin--);
 			param = param->next;
 		}
@@ -82,7 +83,7 @@ int	load_params(t_param *param, unsigned char *board, int index, t_op *op)
 	else
 	{
 		param->code = op->hardcode;
-		param->value = extract_param_value(param->code, board, &index);
+		param->value = extract_param_value(param->code, board, &next_index);
 	}
 	return (opcode);
 }

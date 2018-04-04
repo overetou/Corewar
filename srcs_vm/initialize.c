@@ -55,15 +55,10 @@ t_op	*hardcode_op(t_op *op)
 	return (op);
 }
 
-t_player	create_players(char **argv, int argc)
+t_arena	*new_arena()
 {
-
-}
-
-void	initialize(t_arena **arena, t_param **param, t_op *op)
-{
-	ft_bzero(*arena, sizeof(t_arena));
-	*param = create_three_params();
-	(*arena)->op = hardcode_op(op);
-	(*arena)->players = create_players();
+	if (!(arena = (t_arena*)malloc(sizeof(t_arena)))
+		exit(0);
+	arena->board = malloc(sizeof(unsigned char) * MEM_SIZE);
+	arena->op = hardcode_op(op);
 }

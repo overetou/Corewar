@@ -24,7 +24,8 @@
 
 typedef struct			s_player
 {
-	int					nbr;
+	char				*file_name;
+	char				nbr;
 	char				*name;
 	char				*comment;
 	int					nbr_live;
@@ -37,6 +38,7 @@ typedef struct			s_process
 	int					reg[REG_NUMBER];
 	char				carry;
 	int					index;
+	int					next_index;
 	int					waitting;
 	struct s_process	*next;
 }						t_process;
@@ -86,7 +88,7 @@ void		ft_aff(t_param *param, t_arena *arena, t_process *process);
 
 void		load_params(t_param *param, unsigned char *board, int index, t_op *op);
 void		execute_cycle(t_arena *arena, t_param *param);
-void		initialize(t_arena **arena, t_param **param, t_op *op);
+t_arena		*new_arena(void);
 t_process	*new_process(int player_nbr);
 t_process	*dup_process(t_process *old_process);
 void		add_process(t_process **process, t_process *new_process);
