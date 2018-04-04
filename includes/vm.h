@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/04 18:23:24 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/04 18:35:28 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct			s_process
 	char				carry;
 	int					index;
 	int					waitting;
-	int					color;
+	unsigned char		color;
 	struct s_process	*next;
 }						t_process;
 
