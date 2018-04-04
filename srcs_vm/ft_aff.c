@@ -21,7 +21,7 @@ void	print_aff(unsigned int to_write)
         print_aff((to_write / 256));
         c = to_write % 256;
 		ft_printf("%C", c);
-		arena->tab[adr + len] = c;
+		arena->board[adr + len] = c;
     }
 	else
 		ft_putstr("Aff: ");

@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 15:26:51 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/04 18:22:31 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/04 18:58:02 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		refresh_arena(t_arena *arena, int index, int len, int color)
 		refresh_arena(arena, index, --len, color);
 		if (has_colors() != FALSE)
 			attron(COLOR_PAIR(color));
-		mvprintw(y, x % 192, "%.2x ", arena->tab[index + len]);
+		mvprintw(y, x % 192, "%.2x ", arena->board[index + len]);
 		refresh();
 		if (has_colors() != FALSE)
 			attroff(COLOR_PAIR(color));

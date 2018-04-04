@@ -20,6 +20,6 @@ void    write_tab(unsigned int to_write, t_arena *arena, int adr, int len)
     {
         write_tab((to_write / 256), adr, --len);
         c = to_write % 256;
-		arena->tab[adr + len] = c;
+		arena->board[adr + len] = c;
     }
 }
