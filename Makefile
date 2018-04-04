@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/04 20:17:29 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/04/04 20:38:09 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,12 +112,12 @@ $(OBJ_DIR_VM)%.o: $(SRC_DIR_VM)%.c $(SRCS_INC)
 
 clean:
 	@make -C $(LIB_DIR) clean
-	@rm -rf $(OBJ_DIR_ASM) $(OBJ_DIR_VM)
+	@rm -rf $(OBJ_DIR_ASM) $(OBJ_DIR_DASM) $(OBJ_DIR_VM)
 	@echo "Cleaning" [ objs_asm \& objs_vm ] $(RM)
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean
-	@rm -rf $(ASM) $(VM)
+	@rm -rf $(ASM) $(DASM) $(VM)
 	@echo "Delete" [ asm \& corewar ] $(RM)
 
 re: fclean all
