@@ -26,7 +26,7 @@ int		get_adr_value(t_arena *arena, int index, int nbr_oct)
 	while ((index + i) < MEM_SIZE && i < nbr_oct)
 	{
 		value << 8;
-		value = value | arena->tab[index + i];
+		value = value | arena->board[index + i];
 		i++;
 	}
 }

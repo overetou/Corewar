@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/03 20:04:13 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/04 18:35:28 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct			s_process
 	int					index;
 	int					next_index;
 	int					waitting;
+	unsigned char		color;
 	struct s_process	*next;
 }						t_process;
 
@@ -92,5 +93,8 @@ t_arena		*new_arena(void);
 t_process	*new_process(int player_nbr);
 t_process	*dup_process(t_process *old_process);
 void		add_process(t_process **process, t_process *new_process);
+void		dump_tab(t_arena *arena);
+void		init_color(t_player *players);
+void		refresh_arena(t_arena *arena, int index, int len, int color);
 
 #endif

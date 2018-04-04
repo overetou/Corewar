@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:06:50 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/03 19:41:19 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/04 16:45:15 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 void	ft_fork(t_param *param, t_arena *arena, t_process *process)
 {
-	process->waitting = 800;
-	add_process(&(arena->process), dup_process(process));
-	arena->process->index = process->index + (param->value % IDX_MOD);
+	if (process->waitting == -1)
+		process->waitting = 800;
+	else
+	{
+		add_process(&(arena->process), dup_process(process));
+		arena->process->index = process->index + (param->value % IDX_MOD);
+	}
 }
