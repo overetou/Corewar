@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:44:00 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/03 19:59:34 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/04 16:46:23 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 void	ft_lfork(t_param *param, t_arena *arena, t_process *process)
 {
-	process->waitting = 1000;
-	add_process(&(arena->process), dup_process(process));
-	arena->process->index = process->index + param->value;
+	if (process->waitting == -1)
+		process->waitting = 1000;
+	else
+	{
+		add_process(&(arena->process), dup_process(process));
+		arena->process->index = process->index + param->value;
+	}
 }
