@@ -89,6 +89,7 @@ void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 			}
 			ft_strendcmp(argv[i], ".cor");
 			arena->players = add_player(arena->players, argv[i], &player_number);
+			arena->number_of_players++;
 		}
 	}
 }

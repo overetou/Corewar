@@ -68,6 +68,7 @@ typedef struct			s_arena
 	t_player			*players;
 	t_op				*op;
 	int					aff;
+	int					number_of_players;
 }						t_arena;
 
 void		ft_live(t_param *param, t_arena *arena, t_process *process);

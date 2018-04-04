@@ -57,8 +57,11 @@ t_op	*hardcode_op(t_op *op)
 
 t_arena	*new_arena()
 {
+	t_arena	*arena;
+	
 	if (!(arena = (t_arena*)malloc(sizeof(t_arena)))
 		exit(0);
 	arena->board = malloc(sizeof(unsigned char) * MEM_SIZE);
 	arena->op = hardcode_op(op);
+	arena->number_of_players = 0;
 }
