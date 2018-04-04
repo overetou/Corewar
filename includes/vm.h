@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/29 21:34:21 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/03 20:04:13 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct			s_process
 	char				carry;
 	int					index;
 	int					waitting;
-	int					player_nbr;
 	struct s_process	*next;
 }						t_process;
 
@@ -81,14 +80,15 @@ void		ft_ldi(t_param *param, t_arena *arena, t_process *process);
 void		ft_sti(t_param *param, t_arena *arena, t_process *process);
 void		ft_fork(t_param *param, t_arena *arena, t_process *process);
 void		ft_lld(t_param *param, t_arena *arena, t_process *process);
-void		ft_sti(t_param *param, t_arena *arena, t_process *process);
-void		ft_fork(t_param *param, t_arena *arena, t_process *process);
-void		ft_lld(t_param *param, t_arena *arena, t_process *process);
 void		ft_lldi(t_param *param, t_arena *arena, t_process *process);
 void		ft_lfork(t_param *param, t_arena *arena, t_process *process);
 void		ft_aff(t_param *param, t_arena *arena, t_process *process);
+
 void		load_params(t_param *param, unsigned char *board, int index, t_op *op);
 void		execute_cycle(t_arena *arena, t_param *param);
-void		initialize(t_arena *arena, t_param *param, t_op *op);
+void		initialize(t_arena **arena, t_param **param, t_op *op);
+t_process	*new_process(int player_nbr);
+t_process	*dup_process(t_process *old_process);
+void		add_process(t_process **process, t_process *new_process);
 
 #endif

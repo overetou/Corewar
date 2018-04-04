@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 19:26:23 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/29 20:03:32 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/03 19:51:43 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_live(t_param *param, t_arena *arena, t_process *process)
 {
 	t_player *player;
 
+	process->waitting = 10;
 	player = arena->player;
 	while (player)
 	{

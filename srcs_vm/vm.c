@@ -46,7 +46,7 @@ int			main(int argc, char **argv)
 	arena = NULL;
 	param = NULL;
 	check_arg(argc, argv);
-	initialize(arena, param, op);
+	initialize(&arena, &param, op);
 	ft_printf("ok");
 	return (0);
 }

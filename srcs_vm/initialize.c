@@ -55,9 +55,15 @@ t_op	*hardcode_op(t_op *op)
 	return (op);
 }
 
+t_player	create_players(char **argv, int argc)
+{
+
+}
+
 void	initialize(t_arena **arena, t_param **param, t_op *op)
 {
 	ft_bzero(*arena, sizeof(t_arena));
 	*param = create_three_params();
-	arena->op = hardcode_op(op);
+	(*arena)->op = hardcode_op(op);
+	(*arena)->players = create_players();
 }
