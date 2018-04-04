@@ -47,7 +47,6 @@ typedef struct			s_op
 	int					ind_option;
 	int					has_ocp;
 	int					hardcode;
-	struct s_op			*next;
 }						t_op;
 
 typedef struct			s_param
@@ -85,9 +84,10 @@ void		ft_lld(t_param *param, t_arena *arena, t_process *process);
 void		ft_lldi(t_param *param, t_arena *arena, t_process *process);
 void		ft_lfork(t_param *param, t_arena *arena, t_process *process);
 void		ft_aff(t_param *param, t_arena *arena, t_process *process);
+
 void		load_params(t_param *param, unsigned char *board, int index, t_op *op);
 void		execute_cycle(t_arena *arena, t_param *param);
-void		initialize(t_arena *arena, t_param *param);
+void		initialize(t_arena **arena, t_param **param, t_op *op);
 t_process	*new_process(int player_nbr);
 t_process	*dup_process(t_process *old_process);
 void		add_process(t_process **process, t_process *new_process);

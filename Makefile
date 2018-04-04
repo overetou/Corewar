@@ -31,7 +31,8 @@ writing.c\
 processing.c
 
 SRC_VM		= \
-vm.c
+vm.c\
+initialize.c
 
 SRC_INC		= \
 asm.h\
