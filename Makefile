@@ -6,18 +6,19 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/29 17:13:56 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/04/04 20:17:29 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ASM			= asm
-VM			= corewar
+ASM				= asm
+DASM			= dasm
+VM				= corewar
 
-CC			= gcc
-FLAGS		= -Wall -Wextra -Werror #$(DFLAGS)
-DFLAGS		= -g3 -fsanitize=address
+CC				= gcc
+FLAGS			= -Wall -Wextra -Werror #$(DFLAGS)
+DFLAGS			= -g3 -fsanitize=address
 
-SRC_ASM		= \
+SRC_ASM			= \
 main.c\
 op.c\
 parsing.c\
@@ -30,46 +31,54 @@ file_creation.c\
 writing.c\
 processing.c
 
-SRC_VM		= \
+SRC_DASM		= \
+dasm.c
+
+SRC_VM			= \
 vm.c\
 initialize.c
 
-SRC_INC		= \
+SRC_INC			= \
 asm.h\
+dasm.h\
 vm.h\
 op.h
 
-LIB_DIR		= libft/
-INC_DIR		= includes/
+LIB_DIR			= libft/
+INC_DIR			= includes/
 
-SRC_DIR_ASM	= srcs_asm/
-SRC_DIR_VM	= srcs_vm/
+SRC_DIR_ASM		= srcs_asm/
+SRC_DIR_DASM	= srcs_dasm/
+SRC_DIR_VM		= srcs_vm/
 
-OBJ_DIR_ASM	= objs_asm/
-OBJ_DIR_VM	= objs_vm/
+OBJ_DIR_ASM		= objs_asm/
+OBJ_DIR_DASM	= objs_dasm/
+OBJ_DIR_VM		= objs_vm/
 
-LIBFT_LIB	= $(LIB_DIR)libft.a
+LIBFT_LIB		= $(LIB_DIR)libft.a
 
-SRCS_INC	= $(addprefix $(INC_DIR), $(SRC_INC))
+SRCS_INC		= $(addprefix $(INC_DIR), $(SRC_INC))
 
-SRCS_ASM	= $(addprefix $(SRC_DIR_ASM), $(SRC_ASM))
-SRCS_VM		= $(addprefix $(SRC_DIR_VM), $(SRC_VM))
+SRCS_ASM		= $(addprefix $(SRC_DIR_ASM), $(SRC_ASM))
+SRCS_DASM		= $(addprefix $(SRC_DIR_DASM), $(SRC_DASM))
+SRCS_VM			= $(addprefix $(SRC_DIR_VM), $(SRC_VM))
 
-OBJS_ASM	= $(addprefix $(OBJ_DIR_ASM), $(SRC_ASM:.c=.o))
-OBJS_VM		= $(addprefix $(OBJ_DIR_VM), $(SRC_VM:.c=.o))
+OBJS_ASM		= $(addprefix $(OBJ_DIR_ASM), $(SRC_ASM:.c=.o))
+OBJS_DASM		= $(addprefix $(OBJ_DIR_DASM), $(SRC_DASM:.c=.o))
+OBJS_VM			= $(addprefix $(OBJ_DIR_VM), $(SRC_VM:.c=.o))
 
-HEADER		= -I $(INC_DIR) -I $(LIB_DIR)$(INC_DIR)
+HEADER			= -I $(INC_DIR) -I $(LIB_DIR)$(INC_DIR)
 
-C_NO		= "\033[00m"
-C_GREEN		= "\033[32m"
-C_RED		= "\033[31m"
-C_YELL		= "\033[33m"
+C_NO			= "\033[00m"
+C_GREEN			= "\033[32m"
+C_RED			= "\033[31m"
+C_YELL			= "\033[33m"
 
-SUCCESS		= $(C_GREEN)SUCCESS$(C_NO)
-OK			= $(C_YELL)OK$(C_NO)
-RM			= $(C_RED)OK$(C_NO)
+SUCCESS			= $(C_GREEN)SUCCESS$(C_NO)
+OK				= $(C_YELL)OK$(C_NO)
+RM				= $(C_RED)OK$(C_NO)
 
-all: lib $(ASM) $(VM)
+all: lib $(ASM) $(DASM) $(VM)
 
 lib:
 	@make -j -C $(LIB_DIR)
@@ -80,6 +89,15 @@ $(ASM): $(LIBFT_LIB) $(OBJS_ASM)
 
 $(OBJ_DIR_ASM)%.o: $(SRC_DIR_ASM)%.c $(SRCS_INC)
 	@mkdir -p $(OBJ_DIR_ASM)
+	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
+	@echo "Linking" [ $< ] $(OK)
+
+$(DASM): $(LIBFT_LIB) $(OBJS_DASM)
+	@$(CC) $(FLAGS) $(OBJS_DASM) $(LIBFT_LIB) -o $@
+	@echo "Compiling" [ $@ ] $(SUCCESS)
+
+$(OBJ_DIR_DASM)%.o: $(SRC_DIR_DASM)%.c $(SRCS_INC)
+	@mkdir -p $(OBJ_DIR_DASM)
 	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
 	@echo "Linking" [ $< ] $(OK)
 
