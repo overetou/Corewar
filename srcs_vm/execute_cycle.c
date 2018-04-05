@@ -47,7 +47,7 @@ void	execute_vm(t_arena *arena, t_param *param)
 		getch();
 	}
 	// CHANGER POUR CALCULER LES CYCLES
-	while (1)
+	while (arena->cycles != CYCLE_TO_DIE)
 	{
 		execute_cycle(arena, param);
 		arena->cycles++;
