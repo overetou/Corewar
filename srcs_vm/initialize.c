@@ -34,7 +34,7 @@ t_op	set_op(int ind_option, int has_ocp, int hardcode)
 	return (op);
 }
 
-t_op	*hardcode_op(t_op *op)
+void	hardcode_op(t_op *op)
 {
 	op[0] = set_op(DIRFOR, 0, DIRFOR);
 	op[1] = set_op(DIRFOR, 1, 0);
@@ -52,7 +52,6 @@ t_op	*hardcode_op(t_op *op)
 	op[13] = set_op(DIRTWO, 1, 0);
 	op[14] = set_op(DIRTWO, 0, DIR_CODE);
 	op[15] = set_op(0, 1, 0);
-	return (op);
 }
 
 void hardcode_func(t_arena *arena)
@@ -85,8 +84,7 @@ t_arena	*new_arena()
 	arena->board = (unsigned char*)malloc(sizeof(unsigned char) * MEM_SIZE);
 	arena->cycles = 0;
 	arena->winner = 0;
-	arena->op = hardcode_op(arena->op);
-	return (arena);
+	hardcode_op(arena->op);
 	hardcode_func(arena);
 	arena->aff = 0;
 	arena->end_cycle = 0;

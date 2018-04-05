@@ -68,7 +68,7 @@ typedef struct			s_arena
 	void				(*f[17])(t_param*, struct s_arena*, t_process*);
 	t_process			*process;
 	t_player			*players;
-	t_op				*op;
+	t_op				op[16];
 	int					aff;
 	int					end_cycle;
 	int					number_of_players;

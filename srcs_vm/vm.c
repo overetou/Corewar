@@ -56,14 +56,14 @@ t_player	*add_player(t_player *player, char *file_name, char	*player_number)
 
 	new = (t_player*)malloc(sizeof(t_player));
 	new->file_name = file_name;
+	new->next = player;
 	if (*player_number < 0)
-		player->nbr = find_lowest_player_number(player);
+		new->nbr = find_lowest_player_number(player);	
 	else
 	{
-		player->nbr = check_availability_player_number(player, *player_number);
+		new->nbr = check_availability_player_number(player, *player_number);
 		*player_number = -1;
 	}
-	new->next = player;
 	return (new);
 }
 
@@ -111,7 +111,6 @@ int			main(int argc, char **argv)
 	t_param		*param;
 
 	arena = new_arena();
-	return (0);
 	param = create_three_params();
 	check_arg_create_players(argc, argv, arena);
 	fill_players(arena);
