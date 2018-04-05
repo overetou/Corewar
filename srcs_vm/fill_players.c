@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 19:00:16 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/05 17:37:57 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 19:48:20 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,28 +71,27 @@ void	write_player(int fd, t_arena *arena, int adr, int file_size)
 	offset = lseek(fd, 0, SEEK_END) - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
 	if (offset != file_size)
 		exit(ft_printf("ERROR WRITE PLAYER\noffset = %d\nfile_size = %d\n", offset, file_size));
-	lseek(fd, 0, PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
+	lseek(fd, PROG_NAME_LENGTH + COMMENT_LENGTH + 16, SEEK_SET);
 	read(fd, (arena->board) + adr, file_size);
 }
 
 void	fill_players(t_arena *arena)
 {
 	t_player	*player;
-	int			file_size;
 	int			i;
 	int			adr;
 	int			fd;
 
 	player = arena->players;
-	i = 0;
+	i = 1;
 	while (player)
 	{
 		fd = secure_open(player->file_name, O_RDONLY);
 		player->name = get_name(fd);
-		file_size = get_file_size(fd);
+		player->file_size = get_file_size(fd);
 		player->comment = get_comment(fd);
-		adr = (MEM_SIZE / arena->number_of_players) * i;
-		write_player(fd, arena, adr, file_size);
+		adr = (MEM_SIZE / arena->number_of_players) * (arena->number_of_players - i);
+		write_player(fd, arena, adr, player->file_size);
 		add_process(&(arena->process), new_process(player->nbr, adr));
 		i++;
 		player = player->next;

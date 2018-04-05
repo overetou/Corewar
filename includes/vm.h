@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/05 16:35:30 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 19:41:01 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct			s_player
 	char				*comment;
 	int					nbr_live;
 	int					last_live;
+	int					file_size;
 	struct s_player		*next;
 }						t_player;
 
@@ -99,7 +100,7 @@ t_process	*new_process(int player_nbr, int index);
 t_process	*dup_process(t_process *old_process);
 void		add_process(t_process **process, t_process *new_process);
 void		dump_tab(t_arena *arena);
-void		ft_init_color(t_player *players);
+void		ft_init_color(t_player *players, t_arena *arena);
 void		refresh_arena(t_arena *arena, int index, int len, int color);
 void		execute_vm(t_arena *arena, t_param *param);
 int			get_param_value(t_param *param, t_process *process, t_arena *arena, int has_mod);

@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:53:59 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/05 16:29:31 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 20:26:01 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		extract_bin_code(int ocp, int margin, int ind_option)
 {
+	ft_printf("OCP = %d\n", ocp);
 	while (margin)
 	{
 		ocp = ocp >> 2;
@@ -67,7 +68,7 @@ int		load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 	t_op	op;
 
 	process->next_index = process->index;
-	opcode = board[process->next_index];
+	opcode = board[process->index];
 	op = ope[opcode - 1];
 	if (op.has_ocp)
 	{
@@ -80,11 +81,13 @@ int		load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 			ocp = cut_ocp(ocp, param->code, ocp_margin--);
 			param = param->next;
 		}
+		ft_printf("__________END__________\n");
 	}
 	else
 	{
 		param->code = op.hardcode;
 		param->value = extract_param_value(param->code, board, &(process->next_index));
 	}
+	(process->next_index)++;
 	return (opcode);
 }

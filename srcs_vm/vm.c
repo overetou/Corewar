@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 15:56:40 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/05 17:38:57 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 19:21:40 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_player	*add_player(t_player *player, char *file_name, char	*player_number)
 	new->file_name = file_name;
 	new->next = player;
 	if (*player_number < 0)
-		new->nbr = find_lowest_player_number(player);
+		new->nbr = find_lowest_player_number(player) - 1;
 	else
 	{
 		new->nbr = check_availability_player_number(player, *player_number);
