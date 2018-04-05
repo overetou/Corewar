@@ -59,15 +59,15 @@ int		cut_ocp(int ocp, int code, int ocp_margin)
 	return (ocp ^ code);
 }
 
-int	load_params(t_param *param, unsigned char *board, t_process *process, t_op *op)
+int	load_params(t_param *param, unsigned char *board, t_process *process, t_op *ope)
 {
 	int		ocp_margin;
 	int		opcode;
+	t_op	op;
 
 	next_index = process->index;
 	opcode = board[next_index];
-	while (op->opcode != opcode)
-		op = op->next;
+	op = ope[opcode - 1];
 	if (op->has_ocp)
 	{
 		ocp = board[++next_index];
