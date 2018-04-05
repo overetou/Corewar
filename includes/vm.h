@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/04 18:35:28 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 15:31:34 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define DIRFOR 4
 # define NCURSE 1
 # define AFF	2
+# define DUMP	3
 
 typedef struct			s_player
 {
@@ -68,9 +69,11 @@ typedef struct			s_arena
 	t_player			*players;
 	t_op				*op;
 	int					aff;
+	int					end_cycle;
 	int					number_of_players;
 }						t_arena;
 
+void		ft_void(t_param *param, t_arena *arena, t_process *process);
 void		ft_live(t_param *param, t_arena *arena, t_process *process);
 void		ft_ld(t_param *param, t_arena *arena, t_process *process);
 void		ft_st(t_param *param, t_arena *arena, t_process *process);
@@ -91,11 +94,12 @@ void		ft_aff(t_param *param, t_arena *arena, t_process *process);
 void		load_params(t_param *param, unsigned char *board, int index, t_op *op);
 void		execute_cycle(t_arena *arena, t_param *param);
 t_arena		*new_arena(void);
-t_process	*new_process(int player_nbr);
+t_process	*new_process(int player_nbr, int index);
 t_process	*dup_process(t_process *old_process);
 void		add_process(t_process **process, t_process *new_process);
 void		dump_tab(t_arena *arena);
 void		init_color(t_player *players);
 void		refresh_arena(t_arena *arena, int index, int len, int color);
+void		execute_vm(t_arena *arena, t_param *param);
 
 #endif

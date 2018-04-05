@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:23:09 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/03 19:35:45 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 14:52:22 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_process	*dup_process(t_process *old_process)
 	process->next = NULL;
 }
 
-t_process	*new_process(int player_nbr)
+t_process	*new_process(int player_nbr, int index)
 {
 	t_process	*process;
 
@@ -51,7 +51,9 @@ t_process	*new_process(int player_nbr)
 		exit(ft_printf("ERROR MALLOC PROCESS\n"));
 	process->reg[0] = player_nbr;
 	process->carry = 0;
-	process->index = 0;
+	process->index = index;
+	process->next_index = index;
 	process->waitting = 0;
+	process->color = 0;
 	process->next = NULL;
 }

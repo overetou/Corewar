@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 15:51:43 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/04 18:22:12 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 14:02:27 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	ft_st(t_param *param, t_arena *arena, t_process *process)
 		else
 		{
 			write_tab(value1, arena, (value2 % IDX_MOD), 4);
-			refresh_arena(arena, (value2 % IDX_MOD), 4, process->color);
+			if (process->aff == NCURSE)
+				refresh_arena(arena, (value2 % IDX_MOD), 4, process->color);
 		}
 	}
 }

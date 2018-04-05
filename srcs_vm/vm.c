@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysingaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 15:56:40 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/29 20:41:15 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/05 15:32:01 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			find_lowest_player_number(t_player *player)
 t_player	*add_player(t_player *player, char *file_name, char	*player_number)
 {
 	t_player	*new;
-	
+
 	new = (t_player*)malloc(sizeof(t_player));
 	new->file_name = file_name;
 	if (*player_number < 0)
@@ -63,7 +63,7 @@ t_player	*add_player(t_player *player, char *file_name, char	*player_number)
 	}
 	new->next = player;
 	return (new);
-}	
+}
 
 void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 {
@@ -78,13 +78,22 @@ void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 	{
 		if (!ft_strcmp(argv[i], "-v"))
 			arena->aff = NCURSE;
+		if (!ft_strcmp(argv[i], "-a"))
+			arena->aff = AFF;
+		else if (!ft_strcmp(argv[i], "-dump"))
+		{
+			arena->aff = DUMP;
+			if (!ft_str_is_numeric(argc[++i]) || (arena->end_cycle = ft_atoi(argc[i])) < 0)
+				exit(0);
+		}
 		else
 		{
 			if (!ft_strcmp(argv[i], "-n"))
 			{
 				if (argc <= i + 2)
 					exit(0);
-				player_number = mini_atoi(argc[++i]);
+				if (!ft_str_is_numeric(argc[++i]) || (player_number = ft_atoi(argc[i])) <= 0)
+					exit(0);
 				i++;
 			}
 			ft_strendcmp(argv[i], ".cor");
@@ -104,6 +113,7 @@ int			main(int argc, char **argv)
 	param = create_three_params();
 	check_arg_create_players(argc, argv, arena);
 	fill_players(arena);
+	execute_vm(arena, param);
 	ft_printf("ok");
 	return (0);
 }

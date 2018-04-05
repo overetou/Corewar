@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 19:00:16 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/04 19:00:18 by overetou         ###   ########.fr       */
+/*   Updated: 2018/04/05 14:51:53 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		secure_open(char *file_name, int code)
 char	*get_name(int fd)
 {
 	char	*name;
-	
+
 	name = ft_strnew(PROG_NAME_LENGTH);
 	lseek(fd, 0, 4);
 	if (read(fd, name, PROG_NAME_LENGTH) < 0)
@@ -35,7 +35,7 @@ char	*get_name(int fd)
 char	*get_comment(int fd)
 {
 	char	*comment;
-	
+
 	comment = ft_strnew(COMMEMT_LENGTH);
 	lseek(fd, 0, PROG_NAME_LENGTH + 12);
 	if (read(fd, comment, PROG_comment_LENGTH) < 0)
@@ -64,12 +64,10 @@ int		get_file_size(int fd)
 	return (file_size);
 }
 
-void	write_player(int fd, t_arena *arena, int i, int file_size)
+void	write_player(int fd, t_arena *arena, int adr, int file_size)
 {
-	int adr;
 	int offset;
 
-	adr = (MEM_SIZE / arena->number_of_players) * i;
 	offset = lseek(fd, PROG_NAME_LENGTH + COMMENT_LENGTH + 16, SEEK_END);
 	if (offset != file_size)
 		exit(0);
@@ -80,8 +78,9 @@ void	write_player(int fd, t_arena *arena, int i, int file_size)
 void	fill_players(t_arena *arena)
 {
 	t_player	*player;
-	int		 file_size;
-	int		 i;
+	int			file_size;
+	int			i;
+	int			adr;
 
 	player = arena->players;
 	i = 0;
@@ -91,7 +90,9 @@ void	fill_players(t_arena *arena)
 		player->name = get_name(fd);
 		player->comment = get_coment(fd);
 		file_size = get_file_size(fd);
-		write_player(fd, arena, i, file_size);
+		adr = (MEM_SIZE / arena->number_of_players) * i;
+		write_player(fd, arena, adr, file_size);
+		add_process(&(arena->process), new_process(player->nbr, adr));
 		i++;
 	}
 }
