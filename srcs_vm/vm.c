@@ -80,7 +80,7 @@ void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 	{
 		if (!ft_strcmp(argv[i], "-v"))
 			arena->aff = NCURSE;
-		if (!ft_strcmp(argv[i], "-a"))
+		else if (!ft_strcmp(argv[i], "-a"))
 			arena->aff = AFF;
 		else if (!ft_strcmp(argv[i], "-dump"))
 		{

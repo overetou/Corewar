@@ -55,5 +55,8 @@ void	execute_vm(t_arena *arena, t_param *param)
 			dump_tab(arena);
 	}
 	if (arena->aff == NCURSE)
+	{
+		getch();
 		endwin();
+	}
 }
