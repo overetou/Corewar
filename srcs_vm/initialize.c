@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:32:48 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/05 16:41:17 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 17:09:35 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_arena	*new_arena()
 	t_arena	*arena;
 
 	if (!(arena = (t_arena*)malloc(sizeof(t_arena))))
-		exit(0);
+		exit(ft_printf("ERROR MALLOC ARENA\n"));
 	arena->board = (unsigned char*)malloc(sizeof(unsigned char) * MEM_SIZE);
 	arena->cycles = 0;
 	arena->winner = 0;

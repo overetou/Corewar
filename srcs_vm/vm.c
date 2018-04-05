@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 15:56:40 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/05 16:39:03 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 17:38:57 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_strendcmp(const char *s1, const char *s2)
 
 	i = ft_strlen(s1) - ft_strlen(s2);
 	if (ft_strcmp(s1 + i, s2))
-		exit(0);
+		exit(ft_printf("ERROR STRENDCMP\n"));
 }
 
 int		check_availability_player_number(t_player *player, char player_number)
@@ -26,7 +26,7 @@ int		check_availability_player_number(t_player *player, char player_number)
 	while(player)
 	{
 		if (player->nbr == player_number)
-			exit(0);
+			exit(ft_printf("ERROR check_availability_player_number\n"));
 		player = player->next;
 	}
 	return (player_number);
@@ -58,7 +58,7 @@ t_player	*add_player(t_player *player, char *file_name, char	*player_number)
 	new->file_name = file_name;
 	new->next = player;
 	if (*player_number < 0)
-		new->nbr = find_lowest_player_number(player);	
+		new->nbr = find_lowest_player_number(player);
 	else
 	{
 		new->nbr = check_availability_player_number(player, *player_number);
@@ -75,7 +75,7 @@ void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 	i = 0;
 	player_number = -1;
 	if (argc < 2)
-		exit(0);
+		exit(ft_printf("ERROR check_arg_create_players 1\n"));
 	while (argv[++i])
 	{
 		if (!ft_strcmp(argv[i], "-v"))
@@ -86,16 +86,16 @@ void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 		{
 			arena->aff = DUMP;
 			if (!ft_str_is_numeric(argv[++i]) || (arena->end_cycle = ft_atoi(argv[i])) < 0)
-				exit(0);
+				exit(ft_printf("ERROR check_arg_create_players 2\n"));
 		}
 		else
 		{
 			if (!ft_strcmp(argv[i], "-n"))
 			{
 				if (argc <= i + 2)
-					exit(0);
+					exit(ft_printf("ERROR check_arg_create_players 3\n"));
 				if (!ft_str_is_numeric(argv[++i]) || (player_number = ft_atoi(argv[i])) <= 0)
-					exit(0);
+					exit(ft_printf("ERROR check_arg_create_players 4\n"));
 				i++;
 			}
 			ft_strendcmp(argv[i], ".cor");
