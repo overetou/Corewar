@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/04 20:38:09 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/04/05 16:37:17 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,33 @@ SRC_DASM		= \
 dasm.c
 
 SRC_VM			= \
+execute_cycle.c\
+fill_players.c\
+ft_add.c\
+ft_aff.c\
+ft_and.c\
+ft_fork.c\
+ft_ld.c\
+ft_ldi.c\
+ft_lfork.c\
+ft_live.c\
+ft_lld.c\
+ft_lldi.c\
+ft_or.c\
+ft_st.c\
+ft_sti.c\
+ft_sub.c\
+ft_void.c\
+ft_xor.c\
+ft_zjmp.c\
+get_param_value.c\
+initialize.c\
+load_params.c\
+ncurses.c\
+process.c\
 vm.c\
-initialize.c
+write_tab.c
+
 
 SRC_INC			= \
 asm.h\
@@ -102,7 +127,7 @@ $(OBJ_DIR_DASM)%.o: $(SRC_DIR_DASM)%.c $(SRCS_INC)
 	@echo "Linking" [ $< ] $(OK)
 
 $(VM): $(LIBFT_LIB) $(OBJS_VM)
-	@$(CC) $(FLAGS) $(OBJS_VM) $(LIBFT_LIB) -o $@
+	@$(CC) $(FLAGS) $(OBJS_VM) $(LIBFT_LIB) -lncurses -o $@
 	@echo "Compiling" [ $@ ] $(SUCCESS)
 
 $(OBJ_DIR_VM)%.o: $(SRC_DIR_VM)%.c $(SRCS_INC)

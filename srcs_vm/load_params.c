@@ -6,13 +6,13 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:53:59 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/30 19:54:01 by overetou         ###   ########.fr       */
+/*   Updated: 2018/04/05 16:29:31 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int		extract_bin_code(int ocp, int ocp_margin, int ind_option)
+int		extract_bin_code(int ocp, int margin, int ind_option)
 {
 	while (margin)
 	{
@@ -59,31 +59,32 @@ int		cut_ocp(int ocp, int code, int ocp_margin)
 	return (ocp ^ code);
 }
 
-int	load_params(t_param *param, unsigned char *board, t_process *process, t_op *ope)
+int		load_params(t_param *param, unsigned char *board, t_process *process, t_op *ope)
 {
 	int		ocp_margin;
 	int		opcode;
+	int		ocp;
 	t_op	op;
 
-	next_index = process->index;
-	opcode = board[next_index];
+	process->next_index = process->index;
+	opcode = board[process->next_index];
 	op = ope[opcode - 1];
-	if (op->has_ocp)
+	if (op.has_ocp)
 	{
-		ocp = board[++next_index];
+		ocp = board[++(process->next_index)];
 		ocp_margin = 3;
 		while (ocp)
 		{
-			param->code = extract_bin_code(ocp, ocp_margin, op->ind_option);
-			param->value = extract_param_value(param->code, board, &next_index);
+			param->code = extract_bin_code(ocp, ocp_margin, op.ind_option);
+			param->value = extract_param_value(param->code, board, &(process->next_index));
 			ocp = cut_ocp(ocp, param->code, ocp_margin--);
 			param = param->next;
 		}
 	}
 	else
 	{
-		param->code = op->hardcode;
-		param->value = extract_param_value(param->code, board, &next_index);
+		param->code = op.hardcode;
+		param->value = extract_param_value(param->code, board, &(process->next_index));
 	}
 	return (opcode);
 }

@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/05 15:31:34 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 16:35:30 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <libft.h>
 # include <op.h>
 # include <ncurses.h>
+# include <fcntl.h>
 
 # define DIRTWO 2
 # define DIRFOR 4
@@ -61,10 +62,10 @@ typedef struct			s_param
 
 typedef struct			s_arena
 {
-	unsigned char		board[MEM_SIZE];
+	unsigned char*		board;
 	int					cycles;
 	int					winner;
-	void				(*f[17])(t_param, struct s_arena, t_process);
+	void				(*f[17])(t_param*, struct s_arena*, t_process*);
 	t_process			*process;
 	t_player			*players;
 	t_op				*op;
@@ -91,15 +92,21 @@ void		ft_lldi(t_param *param, t_arena *arena, t_process *process);
 void		ft_lfork(t_param *param, t_arena *arena, t_process *process);
 void		ft_aff(t_param *param, t_arena *arena, t_process *process);
 
-void		load_params(t_param *param, unsigned char *board, int index, t_op *op);
+int			load_params(t_param *param, unsigned char *board, t_process *process, t_op *op);
 void		execute_cycle(t_arena *arena, t_param *param);
 t_arena		*new_arena(void);
 t_process	*new_process(int player_nbr, int index);
 t_process	*dup_process(t_process *old_process);
 void		add_process(t_process **process, t_process *new_process);
 void		dump_tab(t_arena *arena);
-void		init_color(t_player *players);
+void		ft_init_color(t_player *players);
 void		refresh_arena(t_arena *arena, int index, int len, int color);
 void		execute_vm(t_arena *arena, t_param *param);
+int			get_param_value(t_param *param, t_process *process, t_arena *arena, int has_mod);
+void		validate_reg_nbr(t_param *param);
+int			get_adr_value(t_arena *arena, int index, int nbr_oct);
+void		write_tab(unsigned int to_write, t_arena *arena, int adr, int len);
+t_param		*create_three_params(void);
+void		fill_players(t_arena *arena);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/05 15:29:44 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 15:47:20 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	execute_cycle(t_arena *arena, t_param *param)
 	while (head)
 	{
 		(head->waitting)--;
-		if (waitting < 1)
+		if (head->waitting < 1)
 		execute_process(head, param, arena);
 		head = head->next;
 	}
@@ -42,7 +42,7 @@ void	execute_vm(t_arena *arena, t_param *param)
 	{
 		initscr();
 		if (arena->number_of_players <= 7)
-			init_color(arena->players);
+			ft_init_color(arena->players);
 		refresh_arena(arena, 0, MEM_SIZE, 0);
 		getch();
 	}

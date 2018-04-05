@@ -6,19 +6,19 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 16:05:25 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/30 16:34:38 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 16:36:21 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    write_tab(unsigned int to_write, t_arena *arena, int adr, int len)
+void	write_tab(unsigned int to_write, t_arena *arena, int adr, int len)
 {
     int c;
 
     if (len)
     {
-        write_tab((to_write / 256), adr, --len);
+        write_tab((to_write / 256), arena, adr, --len);
         c = to_write % 256;
 		arena->board[adr + len] = c;
     }

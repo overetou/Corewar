@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:32:48 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/05 15:17:01 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 16:41:17 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,44 +55,43 @@ t_op	*hardcode_op(t_op *op)
 	return (op);
 }
 
-void (*f[17])hardcode_func()
+void hardcode_func(t_arena *arena)
 {
-	void	 (*f[17])(t_param, t_arena, t_process);
-
-	f[0] = ft_void;
-	f[1] = ft_live;
-	f[2] = ft_ld;
-	f[3] = ft_st;
-	f[4] = ft_add;
-	f[5] = ft_sub;
-	f[6] = ft_and;
-	f[7] = ft_or;
-	f[8] = ft_xor;
-	f[9] = ft_zjmp;
-	f[10] = ft_ldi;
-	f[11] = ft_sti;
-	f[12] = ft_fork;
-	f[13] = ft_lld;
-	f[14] = ft_lldi;
-	f[15] = ft_lfork;
-	f[16] = ft_aff;
-	return (f)
+	arena->f[0] = ft_void;
+	arena->f[1] = ft_live;
+	arena->f[2] = ft_ld;
+	arena->f[3] = ft_st;
+	arena->f[4] = ft_add;
+	arena->f[5] = ft_sub;
+	arena->f[6] = ft_and;
+	arena->f[7] = ft_or;
+	arena->f[8] = ft_xor;
+	arena->f[9] = ft_zjmp;
+	arena->f[10] = ft_ldi;
+	arena->f[11] = ft_sti;
+	arena->f[12] = ft_fork;
+	arena->f[13] = ft_lld;
+	arena->f[14] = ft_lldi;
+	arena->f[15] = ft_lfork;
+	arena->f[16] = ft_aff;
 }
 
 t_arena	*new_arena()
 {
 	t_arena	*arena;
 
-	if (!(arena = (t_arena*)malloc(sizeof(t_arena)))
+	if (!(arena = (t_arena*)malloc(sizeof(t_arena))))
 		exit(0);
-	arena->board = malloc(sizeof(unsigned char) * MEM_SIZE);
+	arena->board = (unsigned char*)malloc(sizeof(unsigned char) * MEM_SIZE);
 	arena->cycles = 0;
 	arena->winner = 0;
 	arena->op = hardcode_op(arena->op);
-	arena->f = hardcode_func();
+	return (arena);
+	hardcode_func(arena);
 	arena->aff = 0;
 	arena->end_cycle = 0;
 	arena->number_of_players = 0;
 	arena->process = NULL;
 	arena->players = NULL;
+	return (arena);
 }

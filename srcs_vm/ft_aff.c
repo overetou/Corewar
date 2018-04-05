@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 18:55:18 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/04 16:44:27 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 16:07:00 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	print_aff(unsigned int to_write)
         print_aff((to_write / 256));
         c = to_write % 256;
 		ft_printf("%C", c);
-		arena->board[adr + len] = c;
     }
 	else
 		ft_putstr("Aff: ");

@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:03:50 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/04 16:48:14 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 16:12:12 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	ft_sub(t_param *param, t_arena *arena, t_process *process)
 	else
 	{
 		process->carry = 0;
-		value1 = get_param_value(param, process);
+		value1 = get_param_value(param, process, arena, 1);
 		param = param->next;
-		value2 = get_param_value(param, process);
+		value2 = get_param_value(param, process, arena, 1);
 		param = param->next;
 		validate_reg_nbr(param);
 		process->reg[param->value - 1] = value1 - value2;

@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 19:00:16 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/05 14:51:53 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 15:58:35 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ char	*get_comment(int fd)
 {
 	char	*comment;
 
-	comment = ft_strnew(COMMEMT_LENGTH);
+	comment = ft_strnew(COMMENT_LENGTH);
 	lseek(fd, 0, PROG_NAME_LENGTH + 12);
-	if (read(fd, comment, PROG_comment_LENGTH) < 0)
+	if (read(fd, comment, COMMENT_LENGTH) < 0)
 		exit(0);
 	return (comment);
 }
@@ -51,6 +51,7 @@ int		get_file_size(int fd)
 	int		mask;
 
 	size = 0;
+	str_size = 0;
 	lseek(fd, 0, PROG_NAME_LENGTH + 8);
 	if (read(fd, str_size, 4) < 0)
 		exit(0);
@@ -81,6 +82,7 @@ void	fill_players(t_arena *arena)
 	int			file_size;
 	int			i;
 	int			adr;
+	int			fd;
 
 	player = arena->players;
 	i = 0;
@@ -88,7 +90,7 @@ void	fill_players(t_arena *arena)
 	{
 		fd = secure_open(player->file_name, O_RDONLY);
 		player->name = get_name(fd);
-		player->comment = get_coment(fd);
+		player->comment = get_comment(fd);
 		file_size = get_file_size(fd);
 		adr = (MEM_SIZE / arena->number_of_players) * i;
 		write_player(fd, arena, adr, file_size);

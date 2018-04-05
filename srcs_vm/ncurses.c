@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 15:26:51 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/05 14:26:46 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/05 16:30:12 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		dump_tab(t_arena *arena)
 	i = 0;
 	while (i < MEM_SIZE)
 	{
-		ft_printf("%.2x ", tab[i]);
+		ft_printf("%.2x ", arena->board[i]);
 		i++;
 		if (i % 32 == 0)
 			ft_putchar('\n');
@@ -27,7 +27,7 @@ void		dump_tab(t_arena *arena)
 	exit(0);
 }
 
-void		init_color(t_player *players)
+void		ft_init_color(t_player *players)
 {
 	int color;
 
