@@ -76,7 +76,7 @@ void	set_registre_param(char *str, t_param *param, t_champ *champ)
 		ft_error(champ, "SYNTAX ERROR3");
 	param->value = ft_atoi(str);
 	if (param->value > REG_NUMBER)
-		ft_error(champ, "ERROR REG_NUMBER");
+		ft_error(champ, "ERROR REG_NUMBER1");
 	param->code = REG_CODE;
 	param->nbr_octet = 1;
 	param->label = NULL;

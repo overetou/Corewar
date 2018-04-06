@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "vm.h"
-#include "stdio.h"
 
 int		extract_bin_code(int ocp, int margin, int ind_option)
 {
@@ -88,6 +87,7 @@ int		load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 	}
 	else if (opcode)
 	{
+		//ft_printf("opcode = %d\n", opcode);
 		param->code = op.hardcode;
 		param->value = extract_param_value(&(param->code), board, &(process->next_index));
 	}

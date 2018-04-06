@@ -15,7 +15,7 @@
 void	validate_reg_nbr(t_param *param)
 {
 	if (param->value < 1 || param->value > REG_NUMBER)
-		exit(ft_printf("ERROR REG_NUMBER\n"));
+		exit(ft_printf("ERROR REG_NUMBER2\n"));
 }
 
 int		get_adr_value(t_arena *arena, int index, int nbr_oct)

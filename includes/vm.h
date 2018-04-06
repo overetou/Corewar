@@ -38,6 +38,7 @@ typedef struct			s_player
 
 typedef struct			s_process
 {
+	int					opcode;
 	int					reg[REG_NUMBER];
 	char				carry;
 	int					index;

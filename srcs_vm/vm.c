@@ -105,16 +105,16 @@ void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 	}
 }
 
-char		*get_winner(t_player *player, int winner)
-{
-	while (player)
-	{
-		if (player->nbr == winner)
-			return(player->name);
-		player = player->next;
-	}
-	return (NULL);
-}
+// char		*get_winner(t_player *player, int winner)
+// {
+// 	while (player)
+// 	{
+// 		if (player->nbr == winner)
+// 			return(player->name);
+// 		player = player->next;
+// 	}
+// 	return (NULL);
+// }
 
 int			main(int argc, char **argv)
 {
@@ -126,6 +126,6 @@ int			main(int argc, char **argv)
 	check_arg_create_players(argc, argv, arena);
 	fill_players(arena);
 	execute_vm(arena, param);
-	ft_printf("And the winner is... %s!\n", get_winner(arena->players, arena->winner));
+	ft_printf("And the winner is... %d!\n", arena->winner);
 	return (0);
 }

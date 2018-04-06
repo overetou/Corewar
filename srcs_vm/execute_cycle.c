@@ -14,12 +14,20 @@
 
 void	execute_process(t_process *process, t_param *param, t_arena *arena)
 {
-	int	opcode;
-
-	opcode = load_params(param, arena->board, process, arena->op);
-	((arena->f)[opcode])(param, arena, process);
-	if (opcode != 9)
+	if (process->waitting == -1)
+	{
+		process->opcode = load_params(param, arena->board, process, arena->op);
+		((arena->f)[process->opcode])(param, arena, process);
+		ft_printf("loaded params for op : %d\n", process->opcode);
+	}
+	else
+	{
+		((arena->f)[process->opcode])(param, arena, process);
 		process->index = process->next_index;
+		ft_printf("executed op : %d\n", process->opcode);
+	}
+	// ft_printf("operation = %d, waitting = %d\n", process->opcode, process->waitting);
+	sleep(1);
 }
 
 void	execute_cycle(t_arena *arena, t_param *param)
