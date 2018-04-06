@@ -16,3 +16,11 @@ a.out
 test.*
 ex.s
 .json
+
+ressources/champs/*.cor
+ressources/tests/testasm42
+ressources/tests/testasm
+ressources/tests/asm
+ressources/tests/leaks.txt
+ressources/tests/asm.dSYM/Contents/Info.plist
+ressources/tests/asm.dSYM/Contents/Resources/DWARF/asm
