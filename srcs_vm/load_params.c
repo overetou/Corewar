@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "vm.h"
+#include "stdio.h"
 
 int		extract_bin_code(int ocp, int margin, int ind_option)
 {
-	ft_printf("OCP = %d\n", ocp);
 	while (margin)
 	{
 		ocp = ocp >> 2;
@@ -28,34 +28,38 @@ int		extract_bin_code(int ocp, int margin, int ind_option)
 	return (ocp);
 }
 
-int		extract_param_value(int	code, unsigned char *board, int *index)
+int		extract_param_value(char *code, unsigned char *board, int *index)
 {
 	int size;
 	int	mask;
+	int value;
 
-	if (code == 1)
+	if (*code == 1)
 		size = 1;
-	else if (code == 4)
+	else if (*code == 4)
+	{
 		size = 4;
+		*code = 2;
+	}
 	else
 		size = 2;
-	code = board[++(*index)];
+	value = board[++(*index)];
 	while (--size)
 	{
 		(*index)++;
-		code = code << 8;
+		value = value << 8;
 		mask = board[(*index)];
-		code = code | mask;
+		value = value | mask;
 	}
-	return (code);
+	return (value);
 }
 
-int		cut_ocp(int ocp, int code, int ocp_margin)
+int		cut_ocp(int ocp, int code, int margin)
 {
-	while (ocp_margin)
+	while (margin)
 	{
 		code = code << 2;
-		ocp_margin--;
+		margin--;
 	}
 	return (ocp ^ code);
 }
@@ -69,7 +73,7 @@ int		load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 
 	process->next_index = process->index;
 	opcode = board[process->index];
-	op = ope[opcode - 1];
+	op = ope[opcode];
 	if (op.has_ocp)
 	{
 		ocp = board[++(process->next_index)];
@@ -77,16 +81,15 @@ int		load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 		while (ocp)
 		{
 			param->code = extract_bin_code(ocp, ocp_margin, op.ind_option);
-			param->value = extract_param_value(param->code, board, &(process->next_index));
+			param->value = extract_param_value(&(param->code), board, &(process->next_index));
 			ocp = cut_ocp(ocp, param->code, ocp_margin--);
 			param = param->next;
 		}
-		ft_printf("__________END__________\n");
 	}
-	else
+	else if (opcode)
 	{
 		param->code = op.hardcode;
-		param->value = extract_param_value(param->code, board, &(process->next_index));
+		param->value = extract_param_value(&(param->code), board, &(process->next_index));
 	}
 	(process->next_index)++;
 	return (opcode);
