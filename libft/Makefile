@@ -6,15 +6,14 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/03/26 15:13:40 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/04/08 22:49:16 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libft.a
 
 CC		= gcc
-FLAGS	= -Wall -Wextra -Werror #$(DFLAGS)
-DFLAGS	= -g3 -fsanitize=address
+FLAGS	= -Wall -Wextra -Werror -MMD
 
 SRC_BASE = \
 char/ft_charcspn.c\
@@ -110,8 +109,6 @@ str/ft_strsub.c\
 str/ft_strtrim_space.c\
 str/ft_strtrim.c
 
-INC_BASE = libft.h
-
 CUR_DIR	= libft/
 SRC_DIR	= srcs/
 OBJ_DIR	= objs/
@@ -120,39 +117,39 @@ INC_DIR	= includes/
 SRCS	= $(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS	= $(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
 
-C_NO	= "\033[00m"
-C_RED	= "\033[31m"
-C_GREEN	= "\033[32m"
-C_CYAN	= "\033[36m"
+INC		= $(OBJS:%.o=%.d)
 
-SUCCESS	= $(C_GREEN)SUCCESS$(C_NO)
-WAIT	= $(C_CYAN)WAIT$(C_NO)
-RM		= $(C_RED)OK$(C_NO)
+C_NO	= \033[00m
+C_RED	= \033[31m
+C_GREEN	= \033[32m
+C_CYAN	= \033[36m
 
-all: $(NAME)
+OK1		= $(C_GREEN)✔$(C_NO)
+OK2		= $(C_RED)✔$(C_NO)
+
+all:
+	@make $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS)
 	@ar rcs $@ $(OBJS)
-	@echo "\rCompiling & indexing\033[K" [ $(NAME) ] $(SUCCESS)
+	@printf "\rCompiling %-15s$(OK1)\033[K\n" "[ $@ ]"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(dir $(OBJS))
-	@echo "Preparing" [ $(NAME) ] $(WAIT)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INC_DIR)$(INC_BASE)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) -c $(FLAGS) -I $(INC_DIR) $< -o $@
-	@printf "\r\033[38;5;11mLinking [ %s ]\033[0m\033[K" "$<"
+	@printf "\rLinking   [ %s ]\033[K" "$<"
 
 clean:
-	@if [ -e $(OBJ_DIR) ]; then rm -rf $(OBJ_DIR); \
-	echo "Cleaning" [ $(CUR_DIR)objs ] $(RM); fi;
+	@if [ -e $(OBJ_DIR) ]; then rm -rf $(OBJ_DIR); fi;
 
 fclean: clean
-	@if [ -e $(NAME) ]; then rm -rf $(NAME); \
-	echo "Delete" [ $(NAME) ] $(RM); fi;
+	@if [ -e $(NAME) ]; then rm -f $(NAME); fi;
 
 re: fclean
 	@make $(NAME)
 
-.PHONY: fclean clean re
+.PHONY: all fclean clean re
+-include $(INC)

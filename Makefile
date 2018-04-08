@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/05 16:37:17 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/04/08 23:34:22 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ DASM			= dasm
 VM				= corewar
 
 CC				= gcc
-FLAGS			= -Wall -Wextra -Werror #$(DFLAGS)
+FLAGS			= -Wall -Wextra -Werror -MMD #$(DFLAGS)
 DFLAGS			= -g3 -fsanitize=address
 
 SRC_ASM			= \
@@ -62,13 +62,6 @@ process.c\
 vm.c\
 write_tab.c
 
-
-SRC_INC			= \
-asm.h\
-dasm.h\
-vm.h\
-op.h
-
 LIB_DIR			= libft/
 INC_DIR			= includes/
 
@@ -82,8 +75,6 @@ OBJ_DIR_VM		= objs_vm/
 
 LIBFT_LIB		= $(LIB_DIR)libft.a
 
-SRCS_INC		= $(addprefix $(INC_DIR), $(SRC_INC))
-
 SRCS_ASM		= $(addprefix $(SRC_DIR_ASM), $(SRC_ASM))
 SRCS_DASM		= $(addprefix $(SRC_DIR_DASM), $(SRC_DASM))
 SRCS_VM			= $(addprefix $(SRC_DIR_VM), $(SRC_VM))
@@ -92,59 +83,71 @@ OBJS_ASM		= $(addprefix $(OBJ_DIR_ASM), $(SRC_ASM:.c=.o))
 OBJS_DASM		= $(addprefix $(OBJ_DIR_DASM), $(SRC_DASM:.c=.o))
 OBJS_VM			= $(addprefix $(OBJ_DIR_VM), $(SRC_VM:.c=.o))
 
+INC				= $(OBJS_ASM:%.o=%.d) $(OBJS_DASM:%.o=%.d) $(OBJS_VM:%.o=%.d)
+
 HEADER			= -I $(INC_DIR) -I $(LIB_DIR)$(INC_DIR)
 
-C_NO			= "\033[00m"
-C_GREEN			= "\033[32m"
-C_RED			= "\033[31m"
-C_YELL			= "\033[33m"
+LLFT			= -L $(LIB_DIR) -lft
 
-SUCCESS			= $(C_GREEN)SUCCESS$(C_NO)
-OK				= $(C_YELL)OK$(C_NO)
-RM				= $(C_RED)OK$(C_NO)
+C_NO			= \033[00m
+C_GREEN			= \033[32m
+C_RED			= \033[31m
+C_YELL			= \033[33m
 
-all: lib $(ASM) $(DASM) $(VM)
+OK1				= $(C_GREEN)✔$(C_NO)
+OK2				= $(C_RED)✔$(C_NO)
 
-lib:
+all:
 	@make -j -C $(LIB_DIR)
+	@make $(ASM)
+	@make $(DASM)
+	@make $(VM)
 
 $(ASM): $(LIBFT_LIB) $(OBJS_ASM)
-	@$(CC) $(FLAGS) $(OBJS_ASM) $(LIBFT_LIB) -o $@
-	@echo "Compiling" [ $@ ] $(SUCCESS)
+	@$(CC) $(FLAGS) $(OBJS_ASM) $(LLFT) -o $@
+	@printf "\rCompiling %-15s$(OK1)\033[K\n" "[ $@ ]"
 
-$(OBJ_DIR_ASM)%.o: $(SRC_DIR_ASM)%.c $(SRCS_INC)
+$(OBJ_DIR_ASM):
 	@mkdir -p $(OBJ_DIR_ASM)
+
+$(OBJ_DIR_ASM)%.o: $(SRC_DIR_ASM)%.c | $(OBJ_DIR_ASM)
 	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
-	@echo "Linking" [ $< ] $(OK)
+	@printf "\rLinking   [ %s ]\033[K" "$<"
 
 $(DASM): $(LIBFT_LIB) $(OBJS_DASM)
-	@$(CC) $(FLAGS) $(OBJS_DASM) $(LIBFT_LIB) -o $@
-	@echo "Compiling" [ $@ ] $(SUCCESS)
+	@$(CC) $(FLAGS) $(OBJS_DASM) $(LLFT) -o $@
+	@printf "\rCompiling %-15s$(OK1)\033[K\n" "[ $@ ]"
 
-$(OBJ_DIR_DASM)%.o: $(SRC_DIR_DASM)%.c $(SRCS_INC)
+$(OBJ_DIR_DASM):
 	@mkdir -p $(OBJ_DIR_DASM)
+
+$(OBJ_DIR_DASM)%.o: $(SRC_DIR_DASM)%.c | $(OBJ_DIR_DASM)
 	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
-	@echo "Linking" [ $< ] $(OK)
+	@printf "\rLinking   [ %s ]\033[K" "$<"
 
 $(VM): $(LIBFT_LIB) $(OBJS_VM)
-	@$(CC) $(FLAGS) $(OBJS_VM) $(LIBFT_LIB) -lncurses -o $@
-	@echo "Compiling" [ $@ ] $(SUCCESS)
+	@$(CC) $(FLAGS) $(OBJS_VM) $(LLFT) -lncurses -o $@
+	@printf "\rCompiling %-15s$(OK1)\033[K\n" "[ $@ ]"
 
-$(OBJ_DIR_VM)%.o: $(SRC_DIR_VM)%.c $(SRCS_INC)
+$(OBJ_DIR_VM):
 	@mkdir -p $(OBJ_DIR_VM)
+
+$(OBJ_DIR_VM)%.o: $(SRC_DIR_VM)%.c | $(OBJ_DIR_VM)
 	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
-	@echo "Linking" [ $< ] $(OK)
+	@printf "\rLinking   [ %s ]\033[K" "$<"
 
 clean:
 	@make -C $(LIB_DIR) clean
 	@rm -rf $(OBJ_DIR_ASM) $(OBJ_DIR_DASM) $(OBJ_DIR_VM)
-	@echo "Cleaning" [ objs_asm \& objs_vm ] $(RM)
+	@printf "%-25s$(OK2)\n" "Cleaning  [ corewar ]"
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean
-	@rm -rf $(ASM) $(DASM) $(VM)
-	@echo "Delete" [ asm \& corewar ] $(RM)
+	@rm -f $(ASM) $(DASM) $(VM)
+	@printf "%-25s$(OK2)\n" "Delete    [ corewar ]"
 
-re: fclean all
+re: fclean
+	@make
 
-.PHONY: all fclean clean re lib
+.PHONY: all fclean clean re
+-include $(INC)
