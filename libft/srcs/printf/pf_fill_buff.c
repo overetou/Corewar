@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 23:28:25 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/16 23:28:27 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/08 23:46:34 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	fill_sbuff(const char *str, t_pf_env *e)
 
 void	print_buff(t_pf_env *e)
 {
-		e->ret += write(1, e->buff, e->b);
+		e->ret += write(e->fd, e->buff, e->b);
 		e->b = 0;
 }

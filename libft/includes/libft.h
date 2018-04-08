@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:40 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/22 16:01:46 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/08 23:46:26 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,9 +155,11 @@ typedef	struct	s_pf_env
 	int			i;
 	int			b;
 	int			ret;
+	int			fd;
 }				t_pf_env;
 
 int				ft_printf(const char *restrict fmt, ...);
+int				ft_dprintf(int fd, const char *restrict fmt, ...);
 
 /*
 **				fill_buff
