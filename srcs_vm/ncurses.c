@@ -17,12 +17,16 @@ void		dump_tab(t_arena *arena)
 	int i;
 
 	i = 0;
+	ft_printf("0x%.4x : ", i);
 	while (i < MEM_SIZE)
 	{
 		ft_printf("%.2x ", arena->board[i]);
 		i++;
-		if (i % 32 == 0)
+		if (i % 64 == 0)
+		{
 			ft_putchar('\n');
+			ft_printf("%#.4x : ", i);
+		}
 	}
 	exit(0);
 }

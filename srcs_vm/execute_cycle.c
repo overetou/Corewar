@@ -12,35 +12,39 @@
 
 #include "vm.h"
 
+
 void	execute_process(t_process *process, t_param *param, t_arena *arena)
 {
 	if (process->waitting == -1)
 	{
-		process->opcode = load_params(param, arena->board, process, arena->op);
-		((arena->f)[process->opcode])(param, arena, process);
-		ft_printf("loaded params for op : %d\n", process->opcode);
+		process->opcode = arena->board[process->index];
+		if(process->opcode >= 0 && process->opcode <= 16)
+			((arena->f)[process->opcode])(param, arena, process);
+		else
+			process->waitting = 0;
 	}
 	else
 	{
+		//ft_printf("before executed op : %d\n", process->opcode);
+		load_params(param, arena->board, process, arena->op);
 		((arena->f)[process->opcode])(param, arena, process);
 		process->index = process->next_index;
-		ft_printf("executed op : %d\n", process->opcode);
+		//ft_printf("after executed op : %d\n", process->opcode);
 	}
-	// ft_printf("operation = %d, waitting = %d\n", process->opcode, process->waitting);
-	sleep(1);
+	//sleep(1);
 }
 
 void	execute_cycle(t_arena *arena, t_param *param)
 {
-	t_process	*head;
+	t_process	*process;
 
-	head = arena->process;
-	while (head)
+	process = arena->process;
+	while (process)
 	{
-		(head->waitting)--;
-		if (head->waitting < 1)
-			execute_process(head, param, arena);
-		head = head->next;
+		(process->waitting)--;
+		if (process->waitting < 1)
+			execute_process(process, param, arena);
+		process = process->next;
 	}
 }
 
@@ -57,7 +61,7 @@ void	execute_vm(t_arena *arena, t_param *param)
 	{
 		execute_cycle(arena, param);
 		arena->cycles++;
-		if (arena->aff == DUMP && arena->end_cycle >= arena->cycles)
+		if (arena->aff == DUMP && arena->end_cycle <= arena->cycles)
 			dump_tab(arena);
 	}
 	if (arena->aff == NCURSE)

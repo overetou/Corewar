@@ -94,7 +94,7 @@ void		ft_lldi(t_param *param, t_arena *arena, t_process *process);
 void		ft_lfork(t_param *param, t_arena *arena, t_process *process);
 void		ft_aff(t_param *param, t_arena *arena, t_process *process);
 
-int			load_params(t_param *param, unsigned char *board, t_process *process, t_op *op);
+void		load_params(t_param *param, unsigned char *board, t_process *process, t_op *op);
 void		execute_cycle(t_arena *arena, t_param *param);
 t_arena		*new_arena(void);
 t_process	*new_process(int player_nbr, int index);

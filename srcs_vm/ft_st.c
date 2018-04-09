@@ -21,7 +21,7 @@ void	ft_st(t_param *param, t_arena *arena, t_process *process)
 		process->waitting = 5;
 	else
 	{
-		value1 = get_param_value(param, process, NULL, 0);
+		value1 = get_param_value(param, process, NULL, 0);	
 		param = param->next;
 		value2 = get_param_value(param, process, NULL, 0);
 		if (param->code == REG_CODE)

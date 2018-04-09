@@ -30,14 +30,13 @@ int		extract_bin_code(int ocp, int margin, int ind_option)
 int		extract_param_value(char *code, unsigned char *board, int *index)
 {
 	int size;
-	int	mask;
 	int value;
 
 	if (*code == 1)
 		size = 1;
-	else if (*code == 4)
+	else if (*code == DIRFOR)
 	{
-		size = 4;
+		size = DIRFOR;
 		*code = 2;
 	}
 	else
@@ -47,8 +46,7 @@ int		extract_param_value(char *code, unsigned char *board, int *index)
 	{
 		(*index)++;
 		value = value << 8;
-		mask = board[(*index)];
-		value = value | mask;
+		value = value | board[(*index)];
 	}
 	return (value);
 }
@@ -63,21 +61,21 @@ int		cut_ocp(int ocp, int code, int margin)
 	return (ocp ^ code);
 }
 
-int		load_params(t_param *param, unsigned char *board, t_process *process, t_op *ope)
+void	load_params(t_param *param, unsigned char *board, t_process *process, t_op *ope)
 {
 	int		ocp_margin;
-	int		opcode;
 	int		ocp;
 	t_op	op;
-
+	int		x;
+	
 	process->next_index = process->index;
-	opcode = board[process->index];
-	op = ope[opcode];
+	op = ope[(process->opcode)];
 	if (op.has_ocp)
 	{
+		x = 0;
 		ocp = board[++(process->next_index)];
 		ocp_margin = 3;
-		while (ocp)
+		while (ocp && ++x <= 3)
 		{
 			param->code = extract_bin_code(ocp, ocp_margin, op.ind_option);
 			param->value = extract_param_value(&(param->code), board, &(process->next_index));
@@ -85,12 +83,10 @@ int		load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 			param = param->next;
 		}
 	}
-	else if (opcode)
+	else if ((process->opcode))
 	{
-		//ft_printf("opcode = %d\n", opcode);
 		param->code = op.hardcode;
 		param->value = extract_param_value(&(param->code), board, &(process->next_index));
 	}
 	(process->next_index)++;
-	return (opcode);
 }

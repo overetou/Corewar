@@ -18,9 +18,8 @@ void	ft_zjmp(t_param *param, t_arena *arena, t_process *process)
 		process->waitting = 20;
 	else
 	{
-		//ft_printf("index = %d, value = %d\n", process->index, param->value);
 		if (process->carry)
-			process->next_index = process->index + param->value;
+			process->next_index = process->index + (short)param->value;
 	}
 	(void)arena;
 }
