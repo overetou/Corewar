@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:20:09 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/28 18:39:42 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/09 11:38:50 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int		create_cor_file(char *file_name)
 	name = ft_strnew(name_size);
 	ft_strncpy(name, file_name, name_size - 4);
 	ft_strcpy(name + name_size - 4, ".cor");
-	fd = open(name, O_TRUNC | O_CREAT | O_RDWR, 0777);
+//	fd = open(name, O_TRUNC | O_CREAT | O_RDWR, 0777);
+	fd = open(name, O_TRUNC | O_CREAT | O_WRONLY, S_IRWXU);
 	return (fd);
 }
 
