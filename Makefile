@@ -32,7 +32,8 @@ writing.c\
 processing.c
 
 SRC_DASM		= \
-dasm.c
+dasm.c\
+ft_parse.c
 
 SRC_VM			= \
 execute_cycle.c\

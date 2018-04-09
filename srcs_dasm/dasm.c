@@ -12,6 +12,12 @@
 
 #include <dasm.h>
 
+
+/* remplacer les ft_error par un solve pour faire comme dans lem lin des qu'il y 
+a une faute on resoud avec ce qu'on a. si on a pas tout tant pis. c'est le mieux
+je pense plutot que de checker si on a toutess les infos ou pas c casse couilles 
+pour rien. vu que c'est un bonus on peut choisir de le faire comme ca oklm
+*/
 void	ft_error(t_env *e, char *message)
 {
 	if (e->file)
@@ -38,8 +44,9 @@ void	store_file(t_env *e, char *file_name)
 void		ft_dasm(t_env *e, char *argv)
 {
 	store_file(e, argv);
-//	ft_printf("%s\n", e->file);
-	ft_printf("%d\n", e->len);
+//	ft_printf("%d\n", e->len);
+	ft_parse(e);
+
 }
 
 int			main(int argc, char **argv)
