@@ -35,7 +35,8 @@ void		ft_parse_param(t_env *e, t_cmd *cmd)
 
 	i = 0;
 	ft_dir_size(e, cmd);
-	if (tmp = ++e->i >= e->len)
+	tmp = e->file[e->i++];
+	if (e->i >= e->len)
 		ft_error(e, "BAD OCP");
 	while (i < 3)
 	{
