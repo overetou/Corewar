@@ -61,10 +61,9 @@ void	execute_vm(t_arena *arena, t_param *param)
 	{
 		execute_cycle(arena, param);
 		arena->cycles++;
-		if (arena->aff == DUMP && arena->end_cycle >= arena->cycles)
+		if (arena->aff == DUMP && arena->end_cycle <= arena->cycles)
 			dump_tab(arena);
 	}
-	ft_printf("nbr cycles = %d\n", arena->cycles);
 	if (arena->aff == NCURSE)
 	{
 		getch();
