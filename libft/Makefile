@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/08 22:49:16 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/04/09 10:50:36 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -140,7 +140,7 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) -c $(FLAGS) -I $(INC_DIR) $< -o $@
-	@printf "\rLinking   [ %s ]\033[K" "$<"
+	@printf "\rCompiling %-15s$<\033[K" "[ $(NAME) ]"
 
 clean:
 	@if [ -e $(OBJ_DIR) ]; then rm -rf $(OBJ_DIR); fi;

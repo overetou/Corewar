@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/08 23:34:22 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/04/09 10:52:01 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,7 +112,7 @@ $(OBJ_DIR_ASM):
 
 $(OBJ_DIR_ASM)%.o: $(SRC_DIR_ASM)%.c | $(OBJ_DIR_ASM)
 	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
-	@printf "\rLinking   [ %s ]\033[K" "$<"
+	@printf "\rCompiling %-15s$<\033[K" "[ $(ASM) ]"
 
 $(DASM): $(LIBFT_LIB) $(OBJS_DASM)
 	@$(CC) $(FLAGS) $(OBJS_DASM) $(LLFT) -o $@
@@ -123,7 +123,7 @@ $(OBJ_DIR_DASM):
 
 $(OBJ_DIR_DASM)%.o: $(SRC_DIR_DASM)%.c | $(OBJ_DIR_DASM)
 	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
-	@printf "\rLinking   [ %s ]\033[K" "$<"
+	@printf "\rCompiling %-15s$<\033[K" "[ $(DASM) ]"
 
 $(VM): $(LIBFT_LIB) $(OBJS_VM)
 	@$(CC) $(FLAGS) $(OBJS_VM) $(LLFT) -lncurses -o $@
@@ -134,7 +134,7 @@ $(OBJ_DIR_VM):
 
 $(OBJ_DIR_VM)%.o: $(SRC_DIR_VM)%.c | $(OBJ_DIR_VM)
 	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
-	@printf "\rLinking   [ %s ]\033[K" "$<"
+	@printf "\rCompiling %-15s$<\033[K" "[ $(VM) ]"
 
 clean:
 	@make -C $(LIB_DIR) clean
