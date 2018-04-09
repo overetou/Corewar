@@ -15,9 +15,13 @@
 void	ft_fork(t_param *param, t_arena *arena, t_process *process)
 {
 	if (process->waitting == -1)
+	{
+		ft_printf("WAITTING FORK\n");
 		process->waitting = 800;
+	}
 	else
 	{
+		ft_printf("EXECUTE FORK\n");
 		add_process(&(arena->process), dup_process(process));
 		arena->process->index = process->index + (param->value % IDX_MOD);
 	}

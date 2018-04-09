@@ -26,7 +26,6 @@ void	ft_and(t_param *param, t_arena *arena, t_process *process)
 		param = param->next;
 		value2 = get_param_value(param, process, arena, 1);
 		param = param->next;
-		ft_printf("%d => %d\n",param->code, param->value);
 		validate_reg_nbr(param);
 		process->reg[param->value - 1] = value1 & value2;
 		process->carry = 1;

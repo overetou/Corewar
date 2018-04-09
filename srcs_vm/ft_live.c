@@ -17,10 +17,15 @@ void	ft_live(t_param *param, t_arena *arena, t_process *process)
 	t_player *player;
 
 	if (process->waitting == -1)
+	{
+		ft_printf("WAITTING LIVE\n");
 		process->waitting = 10;
+	}
 	else
 	{
+		ft_printf("EXECUTE LIVE\n");
 		player = arena->players;
+		ft_printf("value = %d\n", param->value);
 		while (player)
 		{
 			if (player->nbr == param->value)
