@@ -93,7 +93,7 @@ void	do_processes_checks(t_arena *arena, int	*no_nbr_live, int *ctd)
 	if (arena->nbr_live >= NBR_LIVE)
 		*ctd -= CYCLE_DELTA;
 	else
-		*no_nbr_live++;
+		(*no_nbr_live)++;
 	if (*no_nbr_live == MAX_CHECKS)
 	{
 		*ctd -= CYCLE_DELTA;
