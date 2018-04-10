@@ -32,5 +32,6 @@ void	ft_live(t_param *param, t_arena *arena, t_process *process)
 			}
 			player = player->next;
 		}
+		process->did_live = 1;
 	}
 }

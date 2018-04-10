@@ -55,7 +55,7 @@ void	kill_unlively_processes(t_arena *arena)
 	t_process	*process;
 	t_process	*back;
 
-	if (arena->process)
+	if ((arena->process))
 	{
 		process = arena->process;
 		while(process == arena->process && process)
@@ -67,7 +67,10 @@ void	kill_unlively_processes(t_arena *arena)
 				process = arena->process;
 			}
 			else
+			{
+				process->did_live = 0;
 				process = process->next;
+			}
 		}
 		back = arena->process;
 		while (process)
@@ -90,7 +93,7 @@ void	kill_unlively_processes(t_arena *arena)
 void	do_processes_checks(t_arena *arena, int	*no_nbr_live, int *ctd)
 {
 	kill_unlively_processes(arena);
-	if (arena->nbr_live >= NBR_LIVE)
+	if ((arena->nbr_live) >= NBR_LIVE)
 		*ctd -= CYCLE_DELTA;
 	else
 		(*no_nbr_live)++;
@@ -114,17 +117,16 @@ void	execute_vm(t_arena *arena, t_param *param)
 		ft_init_color(arena->players, arena);
 		getch();
 	}
-	// CHANGER POUR CALCULER LES CYCLES
-	while (ctd)
+	while (ctd > 0)
 	{
-		if (arena->cycles % ctd == 0 && arena->cycles)
+		if ((arena->cycles) % ctd == 0 && arena->cycles)
 			do_processes_checks(arena, &no_nbr_live, &ctd);
 		execute_cycle(arena, param);
 		arena->cycles++;
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
 			dump_tab(arena);
 	}
-	ft_printf("CYCLES = %d\n", arena->cycles);
+	ft_printf("CYCLES = %d, nbr live = %d\n", arena->cycles, arena->nbr_live);
 	if (arena->aff == NCURSE)
 	{
 		getch();
