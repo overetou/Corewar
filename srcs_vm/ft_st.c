@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 15:51:43 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/10 15:05:42 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/10 15:39:02 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,17 @@ void	ft_st(t_param *param, t_arena *arena, t_process *process)
 	else
 	{
 		value1 = get_param_value(param, process, NULL, 0);
+		ft_printf("%d => %d\n", param->value, value1);
 		param = param->next;
 		value2 = get_param_value(param, process, NULL, 0);
+		ft_printf("%d => %d\n", param->value, value2);
 		if (param->code == REG_CODE)
 			process->reg[param->value - 1] = value1;
 		else
 		{
-			write_tab(value1, arena, (value2 % IDX_MOD), 4);
+			write_tab(value1, arena, (process->index + value2) % IDX_MOD, 4);
 			if (arena->aff == NCURSE)
-				refresh_arena(arena, (value2 % IDX_MOD), 4, process->color);
+				refresh_arena(arena, (process->index + value2) % IDX_MOD, 4, process->color);
 		}
 	}
 }

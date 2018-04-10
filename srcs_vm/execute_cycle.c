@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/10 14:15:10 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/10 15:56:59 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	execute_process(t_process *process, t_param *param, t_arena *arena)
 		load_params(param, arena->board, process, arena->op);
 		((arena->f)[process->opcode])(param, arena, process);
 		process->index = process->next_index;
+		process->waitting = -1;
+		execute_process(process, param, arena);
 		//ft_printf("after executed op : %d\n", process->opcode);
 	}
 	//sleep(1);

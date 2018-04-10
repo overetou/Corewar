@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 16:35:47 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/05 20:15:11 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/10 15:37:45 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	ft_sti(t_param *param, t_arena *arena, t_process *process)
 		value2 = get_param_value(param, process, arena, 1);
 		param = param->next;
 		value3 = get_param_value(param, process, arena, 1);
-		write_tab(value1, arena, ((value2 + value3) % IDX_MOD), 4);
+		write_tab(value1, arena, ((process->index + value2 + value3) % IDX_MOD), 4);
 		if (arena->aff == NCURSE)
-			refresh_arena(arena, ((value2 + value3) % IDX_MOD), 4, process->color);
+			refresh_arena(arena, ((process->index + value2 + value3) % IDX_MOD), 4, process->color);
 	}
 }
