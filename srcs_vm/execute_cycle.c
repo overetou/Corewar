@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/10 15:56:59 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:15:43 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	execute_vm(t_arena *arena, t_param *param)
 		getch();
 	}
 	// CHANGER POUR CALCULER LES CYCLES
-	while (arena->cycles != CYCLE_TO_DIE)
+	while (arena->cycles != (CYCLE_TO_DIE * 2))
 	{
 		execute_cycle(arena, param);
 		arena->cycles++;
