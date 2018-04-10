@@ -33,15 +33,25 @@ void	ft_check_magic(t_env *e)
 
 void		ft_parse_comment_name(t_env *e)
 {
-	e->name = ft_strdup(e->file + e->i);
-	while (e->file[e->i] != 0)
+	int i;
+	
+	i = -1;
+	e->name = ft_strndup(e->file + e->i, e->len - e->i);
+	if (ft_strlen(e->name) > PROG_NAME_LENGTH && ft_strlen(e->name) < 1)
+		ft_error(e, "NAME BAD SIZE");
+	while (e->file[e->i] != 0 && e->i < e->len && ++i < PROG_NAME_LENGTH)
 		e->i++;
-	while (e->file[e->i] == 0)
+	while (e->file[e->i] == 0 && e->i < e->len)
 		e->i++;
-	e->comment = ft_strdup(e->file + e->i);
-	while (e->file[e->i] != 0)
+	e->comment = ft_strndup(e->file + e->i, e->len - e->i);
+	i = 0;
+	if (ft_strlen(e->comment) > COMMENT_LENGTH && ft_strlen(e->name) < 1)
+		ft_error(e, "NAME BAD SIZE");
+	while (e->file[e->i] != 0 && e->i < e->len && i < COMMENT_LENGTH)
 		e->i++;
-	while (e->file[e->i] == 0)
+	while (e->file[e->i] != 0 && e->i < e->len)
+		e->i++;
+	while (e->file[e->i] == 0 && e->i < e->len)
 		e->i++;	
 }
 
@@ -52,7 +62,7 @@ void		ft_parse_cmd(t_env *e)
 
 	while (e->i < e->len)
 	{
-		while (e->i < e->len && e->[e->i] == 0)
+		while (e->i < e->len && e->file[e->i] == 0)
 			e->i++;
 		ft_push_cmd(e->cmd, new_cmd(cmd));
 		ft_get_ocp(e);
