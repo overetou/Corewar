@@ -17,7 +17,10 @@
 a une faute on resoud avec ce qu'on a. si on a pas tout tant pis. c'est le mieux
 je pense plutot que de checker si on a toutess les infos ou pas c casse couilles 
 pour rien. vu que c'est un bonus on peut choisir de le faire comme ca oklm
+dabord on check si on, a le magic si non on affiche bad header; si on a le name
+sinon cas d'erreur etc...
 */
+// toujours checker si le fichier est finit ou pas. via la len dans la struct env
 void	ft_error(t_env *e, char *message)
 {
 	if (e->file)
