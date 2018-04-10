@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 19:26:23 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/05 19:17:01 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/10 20:01:46 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_live(t_param *param, t_arena *arena, t_process *process)
 			if (player->nbr == param->value)
 			{
 				arena->winner = param->value;
-				player->nbr_live++;
+				arena->nbr_live++;
 				player->last_live = arena->cycles;
 				break ;
 			}
