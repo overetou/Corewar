@@ -50,8 +50,64 @@ void	execute_cycle(t_arena *arena, t_param *param)
 	}
 }
 
+void	kill_unlively_processes(t_arena *arena)
+{
+	t_process	*process;
+	t_process	*back;
+
+	if (arena->process)
+	{
+		process = arena->process;
+		while(process == arena->process && process)
+		{
+			if (!(process->did_live))
+			{
+				arena->process = process->next;
+				free(process);
+				process = arena->process;
+			}
+			else
+				process = process->next;
+		}
+		back = arena->process;
+		while (process)
+		{
+			if (!(process->did_live))
+			{
+				back = process->next;
+				free(process);
+				process = back->next;
+			}
+			else
+			{
+				back = process;
+				process = process->next;
+			}
+		}
+	}
+}
+
+void	do_processes_checks(t_arena *arena, int	*no_nbr_live, int *ctd)
+{
+	kill_unlively_processes(arena);
+	if (arena->nbr_live >= NBR_LIVE)
+		*ctd -= CYCLE_DELTA;
+	else
+		*no_nbr_live++;
+	if (*no_nbr_live == MAX_CHECKS)
+	{
+		*ctd -= CYCLE_DELTA;
+		*no_nbr_live = 0;
+	}
+}
+
 void	execute_vm(t_arena *arena, t_param *param)
 {
+	int	ctd;
+	int	no_nbr_live;
+
+	ctd = CYCLE_TO_DIE;
+	no_nbr_live = 0;
 	if (arena->aff == NCURSE)
 	{
 		initscr();
@@ -59,8 +115,10 @@ void	execute_vm(t_arena *arena, t_param *param)
 		getch();
 	}
 	// CHANGER POUR CALCULER LES CYCLES
-	while (arena->cycles != (CYCLE_TO_DIE * 2))
+	while (ctd)
 	{
+		if (arena->cycles % ctd == 0 && arena->cycles)
+			do_processes_checks(arena, &no_nbr_live, &ctd);
 		execute_cycle(arena, param);
 		arena->cycles++;
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)

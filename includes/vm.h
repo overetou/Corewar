@@ -30,7 +30,6 @@ typedef struct			s_player
 	char				nbr;
 	char				*name;
 	char				*comment;
-	int					nbr_live;
 	int					last_live;
 	int					file_size;
 	struct s_player		*next;
@@ -44,6 +43,7 @@ typedef struct			s_process
 	int					index;
 	int					next_index;
 	int					waitting;
+	char				did_live;
 	unsigned char		color;
 	struct s_process	*next;
 }						t_process;
@@ -70,6 +70,7 @@ typedef struct			s_arena
 	void				(*f[17])(t_param*, struct s_arena*, t_process*);
 	t_process			*process;
 	t_player			*players;
+	int					nbr_live;
 	t_op				op[17];
 	int					aff;
 	int					end_cycle;
