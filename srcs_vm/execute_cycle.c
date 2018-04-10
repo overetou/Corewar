@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/05 20:08:33 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/10 14:15:10 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	execute_vm(t_arena *arena, t_param *param)
 	{
 		execute_cycle(arena, param);
 		arena->cycles++;
-		if (arena->aff == DUMP && arena->end_cycle <= arena->cycles)
+		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
 			dump_tab(arena);
 	}
 	if (arena->aff == NCURSE)

@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:09:04 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/05 16:14:32 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/10 14:48:19 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int		get_param_value(t_param *param, t_process *process, t_arena *arena, int has
 {
 	int value;
 
+	if (param->code == IND_CODE || param->code == DIRTWO)
+		param->value = (short)param->value;
 	if (param->code == REG_CODE)
 	{
 		validate_reg_nbr(param);
