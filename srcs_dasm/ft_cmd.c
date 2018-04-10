@@ -26,6 +26,8 @@ void		ft_dir_size(t_env *e, t_cmd *cmd)
 		cmd_dir_size = -1;
 	else 
 		ft_error(e, "BAD OP_CODE");
+	if (++e->i >= e->len)
+		ft_error(e, "BAD OCP");
 }
 
 void		ft_parse_param(t_env *e, t_cmd *cmd)
