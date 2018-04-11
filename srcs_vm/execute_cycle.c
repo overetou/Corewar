@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/10 20:18:07 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/11 15:54:44 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	kill_unlively_processes(t_arena *arena)
 		{
 			if (!(process->did_live))
 			{
-				back = process->next;
+				back->next = process->next;
 				free(process);
 				process = back->next;
 			}
@@ -102,6 +102,8 @@ void	do_processes_checks(t_arena *arena, int	*no_nbr_live, int *ctd)
 		*ctd -= CYCLE_DELTA;
 		*no_nbr_live = 0;
 	}
+	arena->executed_cycles = 0;
+	arena->nbr_live = 0;
 }
 
 void	execute_vm(t_arena *arena, t_param *param)
@@ -119,14 +121,14 @@ void	execute_vm(t_arena *arena, t_param *param)
 	}
 	while (ctd > 0)
 	{
-		if ((arena->cycles) % ctd == 0 && arena->cycles)
+		if ((arena->executed_cycles) % ctd == 0 && arena->executed_cycles)
 			do_processes_checks(arena, &no_nbr_live, &ctd);
 		execute_cycle(arena, param);
 		arena->cycles++;
+		arena->executed_cycles++;
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
 			dump_tab(arena);
 	}
-	ft_printf("CYCLES = %d, nbr live = %d\n", arena->cycles, arena->nbr_live);
 	if (arena->aff == NCURSE)
 	{
 		getch();

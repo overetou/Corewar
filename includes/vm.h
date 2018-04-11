@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/10 14:47:59 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/11 15:50:56 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct			s_arena
 {
 	unsigned char*		board;
 	int					cycles;
+	int					executed_cycles;
 	int					winner;
 	void				(*f[17])(t_param*, struct s_arena*, t_process*);
 	t_process			*process;
