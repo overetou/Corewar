@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:23:09 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/10 15:56:26 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/11 18:19:30 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ t_process	*dup_process(t_process *old_process)
 	}
 	process->carry = old_process->carry;
 	process->index = old_process->index;
+	process->next_index = old_process->index;
 	process->waitting = old_process->waitting;
+	process->color = old_process->color;
+	process->param = create_three_params();
 	process->next = NULL;
 	return (process);
 }
@@ -56,6 +59,7 @@ t_process	*new_process(int player_nbr, int index)
 	process->next_index = index;
 	process->waitting = 0;
 	process->color = 0;
+	process->param = create_three_params();
 	process->next = NULL;
 	return (process);
 }

@@ -6,16 +6,17 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:09:04 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/10 19:04:16 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/11 19:27:30 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	validate_reg_nbr(t_param *param)
+int		validate_reg_nbr(t_param *param)
 {
 	if (param->value < 1 || param->value > REG_NUMBER)
-		exit(ft_printf("ERROR REG_NUMBER2\n"));
+		return (0);
+	return (1);
 }
 
 int		get_adr_value(t_arena *arena, int index, int nbr_oct)
@@ -46,8 +47,9 @@ int		get_param_value(t_param *param, t_process *process, t_arena *arena, int has
 		param->value = (short)param->value;
 	if (param->code == REG_CODE)
 	{
-		validate_reg_nbr(param);
-		return (process->reg[param->value - 1]);
+		if (validate_reg_nbr(param))
+			return (process->reg[param->value - 1]);
+		return (0);
 	}
 	else if (arena && param->code == IND_CODE)
 	{

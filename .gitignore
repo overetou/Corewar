@@ -16,6 +16,11 @@ a.out
 test.*
 ex.s
 .json
+us
+zaz
+test_me
+test_org
+.idea
 
 ressources/champs/*.cor
 ressources/tests/testasm42

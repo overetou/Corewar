@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 15:56:40 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/10 14:09:07 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/11 18:57:50 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,11 @@ char		*get_winner(t_player *player, int winner)
 int			main(int argc, char **argv)
 {
 	t_arena		*arena;
-	t_param		*param;
 
 	arena = new_arena();
-	param = create_three_params();
 	check_arg_create_players(argc, argv, arena);
 	fill_players(arena);
-	execute_vm(arena, param);
+	execute_vm(arena);
 	ft_printf("And the winner is... %s!\n", get_winner(arena->players, arena->winner));
 	return (0);
 }

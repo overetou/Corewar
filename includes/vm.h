@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/11 15:50:56 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/11 19:22:23 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <op.h>
 # include <ncurses.h>
 # include <fcntl.h>
+
+# define HAS_REG_PERM(x) ((x | T_DIR | T_IND) == (T_REG | T_DIR | T_IND))
+# define HAS_DIR_PERM(x) ((T_REG | x | T_IND) == (T_REG | T_DIR | T_IND))
+# define HAS_IND_PERM(x) ((T_REG | T_DIR | x) == (T_REG | T_DIR | T_IND))
 
 # define DIRTWO 2
 # define DIRFOR 4
@@ -35,6 +39,13 @@ typedef struct			s_player
 	struct s_player		*next;
 }						t_player;
 
+typedef struct			s_param
+{
+	char				code;
+	int					value;
+	struct s_param		*next;
+}						t_param;
+
 typedef struct			s_process
 {
 	int					opcode;
@@ -45,6 +56,7 @@ typedef struct			s_process
 	int					waitting;
 	char				did_live;
 	unsigned char		color;
+	t_param				*param;
 	struct s_process	*next;
 }						t_process;
 
@@ -53,14 +65,9 @@ typedef struct			s_op
 	int					ind_option;
 	int					has_ocp;
 	int					hardcode;
+	int					nbr_param;
+	int					perm[4];
 }						t_op;
-
-typedef struct			s_param
-{
-	char				code;
-	int					value;
-	struct s_param		*next;
-}						t_param;
 
 typedef struct			s_arena
 {
@@ -96,8 +103,8 @@ void		ft_lldi(t_param *param, t_arena *arena, t_process *process);
 void		ft_lfork(t_param *param, t_arena *arena, t_process *process);
 void		ft_aff(t_param *param, t_arena *arena, t_process *process);
 
-void		load_params(t_param *param, unsigned char *board, t_process *process, t_op *op);
-void		execute_cycle(t_arena *arena, t_param *param);
+int			load_params(t_param *param, unsigned char *board, t_process *process, t_op *op);
+void		execute_cycle(t_arena *arena);
 t_arena		*new_arena(void);
 t_process	*new_process(int player_nbr, int index);
 t_process	*dup_process(t_process *old_process);
@@ -105,9 +112,9 @@ void		add_process(t_process **process, t_process *new_process);
 void		dump_tab(t_arena *arena);
 void		ft_init_color(t_player *players, t_arena *arena);
 void		refresh_arena(t_arena *arena, int index, int len, int color);
-void		execute_vm(t_arena *arena, t_param *param);
+void		execute_vm(t_arena *arena);
 int			get_param_value(t_param *param, t_process *process, t_arena *arena, int has_mod);
-void		validate_reg_nbr(t_param *param);
+int			validate_reg_nbr(t_param *param);
 int			get_adr_value(t_arena *arena, int index, int nbr_oct);
 void		write_tab(unsigned int to_write, t_arena *arena, int adr, int len);
 t_param		*create_three_params(void);

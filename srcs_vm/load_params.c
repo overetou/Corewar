@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:53:59 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/05 20:26:01 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/11 18:42:56 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,18 @@ int		cut_ocp(int ocp, int code, int margin)
 	return (ocp ^ code);
 }
 
-void	load_params(t_param *param, unsigned char *board, t_process *process, t_op *ope)
+int		load_params(t_param *param, unsigned char *board, t_process *process, t_op *ope)
 {
 	int		ocp_margin;
 	int		ocp;
 	t_op	op;
 	int		x;
-	
+
 	process->next_index = process->index;
 	op = ope[(process->opcode)];
+	x = 0;
 	if (op.has_ocp)
 	{
-		x = 0;
 		ocp = board[++(process->next_index)];
 		ocp_margin = 3;
 		while (ocp && ++x <= 3)
@@ -85,8 +85,10 @@ void	load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 	}
 	else if ((process->opcode))
 	{
+		x = 1;
 		param->code = op.hardcode;
 		param->value = extract_param_value(&(param->code), board, &(process->next_index));
 	}
 	(process->next_index)++;
+	return (x);
 }

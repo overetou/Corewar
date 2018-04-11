@@ -6,37 +6,82 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/11 15:54:44 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/11 19:50:44 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-
-void	execute_process(t_process *process, t_param *param, t_arena *arena)
+int is_valide_param(t_process *process, t_op *op, int nbr_param)
 {
+	t_param	*param;
+	int		i;
+
+	if (process->opcode == 0)
+		return (1);
+	if(process->opcode < 0 || process->opcode > 16 || op[process->opcode].nbr_param != nbr_param)
+	{
+		//ft_printf("AAAAAAAAAAAAAAAAA\n");
+		return (0);
+	}
+	param = process->param;
+	i = 0;
+	while (i < nbr_param)
+	{
+		if (param->code == REG_CODE && !HAS_REG_PERM(op[process->opcode].perm[i]))
+		{
+			//ft_printf("param %d dont have reg perm\n", i+1);
+			return (0);
+		}
+		else if (param->code == IND_CODE && !HAS_IND_PERM(op[process->opcode].perm[i]))
+		{
+			//ft_printf("param %d dont have ind perm\n", i+1);
+			return (0);
+		}
+		else if ((param->code == DIRTWO || param->code == DIRFOR) && !HAS_DIR_PERM(op[process->opcode].perm[i]))
+		{
+			//ft_printf("param %d dont have dir perm\n", i+1);
+			return (0);
+		}
+		i++;
+		param = param->next;
+	}
+	return (1);
+}
+
+void	execute_process(t_process *process, t_arena *arena)
+{
+	int nbr_param;
+
 	if (process->waitting == -1)
 	{
 		process->opcode = arena->board[process->index];
-		if(process->opcode >= 0 && process->opcode <= 16)
-			((arena->f)[process->opcode])(param, arena, process);
+		nbr_param = load_params(process->param, arena->board, process, arena->op);
+		if(is_valide_param(process, arena->op, nbr_param))
+			((arena->f)[process->opcode])(process->param, arena, process);
 		else
+		{
+			//ft_printf("The function %d (%d) is invalide with %d param\n", process->opcode, arena->op[process->opcode].nbr_param, nbr_param);
+			//ft_printf("param code = %d\n", process->param->next->code);
+			//exit(0);
 			process->waitting = 0;
+			process->index++;
+		}
+		ft_printf("LOAD : cycles %d => op_code %d\n", arena->cycles, process->opcode);
 	}
 	else
 	{
-		//ft_printf("before executed op : %d\n", process->opcode);
-		load_params(param, arena->board, process, arena->op);
-		((arena->f)[process->opcode])(param, arena, process);
+		((arena->f)[process->opcode])(process->param, arena, process);
 		process->index = process->next_index;
 		process->waitting = -1;
-		execute_process(process, param, arena);
+		ft_printf("EXECUTE : cycles %d => op_code %d\n", arena->cycles, process->opcode);
+		execute_process(process, arena);
 		//ft_printf("after executed op : %d\n", process->opcode);
 	}
 	//sleep(1);
 }
 
-void	execute_cycle(t_arena *arena, t_param *param)
+void	execute_cycle(t_arena *arena)
 {
 	t_process	*process;
 
@@ -45,7 +90,7 @@ void	execute_cycle(t_arena *arena, t_param *param)
 	{
 		(process->waitting)--;
 		if (process->waitting < 1)
-			execute_process(process, param, arena);
+			execute_process(process, arena);
 		process = process->next;
 	}
 }
@@ -106,7 +151,7 @@ void	do_processes_checks(t_arena *arena, int	*no_nbr_live, int *ctd)
 	arena->nbr_live = 0;
 }
 
-void	execute_vm(t_arena *arena, t_param *param)
+void	execute_vm(t_arena *arena)
 {
 	int	ctd;
 	int	no_nbr_live;
@@ -123,7 +168,7 @@ void	execute_vm(t_arena *arena, t_param *param)
 	{
 		if ((arena->executed_cycles) % ctd == 0 && arena->executed_cycles)
 			do_processes_checks(arena, &no_nbr_live, &ctd);
-		execute_cycle(arena, param);
+		execute_cycle(arena);
 		arena->cycles++;
 		arena->executed_cycles++;
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
