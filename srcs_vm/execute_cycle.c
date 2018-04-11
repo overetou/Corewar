@@ -19,7 +19,7 @@ int is_valide_param(t_process *process, t_op *op, int nbr_param)
 
 	if (process->opcode == 0)
 		return (1);
-	if(process->opcode < 0 || process->opcode > 16 || op[process->opcode].nbr_param != nbr_param)
+	if (process->opcode < 0 || process->opcode > 16 || op[process->opcode].nbr_param != nbr_param)
 	{
 		//ft_printf("AAAAAAAAAAAAAAAAA\n");
 		return (0);
@@ -67,32 +67,18 @@ void	execute_process(t_process *process, t_arena *arena)
 			process->waitting = 0;
 			process->index++;
 		}
-		ft_printf("LOAD : cycles %d => op_code %d\n", arena->cycles, process->opcode);
+		//ft_printf("LOAD : cycles %d => op_code %d\n", arena->cycles, process->opcode);
 	}
 	else
 	{
 		((arena->f)[process->opcode])(process->param, arena, process);
 		process->index = process->next_index;
 		process->waitting = -1;
-		ft_printf("EXECUTE : cycles %d => op_code %d\n", arena->cycles, process->opcode);
+		// ft_printf("EXECUTE : cycles %d => op_code %d\n", arena->cycles, process->opcode);
 		execute_process(process, arena);
 		//ft_printf("after executed op : %d\n", process->opcode);
 	}
 	//sleep(1);
-}
-
-void	execute_cycle(t_arena *arena)
-{
-	t_process	*process;
-
-	process = arena->process;
-	while (process)
-	{
-		(process->waitting)--;
-		if (process->waitting < 1)
-			execute_process(process, arena);
-		process = process->next;
-	}
 }
 
 void	kill_unlively_processes(t_arena *arena)
@@ -151,6 +137,20 @@ void	do_processes_checks(t_arena *arena, int	*no_nbr_live, int *ctd)
 	arena->nbr_live = 0;
 }
 
+void	execute_cycle(t_arena *arena)
+{
+	t_process	*process;
+
+	process = arena->process;
+	while (process)
+	{
+		(process->waitting)--;
+		if (process->waitting < 1)
+			execute_process(process, arena);
+		process = process->next;
+	}
+}
+
 void	execute_vm(t_arena *arena)
 {
 	int	ctd;
@@ -166,7 +166,7 @@ void	execute_vm(t_arena *arena)
 	}
 	while (ctd > 0)
 	{
-		if ((arena->executed_cycles) % ctd == 0 && arena->executed_cycles)
+		if ((arena->executed_cycles) == ctd)
 			do_processes_checks(arena, &no_nbr_live, &ctd);
 		execute_cycle(arena);
 		arena->cycles++;
