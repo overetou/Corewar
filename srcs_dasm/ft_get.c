@@ -12,70 +12,80 @@
 
 #include <dasm.h>
 
+void	ft_check_ocp(t_env *e, unsigned int tmp)
+{
+	tmp++;
+	tmp--;
+	e->i++;
+	e->i--;
+	return ;
+}
+
 void	ft_get_reg(t_env *e, t_cmd *cmd)
 {
-	// printf("enter ft_get_reg\n");
+	printf("enter fget reg\n");
+	unsigned char tmp;
+
 	cmd->param[cmd->index].code = REG_CODE;
-	cmd->param[cmd->index].value = e->file[e->i];
+	tmp = e->file[e->i];
+	cmd->param[cmd->index].value = tmp;
 	if (cmd->param[cmd->index].value < 1 ||
 		cmd->param[cmd->index].value > REG_NUMBER)
 		ft_error(e, "Bad reg number");
-	++e->i >= e->len ? ft_error(e, "C'est pas forcement une erreur reg") : 0;
+	++(cmd->index);
+	ft_iter(e, "test d 1", 0, cmd);
+	printf("e->j == %d, value == %d", e->j, cmd->param[cmd->index - 1].value);
 }
 
 void	ft_get_dir2(t_env *e, t_cmd *cmd)
 {
+	printf("enter fget dir2\n");
 	unsigned char tmp;
-	 // printf("enter ft_get_dir2\n");
 
 	cmd->param[cmd->index].code = DIR_CODE;
-	tmp = e->file[e->i++];
+	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 8;
-	e->i >= e->len ? ft_error(e, "dir 4, 2") : 0;
-	tmp = e->file[e->i++];
-	cmd->param[cmd->index].value += tmp;
-	printf("check value avec d = %d\ncheck value avec d = %u ",
-		cmd->param[cmd->index].value, cmd->param[cmd->index].value);
-	e->i++ >= e->len ? ft_error(e, "C'est pas forcement une erreur dir4") : 0;
+	ft_iter(e, "test d 1", 1, cmd);
+	tmp = e->file[e->i];
+	cmd->param[cmd->index++].value += tmp;
+	ft_iter(e, "test d 2", 0, cmd);
+	printf("e->j == %d, value == %d", e->j, cmd->param[cmd->index - 1].value);
 }
 
 void	ft_get_dir4(t_env *e, t_cmd *cmd)
 {
+	printf("enter fget dir4\n");
 	unsigned char tmp;
 	// printf("enter ft_get_dir4\n");
 
 	cmd->param[cmd->index].code = DIR_CODE;
-	tmp = e->file[e->i++];
+	tmp = e->file[e->i];
 	cmd->param[cmd->index].value = tmp << 24;
-	e->i >= e->len ? ft_error(e, "dir4, 1") : 0;
-	tmp = e->file[e->i++];
+	ft_iter(e, "test dir 1", 1, cmd);
+	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 16;
-	e->i >= e->len ? ft_error(e, "dir 4, 2") : 0;
-	tmp = e->file[e->i++];
+	ft_iter(e, "test dir 2", 1, cmd);
+	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 8;
-	e->i >= e->len ? ft_error(e, "dir 4, 2") : 0;
-	tmp = e->file[e->i++];
-	cmd->param[cmd->index].value += tmp;
-	printf("check value avec d = %d\ncheck value avec u = %u\n",
-		cmd->param[cmd->index].value, cmd->param[cmd->index].value);
-	e->i++ >= e->len ? ft_error(e, "C'est pas forcement une erreur dir4") : 0;
+	ft_iter(e, "test dir 3", 1, cmd);
+	tmp = e->file[e->i];
+	cmd->param[cmd->index++].value += tmp;
+	ft_iter(e, "test dir 4", 0, cmd);
+	printf("e->j == %d, value == %d", e->j, cmd->param[cmd->index - 1].value);
 }
 
 void	ft_get_ind(t_env *e, t_cmd *cmd)
 {
+	printf("enter fget ind\n");
 	unsigned char tmp;
-	// printf("enter ft_get_ind\n");
 
 	cmd->param[cmd->index].code = IND_CODE;
-	tmp = e->file[e->i++];
+	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 8;
-	e->i >= e->len ? ft_error(e, "dir 4, 2") : 0;
-	tmp = e->file[e->i++];
-	cmd->param[cmd->index].value += tmp;
-	printf("check value avec d = %d\ncheck value avec d = %u ",
-		cmd->param[cmd->index].value, cmd->param[cmd->index].value);
-	e->i++ >= e->len ? ft_error(e, "C'est pas forcement une erreur ind") : 0;
-	// printf("check value avec d = %d\ncheck value avec d = %u ",
-		// cmd->param[cmd->index].value, cmd->param[cmd->index].value);	
+	ft_iter(e, "test ind 1", 1, cmd);
+	tmp = e->file[e->i];
+	cmd->param[cmd->index++].value += tmp;
+	ft_iter(e, "test ind 2", 0, cmd);
+	printf("e->j == %d, value == %d", e->j, cmd->param[cmd->index - 1].value);
 }
 
