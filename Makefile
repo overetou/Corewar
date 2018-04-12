@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/09 10:52:01 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/04/12 14:57:16 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,8 +101,8 @@ OK2				= $(C_RED)✔$(C_NO)
 all:
 	@make -j -C $(LIB_DIR)
 	@make $(ASM)
-	@make $(DASM)
-	@make $(VM)
+#	@make $(DASM)
+#	@make $(VM)
 
 $(ASM): $(LIBFT_LIB) $(OBJS_ASM)
 	@$(CC) $(FLAGS) $(OBJS_ASM) $(LLFT) -o $@
