@@ -6,11 +6,35 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:11:29 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/10 16:51:58 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/12 19:13:46 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
+
+int		assemble_ocp(t_cmd *cmd)
+{
+	t_param	*head;
+	int		ocp;
+	int		i;
+
+	ocp = 0;
+	i = 0;
+	head = cmd->param;
+	while (head)
+	{
+		ocp = ocp | head->code;
+		ocp = ocp << 2;
+		head = head->next;
+		i++;
+	}
+	while (i < 3)
+	{
+		ocp = ocp << 2;
+		i++;
+	}
+	return (ocp);
+}
 
 void	valid_params(t_param *param, t_op *op, t_champ *champ)
 {

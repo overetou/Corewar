@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 15:47:41 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/12 18:25:30 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/12 18:56:06 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		store_hash(t_champ *champ)
 	champ->i += ft_strcspn(&champ->file[champ->i], "\n");
 }
 
-void		set_name_comment(t_champ *champ)
+void		store_header(t_champ *champ)
 {
 	while (champ->file[champ->i] && (!champ->name || !champ->comment))
 	{
@@ -72,15 +72,4 @@ void		set_name_comment(t_champ *champ)
 			ft_error(champ, "bug on parsing");
 		champ->i++;
 	}
-}
-
-void		parse(t_champ *champ)
-{
-	champ->name = NULL;
-	champ->comment = NULL;
-	champ->cmd = NULL;
-	champ->label = NULL;
-	set_name_comment(champ);
-	parse_instruct(champ);
-	valid_labels(champ);
 }

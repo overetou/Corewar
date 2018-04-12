@@ -6,20 +6,20 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 14:41:32 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/12 18:38:57 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/12 19:15:35 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-void		parse_args(t_champ *champ)
+void	ft_asm(t_champ *champ)
 {
 	champ->name = NULL;
 	champ->comment = NULL;
 	champ->cmd = NULL;
 	champ->label = NULL;
-	set_name_comment(champ);
-	parse_instruct(champ);
+	store_header(champ);
+	parse_args(champ);
 	valid_labels(champ);
 }
 
@@ -56,9 +56,9 @@ int		main(int argc, char **argv)
 		{
 			ft_bzero(&champ, sizeof(champ));
 			champ.file = read_file(argv[i]);
-			parse_args(&champ);
+			ft_asm(&champ);
 			file_creation(&champ, argv[i]);
-			free_env(&champ);
+			free_champ(&champ);
 		}
 		else
 			ft_error(NULL, "ERROR on NAME");

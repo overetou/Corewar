@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/12 18:10:12 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/04/12 19:15:55 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,15 +21,14 @@ DFLAGS			= -g3 -fsanitize=address
 SRC_ASM			= \
 main.c\
 op.c\
-parsing.c\
-cmd.c\
-label.c\
-param.c\
+parse_args.c\
+store_cmd.c\
+store_header.c\
 store_label.c\
-error.c\
+store_param.c\
 file_creation.c\
-writing.c\
-processing.c
+file_writing.c\
+ft_exit.c
 
 SRC_DASM		= \
 dasm.c\

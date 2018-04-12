@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 02:22:30 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/12 18:36:43 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/12 19:15:46 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ t_op    g_op_tab[17];
 **				parse_args
 */
 
+void			ft_asm(t_champ *champ);
+void			store_header(t_champ *champ);
 void			parse_args(t_champ *champ);
-void			set_name_comment(t_champ *champ);
 void			store_hash(t_champ *champ);
 t_cmd			*new_cmd(t_op *op, t_champ *champ, int index);
 void			push_cmd(t_cmd **cmd, t_cmd *new_cmd);
@@ -88,7 +89,6 @@ t_label			*new_label(char *str, t_champ *champ);
 t_label			*find_label(t_label *label, char *str);
 void			push_param(t_param **param, t_param *new_param);
 t_param			*new_param(char *str, t_cmd *cmd, t_champ *champ);
-void			parse_instruct(t_champ *champ);
 void			valid_labels(t_champ *champ);
 
 /*
@@ -105,7 +105,7 @@ int				assemble_ocp(t_cmd *cmd);
 **				exit
 */
 
+void			free_champ(t_champ *champ);
 void			ft_error(t_champ *champ, char *message);
-void			free_env(t_champ *champ);
 
 #endif
