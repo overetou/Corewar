@@ -23,10 +23,34 @@ sinon cas d'erreur etc...
 // toujours checker si le fichier est finit ou pas. via la len dans la struct env
 void	ft_error(t_env *e, char *message)
 {
-	if (e->file)
-		free(e->file);
+	//if (e->file)
+	//	free(e->file);
+	e = (t_env*)e;
 	ft_printf("%s\n", message);
 	exit (0);
+}
+
+void	ft_iter(t_env *e, char *message, int check, t_cmd *cmd)
+{
+	int i;
+
+	++(e->j); 
+	++(e->i);
+	// printf("\niter, e->i == %d\ne->len == %d\n", e->i, e->len);
+	// printf("iter, e->j == %d\ne->champ_size == %d\n", e->j, e->champ_size);
+	i = e->j + PROG_NAME_LENGTH + COMMENT_LENGTH + 16;
+	if (e->j != e->champ_size && e->i != e->len)
+		return ;
+	if (e->j == e->champ_size || e->i == e->len)
+	{
+		// printf("i == %d ?\n", i);
+		check == 1 ? ft_error(e, message) : 0;
+		cmd->index != cmd->nb_params ? ft_error(e, "BAD NB PARAM") : 0;
+		i != e->len ? ft_error(e, message) : 0;
+		e->i != e->len ? ft_error(e, message) : 0;
+		e->j != e->champ_size ? ft_error(e, message) : 0;
+		// ft_creat_file(e);
+	}
 }
 
 void	store_file(t_env *e, char *file_name)
@@ -49,17 +73,30 @@ void		ft_dasm(t_env *e, char *argv)
 	store_file(e, argv);
 //	ft_printf("%d\n", e->len);
 	ft_parse(e);
+	ft_write(e);
+	printf("SUCESS1\n");
+
 
 }
 
 int			main(int argc, char **argv)
 {
 	t_env e;
-	
+	int arg;
+	int len;
+
+	if (argc < 1)
+		ft_error(&e, "Usage : ./dasm *.cor ...\n");
+	arg = 1;
 	ft_bzero(&e, sizeof(e));
-	if (argc == 2 && !ft_strcmp(&argv[1] [ft_strlen(argv[1]) - 4], ".cor"))
-		ft_dasm(&e, argv[1]);
-	else
-		ft_error(&e, "yo c pa un .cor");
+	while (arg < argc)
+	{
+		len = ft_strlen(argv[arg]) - 1;
+		if (len > 3 && argv[arg][len] == 'r' && argv[arg][len - 1] == 'o' &&
+			argv[arg][len - 2] == 'c' && argv[arg][len - 3] == '.')
+			ft_dasm(&e, argv[arg++]);
+		else
+			ft_printf("File %d is invalid\n", arg++);
+	}
 	return (0);
 }
