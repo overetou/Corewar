@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   param.c                                            :+:      :+:    :+:   */
+/*   store_param.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 18:51:26 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/12 19:11:26 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/12 19:31:44 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	set_int_param(char *str, t_param *param, int code, t_champ *champ)
 		i++;
 	while (ft_isdigit(str[i]))
 		i++;
-	(void)champ;
 	if (str[i])
 		ft_error(champ, "SYNTAX ERROR1");
 	param->value = ft_atoi(str);
@@ -49,7 +48,6 @@ void	set_label_param(char *str, t_param *param, int code, t_champ *champ)
 	int i;
 
 	i = ft_strspn(str, LABEL_CHARS);
-	(void)champ;
 	if (str[i])
 		ft_error(champ, "SYNTAX ERROR2");
 	param->value = 0;

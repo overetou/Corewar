@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   store_header.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/20 15:47:41 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/12 18:56:06 by kenguyen         ###   ########.fr       */
+/*   Created: 2018/03/21 19:26:01 by kenguyen          #+#    #+#             */
+/*   Updated: 2018/04/12 19:37:29 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		store_header(t_champ *champ)
 		else if (champ->file[champ->i] == COMMENT_CHAR)
 			store_hash(champ);
 		else
-			ft_error(champ, "bug on parsing");
+			ft_error(champ, "bug on parse header");
 		champ->i++;
 	}
 }
