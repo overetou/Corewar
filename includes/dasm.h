@@ -17,38 +17,78 @@
 # include <fcntl.h>
 # include "op.h"
 
-
-typedef struct 			s_param
+typedef struct	s_op
 {
-	char *name;
-	int	*value;
-}						t_param;
+	char					*short_name;
+	int						param_numbers;
+	int						perm[4];
+	int						opcode;
+	int						cycles_numbers;
+	char 					*full_name;
+	int						has_ocp;
+	int						dir_size;
+}				t_op;
 
-typedef struct 			s_cmd
+typedef struct	s_param
 {
-	int 				op_code;
-	int					ocp;
-	int					dir_size;
-	t_param 			tab[3];
-	struct s_cmd		*next;
-}						t_cmd;
+	char				code;
+	int					value;
+	int					nbr_octet;
+	char				*label;
+}				t_param;
+
+typedef struct	s_cmd
+{
+	t_op			*op;
+	unsigned int 	ocp;
+	int				nb_params;
+	int				index;
+	t_param			param[4];
+	struct s_cmd	*next;
+}				t_cmd;
+
+typedef struct 			s_header
+{
+	char				prefix_name[9];
+	char				prog_name[PROG_NAME_LENGTH + 1];
+	char				prefix_comment[13];
+	char				comment[COMMENT_LENGTH + 1];
+	char				pad[3];
+}						t_header;
 
 typedef struct			s_env
 {
 	char		*file;
 	char		*name;
 	char		*comment;
+	int			champ_size;
 	t_cmd		*cmd;
 	int 		i;
+	int			j;
 	int			len;
+	t_header	head;
 }						t_env;
 
+
+t_op   		 g_op_tab[17];
+
+t_cmd		*creat_cmd(t_env *e);
+void		ft_add_cmd(t_cmd **cmd, t_cmd *new_cmd);
 void		ft_error(t_env *e, char *message);
 void		store_file(t_env *e, char *file_name);
 void		ft_dasm(t_env *e, char *argv);
 void		ft_check_magic(t_env *e);
-void		ft_get_name(char *str, t_env *e);
 void		ft_parse(t_env *e);
+
+void		ft_get_reg(t_env *e, t_cmd *cmd);
+void		ft_get_dir2(t_env *e, t_cmd *cmd);
+void		ft_get_dir4(t_env *e, t_cmd *cmd);
+void		ft_get_ind(t_env *e, t_cmd *cmd);
+
+void		ft_iter(t_env *e, char *message, int check, t_cmd *cmd);
+void		ft_check_ocp(t_env *e, unsigned int tmp);
+void		ft_write(t_env *env);
+
 
 
 #endif
