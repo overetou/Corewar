@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 15:47:41 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/10 16:52:44 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/12 18:25:30 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void		parse(t_champ *champ)
 	champ->comment = NULL;
 	champ->cmd = NULL;
 	champ->label = NULL;
-	champ->file_size = 0;
 	set_name_comment(champ);
 	parse_instruct(champ);
 	valid_labels(champ);

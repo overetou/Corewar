@@ -6,11 +6,22 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 14:41:32 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/12 15:30:23 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/12 18:38:57 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
+
+void		parse_args(t_champ *champ)
+{
+	champ->name = NULL;
+	champ->comment = NULL;
+	champ->cmd = NULL;
+	champ->label = NULL;
+	set_name_comment(champ);
+	parse_instruct(champ);
+	valid_labels(champ);
+}
 
 char	*read_file(char *file_name)
 {
@@ -45,8 +56,8 @@ int		main(int argc, char **argv)
 		{
 			ft_bzero(&champ, sizeof(champ));
 			champ.file = read_file(argv[i]);
-			parse(&champ);
-			manage_file_creation(&champ, argv[i]);
+			parse_args(&champ);
+			file_creation(&champ, argv[i]);
 			free_env(&champ);
 		}
 		else
@@ -54,24 +65,3 @@ int		main(int argc, char **argv)
 	}
 	return (0);
 }
-/*
-int		main(int argc, char **argv)
-{
-	t_champ	champ;
-	int		i;
-
-	i = 1;
-	ft_bzero(&champ, sizeof(champ));
-	if (argc < 2)
-		ft_error(NULL, "Usage");
-	if (argc == 2 && !ft_strcmp(&argv[i][ft_strlen(argv[i]) - 2], ".s"))
-	{
-		champ.file = read_file(argv[i]);
-		parse(&champ);
-		manage_file_creation(&champ, argv[i]);
-		free_env(&champ);
-	}
-	else
-		ft_error(NULL, "ERROR on NAME");
-	return (0);
-}*/

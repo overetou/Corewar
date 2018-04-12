@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/12 15:38:14 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/04/12 18:10:12 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -154,7 +154,7 @@ re: fclean
 	@./asm *.s
 
 cor:
-	@rm -f *.cor
+	@find . -name '*.cor' -delete
 	@printf "%-25s$(OK2)\n" "Cleaning  [ .cor ]"
 
 .PHONY: all fclean clean re cor .s

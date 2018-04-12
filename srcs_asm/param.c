@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 18:51:26 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/10 17:59:49 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/12 18:08:43 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ void	set_int_param(char *str, t_param *param, int code, t_champ *champ)
 		i++;
 	while (ft_isdigit(str[i]))
 		i++;
-	if (str[i])
-		ft_error(champ, "SYNTAX ERROR1");
+	(void)champ;
+//	if (str[i])
+//		ft_error(champ, "SYNTAX ERROR1");
 	param->value = ft_atoi(str);
 	param->code = code;
 	param->label = NULL;
@@ -48,8 +49,9 @@ void	set_label_param(char *str, t_param *param, int code, t_champ *champ)
 	int i;
 
 	i = ft_strspn(str, LABEL_CHARS);
-	if (str[i])
-		ft_error(champ, "SYNTAX ERROR2");
+	(void)champ;
+//	if (str[i])
+//		ft_error(champ, "SYNTAX ERROR2");
 	param->value = 0;
 	param->code = code;
 	param->label = str;

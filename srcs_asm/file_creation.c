@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:20:09 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/12 15:25:34 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/12 18:36:24 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	print_cmd(int fd, t_cmd *cmd, t_champ *champ)
 	}
 }
 
-void	manage_file_creation(t_champ *champ, char *filename)
+void	file_creation(t_champ *champ, char *filename)
 {
 	int		fd;
 	char	*tmp;
