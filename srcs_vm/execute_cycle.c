@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/11 20:54:54 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/12 14:37:08 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int is_valide_param(t_process *process, t_op *op, int nbr_param)
 
 	if (process->opcode == 0)
 		return (1);
-	if(process->opcode < 0 || process->opcode > 16 || op[process->opcode].nbr_param != nbr_param)
+	if (process->opcode < 0 || process->opcode > 16 || op[process->opcode].nbr_param != nbr_param)
 		return (0);
 	param = process->param;
 	i = 0;
@@ -86,20 +86,6 @@ void	execute_process(t_process *process, t_arena *arena)
 	//sleep(1);
 }
 
-void	execute_cycle(t_arena *arena)
-{
-	t_process	*process;
-
-	process = arena->process;
-	while (process)
-	{
-		(process->waitting)--;
-		if (process->waitting < 1)
-			execute_process(process, arena);
-		process = process->next;
-	}
-}
-
 void	kill_unlively_processes(t_arena *arena)
 {
 	t_process	*process;
@@ -156,6 +142,20 @@ void	do_processes_checks(t_arena *arena, int	*no_nbr_live, int *ctd)
 	arena->nbr_live = 0;
 }
 
+void	execute_cycle(t_arena *arena)
+{
+	t_process	*process;
+
+	process = arena->process;
+	while (process)
+	{
+		(process->waitting)--;
+		if (process->waitting < 1)
+			execute_process(process, arena);
+		process = process->next;
+	}
+}
+
 void	execute_vm(t_arena *arena)
 {
 	int	ctd;
@@ -171,7 +171,7 @@ void	execute_vm(t_arena *arena)
 	}
 	while (ctd > 0)
 	{
-		if ((arena->executed_cycles) % ctd == 0 && arena->executed_cycles)
+		if ((arena->executed_cycles) == ctd)
 			do_processes_checks(arena, &no_nbr_live, &ctd);
 		execute_cycle(arena);
 		arena->cycles++;
