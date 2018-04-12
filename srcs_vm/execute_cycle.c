@@ -132,6 +132,8 @@ void	kill_unlively_processes(t_arena *arena)
 void	do_processes_checks(t_arena *arena, int	*no_nbr_live, int *ctd)
 {
 	kill_unlively_processes(arena);
+	if (!arena->process)
+		exit(ft_printf("And the winner is... %s!\n", get_winner(arena->players, arena->winner)));
 	if ((arena->nbr_live) >= NBR_LIVE)
 		*ctd -= CYCLE_DELTA;
 	else

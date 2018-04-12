@@ -119,5 +119,6 @@ int			get_adr_value(t_arena *arena, int index, int nbr_oct);
 void		write_tab(unsigned int to_write, t_arena *arena, int adr, int len);
 t_param		*create_three_params(void);
 void		fill_players(t_arena *arena);
+char		*get_winner(t_player *player, int winner);
 
 #endif
