@@ -6,11 +6,11 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 16:39:17 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/26 17:13:41 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:57:10 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include <asm.h>
 
 t_op	*find_op(t_op *op, char *str)
 {
@@ -30,7 +30,7 @@ void	parse_instruct(t_champ *champ)
 {
 	int		len;
 	char	*tmp;
-	int 	index;
+	int		index;
 	t_op	*op;
 
 	index = 1;
@@ -52,7 +52,8 @@ void	parse_instruct(t_champ *champ)
 				add_label(&champ->label, new_label(tmp, champ));
 				champ->i++;
 			}
-			else if (ft_isspace(champ->file[champ->i]) && (op = find_op(g_op_tab, tmp)))
+			else if (ft_isspace(champ->file[champ->i])
+				&& (op = find_op(g_op_tab, tmp)))
 				push_cmd(&champ->cmd, new_cmd(op, champ, index++));
 			else if (champ->file[champ->i])
 				ft_error(champ, "OP UNEXIST");

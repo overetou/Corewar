@@ -6,11 +6,21 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 13:26:07 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/26 17:30:20 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/10 18:12:39 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include <asm.h>
+
+void	free_env(t_champ *champ)
+{
+	if (champ->file)
+		free(champ->file);
+	if (champ->name)
+		free(champ->name);
+	if (champ->file)
+		free(champ->comment);
+}
 
 void	ft_error(t_champ *champ, char *message)
 {
@@ -21,14 +31,12 @@ void	ft_error(t_champ *champ, char *message)
 	i = 0;
 	if (champ)
 	{
-		line++;
-		while (i < champ->i)
-		{
+		++line;
+		while (++i < champ->i)
 			if (champ->file[i] == '\n')
-				line++;
-			i++;
-		}
+				++line;
 	}
 	ft_printf("Syntax error at line %d: \"%s\"\n", line, message);
-	exit (0);
+//	free_env(champ);
+	exit(0);
 }

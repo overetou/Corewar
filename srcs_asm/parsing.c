@@ -6,11 +6,11 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 15:47:41 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/27 18:18:06 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/10 16:52:44 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include <asm.h>
 
 void		store_name(t_champ *champ)
 {

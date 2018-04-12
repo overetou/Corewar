@@ -6,25 +6,22 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:58:53 by overetou          #+#    #+#             */
-/*   Updated: 2018/03/30 16:06:22 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/10 16:54:12 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
 #include <asm.h>
 
-void    write_bin(unsigned int to_write, int fd, int len)
+void	write_bin(unsigned int to_write, int fd, int len)
 {
-    int c;
+	int c;
 
-    if (len)
-    {
-        write_bin((to_write / 256), fd, --len);
-        c = to_write % 256;
-        write(fd, &c, 1);
-    }
+	if (len)
+	{
+		write_bin((to_write / 256), fd, --len);
+		c = to_write % 256;
+		write(fd, &c, 1);
+	}
 }
 
 int		get_cmd_size(t_cmd *cmd)
@@ -34,8 +31,8 @@ int		get_cmd_size(t_cmd *cmd)
 
 	count = 1;
 	digger = cmd->param;
-    if (cmd->op->has_ocp)
-        count++;
+	if (cmd->op->has_ocp)
+		count++;
 	while (digger)
 	{
 		count += digger->nbr_octet;
@@ -44,28 +41,28 @@ int		get_cmd_size(t_cmd *cmd)
 	return (count);
 }
 
-void    print_label(t_cmd *current, t_param *p, t_label *lab, int fd)
+void	print_label(t_cmd *current, t_param *p, t_label *lab, int fd)
 {
-    t_cmd   *digger;
-    t_cmd   *floor;
-    int     count;
+	t_cmd	*digger;
+	t_cmd	*floor;
+	int		count;
 	int		sign;
 
-    lab = find_label(lab, p->label);
-    if (lab->cmd->index > current->index)
-    {
-        digger = current;
-        floor = lab->cmd;
+	lab = find_label(lab, p->label);
+	if (lab->cmd->index > current->index)
+	{
+		digger = current;
+		floor = lab->cmd;
 		sign = 1;
-    }
-    else
-    {
-        digger = lab->cmd;
-        floor = current;
+	}
+	else
+	{
+		digger = lab->cmd;
+		floor = current;
 		sign = -1;
-    }
-    count = 0;
-    while (digger != floor)
+	}
+	count = 0;
+	while (digger != floor)
 	{
 		count += get_cmd_size(digger) * sign;
 		digger = digger->next;

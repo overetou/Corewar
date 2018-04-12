@@ -6,11 +6,11 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:11:29 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/26 17:33:21 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/10 16:51:58 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include <asm.h>
 
 void	valid_params(t_param *param, t_op *op, t_champ *champ)
 {
@@ -34,9 +34,9 @@ void	valid_params(t_param *param, t_op *op, t_champ *champ)
 
 void	parse_param(t_cmd *cmd, t_champ *champ)
 {
-	int len;
-	int len2;
-	char *tmp;
+	int		len;
+	int		len2;
+	char	*tmp;
 
 	while (ft_isspace(champ->file[champ->i]))
 		champ->i++;

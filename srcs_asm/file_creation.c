@@ -6,23 +6,23 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:20:09 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/09 11:38:50 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:58:49 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include <asm.h>
 
 int		create_cor_file(char *file_name)
 {
-    int		fd;
-    char	*name;
-    int		name_size;
+	int		fd;
+	char	*name;
+	int		name_size;
 
 	name_size = ft_strlen(file_name) + 2;
 	name = ft_strnew(name_size);
 	ft_strncpy(name, file_name, name_size - 4);
 	ft_strcpy(name + name_size - 4, ".cor");
-//	fd = open(name, O_TRUNC | O_CREAT | O_RDWR, 0777);
+	//	fd = open(name, O_TRUNC | O_CREAT | O_RDWR, 0777);
 	fd = open(name, O_TRUNC | O_CREAT | O_WRONLY, S_IRWXU);
 	return (fd);
 }
@@ -63,10 +63,14 @@ void	print_cmd(int fd, t_cmd *cmd, t_champ *champ)
 
 void	manage_file_creation(t_champ *champ, char *filename)
 {
-	int	fd;
+	int		fd;
+	char	*tmp;
 
 	fd = create_cor_file(filename);
 	print_header(fd, champ);
 	print_cmd(fd, champ->cmd, champ);
+	tmp = ft_strsub(filename, 0, ft_strlen(filename) - 2);
+	ft_printf("Writing output program to %s.cor\n", tmp);
+	free(tmp);
 	close(fd);
 }
