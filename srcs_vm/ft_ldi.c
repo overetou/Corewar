@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 15:28:11 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/11 19:24:45 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:17:05 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ void	ft_ldi(t_param *param, t_arena *arena, t_process *process)
 		process->waitting = 25;
 	else
 	{
+		if (!validate_reg_nbr(param))
+			return ;
 		value1 = get_param_value(param, process, arena, 1);
 		param = param->next;
+		if (!validate_reg_nbr(param))
+			return ;
 		value2 = get_param_value(param, process, arena, 1);
 		param = param->next;
 		if (validate_reg_nbr(param))

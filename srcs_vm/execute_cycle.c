@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/12 14:37:08 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/12 17:01:37 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	execute_process(t_process *process, t_arena *arena)
 		}
 		else
 		{
+			process->index++;
 			//ft_printf("Cycles %d : The function %d is invalide with %d (%d) param\n", arena->cycles, process->opcode, nbr_param, arena->op[process->opcode].nbr_param);
 		}
 		process->waitting = -1;
@@ -165,8 +166,8 @@ void	execute_vm(t_arena *arena)
 	no_nbr_live = 0;
 	if (arena->aff == NCURSE)
 	{
-		initscr();
-		ft_init_color(arena->players, arena);
+		//initscr();
+		//ft_init_color(arena->players, arena);
 		//getch();
 	}
 	while (ctd > 0)
@@ -179,9 +180,10 @@ void	execute_vm(t_arena *arena)
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
 			dump_tab(arena);
 	}
+	//ft_printf("END AFTER %lld cycles\n", arena->cycles);
 	if (arena->aff == NCURSE)
 	{
 		getch();
-		endwin();
+		//endwin();
 	}
 }

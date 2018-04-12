@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 15:51:43 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/10 19:50:15 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:13:35 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ void	ft_st(t_param *param, t_arena *arena, t_process *process)
 		process->waitting = 5;
 	else
 	{
+		if (!validate_reg_nbr(param))
+			return ;
 		value1 = get_param_value(param, process, NULL, 0);
 		param = param->next;
+		if (!validate_reg_nbr(param))
+			return ;
 		value2 = get_param_value(param, process, NULL, 0);
 		if (param->code == REG_CODE)
 			process->reg[param->value - 1] = value1;
