@@ -19,7 +19,7 @@ void		ft_nb_param(t_cmd *cmd)
 		cmd->op->opcode == 15 || cmd->op->opcode == 16)
 		cmd->nb_params = 1;
 	else if (cmd->op->opcode == 2 || cmd->op->opcode == 3 ||
-		cmd->op->opcode == 4 || cmd->op->opcode == 5 || cmd->op->opcode == 13)
+			 cmd->op->opcode == 13)
 		cmd->nb_params = 2;
 	else
 		cmd->nb_params = 3;
@@ -103,6 +103,7 @@ t_cmd	*creat_cmd(t_env *e)
 	cmd->op = &g_op_tab[op_code - 1];
 	op_code = -1;
 	ft_nb_param(cmd);
+	cmd->next = NULL;
 	// printf("has_ocp == %d\n\n", cmd->op->has_ocp);
 	if (cmd->op->has_ocp)
 		ft_parse_param1(e, cmd);

@@ -43,6 +43,7 @@ void	ft_get_dir2(t_env *e, t_cmd *cmd)
 	unsigned char tmp;
 
 	cmd->param[cmd->index].code = DIR_CODE;
+	cmd->param[cmd->index].nbr_octet = 2;
 	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 8;
 	ft_iter(e, "test d 1", 1, cmd);
@@ -59,6 +60,7 @@ void	ft_get_dir4(t_env *e, t_cmd *cmd)
 	// printf("enter ft_get_dir4\n");
 
 	cmd->param[cmd->index].code = DIR_CODE;
+	cmd->param[cmd->index].nbr_octet = 4;
 	tmp = e->file[e->i];
 	cmd->param[cmd->index].value = tmp << 24;
 	ft_iter(e, "test dir 1", 1, cmd);

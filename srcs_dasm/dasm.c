@@ -73,6 +73,7 @@ void		ft_dasm(t_env *e, char *argv)
 	store_file(e, argv);
 //	ft_printf("%d\n", e->len);
 	ft_parse(e);
+	ft_write(e);
 	printf("SUCESS1\n");
 
 
