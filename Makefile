@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/12 14:57:16 by kenguyen         ###   ########.fr        #
+#    Updated: 2018/04/12 15:38:14 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,7 +137,7 @@ $(OBJ_DIR_VM)%.o: $(SRC_DIR_VM)%.c | $(OBJ_DIR_VM)
 	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
 	@printf "\rCompiling %-15s$<\033[K" "[ $(VM) ]"
 
-clean:
+clean: cor
 	@make -C $(LIB_DIR) clean
 	@rm -rf $(OBJ_DIR_ASM) $(OBJ_DIR_DASM) $(OBJ_DIR_VM)
 	@printf "%-25s$(OK2)\n" "Cleaning  [ corewar ]"
@@ -150,5 +150,12 @@ fclean: clean
 re: fclean
 	@make
 
-.PHONY: all fclean clean re
+.s: cor
+	@./asm *.s
+
+cor:
+	@rm -f *.cor
+	@printf "%-25s$(OK2)\n" "Cleaning  [ .cor ]"
+
+.PHONY: all fclean clean re cor .s
 -include $(INC)

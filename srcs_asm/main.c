@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 14:41:32 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/10 18:02:18 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:30:23 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,30 @@ int		main(int argc, char **argv)
 	t_champ	champ;
 	int		i;
 
+	i = 0;
+	if (argc < 2)
+		ft_error(NULL, "Usage");
+	while (++i < argc)
+	{
+		if (!ft_strcmp(&argv[i][ft_strlen(argv[i]) - 2], ".s"))
+		{
+			ft_bzero(&champ, sizeof(champ));
+			champ.file = read_file(argv[i]);
+			parse(&champ);
+			manage_file_creation(&champ, argv[i]);
+			free_env(&champ);
+		}
+		else
+			ft_error(NULL, "ERROR on NAME");
+	}
+	return (0);
+}
+/*
+int		main(int argc, char **argv)
+{
+	t_champ	champ;
+	int		i;
+
 	i = 1;
 	ft_bzero(&champ, sizeof(champ));
 	if (argc < 2)
@@ -50,4 +74,4 @@ int		main(int argc, char **argv)
 	else
 		ft_error(NULL, "ERROR on NAME");
 	return (0);
-}
+}*/

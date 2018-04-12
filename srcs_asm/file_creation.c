@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:20:09 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/10 17:58:49 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:25:34 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int		create_cor_file(char *file_name)
 	name = ft_strnew(name_size);
 	ft_strncpy(name, file_name, name_size - 4);
 	ft_strcpy(name + name_size - 4, ".cor");
-	//	fd = open(name, O_TRUNC | O_CREAT | O_RDWR, 0777);
-	fd = open(name, O_TRUNC | O_CREAT | O_WRONLY, S_IRWXU);
+	fd = open(name, O_TRUNC | O_CREAT | O_WRONLY, 0600);
 	return (fd);
 }
 
@@ -70,7 +69,7 @@ void	manage_file_creation(t_champ *champ, char *filename)
 	print_header(fd, champ);
 	print_cmd(fd, champ->cmd, champ);
 	tmp = ft_strsub(filename, 0, ft_strlen(filename) - 2);
-	ft_printf("Writing output program to %s.cor\n", tmp);
+	ft_printf("\x1b[32mWriting output program to %s.cor\n\x1b[0m", tmp);
 	free(tmp);
 	close(fd);
 }

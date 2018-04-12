@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 02:22:30 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/29 16:18:47 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:02:41 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ int			create_cor_file(char *file_name);
 int			assemble_ocp(t_cmd *cmd);
 void		manage_file_creation(t_champ *champ, char *filename);
 void		valid_labels(t_champ *champ);
+void		free_env(t_champ *champ);
 
 #endif
