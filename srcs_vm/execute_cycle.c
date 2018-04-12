@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/12 17:01:37 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/12 17:34:19 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	execute_process(t_process *process, t_arena *arena)
 		}
 		else
 		{
+			if (process->opcode >= 0 && process->opcode <= 16 && arena->op[process->opcode].has_ocp)
+				process->index++;
 			process->index++;
 			//ft_printf("Cycles %d : The function %d is invalide with %d (%d) param\n", arena->cycles, process->opcode, nbr_param, arena->op[process->opcode].nbr_param);
 		}
