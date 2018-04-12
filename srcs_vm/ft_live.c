@@ -42,6 +42,6 @@ void	ft_live(t_param *param, t_arena *arena, t_process *process)
 		//if (test)
 			//ft_printf("%d\n", param->value);
 			//arena->cycles -= 9;
-		process->next_index = next;
+		//process->next_index = next;
 	}
 }

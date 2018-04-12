@@ -120,5 +120,6 @@ void		write_tab(unsigned int to_write, t_arena *arena, int adr, int len);
 t_param		*create_three_params(void);
 void		fill_players(t_arena *arena);
 char		*get_winner(t_player *player, int winner);
+void		execute_process(t_process *process, t_arena *arena);
 
 #endif

@@ -22,6 +22,8 @@ void	ft_fork(t_param *param, t_arena *arena, t_process *process)
 	{
 		add_process(&(arena->process), dup_process(process));
 		value = get_param_value(param, process, arena, 1);
-		arena->process->index = (process->index + value) % IDX_MOD;
+		arena->process->index = (process->index + value) % MEM_SIZE;
+		// arena->process->waitting = -1;
+		//execute_process(arena->process, arena);
 	}
 }

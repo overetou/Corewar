@@ -161,6 +161,17 @@ void	execute_cycle(t_arena *arena)
 	}
 }
 
+int		print_process_state(t_arena *arena)
+{
+	ft_printf(">>>>>>>>>>>\ncycle = %d\n<<<<<<<<<<<\n", arena->cycles);
+	while (arena->process)
+	{
+		ft_printf("index = %d, waitting = %d, opcode = %d\n", arena->process->index, arena->process->waitting, arena->process->opcode);
+		arena->process = arena->process->next;
+	}
+	return (0);
+}
+
 void	execute_vm(t_arena *arena)
 {
 	int	ctd;
@@ -181,6 +192,8 @@ void	execute_vm(t_arena *arena)
 		execute_cycle(arena);
 		arena->cycles++;
 		arena->executed_cycles++;
+		// if (arena->cycles == 2980)
+		// 	exit(print_process_state(arena));
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
 			dump_tab(arena);
 	}
