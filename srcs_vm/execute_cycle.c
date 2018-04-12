@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/11 19:50:44 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/12 14:37:08 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ int is_valide_param(t_process *process, t_op *op, int nbr_param)
 	if (process->opcode == 0)
 		return (1);
 	if (process->opcode < 0 || process->opcode > 16 || op[process->opcode].nbr_param != nbr_param)
-	{
-		//ft_printf("AAAAAAAAAAAAAAAAA\n");
 		return (0);
-	}
 	param = process->param;
 	i = 0;
+	return (1);
 	while (i < nbr_param)
 	{
 		if (param->code == REG_CODE && !HAS_REG_PERM(op[process->opcode].perm[i]))
@@ -56,25 +54,32 @@ void	execute_process(t_process *process, t_arena *arena)
 	if (process->waitting == -1)
 	{
 		process->opcode = arena->board[process->index];
-		nbr_param = load_params(process->param, arena->board, process, arena->op);
-		if(is_valide_param(process, arena->op, nbr_param))
+		//ft_printf("LOAD : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
+		if(process->opcode >= 0 && process->opcode <= 16)
 			((arena->f)[process->opcode])(process->param, arena, process);
 		else
 		{
-			//ft_printf("The function %d (%d) is invalide with %d param\n", process->opcode, arena->op[process->opcode].nbr_param, nbr_param);
+			//ft_printf("Cycles %d : The function %d doesnt exist\n", arena->cycles, process->opcode);
 			//ft_printf("param code = %d\n", process->param->next->code);
 			//exit(0);
 			process->waitting = 0;
 			process->index++;
 		}
-		//ft_printf("LOAD : cycles %d => op_code %d\n", arena->cycles, process->opcode);
 	}
 	else
 	{
-		((arena->f)[process->opcode])(process->param, arena, process);
-		process->index = process->next_index;
+		nbr_param = load_params(process->param, arena->board, process, arena->op);
+		if(is_valide_param(process, arena->op, nbr_param))
+		{
+			((arena->f)[process->opcode])(process->param, arena, process);
+			//ft_printf("EXECUTE : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
+			process->index = process->next_index;
+		}
+		else
+		{
+			//ft_printf("Cycles %d : The function %d is invalide with %d (%d) param\n", arena->cycles, process->opcode, nbr_param, arena->op[process->opcode].nbr_param);
+		}
 		process->waitting = -1;
-		// ft_printf("EXECUTE : cycles %d => op_code %d\n", arena->cycles, process->opcode);
 		execute_process(process, arena);
 		//ft_printf("after executed op : %d\n", process->opcode);
 	}
@@ -162,7 +167,7 @@ void	execute_vm(t_arena *arena)
 	{
 		initscr();
 		ft_init_color(arena->players, arena);
-		getch();
+		//getch();
 	}
 	while (ctd > 0)
 	{

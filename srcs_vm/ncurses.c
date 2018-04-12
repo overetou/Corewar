@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 15:26:51 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/05 19:50:02 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/11 20:57:44 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void		ft_init_color(t_player *players, t_arena *arena)
 
 	start_color();
 	refresh_arena(arena, 0, MEM_SIZE, 0);
-	getch();
 	i = 1;
 	if (arena->number_of_players <= 7)
 	{
@@ -53,7 +52,6 @@ void		ft_init_color(t_player *players, t_arena *arena)
 			i++;
 		}
 	}
-	getch();
 }
 
 void		refresh_arena(t_arena *arena, int index, int len, int color)
