@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 15:26:51 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/12 15:07:13 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/13 15:47:50 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ void		refresh_arena(t_arena *arena, int adr, int len, unsigned char color)
 
 	x = (adr + len - 1) * 3;
 	y = x / 192;
-	/*if (adr < 0)
-        write_tab(to_write, arena, MEM_SIZE + adr, len);
-    else if (adr >= MEM_SIZE)
-        write_tab(to_write, arena, adr % MEM_SIZE, len);*/
+	adr = get_valide_adr(adr);
 	if (len)
 	{
 		refresh_arena(arena, adr, --len, color);

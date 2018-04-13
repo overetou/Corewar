@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/12 14:52:49 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/13 15:23:20 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ t_param		*create_three_params(void);
 void		fill_players(t_arena *arena);
 char		*get_winner(t_player *player, int winner);
 void		execute_process(t_process *process, t_arena *arena);
+int			get_valide_adr(int adr);
 
 #endif

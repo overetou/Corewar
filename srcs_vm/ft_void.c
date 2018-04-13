@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 15:11:18 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/11 16:53:44 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/13 16:01:28 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_void(t_param *param, t_arena *arena, t_process *process)
 {
 	process->waitting++;
-	process->index++;
+	process->index = get_valide_adr(process->index + 1);
 	(void)param;
 	(void)arena;
 }
