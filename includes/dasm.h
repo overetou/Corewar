@@ -88,7 +88,6 @@ void		ft_get_ind(t_env *e, t_cmd *cmd);
 void		ft_iter(t_env *e, char *message, int check, t_cmd *cmd);
 void		ft_check_ocp(t_env *e, unsigned int tmp);
 void		ft_write(t_env *env);
-
-
+void		ft_print_cmd(t_env *e);
 
 #endif

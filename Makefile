@@ -33,7 +33,11 @@ processing.c
 
 SRC_DASM		= \
 dasm.c\
-ft_parse.c
+ft_parse.c\
+op.c\
+ft_cmd.c\
+ft_get.c\
+ft_file.c
 
 SRC_VM			= \
 execute_cycle.c\

@@ -23,7 +23,6 @@ void	ft_check_ocp(t_env *e, unsigned int tmp)
 
 void	ft_get_reg(t_env *e, t_cmd *cmd)
 {
-	printf("enter fget reg\n");
 	unsigned char tmp;
 
 	cmd->param[cmd->index].code = REG_CODE;
@@ -34,12 +33,10 @@ void	ft_get_reg(t_env *e, t_cmd *cmd)
 		ft_error(e, "Bad reg number");
 	++(cmd->index);
 	ft_iter(e, "test d 1", 0, cmd);
-	printf("e->j == %d, value == %d", e->j, cmd->param[cmd->index - 1].value);
 }
 
 void	ft_get_dir2(t_env *e, t_cmd *cmd)
 {
-	printf("enter fget dir2\n");
 	unsigned char tmp;
 
 	cmd->param[cmd->index].code = DIR_CODE;
@@ -50,14 +47,11 @@ void	ft_get_dir2(t_env *e, t_cmd *cmd)
 	tmp = e->file[e->i];
 	cmd->param[cmd->index++].value += tmp;
 	ft_iter(e, "test d 2", 0, cmd);
-	printf("e->j == %d, value == %d", e->j, cmd->param[cmd->index - 1].value);
 }
 
 void	ft_get_dir4(t_env *e, t_cmd *cmd)
 {
-	printf("enter fget dir4\n");
 	unsigned char tmp;
-	// printf("enter ft_get_dir4\n");
 
 	cmd->param[cmd->index].code = DIR_CODE;
 	cmd->param[cmd->index].nbr_octet = 4;
@@ -73,12 +67,10 @@ void	ft_get_dir4(t_env *e, t_cmd *cmd)
 	tmp = e->file[e->i];
 	cmd->param[cmd->index++].value += tmp;
 	ft_iter(e, "test dir 4", 0, cmd);
-	printf("e->j == %d, value == %d", e->j, cmd->param[cmd->index - 1].value);
 }
 
 void	ft_get_ind(t_env *e, t_cmd *cmd)
 {
-	printf("enter fget ind\n");
 	unsigned char tmp;
 
 	cmd->param[cmd->index].code = IND_CODE;
@@ -88,6 +80,5 @@ void	ft_get_ind(t_env *e, t_cmd *cmd)
 	tmp = e->file[e->i];
 	cmd->param[cmd->index++].value += tmp;
 	ft_iter(e, "test ind 2", 0, cmd);
-	printf("e->j == %d, value == %d", e->j, cmd->param[cmd->index - 1].value);
 }
 

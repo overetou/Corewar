@@ -12,48 +12,49 @@
 
 #include <dasm.h>
 
-
-/* remplacer les ft_error par un solve pour faire comme dans lem lin des qu'il y 
-a une faute on resoud avec ce qu'on a. si on a pas tout tant pis. c'est le mieux
-je pense plutot que de checker si on a toutess les infos ou pas c casse couilles 
-pour rien. vu que c'est un bonus on peut choisir de le faire comme ca oklm
-dabord on check si on, a le magic si non on affiche bad header; si on a le name
-sinon cas d'erreur etc...
-*/
-// toujours checker si le fichier est finit ou pas. via la len dans la struct env
-void	ft_error(t_env *e, char *message)
+void		ft_free_everything(t_env *e)
 {
-	//if (e->file)
-	//	free(e->file);
-	e = (t_env*)e;
-	ft_printf("%s\n", message);
-	exit (0);
+	t_cmd 	*tmp;
+
+	free(e->file);
+	free(e->name);
+	free(e->comment);
+	while (e->cmd)
+	{
+		tmp = e->cmd->next;
+		free(e->cmd);
+		e->cmd = tmp;
+	}
 }
 
-void	ft_iter(t_env *e, char *message, int check, t_cmd *cmd)
+
+void		ft_error(t_env *e, char *message)
 {
-	int i;
+	ft_free_everything(e);
+	ft_printf("%s\n", message);
+	exit(EXIT_FAILURE);
+}
+
+void		ft_iter(t_env *e, char *message, int check, t_cmd *cmd)
+{
+	int 	i;
 
 	++(e->j); 
 	++(e->i);
-	// printf("\niter, e->i == %d\ne->len == %d\n", e->i, e->len);
-	// printf("iter, e->j == %d\ne->champ_size == %d\n", e->j, e->champ_size);
 	i = e->j + PROG_NAME_LENGTH + COMMENT_LENGTH + 16;
 	if (e->j != e->champ_size && e->i != e->len)
 		return ;
 	if (e->j == e->champ_size || e->i == e->len)
 	{
-		// printf("i == %d ?\n", i);
 		check == 1 ? ft_error(e, message) : 0;
-		cmd->index != cmd->nb_params ? ft_error(e, "BAD NB PARAM") : 0;
+		cmd->index != cmd->nb_params ? ft_error(e, "Don't fuck with me") : 0;
 		i != e->len ? ft_error(e, message) : 0;
 		e->i != e->len ? ft_error(e, message) : 0;
 		e->j != e->champ_size ? ft_error(e, message) : 0;
-		// ft_creat_file(e);
 	}
 }
 
-void	store_file(t_env *e, char *file_name)
+void		store_file(t_env *e, char *file_name)
 {
 	int		fd;
 
@@ -68,35 +69,30 @@ void	store_file(t_env *e, char *file_name)
 	close(fd);
 }
 
-void		ft_dasm(t_env *e, char *argv)
-{
-	store_file(e, argv);
-//	ft_printf("%d\n", e->len);
-	ft_parse(e);
-	ft_write(e);
-	printf("SUCESS1\n");
-
-
-}
-
 int			main(int argc, char **argv)
 {
-	t_env e;
-	int arg;
-	int len;
+	t_env 	e;
+	int 	arg;
+	int 	len;
 
 	if (argc < 1)
 		ft_error(&e, "Usage : ./dasm *.cor ...\n");
-	arg = 1;
+	arg = 0;
 	ft_bzero(&e, sizeof(e));
-	while (arg < argc)
+	while (++arg < argc)
 	{
 		len = ft_strlen(argv[arg]) - 1;
 		if (len > 3 && argv[arg][len] == 'r' && argv[arg][len - 1] == 'o' &&
 			argv[arg][len - 2] == 'c' && argv[arg][len - 3] == '.')
-			ft_dasm(&e, argv[arg++]);
+		{
+			store_file(&e, argv[arg]);
+			ft_parse(&e);
+			ft_creat_fill_file(&e, argv[arg], len);
+			ft_free_everything(&e);
+		}
 		else
 			ft_printf("File %d is invalid\n", arg++);
 	}
+
 	return (0);
 }

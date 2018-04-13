@@ -12,7 +12,6 @@
 
 #include <dasm.h>
 
-// void 		ft_check_ocp(t_env)
 void		ft_nb_param(t_cmd *cmd)
 {
 	if (cmd->op->opcode == 1 || cmd->op->opcode == 9 || cmd->op->opcode == 12 || 
@@ -41,15 +40,12 @@ void		ft_add_cmd(t_cmd **cmd, t_cmd *new_cmd)
 
 void		ft_parse_param1(t_env *e, t_cmd *cmd)
 {
-	printf("enter ft_parse_param1\n");
 	unsigned char tmp;
 	int i;
 
 	tmp = e->file[e->i];
 	ft_check_ocp(e, tmp);
 	ft_iter(e, "test 1", 1, cmd);
-	i = 0;
-	printf("op_code == %d\n",cmd->op->opcode);
 	if ((tmp & 3) != 0)
 		ft_error(e, "BAD little byte ocp");
 	i = -1;
@@ -68,15 +64,11 @@ void		ft_parse_param1(t_env *e, t_cmd *cmd)
 			ft_error(e, "BAD OCP");
 		else
 			ft_error(e, "\n\nWUT,?\n\n");
-		printf("\ni == %d\n", i);
-		// ++(e->i) >= e->len ? ft_error(e, "BAD PARAM NUMBER") : 0;
-		// ft_iter(e, "test 2", 0, cmd);
 	}
 }
 
 void		ft_parse_param2(t_env *e, t_cmd *cmd)
 {
-	printf("enter ft_parse_param2\n");
 	if (cmd->op->opcode == 1)
 		ft_get_dir4(e, cmd);
 	else if (cmd->op->opcode == 9 || cmd->op->opcode == 12 ||
@@ -97,14 +89,12 @@ t_cmd	*creat_cmd(t_env *e)
 	bzero(cmd, sizeof(*cmd));
 	op_code = e->file[e->i];
 	ft_iter(e, "no param", 1, cmd);
-	printf("op_code == %d\n\n", op_code);
 	if (!(op_code > 0 && op_code < 17))
 		ft_error(e, "BAD OP_CODE1");
 	cmd->op = &g_op_tab[op_code - 1];
 	op_code = -1;
 	ft_nb_param(cmd);
 	cmd->next = NULL;
-	// printf("has_ocp == %d\n\n", cmd->op->has_ocp);
 	if (cmd->op->has_ocp)
 		ft_parse_param1(e, cmd);
 	else
