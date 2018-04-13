@@ -32,9 +32,9 @@ void	ft_error(t_champ *champ, char *message)
 	line = 0;
 	column = 0;
 	i = 0;
-	end = champ->i;
-	if (champ)
+	if (champ && champ->file && champ->file != NULL)
 	{
+		end = champ->i;
 		++line;
 		while (++i < champ->i)
 			if (champ->file[i] == '\n')
@@ -43,7 +43,7 @@ void	ft_error(t_champ *champ, char *message)
 			--end;
 		column = champ->i - end;
 	}
-//	ft_printf("%s\n", ft_strsub(champ->file, 0, champ->i));
+	ft_printf("\n%s\n", ft_strsub(champ->file, 0, champ->i));
 	ft_printf("Syntax error at line ");
 	ft_printf("%d, column %d: \"%s\"\n", line, column, message);
 	exit(0);

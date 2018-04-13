@@ -66,6 +66,7 @@ typedef struct	s_champ
 	int		i;
 	int		file_size;
 	char	*file;
+	int		file_len;
 	char	*name;
 	char	*comment;
 	t_cmd	*cmd;

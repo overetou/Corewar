@@ -52,7 +52,7 @@ void	valid_params(t_param *param, t_op *op, t_champ *champ)
 		i++;
 		param = param->next;
 	}
-	if (i != op->param_numbers)
+	if (i != op->param_numbers || param)
 		ft_error(champ, "ERROR NBR PARAM");
 }
 
@@ -104,7 +104,6 @@ t_cmd	*new_cmd(t_op *op, t_champ *champ, int index)
 		ft_error(champ, "ERROR MALLOC CMD");
 	cmd->op = op;
 	cmd->index = index;
-	cmd->next = NULL;
 	cmd->next = NULL;
 	cmd->param = NULL;
 	while (champ->file[champ->i] && !ft_strchr("#\n", champ->file[champ->i]))

@@ -38,7 +38,8 @@ void	parse_args(t_champ *champ)
 	{
 		while (ft_isblank(champ->file[champ->i]))
 			++champ->i;
-		if (champ->file[champ->i] == COMMENT_CHAR)
+		if (champ->file[champ->i] == COMMENT_CHAR ||
+			champ->file[champ->i]== ';')
 			store_hash(champ);
 		else
 		{

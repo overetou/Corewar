@@ -66,7 +66,8 @@ void		store_header(t_champ *champ)
 		else if (ft_strnequ(&champ->file[champ->i], COMMENT_CMD_STRING,
 			ft_strlen(COMMENT_CMD_STRING)))
 			store_comment(champ);
-		else if (champ->file[champ->i] == COMMENT_CHAR)
+		else if (champ->file[champ->i] == COMMENT_CHAR ||
+			champ->file[champ->i]== ';')
 			store_hash(champ);
 		else
 			ft_error(champ, "bug on parse header");
