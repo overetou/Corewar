@@ -32,6 +32,25 @@ char	*get_name(int fd)
 	return (name);
 }
 
+int		get_file_size(int fd)
+{
+	char	str_size[4];
+	int		file_size;
+	int		size;
+
+	size = 0;
+	lseek(fd, 4, SEEK_CUR);
+	if (read(fd, str_size, 4) < 0)
+		exit(ft_printf("ERROR GET FILE SIZE\n"));
+	file_size = str_size[0];
+	while (++size < 4)
+	{
+		file_size = file_size << 8;
+		file_size = file_size | str_size[size];
+	}
+	return (file_size);
+}
+
 char	*get_comment(int fd)
 {
 	char	*comment;
@@ -43,27 +62,6 @@ char	*get_comment(int fd)
 	return (comment);
 }
 
-int		get_file_size(int fd)
-{
-	char	str_size[4];
-	int		file_size;
-	int		size;
-	int		mask;
-
-	size = 0;
-	lseek(fd, 4, SEEK_CUR);
-	if (read(fd, str_size, 4) < 0)
-		exit(ft_printf("ERROR GET FILE SIZE\n"));
-	file_size = str_size[0];
-	while (++size < 4)
-	{
-		file_size = file_size << 8;
-		mask = str_size[size];
-		file_size = file_size | mask;
-	}
-	return (file_size);
-}
-
 void	write_player(int fd, t_arena *arena, int adr, int file_size)
 {
 	int offset;
@@ -73,6 +71,24 @@ void	write_player(int fd, t_arena *arena, int adr, int file_size)
 		exit(ft_printf("ERROR WRITE PLAYER\noffset = %d\nfile_size = %d\n", offset, file_size));
 	lseek(fd, PROG_NAME_LENGTH + COMMENT_LENGTH + 16, SEEK_SET);
 	read(fd, (arena->board) + adr, file_size);
+}
+
+void	check_numbers(int fd, int file_size)
+{
+	int		count;
+	char	buff[50];
+	int		witness;
+
+	count = 0;
+	lseek(fd, 4, SEEK_CUR);
+	while ((witness = read(fd, buff, 50)))
+	{
+		count += witness;
+		if (witness < 0)
+			exit(ft_printf("ERROR ON READING FILE\n"));
+	}
+	if (count != file_size)
+		exit(ft_printf("ERROR : FILE SIZE DOES NOT MATCH\n"));
 }
 
 void	fill_players(t_arena *arena)
@@ -90,6 +106,7 @@ void	fill_players(t_arena *arena)
 		player->name = get_name(fd);
 		player->file_size = get_file_size(fd);
 		player->comment = get_comment(fd);
+		check_numbers(fd, player->file_size);
 		adr = (MEM_SIZE / arena->number_of_players) * (arena->number_of_players - i);
 		write_player(fd, arena, adr, player->file_size);
 		add_process(&(arena->process), new_process(player->nbr, adr));

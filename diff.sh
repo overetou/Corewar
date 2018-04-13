@@ -21,7 +21,6 @@ do
 		sed -i '' '/0x1000 :/d' us
 		echo $i
 	done
-	echo "false positive."
 	./corewar $1 -dump $i > us
 	./ressources/corewar $1 -d $i > zaz
 	sed -i '' '1,2d' zaz
