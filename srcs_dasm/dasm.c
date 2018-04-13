@@ -14,11 +14,11 @@
 
 void		ft_free_everything(t_env *e)
 {
-	t_cmd 	*tmp;
+	t_cmd	*tmp;
 
-	free(e->file);
-	free(e->name);
-	free(e->comment);
+	ft_strdel(&(e->file));
+	ft_strdel((&e->name));
+	ft_strdel((&e->comment));
 	while (e->cmd)
 	{
 		tmp = e->cmd->next;
@@ -26,7 +26,6 @@ void		ft_free_everything(t_env *e)
 		e->cmd = tmp;
 	}
 }
-
 
 void		ft_error(t_env *e, char *message)
 {
@@ -37,9 +36,9 @@ void		ft_error(t_env *e, char *message)
 
 void		ft_iter(t_env *e, char *message, int check, t_cmd *cmd)
 {
-	int 	i;
+	int		i;
 
-	++(e->j); 
+	++(e->j);
 	++(e->i);
 	i = e->j + PROG_NAME_LENGTH + COMMENT_LENGTH + 16;
 	if (e->j != e->champ_size && e->i != e->len)
@@ -59,7 +58,7 @@ void		store_file(t_env *e, char *file_name)
 	int		fd;
 
 	if ((fd = open(file_name, O_RDONLY)) < 0)
-        ft_error(e, "BUG OPEN FILE");
+		ft_error(e, "BUG OPEN FILE");
 	e->len = lseek(fd, 0, SEEK_END);
 	if (!(e->file = ft_strnew(e->len)))
 		ft_error(e, "MALLOC FAIL");
@@ -71,28 +70,28 @@ void		store_file(t_env *e, char *file_name)
 
 int			main(int argc, char **argv)
 {
-	t_env 	e;
-	int 	arg;
-	int 	len;
+	t_env	e;
+	int		arg;
+	int		len;
 
 	if (argc < 1)
 		ft_error(&e, "Usage : ./dasm *.cor ...\n");
 	arg = 0;
-	ft_bzero(&e, sizeof(e));
 	while (++arg < argc)
 	{
 		len = ft_strlen(argv[arg]) - 1;
 		if (len > 3 && argv[arg][len] == 'r' && argv[arg][len - 1] == 'o' &&
 			argv[arg][len - 2] == 'c' && argv[arg][len - 3] == '.')
 		{
+			ft_bzero(&e, sizeof(e));
+			ft_printf("%s\n", argv[arg]);
 			store_file(&e, argv[arg]);
 			ft_parse(&e);
-			ft_creat_fill_file(&e, argv[arg], len);
+			ft_creat_fill_file(&e, argv[arg], len, arg);
 			ft_free_everything(&e);
 		}
 		else
 			ft_printf("File %d is invalid\n", arg++);
 	}
-
 	return (0);
 }

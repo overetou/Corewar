@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 18:55:18 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/10 14:50:50 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:19:04 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	ft_aff(t_param *param, t_arena *arena, t_process *process)
 		process->waitting = 2;
 	else if (arena->aff ==  AFF)
 	{
+		if (!validate_reg_nbr(param))
+			return ;
 		value = get_param_value(param, process, arena, 1);
 		print_aff(value);
 		ft_putchar('\n');

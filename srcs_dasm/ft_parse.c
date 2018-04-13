@@ -55,13 +55,13 @@ void				ft_parse_comment_name_size(t_env *e)
 {
 	int				i;
 	int				stop;
-	
+
 	i = -1;
 	e->name = ft_strndup(e->file + e->i, e->len - e->i);
 	stop = ft_strlen(e->name);
 	if (stop > PROG_NAME_LENGTH && stop < 1)
 		ft_error(e, "NAME BAD SIZE");
-	stop = PROG_NAME_LENGTH + 4 ;
+	stop = PROG_NAME_LENGTH + 4;
 	while (e->i < e->len && ++i < stop)
 		e->i++;
 	ft_get_champ_size(e);

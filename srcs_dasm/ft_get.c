@@ -12,18 +12,9 @@
 
 #include <dasm.h>
 
-void	ft_check_ocp(t_env *e, unsigned int tmp)
+void				ft_get_reg(t_env *e, t_cmd *cmd)
 {
-	tmp++;
-	tmp--;
-	e->i++;
-	e->i--;
-	return ;
-}
-
-void	ft_get_reg(t_env *e, t_cmd *cmd)
-{
-	unsigned char tmp;
+	unsigned char	tmp;
 
 	cmd->param[cmd->index].code = REG_CODE;
 	tmp = e->file[e->i];
@@ -35,9 +26,9 @@ void	ft_get_reg(t_env *e, t_cmd *cmd)
 	ft_iter(e, "test d 1", 0, cmd);
 }
 
-void	ft_get_dir2(t_env *e, t_cmd *cmd)
+void				ft_get_dir2(t_env *e, t_cmd *cmd)
 {
-	unsigned char tmp;
+	unsigned char	tmp;
 
 	cmd->param[cmd->index].code = DIR_CODE;
 	cmd->param[cmd->index].nbr_octet = 2;
@@ -49,9 +40,9 @@ void	ft_get_dir2(t_env *e, t_cmd *cmd)
 	ft_iter(e, "test d 2", 0, cmd);
 }
 
-void	ft_get_dir4(t_env *e, t_cmd *cmd)
+void				ft_get_dir4(t_env *e, t_cmd *cmd)
 {
-	unsigned char tmp;
+	unsigned char	tmp;
 
 	cmd->param[cmd->index].code = DIR_CODE;
 	cmd->param[cmd->index].nbr_octet = 4;
@@ -69,9 +60,9 @@ void	ft_get_dir4(t_env *e, t_cmd *cmd)
 	ft_iter(e, "test dir 4", 0, cmd);
 }
 
-void	ft_get_ind(t_env *e, t_cmd *cmd)
+void				ft_get_ind(t_env *e, t_cmd *cmd)
 {
-	unsigned char tmp;
+	unsigned char	tmp;
 
 	cmd->param[cmd->index].code = IND_CODE;
 	tmp = e->file[e->i];
@@ -81,4 +72,3 @@ void	ft_get_ind(t_env *e, t_cmd *cmd)
 	cmd->param[cmd->index++].value += tmp;
 	ft_iter(e, "test ind 2", 0, cmd);
 }
-

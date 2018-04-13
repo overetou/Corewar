@@ -12,20 +12,21 @@
 
 #include <dasm.h>
 
-void		ft_nb_param(t_cmd *cmd)
+void				ft_nb_param(t_cmd *cmd)
 {
-	if (cmd->op->opcode == 1 || cmd->op->opcode == 9 || cmd->op->opcode == 12 || 
-		cmd->op->opcode == 15 || cmd->op->opcode == 16)
+	if (cmd->op->opcode == 1 || cmd->op->opcode == 9 ||
+		cmd->op->opcode == 12 || cmd->op->opcode == 15 || cmd->op->opcode == 16)
 		cmd->nb_params = 1;
 	else if (cmd->op->opcode == 2 || cmd->op->opcode == 3 ||
-			 cmd->op->opcode == 13)
+			cmd->op->opcode == 13)
 		cmd->nb_params = 2;
 	else
 		cmd->nb_params = 3;
 }
-void		ft_add_cmd(t_cmd **cmd, t_cmd *new_cmd)
+
+void				ft_add_cmd(t_cmd **cmd, t_cmd *new_cmd)
 {
-	t_cmd *tmp;
+	t_cmd			*tmp;
 
 	if (!*cmd)
 		*cmd = new_cmd;
@@ -38,20 +39,18 @@ void		ft_add_cmd(t_cmd **cmd, t_cmd *new_cmd)
 	}
 }
 
-void		ft_parse_param1(t_env *e, t_cmd *cmd)
+void				ft_parse_param1(t_env *e, t_cmd *cmd)
 {
-	unsigned char tmp;
-	int i;
+	unsigned char	tmp;
+	int				i;
 
 	tmp = e->file[e->i];
-	ft_check_ocp(e, tmp);
 	ft_iter(e, "test 1", 1, cmd);
 	if ((tmp & 3) != 0)
 		ft_error(e, "BAD little byte ocp");
 	i = -1;
 	while (++i < cmd->nb_params && i < 4)
 	{
-		// printf("nocomprede %d\n", i);
 		if (((tmp >> (6 - (i * 2))) & 3) == 1)
 			ft_get_reg(e, cmd);
 		else if ((((tmp >> (6 - (i * 2))) & 3) == 2) && cmd->op->dir_size == 1)
@@ -67,7 +66,7 @@ void		ft_parse_param1(t_env *e, t_cmd *cmd)
 	}
 }
 
-void		ft_parse_param2(t_env *e, t_cmd *cmd)
+void				ft_parse_param2(t_env *e, t_cmd *cmd)
 {
 	if (cmd->op->opcode == 1)
 		ft_get_dir4(e, cmd);
@@ -78,10 +77,10 @@ void		ft_parse_param2(t_env *e, t_cmd *cmd)
 		ft_error(e, "WTF dude");
 }
 
-t_cmd	*creat_cmd(t_env *e)
+t_cmd				*creat_cmd(t_env *e)
 {
-	t_cmd	*cmd;
-	int 	op_code;
+	t_cmd			*cmd;
+	int				op_code;
 
 	cmd = NULL;
 	if (!(cmd = (t_cmd*)malloc(sizeof(t_cmd))))

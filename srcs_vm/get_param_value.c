@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:09:04 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/11 19:27:30 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:09:33 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		validate_reg_nbr(t_param *param)
 {
-	if (param->value < 1 || param->value > REG_NUMBER)
+	if (param->code == REG_CODE && (param->value < 1 || param->value > REG_NUMBER))
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/11 19:22:23 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/12 14:52:49 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_process	*dup_process(t_process *old_process);
 void		add_process(t_process **process, t_process *new_process);
 void		dump_tab(t_arena *arena);
 void		ft_init_color(t_player *players, t_arena *arena);
-void		refresh_arena(t_arena *arena, int index, int len, int color);
+void		refresh_arena(t_arena *arena, int index, int len, unsigned char color);
 void		execute_vm(t_arena *arena);
 int			get_param_value(t_param *param, t_process *process, t_arena *arena, int has_mod);
 int			validate_reg_nbr(t_param *param);
@@ -119,5 +119,7 @@ int			get_adr_value(t_arena *arena, int index, int nbr_oct);
 void		write_tab(unsigned int to_write, t_arena *arena, int adr, int len);
 t_param		*create_three_params(void);
 void		fill_players(t_arena *arena);
+char		*get_winner(t_player *player, int winner);
+void		execute_process(t_process *process, t_arena *arena);
 
 #endif

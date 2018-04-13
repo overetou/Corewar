@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 13:58:33 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/11 19:23:35 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:15:01 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ void	ft_add(t_param *param, t_arena *arena, t_process *process)
 	else
 	{
 		process->carry = 0;
+		if (!validate_reg_nbr(param))
+			return ;
 		value1 = get_param_value(param, process, arena, 0);
 		param = param->next;
+		if (!validate_reg_nbr(param))
+			return ;
 		value2 = get_param_value(param, process, arena, 0);
 		param = param->next;
 		if (validate_reg_nbr(param))

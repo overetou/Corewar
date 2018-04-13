@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/12 14:37:08 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/12 17:34:19 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ void	execute_process(t_process *process, t_arena *arena)
 		}
 		else
 		{
+			if (process->opcode >= 0 && process->opcode <= 16 && arena->op[process->opcode].has_ocp)
+				process->index++;
+			process->index++;
 			//ft_printf("Cycles %d : The function %d is invalide with %d (%d) param\n", arena->cycles, process->opcode, nbr_param, arena->op[process->opcode].nbr_param);
 		}
 		process->waitting = -1;
@@ -129,6 +132,8 @@ void	kill_unlively_processes(t_arena *arena)
 void	do_processes_checks(t_arena *arena, int	*no_nbr_live, int *ctd)
 {
 	kill_unlively_processes(arena);
+	if (!arena->process)
+		exit(ft_printf("And the winner is... %s!\n", get_winner(arena->players, arena->winner)));
 	if ((arena->nbr_live) >= NBR_LIVE)
 		*ctd -= CYCLE_DELTA;
 	else
@@ -156,6 +161,17 @@ void	execute_cycle(t_arena *arena)
 	}
 }
 
+int		print_process_state(t_arena *arena)
+{
+	ft_printf(">>>>>>>>>>>\ncycle = %d\n<<<<<<<<<<<\n", arena->cycles);
+	while (arena->process)
+	{
+		ft_printf("index = %d, waitting = %d, opcode = %d\n", arena->process->index, arena->process->waitting, arena->process->opcode);
+		arena->process = arena->process->next;
+	}
+	return (0);
+}
+
 void	execute_vm(t_arena *arena)
 {
 	int	ctd;
@@ -165,8 +181,8 @@ void	execute_vm(t_arena *arena)
 	no_nbr_live = 0;
 	if (arena->aff == NCURSE)
 	{
-		initscr();
-		ft_init_color(arena->players, arena);
+		//initscr();
+		//ft_init_color(arena->players, arena);
 		//getch();
 	}
 	while (ctd > 0)
@@ -176,12 +192,15 @@ void	execute_vm(t_arena *arena)
 		execute_cycle(arena);
 		arena->cycles++;
 		arena->executed_cycles++;
+		// if (arena->cycles == 2980)
+		// 	exit(print_process_state(arena));
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
 			dump_tab(arena);
 	}
+	//ft_printf("END AFTER %lld cycles\n", arena->cycles);
 	if (arena->aff == NCURSE)
 	{
 		getch();
-		endwin();
+		//endwin();
 	}
 }
