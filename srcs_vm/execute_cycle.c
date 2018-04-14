@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/12 17:34:19 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/13 16:37:34 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	execute_process(t_process *process, t_arena *arena)
 			//ft_printf("param code = %d\n", process->param->next->code);
 			//exit(0);
 			process->waitting = 0;
-			process->index++;
+			process->index = get_valide_adr(process->index + 1);
 		}
 	}
 	else
@@ -73,13 +73,13 @@ void	execute_process(t_process *process, t_arena *arena)
 		{
 			((arena->f)[process->opcode])(process->param, arena, process);
 			//ft_printf("EXECUTE : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
-			process->index = process->next_index;
+			process->index = get_valide_adr(process->next_index);
 		}
 		else
 		{
 			if (process->opcode >= 0 && process->opcode <= 16 && arena->op[process->opcode].has_ocp)
 				process->index++;
-			process->index++;
+			process->index = get_valide_adr(process->index + 1);
 			//ft_printf("Cycles %d : The function %d is invalide with %d (%d) param\n", arena->cycles, process->opcode, nbr_param, arena->op[process->opcode].nbr_param);
 		}
 		process->waitting = -1;
@@ -122,6 +122,7 @@ void	kill_unlively_processes(t_arena *arena)
 			}
 			else
 			{
+				process->did_live = 0;
 				back = process;
 				process = process->next;
 			}
@@ -154,6 +155,8 @@ void	execute_cycle(t_arena *arena)
 	process = arena->process;
 	while (process)
 	{
+		 //if (arena->cycles == 11492)
+		 // 	ft_printf("adr = %d, op_code = %d\n", process->index, process->opcode);
 		(process->waitting)--;
 		if (process->waitting < 1)
 			execute_process(process, arena);
@@ -192,8 +195,8 @@ void	execute_vm(t_arena *arena)
 		execute_cycle(arena);
 		arena->cycles++;
 		arena->executed_cycles++;
-		// if (arena->cycles == 2980)
-		// 	exit(print_process_state(arena));
+		//if (arena->cycles == 11493)
+		//	exit(0);
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
 			dump_tab(arena);
 	}

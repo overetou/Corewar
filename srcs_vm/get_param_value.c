@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:09:04 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/12 16:09:33 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/13 15:45:09 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ int		get_adr_value(t_arena *arena, int index, int nbr_oct)
 
 	value = 0;
 	i = 0;
-	if (index < 0)
-		return (get_adr_value(arena, MEM_SIZE + index, nbr_oct));
-    else if (index >= MEM_SIZE)
-		return (get_adr_value(arena, index % MEM_SIZE, nbr_oct));
+	index = get_valide_adr(index);
 	while ((index + i) < MEM_SIZE && i < nbr_oct)
 	{
 		value = value << 8;
