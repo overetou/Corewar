@@ -41,29 +41,30 @@ void				ft_add_cmd(t_cmd **cmd, t_cmd *new_cmd)
 
 void				ft_parse_param1(t_env *e, t_cmd *cmd)
 {
-	unsigned char	tmp;
+	unsigned char	ocp;
 	int				i;
 
-	tmp = e->file[e->i];
+	ocp = e->file[e->i];
 	ft_iter(e, "test 1", 1, cmd);
-	if ((tmp & 3) != 0)
+	if ((ocp & 3) != 0)
 		ft_error(e, "BAD little byte ocp");
 	i = -1;
 	while (++i < cmd->nb_params && i < 4)
 	{
-		if (((tmp >> (6 - (i * 2))) & 3) == 1)
+		if (((ocp >> (6 - (i * 2))) & 3) == 1)
 			ft_get_reg(e, cmd);
-		else if ((((tmp >> (6 - (i * 2))) & 3) == 2) && cmd->op->dir_size == 1)
+		else if ((((ocp >> (6 - (i * 2))) & 3) == 2) && cmd->op->dir_size == 1)
 			ft_get_dir2(e, cmd);
-		else if (((tmp >> (6 - (i * 2))) & 3) == 2 && cmd->op->dir_size == 0)
+		else if (((ocp >> (6 - (i * 2))) & 3) == 2 && cmd->op->dir_size == 0)
 			ft_get_dir4(e, cmd);
-		else if (((tmp >> (6 - (i * 2))) & 3) == 3)
+		else if (((ocp >> (6 - (i * 2))) & 3) == 3)
 			ft_get_ind(e, cmd);
-		else if (((tmp >> (6 - (i * 2))) & 3) == 0)
+		else if (((ocp >> (6 - (i * 2))) & 3) == 0)
 			ft_error(e, "BAD OCP");
 		else
 			ft_error(e, "\n\nWUT,?\n\n");
 	}
+	ft_check_ocp(e, cmd);
 }
 
 void				ft_parse_param2(t_env *e, t_cmd *cmd)

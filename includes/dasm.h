@@ -18,6 +18,10 @@
 # include <fcntl.h>
 # include "op.h"
 
+# define HAS_REG_PERM(x) ((x | T_DIR | T_IND) == (T_REG | T_DIR | T_IND))
+# define HAS_DIR_PERM(x) ((T_REG | x | T_IND) == (T_REG | T_DIR | T_IND))
+# define HAS_IND_PERM(x) ((T_REG | T_DIR | x) == (T_REG | T_DIR | T_IND))
+
 typedef struct		s_op
 {
 	char			*short_name;
@@ -74,8 +78,8 @@ void				ft_get_dir2(t_env *e, t_cmd *cmd);
 void				ft_get_dir4(t_env *e, t_cmd *cmd);
 void				ft_get_ind(t_env *e, t_cmd *cmd);
 void				ft_iter(t_env *e, char *message, int check, t_cmd *cmd);
-void				ft_check_ocp(t_env *e, unsigned int tmp);
 void				ft_creat_fill_file(t_env *env, char *file, int l, int a);
 void				ft_print_cmd(t_env *e);
+void				ft_check_ocp(t_env *e, t_cmd *cmd);
 
 #endif

@@ -12,6 +12,26 @@
 
 #include <dasm.h>
 
+void				ft_check_ocp(t_env *e, t_cmd *cmd)
+{
+	int				i;
+
+	i = 0;
+	while (i < cmd->op->param_numbers && i < 4)
+	{
+		if (cmd->param[i].code == REG_CODE &&
+			!HAS_REG_PERM(cmd->op->perm[i]))
+			ft_error(e, "ERROR HAS_REG_PERM");
+		else if (cmd->param[i].code == DIR_CODE &&
+			!HAS_DIR_PERM(cmd->op->perm[i]))
+			ft_error(e, "ERROR HAS_DIR_PERM");
+		else if (cmd->param[i].code == IND_CODE &&
+			!HAS_IND_PERM(cmd->op->perm[i]))
+			ft_error(e, "ERROR HAS_IND_PERM");
+		i++;
+	}
+}
+
 void				ft_get_reg(t_env *e, t_cmd *cmd)
 {
 	unsigned char	tmp;
