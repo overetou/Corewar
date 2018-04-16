@@ -29,8 +29,19 @@ void		ft_free_everything(t_env *e)
 
 void		ft_error(t_env *e, char *message)
 {
+	int 	i;
+	int		count;
+
+	i = 0;
+	count = 0;
 	ft_free_everything(e);
-	ft_printf("%s\n", message);
+	while (i < e->i)
+	{
+		if (e->file[i] == '\n')
+			count++;
+		i++;
+	}
+	ft_printf("Line %d :%s\n", count, message);
 	exit(EXIT_FAILURE);
 }
 
