@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/13 15:23:20 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/16 19:11:36 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct			s_param
 
 typedef struct			s_process
 {
+	int					nbr;
 	int					opcode;
 	int					reg[REG_NUMBER];
 	char				carry;
@@ -72,6 +73,7 @@ typedef struct			s_op
 typedef struct			s_arena
 {
 	unsigned char*		board;
+	char				debug;
 	int					cycles;
 	int					executed_cycles;
 	int					winner;
@@ -83,6 +85,7 @@ typedef struct			s_arena
 	int					aff;
 	int					end_cycle;
 	int					number_of_players;
+	int					nbr_process;
 }						t_arena;
 
 void		ft_void(t_param *param, t_arena *arena, t_process *process);

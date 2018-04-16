@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 18:06:50 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/12 16:18:40 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/16 20:25:45 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ void	ft_lldi(t_param *param, t_arena *arena, t_process *process)
 			if (!process->reg[param->value - 1])
 				process->carry = 1;
 		}
+		if (arena->debug)
+			ft_printf("P %4d | lldi %d %d r%d\n       | -> load from %d + %d = %d (with pc %d)\n", process->nbr, value1, value2, param->value, value1, value2, value1 + value2, process->index + value1 + value2);
 	}
 }

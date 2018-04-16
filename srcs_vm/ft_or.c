@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:28:22 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/12 16:16:25 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/16 19:31:33 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ void	ft_or(t_param *param, t_arena *arena, t_process *process)
 			if (!process->reg[param->value - 1])
 				process->carry = 1;
 		}
+		if (arena->debug)
+			ft_printf("P %4d | or %d %d r%d\n", process->nbr, value1, value2, param->value);
 	}
 }

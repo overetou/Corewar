@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 15:56:40 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/11 18:57:50 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/16 19:11:04 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 			if (!ft_str_is_numeric(argv[++i]) || (arena->end_cycle = ft_atoi(argv[i])) < 0)
 				exit(ft_printf("ERROR check_arg_create_players 2\n"));
 		}
+		else if (!ft_strcmp(argv[i], "-debug"))
+			arena->debug = 1;
 		else
 		{
 			if (!ft_strcmp(argv[i], "-n"))

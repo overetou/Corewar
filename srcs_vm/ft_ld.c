@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:10:21 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/11 19:24:08 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/16 20:13:59 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ void	ft_ld(t_param *param, t_arena *arena, t_process *process)
 			if (!process->reg[param->value - 1])
 				process->carry = 1;
 		}
+		if (arena->debug)
+			ft_printf("P %4d | ld %d r%d\n", process->nbr, value, param->value);
 	}
 }
