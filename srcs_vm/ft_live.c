@@ -26,11 +26,11 @@ void	ft_live(t_param *param, t_arena *arena, t_process *process)
 			if (player->nbr == param->value)
 			{
 				arena->winner = param->value;
-				arena->nbr_live++;
 				player->last_live = arena->cycles;
-				process->did_live = 1;
 				break ;
 			}
+			process->did_live = 1;
+			arena->nbr_live++;
 			player = player->next;
 		}
 	}

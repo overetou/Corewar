@@ -35,10 +35,7 @@ int		extract_param_value(char *code, unsigned char *board, int *index)
 	if (*code == 1)
 		size = 1;
 	else if (*code == DIRFOR)
-	{
 		size = DIRFOR;
-		*code = 2;
-	}
 	else
 		size = 2;
 	value = board[++(*index)];
@@ -53,6 +50,8 @@ int		extract_param_value(char *code, unsigned char *board, int *index)
 
 int		cut_ocp(int ocp, int code, int margin)
 {
+	if (code == DIRFOR)
+		code = DIRTWO;
 	while (margin)
 	{
 		code = code << 2;

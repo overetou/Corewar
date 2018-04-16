@@ -41,7 +41,10 @@ int		get_param_value(t_param *param, t_process *process, t_arena *arena, int has
 	int value;
 
 	if (param->code == IND_CODE || param->code == DIRTWO)
+	{
+		//ft_printf("TEST\n");
 		param->value = (short)param->value;
+	}
 	if (param->code == REG_CODE)
 	{
 		if (validate_reg_nbr(param))

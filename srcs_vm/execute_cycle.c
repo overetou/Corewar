@@ -155,8 +155,8 @@ void	execute_cycle(t_arena *arena)
 	process = arena->process;
 	while (process)
 	{
-		 //if (arena->cycles == 11492)
-		 // 	ft_printf("adr = %d, op_code = %d\n", process->index, process->opcode);
+		//  if (arena->cycles == 4575)
+		//   	ft_printf("adr = %d, op_code = %d\n", process->index, process->opcode);
 		(process->waitting)--;
 		if (process->waitting < 1)
 			execute_process(process, arena);
@@ -195,8 +195,9 @@ void	execute_vm(t_arena *arena)
 		execute_cycle(arena);
 		arena->cycles++;
 		arena->executed_cycles++;
-		//if (arena->cycles == 11493)
-		//	exit(0);
+		// if (arena->cycles == 4576)
+		// 	exit(0);
+		//	exit(print_process_state(arena));
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
 			dump_tab(arena);
 	}
