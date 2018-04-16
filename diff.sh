@@ -1,9 +1,6 @@
 #!/bin/bash
 
 let "i = 0"
-rm zaz us
-touch zaz
-touch us
 let "i = $2"
 ./corewar $1 -dump $i > us
 ./ressources/corewar $1 -d $i > zaz
