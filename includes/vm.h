@@ -49,6 +49,7 @@ typedef struct			s_param
 typedef struct			s_process
 {
 	int					nbr;
+	int					nbr_param;
 	int					opcode;
 	int					reg[REG_NUMBER];
 	char				carry;

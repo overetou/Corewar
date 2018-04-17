@@ -38,6 +38,7 @@ t_process	*dup_process(t_process *old_process)
 		i++;
 	}
 	process->nbr = 1;
+	process->nbr_param = 0;
 	process->opcode = 0;
 	process->carry = old_process->carry;
 	process->index = old_process->index;

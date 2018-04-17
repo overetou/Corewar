@@ -19,7 +19,7 @@ int is_valide_param(t_process *process, t_op *op, int nbr_param)
 
 	if (process->opcode == 0)
 		return (1);
-	if (process->opcode < 0 || process->opcode > 16 || op[process->opcode].nbr_param > nbr_param)
+	if (process->opcode < 0 || process->opcode > 16 || op[process->opcode].nbr_param != nbr_param)
 		return (0);
 	param = process->param;
 	i = 0;
@@ -49,15 +49,16 @@ int is_valide_param(t_process *process, t_op *op, int nbr_param)
 
 void	execute_process(t_process *process, t_arena *arena)
 {
-	int nbr_param;
-
 	if (process->waitting == -1)
 	{
 		process->opcode = arena->board[process->index];
-		//if (process->nbr == 14)
-			//ft_printf("LOAD : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
+		//if (process->nbr == 16)
+		//	ft_printf("LOAD : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
 		if(process->opcode >= 0 && process->opcode <= 16)
+		{
+			process->nbr_param = load_params(process->param, arena->board, process, arena->op);
 			((arena->f)[process->opcode])(process->param, arena, process);
+		}
 		else
 		{
 			//ft_printf("Cycles %d : The function %d doesnt exist\n", arena->cycles, process->opcode);
@@ -69,21 +70,20 @@ void	execute_process(t_process *process, t_arena *arena)
 	}
 	else
 	{
-		nbr_param = load_params(process->param, arena->board, process, arena->op);
-		if(is_valide_param(process, arena->op, nbr_param))
+		if(is_valide_param(process, arena->op, process->nbr_param))
 		{
 			((arena->f)[process->opcode])(process->param, arena, process);
-			//if (process->nbr == 14)
-				//ft_printf("EXECUTE : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
-			process->index = get_valide_adr(process->next_index);
+			//if (process->nbr == 10)
+			//	ft_printf("EXECUTE : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
 		}
-		else
+		/*else
 		{
 			if (process->opcode >= 0 && process->opcode <= 16 && arena->op[process->opcode].has_ocp)
 				process->index++;
 			process->index = get_valide_adr(process->index + 1);
 			//ft_printf("Cycles %d : The function %d is invalide with %d (%d) param\n", arena->cycles, process->opcode, nbr_param, arena->op[process->opcode].nbr_param);
-		}
+		}*/
+		process->index = get_valide_adr(process->next_index);
 		process->waitting = -1;
 		execute_process(process, arena);
 		//ft_printf("after executed op : %d\n", process->opcode);
@@ -157,8 +157,8 @@ void	execute_cycle(t_arena *arena)
 	process = arena->process;
 	while (process)
 	{
-		//  if (arena->cycles == 4575)
-		//   	ft_printf("adr = %d, op_code = %d\n", process->index, process->opcode);
+		  //if (arena->cycles == 4576)
+		  // 	ft_printf("adr = %d, op_code = %d\n", process->index, process->opcode);
 		(process->waitting)--;
 		if (process->waitting < 1)
 			execute_process(process, arena);
@@ -171,7 +171,7 @@ int		print_process_state(t_arena *arena)
 	ft_printf(">>>>>>>>>>>\ncycle = %d\n<<<<<<<<<<<\n", arena->cycles);
 	while (arena->process)
 	{
-		ft_printf("index = %d, waitting = %d, opcode = %d\n", arena->process->index, arena->process->waitting, arena->process->opcode);
+		ft_printf("process_nbr = %d, index = %d, waitting = %d, opcode = %d\n", arena->process->nbr, arena->process->index, arena->process->waitting, arena->process->opcode);
 		arena->process = arena->process->next;
 	}
 	return (0);
@@ -197,8 +197,8 @@ void	execute_vm(t_arena *arena)
 		execute_cycle(arena);
 		arena->cycles++;
 		arena->executed_cycles++;
-		//if (arena->cycles == 4553)
-		 	//exit(0);
+		//if (arena->cycles == 4841)
+		// 	exit(0);
 		//	exit(print_process_state(arena));
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
 			dump_tab(arena);

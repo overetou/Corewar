@@ -32,18 +32,20 @@ int		extract_param_value(char *code, unsigned char *board, int *index)
 	int size;
 	int value;
 
+	if (!*code)
+		return (0);
 	if (*code == 1)
 		size = 1;
 	else if (*code == DIRFOR)
 		size = DIRFOR;
 	else
 		size = 2;
-	value = board[++(*index)];
+	value = board[++(*index) % MEM_SIZE];
 	while (--size)
 	{
 		(*index)++;
 		value = value << 8;
-		value = value | board[(*index)];
+		value = value | board[(*index) % MEM_SIZE];
 	}
 	return (value);
 }
@@ -72,7 +74,7 @@ int		load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 	x = 0;
 	if (op.has_ocp)
 	{
-		ocp = board[++(process->next_index)];
+		ocp = board[++(process->next_index) % MEM_SIZE];
 		ocp_margin = 3;
 		while (ocp && ++x <= 3)
 		{

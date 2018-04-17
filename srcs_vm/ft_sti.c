@@ -29,11 +29,17 @@ void	ft_sti(t_param *param, t_arena *arena, t_process *process)
 			ft_printf("P %4d | sti r%d ", process->nbr, param->value);
 		param = param->next;
 		if (!validate_reg_nbr(param))
+		{
+			//ft_printf("FUCK YOU !!!!!!!!!!!!!!!!!! (adr = %d)\n", arena->cycles);
 			return ;
+		}
 		value2 = get_param_value(param, process, arena, 1);
 		param = param->next;
 		if (!validate_reg_nbr(param))
+		{
+			//ft_printf("FUCK YOU !!!!!!!!!!!!!!!!!! (adr = %d)\n", arena->cycles);
 			return ;
+		}
 		value3 = get_param_value(param, process, arena, 1);
 		write_tab(value1, arena, process->index + ((value2 + value3) % IDX_MOD), 4);
 		if (arena->aff == NCURSE)
