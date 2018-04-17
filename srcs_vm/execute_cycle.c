@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/13 16:37:34 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/17 15:41:56 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int is_valide_param(t_process *process, t_op *op, int nbr_param)
 
 	if (process->opcode == 0)
 		return (1);
-	if (process->opcode < 0 || process->opcode > 16 || op[process->opcode].nbr_param != nbr_param)
+	if (process->opcode < 0 || process->opcode > 16 || op[process->opcode].nbr_param > nbr_param)
 		return (0);
 	param = process->param;
 	i = 0;
@@ -54,7 +54,8 @@ void	execute_process(t_process *process, t_arena *arena)
 	if (process->waitting == -1)
 	{
 		process->opcode = arena->board[process->index];
-		//ft_printf("LOAD : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
+		//if (process->nbr == 14)
+			//ft_printf("LOAD : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
 		if(process->opcode >= 0 && process->opcode <= 16)
 			((arena->f)[process->opcode])(process->param, arena, process);
 		else
@@ -72,7 +73,8 @@ void	execute_process(t_process *process, t_arena *arena)
 		if(is_valide_param(process, arena->op, nbr_param))
 		{
 			((arena->f)[process->opcode])(process->param, arena, process);
-			//ft_printf("EXECUTE : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
+			//if (process->nbr == 14)
+				//ft_printf("EXECUTE : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
 			process->index = get_valide_adr(process->next_index);
 		}
 		else
@@ -195,8 +197,8 @@ void	execute_vm(t_arena *arena)
 		execute_cycle(arena);
 		arena->cycles++;
 		arena->executed_cycles++;
-		// if (arena->cycles == 4576)
-		// 	exit(0);
+		//if (arena->cycles == 4553)
+		 	//exit(0);
 		//	exit(print_process_state(arena));
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
 			dump_tab(arena);

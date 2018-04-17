@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:47:55 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/16 20:41:47 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/16 20:57:05 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_zjmp(t_param *param, t_arena *arena, t_process *process)
 	{
 		value = get_param_value(param, process, arena, 0);
 		if (process->carry)
-			process->next_index = (process->index + value) % IDX_MOD;
+			process->next_index = process->index + (value % IDX_MOD);
 		if (arena->debug)
 			ft_printf("P %4d | zjmp %d %s\n", process->nbr, param->value % MEM_SIZE, ((process->carry) ? "OK" : "FAILED"));
 	}
