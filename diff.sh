@@ -1,6 +1,5 @@
 #!/bin/bash
 
-let "i = 0"
 let "i = $1"
 #echo "./corewar $2 $3 $4 $5 -dump $i > us"
 #echo "./ressources/corewar $2 $3 $4 $5 -d $i > zaz"
