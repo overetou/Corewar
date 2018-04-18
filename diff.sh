@@ -1,9 +1,9 @@
 #!/bin/bash
 
 let "i = 0"
-let "i = $2"
-./corewar $1 -dump $i > us
-./ressources/corewar $1 -d $i > zaz
+let "i = $1"
+./corewar $2 $3 $4 $5 -dump $i > us
+./ressources/corewar $2 $3 $4 $5 -d $i > zaz
 sed -i '' '1,2d' zaz
 sed -i '' '/0x1000 :/d' us
 echo $i
@@ -12,14 +12,14 @@ do
 	while [ -z "`diff --suppress-common-lines us zaz`" ]
 	do
 		let "i++"
-		./corewar $1 -dump $i > us
-		./ressources/corewar $1 -d $i > zaz
+		./corewar $2 $3 $4 $5 -dump $i > us
+		./ressources/corewar $2 $3 $4 $5 -d $i > zaz
 		sed -i '' '1,2d' zaz
 		sed -i '' '/0x1000 :/d' us
 		echo $i
 	done
-	./corewar $1 -dump $i > us
-	./ressources/corewar $1 -d $i > zaz
+	./corewar $2 $3 $4 $5 -dump $i > us
+	./ressources/corewar $2 $3 $4 $5 -d $i > zaz
 	sed -i '' '1,2d' zaz
 	sed -i '' '/0x1000 :/d' us
 done
