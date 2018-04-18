@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:53:59 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/11 18:42:56 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 16:40:34 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 	{
 		ocp = board[++(process->next_index) % MEM_SIZE];
 		ocp_margin = 3;
-		while (ocp && ++x <= 3)
+		while (ocp && ++x <= op.nbr_param)
 		{
 			param->code = extract_bin_code(ocp, ocp_margin, op.ind_option);
 			param->value = extract_param_value(&(param->code), board, &(process->next_index));

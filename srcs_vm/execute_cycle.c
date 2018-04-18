@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/17 15:41:56 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 16:42:22 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,10 @@ void	execute_process(t_process *process, t_arena *arena)
 	if (process->waitting == -1)
 	{
 		process->opcode = arena->board[process->index];
-		//if (process->nbr == 16)
+		//if (process->nbr == 17)
 		//	ft_printf("LOAD : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
 		if(process->opcode >= 0 && process->opcode <= 16)
-		{
-			process->nbr_param = load_params(process->param, arena->board, process, arena->op);
 			((arena->f)[process->opcode])(process->param, arena, process);
-		}
 		else
 		{
 			//ft_printf("Cycles %d : The function %d doesnt exist\n", arena->cycles, process->opcode);
@@ -70,10 +67,11 @@ void	execute_process(t_process *process, t_arena *arena)
 	}
 	else
 	{
+		process->nbr_param = load_params(process->param, arena->board, process, arena->op);
 		if(is_valide_param(process, arena->op, process->nbr_param))
 		{
 			((arena->f)[process->opcode])(process->param, arena, process);
-			//if (process->nbr == 10)
+			//if (process->nbr == 17)
 			//	ft_printf("EXECUTE : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
 		}
 		/*else
@@ -157,8 +155,8 @@ void	execute_cycle(t_arena *arena)
 	process = arena->process;
 	while (process)
 	{
-		  //if (arena->cycles == 4576)
-		  // 	ft_printf("adr = %d, op_code = %d\n", process->index, process->opcode);
+		//if (arena->cycles == 4576)
+		//	ft_printf("adr = %d, op_code = %d\n", process->index, process->opcode);
 		(process->waitting)--;
 		if (process->waitting < 1)
 			execute_process(process, arena);
@@ -197,7 +195,8 @@ void	execute_vm(t_arena *arena)
 		execute_cycle(arena);
 		arena->cycles++;
 		arena->executed_cycles++;
-		//if (arena->cycles == 4841)
+		//if (arena->cycles == 5500)
+		//	ft_printf("CYCLE %d\n", arena->cycles);
 		// 	exit(0);
 		//	exit(print_process_state(arena));
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
