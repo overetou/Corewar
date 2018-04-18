@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/18 18:33:07 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:42:41 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int is_valide_param(t_process *process, t_op *op, int nbr_param)
 
 void	execute_process(t_process *process, t_arena *arena)
 {
-	if (process->waitting == -1)
+	if (process->waitting < 0)
 	{
 		process->opcode = arena->board[process->index];
-		//if (process->nbr == 17)
+		//if (process->nbr == 29)
 		//	ft_printf("LOAD : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
 		if(process->opcode >= 0 && process->opcode <= 16)
 			((arena->f)[process->opcode])(process->param, arena, process);
@@ -64,7 +64,7 @@ void	execute_process(t_process *process, t_arena *arena)
 		if(is_valide_param(process, arena->op, process->nbr_param))
 		{
 			((arena->f)[process->opcode])(process->param, arena, process);
-			//if (process->nbr == 17)
+			//if (process->nbr == 29)
 			//	ft_printf("EXECUTE : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
 		}
 		/*else
@@ -75,8 +75,8 @@ void	execute_process(t_process *process, t_arena *arena)
 			//ft_printf("Cycles %d : The function %d is invalide with %d (%d) param\n", arena->cycles, process->opcode, nbr_param, arena->op[process->opcode].nbr_param);
 		}*/
 		process->index = get_valide_adr(process->next_index);
-		process->waitting = -1;
-		execute_process(process, arena);
+		//process->waitting = -1;
+		//execute_process(process, arena);
 		//ft_printf("after executed op : %d\n", process->opcode);
 	}
 	//sleep(1);
@@ -188,7 +188,7 @@ void	execute_vm(t_arena *arena)
 		execute_cycle(arena);
 		arena->cycles++;
 		arena->executed_cycles++;
-		//if (arena->cycles >= 4249 && arena->cycles <= 4251)
+		//if (arena->cycles >= 17553 && arena->cycles <= 17555)
 		//	ft_printf("CYCLE %d\n", arena->cycles);
 		// 	exit(0);
 		//	exit(print_process_state(arena));

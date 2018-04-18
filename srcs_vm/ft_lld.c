@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:42:00 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/16 20:16:38 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:37:25 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_lld(t_param *param, t_arena *arena, t_process *process)
 	int value;
 
 	if (process->waitting == -1)
+		process->waitting += 10;
+	else if (process->waitting < -1)
 		process->waitting = 10;
 	else
 	{

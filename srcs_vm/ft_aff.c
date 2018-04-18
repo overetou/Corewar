@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 18:55:18 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/12 16:19:04 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 20:01:30 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_aff(t_param *param, t_arena *arena, t_process *process)
 	unsigned int	value;
 
 	if (process->waitting == -1)
+		process->waitting += 2;
+	else if (process->waitting < -1)
 		process->waitting = 2;
 	else if (arena->aff ==  AFF)
 	{

@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:29:46 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/16 19:31:45 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:39:12 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_xor(t_param *param, t_arena *arena, t_process *process)
 	int value2;
 
 	if (process->waitting == -1)
+		process->waitting += 6;
+	else if (process->waitting < -1)
 		process->waitting = 6;
 	else
 	{

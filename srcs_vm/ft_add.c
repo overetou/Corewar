@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 13:58:33 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/16 19:58:50 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:34:51 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_add(t_param *param, t_arena *arena, t_process *process)
 	int value2;
 
 	if (process->waitting == -1)
+		process->waitting += 10;
+	else if (process->waitting < -1)
 		process->waitting = 10;
 	else
 	{

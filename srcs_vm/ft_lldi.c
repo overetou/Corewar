@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 18:06:50 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/16 20:25:45 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:37:45 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_lldi(t_param *param, t_arena *arena, t_process *process)
 	int value2;
 
 	if (process->waitting == -1)
+		process->waitting += 50;
+	else if (process->waitting < -1)
 		process->waitting = 50;
 	else
 	{

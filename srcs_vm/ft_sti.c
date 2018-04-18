@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 16:35:47 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/18 18:32:59 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:38:23 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ft_sti(t_param *param, t_arena *arena, t_process *process)
 	int value3;
 
 	if (process->waitting == -1)
+		process->waitting += 25;
+	else if (process->waitting < -1)
 		process->waitting = 25;
 	else
 	{

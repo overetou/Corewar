@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:03:50 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/16 20:00:52 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 20:02:23 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_sub(t_param *param, t_arena *arena, t_process *process)
 	int value2;
 
 	if (process->waitting == -1)
+		process->waitting += 10;
+	else if (process->waitting < -1)
 		process->waitting = 10;
 	else
 	{

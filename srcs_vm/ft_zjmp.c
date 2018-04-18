@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:47:55 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/16 20:57:05 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:39:28 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_zjmp(t_param *param, t_arena *arena, t_process *process)
 	int value;
 
 	if (process->waitting == -1)
+		process->waitting += 20;
+	else if (process->waitting < -1)
 		process->waitting = 20;
 	else
 	{

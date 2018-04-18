@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:23:09 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/18 18:01:35 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:30:58 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_process	*new_process(int player_nbr, int index)
 	process->carry = 0;
 	process->index = index;
 	process->next_index = index;
-	process->waitting = 0;
+	process->waitting = -1;
 	process->did_live = 0;
 	process->color = player_nbr;
 	process->param = create_three_params();
