@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/18 16:42:22 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 18:33:07 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,17 @@ int is_valide_param(t_process *process, t_op *op, int nbr_param)
 		return (0);
 	param = process->param;
 	i = 0;
-	return (1);
+	//return (1);
 	while (i < nbr_param)
 	{
-		if (param->code == REG_CODE && !HAS_REG_PERM(op[process->opcode].perm[i]))
-		{
-			//ft_printf("param %d dont have reg perm\n", i+1);
+		if (!param->code)
 			return (0);
-		}
+		else if (param->code == REG_CODE && !HAS_REG_PERM(op[process->opcode].perm[i]))
+			return (0);
 		else if (param->code == IND_CODE && !HAS_IND_PERM(op[process->opcode].perm[i]))
-		{
-			//ft_printf("param %d dont have ind perm\n", i+1);
 			return (0);
-		}
 		else if ((param->code == DIRTWO || param->code == DIRFOR) && !HAS_DIR_PERM(op[process->opcode].perm[i]))
-		{
-			//ft_printf("param %d dont have dir perm\n", i+1);
 			return (0);
-		}
 		i++;
 		param = param->next;
 	}
@@ -195,7 +188,7 @@ void	execute_vm(t_arena *arena)
 		execute_cycle(arena);
 		arena->cycles++;
 		arena->executed_cycles++;
-		//if (arena->cycles == 5500)
+		//if (arena->cycles >= 4249 && arena->cycles <= 4251)
 		//	ft_printf("CYCLE %d\n", arena->cycles);
 		// 	exit(0);
 		//	exit(print_process_state(arena));
