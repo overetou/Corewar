@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 19:00:16 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/16 19:15:38 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 18:01:51 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	fill_players(t_arena *arena)
 		check_numbers(fd, player->file_size);
 		adr = (MEM_SIZE / arena->number_of_players) * (arena->number_of_players - i);
 		write_player(fd, arena, adr, player->file_size);
-		add_process(&(arena->process), new_process(player->nbr, adr));
+		push_process(&(arena->process), new_process(player->nbr, adr));
 		arena->process->nbr = ++arena->nbr_process;
 		i++;
 		player = player->next;

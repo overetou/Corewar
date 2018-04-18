@@ -6,11 +6,25 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:23:09 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/16 19:04:37 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 18:01:35 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+void		push_process(t_process **process, t_process *new_process)
+{
+	t_process *temp;
+	if (!*process)
+		*process = new_process;
+	else
+	{
+		temp = *process;
+		while (temp->next)
+			temp = temp->next;
+		temp->next = new_process;
+	}
+}
 
 void		add_process(t_process **process, t_process *new_process)
 {

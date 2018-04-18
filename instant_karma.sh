@@ -1,9 +1,9 @@
 #!/bin/bash
 
-./corewar $1 -debug > us
-./ressources/corewar $1 -v 4 > zaz
-sed -i '' '1,2d' zaz
-sed -i '' '/0x1000 :/d' us
+./corewar $1 $2 $3 $4 -debug > us
+./ressources/corewar $1 $2 $3 $4 -v 4 > zaz
+sed -i '' '1d' zaz
+sed -i '' '/\*/d' zaz
 if [ -z "`diff --suppress-common-lines us zaz`" ]
 then
     echo "No difference !"
