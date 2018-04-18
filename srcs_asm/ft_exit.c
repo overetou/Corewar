@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 13:26:07 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/12 19:16:25 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/18 17:04:34 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_error(t_champ *champ, char *message)
 			--end;
 		column = champ->i - end;
 	}
-	ft_printf("\n%s\n", ft_strsub(champ->file, 0, champ->i));
+//	ft_printf("\n%s\n", ft_strsub(champ->file, 0, champ->i));
 	ft_printf("Syntax error at line ");
 	ft_printf("%d, column %d: \"%s\"\n", line, column, message);
 	exit(0);

@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:58:53 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/12 18:50:37 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/18 18:10:37 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		get_cmd_size(t_cmd *cmd)
 	t_param	*digger;
 
 	count = 1;
+	if (cmd == NULL)
+		return (1);
 	digger = cmd->param;
 	if (cmd->op->has_ocp)
 		count++;
@@ -48,8 +50,15 @@ void	print_label(t_cmd *current, t_param *p, t_label *lab, int fd)
 	int		count;
 	int		sign;
 
+	count = 0;
 	lab = find_label(lab, p->label);
-	if (lab->cmd->index > current->index)
+	if (lab->cmd == NULL)
+	{
+		digger = current;
+		floor = lab->cmd;
+		sign = 1;
+	}
+	if (lab->cmd && (lab->cmd->index > current->index))
 	{
 		digger = current;
 		floor = lab->cmd;
@@ -61,8 +70,9 @@ void	print_label(t_cmd *current, t_param *p, t_label *lab, int fd)
 		floor = current;
 		sign = -1;
 	}
-	count = 0;
-	while (digger != floor)
+	if (digger == NULL)
+		count += get_cmd_size(digger) * sign;
+	while (digger && digger != floor)
 	{
 		count += get_cmd_size(digger) * sign;
 		digger = digger->next;

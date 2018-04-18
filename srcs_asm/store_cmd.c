@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:11:29 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/12 19:26:10 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/18 18:17:14 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	parse_param(t_cmd *cmd, t_champ *champ)
 	len2 = ft_strcspn(&champ->file[champ->i], "\n");
 	if (len2 < len)
 		len = len2;
-	len2 = ft_charcspn(&champ->file[champ->i], COMMENT_CHAR);
+	len2 = ft_strcspn(&champ->file[champ->i], ";#");
+//	len2 = ft_charcspn(&champ->file[champ->i], COMMENT_CHAR);
 	if (len2 < len)
 		len = len2;
 	tmp = ft_strsub(champ->file, champ->i, len);
@@ -106,7 +107,7 @@ t_cmd	*new_cmd(t_op *op, t_champ *champ, int index)
 	cmd->index = index;
 	cmd->next = NULL;
 	cmd->param = NULL;
-	while (champ->file[champ->i] && !ft_strchr("#\n", champ->file[champ->i]))
+	while (champ->file[champ->i] && !ft_strchr("#;\n", champ->file[champ->i]))
 		parse_param(cmd, champ);
 	valid_params(cmd->param, op, champ);
 	if (champ->label && !champ->label->cmd)
