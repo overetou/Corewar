@@ -23,20 +23,15 @@ void	ft_ldi(t_param *param, t_arena *arena, t_process *process)
 		process->waitting = 25;
 	else
 	{
-		if (!validate_reg_nbr(param))
+		if (!validate_all_reg_nbr(param))
 			return ;
 		value1 = get_param_value(param, process, arena, 1);
 		param = param->next;
-		if (!validate_reg_nbr(param))
-			return ;
 		value2 = get_param_value(param, process, arena, 1);
 		param = param->next;
-		if (validate_reg_nbr(param))
-		{
-			process->reg[param->value - 1] =
-				get_adr_value(arena, process->index +
-				((value1 + value2) % IDX_MOD), REG_SIZE);
-		}
+		process->reg[param->value - 1] =
+			get_adr_value(arena, process->index +
+			((value1 + value2) % IDX_MOD), REG_SIZE);
 		if (arena->debug)
 			ft_printf("P %4d | ldi %d %d r%d\n       | -> load from %d + %d = %d (with pc and mod %d)\n", process->nbr, value1, value2, param->value, value1, value2, value1 + value2, process->index + ((value1 + value2) % IDX_MOD));
 	}

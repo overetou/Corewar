@@ -44,7 +44,7 @@ void	execute_process(t_process *process, t_arena *arena)
 {
 	if (process->waitting < 0)
 	{
-		process->opcode = arena->board[process->index];
+		process->opcode = arena->board[get_valide_adr(process->index)];
 		//if (process->nbr == 29)
 		//	ft_printf("LOAD : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
 		if(process->opcode >= 0 && process->opcode <= 16)

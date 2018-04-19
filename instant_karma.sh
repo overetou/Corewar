@@ -9,5 +9,8 @@ then
     echo "No difference !"
 else
     diff zaz us -y > dif_file
+    egrep 'lld' -m 1 -n dif_file
+    egrep ' [><]' -m 1 -n dif_file
+    egrep '[|].*[|].*[|]' -m 1 -n dif_file
     echo "There is a diff."
 fi

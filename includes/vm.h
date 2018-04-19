@@ -127,5 +127,6 @@ char		*get_winner(t_player *player, int winner);
 void		execute_process(t_process *process, t_arena *arena);
 int			get_valide_adr(int adr);
 void		push_process(t_process **process, t_process *new_process);
+int			validate_all_reg_nbr(t_param *param);
 
 #endif

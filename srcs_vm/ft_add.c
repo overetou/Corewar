@@ -24,24 +24,19 @@ void	ft_add(t_param *param, t_arena *arena, t_process *process)
 	else
 	{
 		process->carry = 0;
-		if (!validate_reg_nbr(param))
+		if (!validate_all_reg_nbr(param))
 			return ;
-		value1 = get_param_value(param, process, arena, 0);
+		value1 = get_param_value(param, process, arena, 1);
 		if (arena->debug)
 			ft_printf("P %4d | add r%d ", process->nbr, param->value);
 		param = param->next;
-		if (!validate_reg_nbr(param))
-			return ;
-		value2 = get_param_value(param, process, arena, 0);
+		value2 = get_param_value(param, process, arena, 1);
 		if (arena->debug)
 			ft_printf("r%d ", param->value);
 		param = param->next;
-		if (validate_reg_nbr(param))
-		{
-			process->reg[param->value - 1] = value1 + value2;
-			if (!process->reg[param->value - 1])
-				process->carry = 1;
-		}
+		process->reg[param->value - 1] = value1 + value2;
+		if (!process->reg[param->value - 1])
+			process->carry = 1;
 		if (arena->debug)
 			ft_printf("r%d\n", param->value);
 	}

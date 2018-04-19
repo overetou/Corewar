@@ -34,9 +34,9 @@ void	ft_aff(t_param *param, t_arena *arena, t_process *process)
 		process->waitting += 2;
 	else if (process->waitting < -1)
 		process->waitting = 2;
-	else if (arena->aff ==  AFF)
+	else if (arena->aff == AFF)
 	{
-		if (!validate_reg_nbr(param))
+		if (!validate_all_reg_nbr(param))
 			return ;
 		value = get_param_value(param, process, arena, 1);
 		print_aff(value);

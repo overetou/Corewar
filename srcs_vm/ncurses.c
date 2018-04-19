@@ -61,13 +61,12 @@ void		refresh_arena(t_arena *arena, int adr, int len, unsigned char color)
 
 	x = (adr + len - 1) * 3;
 	y = x / 192;
-	adr = get_valide_adr(adr);
 	if (len)
 	{
 		refresh_arena(arena, adr, --len, color);
 		if (color && has_colors() != FALSE)
 			attron(COLOR_PAIR(color));
-		mvprintw(y, x % 192, "%.2x ", arena->board[adr + len]);
+		mvprintw(y, x % 192, "%.2x ", arena->board[get_valide_adr(adr + len)]);
 		refresh();
 		if (color && has_colors() != FALSE)
 			attroff(COLOR_PAIR(color));

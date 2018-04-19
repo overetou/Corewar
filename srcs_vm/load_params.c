@@ -37,15 +37,15 @@ int		extract_param_value(char *code, unsigned char *board, int *index)
 	if (*code == 1)
 		size = 1;
 	else if (*code == DIRFOR)
-		size = DIRFOR;
+		size = 4;
 	else
 		size = 2;
-	value = board[++(*index) % MEM_SIZE];
+	value = board[get_valide_adr(++(*index))];
 	while (--size)
 	{
 		(*index)++;
 		value = value << 8;
-		value = value | board[(*index) % MEM_SIZE];
+		value = value | board[get_valide_adr((*index))];
 	}
 	return (value);
 }
@@ -74,7 +74,7 @@ int		load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 	x = 0;
 	if (op.has_ocp)
 	{
-		ocp = board[++(process->next_index) % MEM_SIZE];
+		ocp = board[get_valide_adr(++(process->next_index))];
 		ocp_margin = 3;
 		while (ocp && ++x <= op.nbr_param)
 		{
@@ -89,6 +89,13 @@ int		load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 		x = 1;
 		param->code = op.hardcode;
 		param->value = extract_param_value(&(param->code), board, &(process->next_index));
+		param = param->next;
+	}
+	while (param)
+	{
+		param->code = 0;
+		param->value = 0;
+		param = param->next;
 	}
 	(process->next_index)++;
 	return (x);

@@ -19,6 +19,17 @@ int		validate_reg_nbr(t_param *param)
 	return (1);
 }
 
+int		validate_all_reg_nbr(t_param *param)
+{
+	while (param)
+	{
+		if (param->code == REG_CODE && (param->value < 1 || param->value > REG_NUMBER))
+			return (0);
+		param = param->next;
+	}
+	return (1);
+}
+
 int		get_adr_value(t_arena *arena, int index, int nbr_oct)
 {
 	int value;
@@ -26,11 +37,10 @@ int		get_adr_value(t_arena *arena, int index, int nbr_oct)
 
 	value = 0;
 	i = 0;
-	index = get_valide_adr(index);
-	while ((index + i) < MEM_SIZE && i < nbr_oct)
+	while (i < nbr_oct)
 	{
 		value = value << 8;
-		value = value | arena->board[index + i];
+		value = value | arena->board[get_valide_adr(index + i)];
 		i++;
 	}
 	return (value);

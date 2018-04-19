@@ -26,11 +26,10 @@ void	write_tab(unsigned int to_write, t_arena *arena, int adr, int len)
 {
     int c;
 
-	adr = get_valide_adr(adr);
 	if (len)
     {
         write_tab((to_write / 256), arena, adr, --len);
         c = to_write % 256;
-		arena->board[(adr + len) % MEM_SIZE] = c;
+		arena->board[get_valide_adr(adr + len)] = c;
     }
 }

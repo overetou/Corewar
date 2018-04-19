@@ -28,7 +28,7 @@ void	ft_lfork(t_param *param, t_arena *arena, t_process *process)
 		arena->process->nbr = ++arena->nbr_process;
 		arena->process->waitting = 0;
 		if (arena->debug)
-			ft_printf("P %4d | lfork %d (%d)\n", process->nbr, param->value % MEM_SIZE, arena->process->index);
+			ft_printf("P %4d | lfork %d (%d)\n", process->nbr, param->value % MEM_SIZE, process->index + value);
 		//execute_process(arena->process, arena);
 	}
 }
