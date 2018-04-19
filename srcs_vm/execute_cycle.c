@@ -129,7 +129,10 @@ void	do_processes_checks(t_arena *arena, int	*no_nbr_live, int *ctd)
 	if (!arena->process)
 		exit(ft_printf("And the winner is... %s!\n", get_winner(arena->players, arena->winner)));
 	if ((arena->nbr_live) >= NBR_LIVE)
+	{
 		*ctd -= CYCLE_DELTA;
+		*no_nbr_live = 0;
+	}
 	else
 		(*no_nbr_live)++;
 	if (*no_nbr_live == MAX_CHECKS)
