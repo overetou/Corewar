@@ -34,7 +34,7 @@ char	*get_name(int fd)
 
 int		get_file_size(int fd)
 {
-	char	str_size[4];
+	unsigned char	str_size[4];
 	int		file_size;
 	int		size;
 
@@ -73,22 +73,18 @@ void	write_player(int fd, t_arena *arena, int adr, int file_size)
 	read(fd, (arena->board) + adr, file_size);
 }
 
-void	check_numbers(int fd, int file_size)
+void	check_numbers(int fd, unsigned int file_size)
 {
-	int		count;
-	char	buff[50];
-	int		witness;
+	unsigned int		count;
+	char				buff[50];
+	unsigned int		witness;
 
 	count = 0;
 	lseek(fd, 4, SEEK_CUR);
 	while ((witness = read(fd, buff, 50)))
-	{
 		count += witness;
-		if (witness < 0)
-			exit(ft_printf("ERROR ON READING FILE\n"));
-	}
 	if (count != file_size)
-		exit(ft_printf("ERROR : FILE SIZE DOES NOT MATCH\n"));
+		exit(ft_printf("ERROR : FILE SIZE DOES NOT MATCH, count = %u, file_size = %u\n", count, file_size));
 }
 
 void	fill_players(t_arena *arena)
