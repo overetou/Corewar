@@ -37,8 +37,8 @@ void	ft_st(t_param *param, t_arena *arena, t_process *process)
 			write_tab(value1, arena, process->index + (value2 % IDX_MOD), 4);
 			if (arena->aff == NCURSE)
 				refresh_arena(arena, process->index + (value2 % IDX_MOD), 4, process->color);
-			if (arena->debug)
-				ft_printf("%d\n", param->value);
 		}
+		if (arena->debug)
+			ft_printf("%d\n", param->value);
 	}
 }

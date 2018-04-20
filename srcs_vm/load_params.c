@@ -83,6 +83,8 @@ int		load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 			ocp = cut_ocp(ocp, param->code, ocp_margin--);
 			param = param->next;
 		}
+		if (ocp)
+			x--;
 	}
 	else if ((process->opcode))
 	{

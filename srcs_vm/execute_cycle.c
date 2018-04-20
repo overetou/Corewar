@@ -45,8 +45,8 @@ void	execute_process(t_process *process, t_arena *arena)
 	if (process->waitting < 0)
 	{
 		process->opcode = arena->board[get_valide_adr(process->index)];
-		//if (process->nbr == 17)
-		//	ft_printf("LOAD : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
+		//if (process->nbr == 926)
+		//	ft_printf("LOAD : cycles %d, ex_cycle = %d => op_code %d (adr %d)\n", arena->cycles, arena->executed_cycles, process->opcode, process->index);
 		if(process->opcode >= 0 && process->opcode <= 16)
 			((arena->f)[process->opcode])(process->param, arena, process);
 		else
@@ -64,7 +64,7 @@ void	execute_process(t_process *process, t_arena *arena)
 		if(is_valide_param(process, arena->op, process->nbr_param))
 		{
 			((arena->f)[process->opcode])(process->param, arena, process);
-			//if (process->nbr == 17)
+			//if (process->nbr == 926)
 			//	ft_printf("EXECUTE : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
 		}
 		/*else
