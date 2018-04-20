@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 18:06:50 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/18 19:37:45 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/20 16:49:28 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_lldi(t_param *param, t_arena *arena, t_process *process)
 		process->waitting = 50;
 	else
 	{
-		process->carry = 0;
 		if (!validate_all_reg_nbr(param))
 			return ;
 		value1 = get_param_value(param, process, arena, 0);
@@ -32,6 +31,7 @@ void	ft_lldi(t_param *param, t_arena *arena, t_process *process)
 		param = param->next;
 		process->reg[param->value - 1] =
 			get_adr_value(arena, process->index + value1 + value2, REG_SIZE);
+			process->carry = 0;
 		if (!process->reg[param->value - 1])
 			process->carry = 1;
 		if (arena->debug)

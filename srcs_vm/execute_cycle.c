@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/18 19:42:41 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/20 18:17:36 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	execute_process(t_process *process, t_arena *arena)
 	if (process->waitting < 0)
 	{
 		process->opcode = arena->board[get_valide_adr(process->index)];
-		//if (process->nbr == 29)
+		//if (process->nbr == 17)
 		//	ft_printf("LOAD : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
 		if(process->opcode >= 0 && process->opcode <= 16)
 			((arena->f)[process->opcode])(process->param, arena, process);
@@ -64,7 +64,7 @@ void	execute_process(t_process *process, t_arena *arena)
 		if(is_valide_param(process, arena->op, process->nbr_param))
 		{
 			((arena->f)[process->opcode])(process->param, arena, process);
-			//if (process->nbr == 29)
+			//if (process->nbr == 17)
 			//	ft_printf("EXECUTE : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
 		}
 		/*else
@@ -94,6 +94,8 @@ void	kill_unlively_processes(t_arena *arena)
 		{
 			if (!(process->did_live))
 			{
+				//if (process->nbr == 17)
+				//	ft_printf("PROCESS %d WAS KILL\n", process->nbr);
 				arena->process = process->next;
 				free(process);
 				process = arena->process;
@@ -109,6 +111,8 @@ void	kill_unlively_processes(t_arena *arena)
 		{
 			if (!(process->did_live))
 			{
+				//if (process->nbr == 17)
+				//	ft_printf("PROCESS %d WAS KILL\n", process->nbr);
 				back->next = process->next;
 				free(process);
 				process = back->next;
@@ -186,11 +190,14 @@ void	execute_vm(t_arena *arena)
 	}
 	while (ctd > 0)
 	{
+		execute_cycle(arena);
 		if ((arena->executed_cycles) == ctd)
 			do_processes_checks(arena, &no_nbr_live, &ctd);
-		execute_cycle(arena);
 		arena->cycles++;
 		arena->executed_cycles++;
+		//if (arena->cycles == 21000)
+		//	exit(0);
+		//ft_printf("CYCLES %d, CTD %d\n", arena->cycles, ctd);
 		//if (arena->cycles >= 17553 && arena->cycles <= 17555)
 		//	ft_printf("CYCLE %d\n", arena->cycles);
 		// 	exit(0);
