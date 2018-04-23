@@ -128,5 +128,8 @@ void		execute_process(t_process *process, t_arena *arena);
 int			get_valide_adr(int adr);
 void		push_process(t_process **process, t_process *new_process);
 int			validate_all_reg_nbr(t_param *param);
+void		ft_error(char *message, t_arena *arena);
+void		ft_usage(char *path, t_arena *arena);
+void	free_arena(t_arena *arena);
 
 #endif

@@ -16,6 +16,8 @@ int				ft_str_is_numeric(char *str)
 {
 	int		i;
 
+	if (!str)
+		return (0);
 	i = -1;
 	if (str[0] == '-')
 		++i;

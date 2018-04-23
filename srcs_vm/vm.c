@@ -56,6 +56,10 @@ t_player	*add_player(t_player *player, char *file_name, char	*player_number)
 
 	new = (t_player*)malloc(sizeof(t_player));
 	new->file_name = file_name;
+	new->name = NULL;
+	new->comment = NULL;
+	new->last_live = 0;
+	new->file_size = 0;
 	new->next = player;
 	if (*player_number < 0)
 		new->nbr = find_lowest_player_number(player) - 1;
@@ -86,7 +90,7 @@ void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 		{
 			arena->aff = DUMP;
 			if (!ft_str_is_numeric(argv[++i]) || (arena->end_cycle = ft_atoi(argv[i])) < 0)
-				exit(ft_printf("ERROR check_arg_create_players 2\n"));
+				ft_error("No dump end cycle detected", arena);
 		}
 		else if (!ft_strcmp(argv[i], "-debug"))
 			arena->debug = 1;
@@ -127,5 +131,6 @@ int			main(int argc, char **argv)
 	fill_players(arena);
 	execute_vm(arena);
 	ft_printf("And the winner is... %s!\n", get_winner(arena->players, arena->winner));
+	free_arena(arena);
 	return (0);
 }

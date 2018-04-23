@@ -108,6 +108,7 @@ t_arena	*new_arena()
 	if (!(arena = (t_arena*)malloc(sizeof(t_arena))))
 		exit(ft_printf("ERROR MALLOC ARENA\n"));
 	arena->board = (unsigned char*)malloc(sizeof(unsigned char) * MEM_SIZE);
+	bzero(arena->board, MEM_SIZE);
 	arena->cycles = 0;
 	arena->debug = 0;
 	arena->executed_cycles = 0;
@@ -118,6 +119,7 @@ t_arena	*new_arena()
 	arena->end_cycle = 0;
 	arena->number_of_players = 0;
 	arena->nbr_process = 0;
+	arena->nbr_live = 0;
 	arena->process = NULL;
 	arena->players = NULL;
 	return (arena);

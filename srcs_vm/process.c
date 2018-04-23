@@ -68,12 +68,16 @@ t_process	*dup_process(t_process *old_process)
 t_process	*new_process(int player_nbr, int index)
 {
 	t_process	*process;
+	int			i;
 
 	if (!(process = (t_process*)malloc(sizeof(t_process))))
 		exit(ft_printf("ERROR MALLOC PROCESS\n"));
+	i = 0;
 	process->nbr = 1;
 	process->opcode = 0;
 	process->reg[0] = player_nbr;
+	while (++i < REG_NUMBER)
+		process->reg[i] = 0;
 	process->carry = 0;
 	process->index = index;
 	process->next_index = index;
