@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 15:26:51 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/23 19:19:25 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/23 21:03:55 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,15 @@ void		ft_init_color(t_player *players, t_arena *arena)
 	}
 }
 
-void waitting()
+void		waitting()
 {
-   unsigned int i = 0;
-   while (i < 500000)  { i++; }
+   unsigned int i;
+   unsigned int	max;
+
+   i = 0;
+   max = 500000;
+   while (i < max)
+	   i++;
 }
 
 void		refresh_status(t_arena *arena, int ctd, int finish)
