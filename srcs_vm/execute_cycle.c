@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/20 18:17:36 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/23 15:54:38 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ void	execute_vm(t_arena *arena)
 		if (arena->aff == DUMP && arena->end_cycle < arena->cycles)
 			dump_tab(arena);
 	}
+	execute_cycle(arena);
 	//ft_printf("END AFTER %lld cycles\n", arena->cycles);
 	if (arena->aff == NCURSE)
 	{
