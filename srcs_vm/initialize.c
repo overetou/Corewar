@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:32:48 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/16 19:11:17 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/23 16:55:48 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ t_arena	*new_arena()
 	arena->end_cycle = 0;
 	arena->number_of_players = 0;
 	arena->nbr_process = 0;
+	arena->process_cpt = 0;
 	arena->process = NULL;
 	arena->players = NULL;
 	return (arena);

@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 21:33:58 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/23 15:54:38 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/23 17:35:57 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	kill_unlively_processes(t_arena *arena)
 				arena->process = process->next;
 				free(process);
 				process = arena->process;
+				arena->process_cpt--;
 			}
 			else
 			{
@@ -116,6 +117,7 @@ void	kill_unlively_processes(t_arena *arena)
 				back->next = process->next;
 				free(process);
 				process = back->next;
+				arena->process_cpt--;
 			}
 			else
 			{
@@ -184,12 +186,14 @@ void	execute_vm(t_arena *arena)
 	no_nbr_live = 0;
 	if (arena->aff == NCURSE)
 	{
-		//initscr();
-		//ft_init_color(arena->players, arena);
+		initscr();
+		ft_init_color(arena->players, arena);
 		//getch();
 	}
 	while (ctd > 0)
 	{
+		if (arena->aff == NCURSE)
+			refresh_status(arena, ctd, 0);
 		execute_cycle(arena);
 		if ((arena->executed_cycles) == ctd)
 			do_processes_checks(arena, &no_nbr_live, &ctd);
@@ -209,7 +213,8 @@ void	execute_vm(t_arena *arena)
 	//ft_printf("END AFTER %lld cycles\n", arena->cycles);
 	if (arena->aff == NCURSE)
 	{
+		refresh_status(arena, ctd, 1);
 		getch();
-		//endwin();
+		endwin();
 	}
 }

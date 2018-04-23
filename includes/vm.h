@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/18 18:02:31 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/23 19:17:59 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct			s_arena
 	int					end_cycle;
 	int					number_of_players;
 	int					nbr_process;
+	int					process_cpt;
 }						t_arena;
 
 void		ft_void(t_param *param, t_arena *arena, t_process *process);
@@ -128,5 +129,6 @@ void		execute_process(t_process *process, t_arena *arena);
 int			get_valide_adr(int adr);
 void		push_process(t_process **process, t_process *new_process);
 int			validate_all_reg_nbr(t_param *param);
+void		refresh_status(t_arena *arena, int ctd, int finish);
 
 #endif
