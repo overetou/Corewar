@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 15:26:51 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/13 15:47:50 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/23 19:19:25 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void		dump_tab(t_arena *arena)
 			ft_printf("%#.4x : ", i);
 		}
 	}
+	free_arena(arena);
 	exit(0);
 }
 
@@ -54,11 +55,36 @@ void		ft_init_color(t_player *players, t_arena *arena)
 	}
 }
 
+void waitting()
+{
+   unsigned int i = 0;
+   while (i < 500000)  { i++; }
+}
+
+void		refresh_status(t_arena *arena, int ctd, int finish)
+{
+	int x;
+	int y;
+
+	x = 200;
+	y = 4;
+	mvprintw(y += 2, x, "Cycle : %d", arena->cycles);
+	mvprintw(y += 2, x, "Processes : %-10d", arena->process_cpt);
+	mvprintw(y += 2, x, "CYCLE_TO_DIE : %-4d", ctd);
+	mvprintw(y += 2, x, "CYCLE_DELTA : %d", CYCLE_DELTA);
+	mvprintw(y += 2, x, "NBR_LIVE : %-10d", arena->nbr_live);
+	if (finish)
+		mvprintw(y += 2, x, "And the winner is... %s!\n", get_winner(arena->players, arena->winner));
+	refresh();
+	waitting();
+}
+
 void		refresh_arena(t_arena *arena, int adr, int len, unsigned char color)
 {
 	int x;
 	int y;
 
+	adr = get_valide_adr(adr);
 	x = (adr + len - 1) * 3;
 	y = x / 192;
 	if (len)

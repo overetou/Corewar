@@ -20,7 +20,7 @@ void	free_param(t_param *param)
 	{
 		tmp_param = param;
 		param = param->next;
-		free(param);
+		free(tmp_param);
 	}
 }
 
@@ -47,7 +47,6 @@ void	free_arena(t_arena *arena)
 			ft_strdel(&(tmp_player->comment));
 		free(tmp_player);
 	}
-	ft_printf("salut !");
 	free(arena);
 }
 

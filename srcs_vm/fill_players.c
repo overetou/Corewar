@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 19:00:16 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/18 18:01:51 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/23 16:56:19 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	fill_players(t_arena *arena)
 		write_player(fd, arena, adr, player->file_size);
 		push_process(&(arena->process), new_process(player->nbr, adr));
 		arena->process->nbr = ++arena->nbr_process;
+		arena->process_cpt++;
 		i++;
 		player = player->next;
 	}
