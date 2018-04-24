@@ -46,12 +46,11 @@ t_op	set_op(int ind_option, int has_ocp, int hardcode, int *perm)
 	return (op);
 }
 
-int 	*create_perms_array(int v1, int v2, int v3)
+int 	*create_perms_array(int v1, int v2, int v3, t_op op)
 {
 	int *array;
 
-	if (!(array = (int*)malloc(sizeof(int) * 4)))
-		exit(ft_printf("ERROR MALLOC PERMS\n"));
+	array = op.perm;
 	array[0] = v1;
 	array[1] = v2;
 	array[2] = v3;
@@ -61,23 +60,23 @@ int 	*create_perms_array(int v1, int v2, int v3)
 
 void	hardcode_op(t_op *op)
 {
-	op[0] = set_op(DIRFOR, 0, 0, create_perms_array(0, 0, 0));
-	op[1] = set_op(DIRFOR, 0, DIRFOR, create_perms_array(T_DIR, 0, 0));
-	op[2] = set_op(DIRFOR, 1, 0, create_perms_array(T_DIR | T_IND, T_REG, 0));
-	op[3] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG, T_IND | T_REG, 0));
-	op[4] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG, T_REG, T_REG));
-	op[5] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG, T_REG, T_REG));
-	op[6] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG));
-	op[7] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG));
-	op[8] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG));
-	op[9] = set_op(DIRTWO, 0, DIR_CODE, create_perms_array(T_DIR, 0, 0));
-	op[10] = set_op(DIRTWO, 1, 0, create_perms_array(T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG));
-	op[11] = set_op(DIRTWO, 1, 0, create_perms_array(T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG));
-	op[12] = set_op(DIRTWO, 0, DIR_CODE, create_perms_array(T_DIR, 0, 0));
-	op[13] = set_op(DIRFOR, 1, 0, create_perms_array(T_DIR | T_IND, T_REG, 0));
-	op[14] = set_op(DIRTWO, 1, 0, create_perms_array(T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG));
-	op[15] = set_op(DIRTWO, 0, DIR_CODE, create_perms_array(T_DIR, 0, 0));
-	op[16] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG, 0, 0));
+	op[0] = set_op(DIRFOR, 0, 0, create_perms_array(0, 0, 0, op[0]));
+	op[1] = set_op(DIRFOR, 0, DIRFOR, create_perms_array(T_DIR, 0, 0, op[1]));
+	op[2] = set_op(DIRFOR, 1, 0, create_perms_array(T_DIR | T_IND, T_REG, 0, op[2]));
+	op[3] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG, T_IND | T_REG, 0, op[3]));
+	op[4] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG, T_REG, T_REG, op[4]));
+	op[5] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG, T_REG, T_REG, op[5]));
+	op[6] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG, op[6]));
+	op[7] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG, op[7]));
+	op[8] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG, op[8]));
+	op[9] = set_op(DIRTWO, 0, DIR_CODE, create_perms_array(T_DIR, 0, 0, op[9]));
+	op[10] = set_op(DIRTWO, 1, 0, create_perms_array(T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG, op[10]));
+	op[11] = set_op(DIRTWO, 1, 0, create_perms_array(T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG, op[11]));
+	op[12] = set_op(DIRTWO, 0, DIR_CODE, create_perms_array(T_DIR, 0, 0, op[12]));
+	op[13] = set_op(DIRFOR, 1, 0, create_perms_array(T_DIR | T_IND, T_REG, 0, op[13]));
+	op[14] = set_op(DIRTWO, 1, 0, create_perms_array(T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG, op[14]));
+	op[15] = set_op(DIRTWO, 0, DIR_CODE, create_perms_array(T_DIR, 0, 0, op[15]));
+	op[16] = set_op(DIRFOR, 1, 0, create_perms_array(T_REG, 0, 0, op[16]));
 }
 
 void hardcode_func(t_arena *arena)
@@ -108,6 +107,7 @@ t_arena	*new_arena()
 	if (!(arena = (t_arena*)malloc(sizeof(t_arena))))
 		exit(ft_printf("ERROR MALLOC ARENA\n"));
 	arena->board = (unsigned char*)malloc(sizeof(unsigned char) * MEM_SIZE);
+	bzero(arena->board, MEM_SIZE);
 	arena->cycles = 0;
 	arena->debug = 0;
 	arena->executed_cycles = 0;
@@ -118,6 +118,7 @@ t_arena	*new_arena()
 	arena->end_cycle = 0;
 	arena->number_of_players = 0;
 	arena->nbr_process = 0;
+	arena->nbr_live = 0;
 	arena->process_cpt = 0;
 	arena->process = NULL;
 	arena->players = NULL;

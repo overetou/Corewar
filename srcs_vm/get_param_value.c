@@ -48,8 +48,6 @@ int		get_adr_value(t_arena *arena, int index, int nbr_oct)
 
 int		get_param_value(t_param *param, t_process *process, t_arena *arena, int has_mod)
 {
-	int value;
-
 	if (param->code == IND_CODE || param->code == DIRTWO)
 	{
 		//ft_printf("TEST\n");
@@ -64,10 +62,9 @@ int		get_param_value(t_param *param, t_process *process, t_arena *arena, int has
 	else if (arena && param->code == IND_CODE)
 	{
 		if (has_mod)
-			value = get_adr_value(arena, process->index + (param->value % IDX_MOD), 4);
+			return (get_adr_value(arena, process->index + (param->value % IDX_MOD), 4));
 		else
-			value = get_adr_value(arena, process->index + param->value, 4);
-		return (value);
+			return (get_adr_value(arena, process->index + param->value, 4));
 	}
 	else
 		return (param->value);

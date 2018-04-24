@@ -97,6 +97,7 @@ void	kill_unlively_processes(t_arena *arena)
 				//if (process->nbr == 17)
 				//	ft_printf("PROCESS %d WAS KILL\n", process->nbr);
 				arena->process = process->next;
+				free_param(process->param);
 				free(process);
 				process = arena->process;
 				arena->process_cpt--;
@@ -115,6 +116,7 @@ void	kill_unlively_processes(t_arena *arena)
 				//if (process->nbr == 17)
 				//	ft_printf("PROCESS %d WAS KILL\n", process->nbr);
 				back->next = process->next;
+				free_param(process->param);
 				free(process);
 				process = back->next;
 				arena->process_cpt--;

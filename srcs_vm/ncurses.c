@@ -28,6 +28,7 @@ void		dump_tab(t_arena *arena)
 			ft_printf("%#.4x : ", i);
 		}
 	}
+	free_arena(arena);
 	exit(0);
 }
 

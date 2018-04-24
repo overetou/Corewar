@@ -45,6 +45,7 @@ fill_players.c\
 ft_add.c\
 ft_aff.c\
 ft_and.c\
+error.c\
 ft_fork.c\
 ft_ld.c\
 ft_ldi.c\
