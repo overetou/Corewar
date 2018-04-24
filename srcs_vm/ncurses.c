@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 15:26:51 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/24 17:08:43 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 20:03:22 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void		ft_init_color(t_player *players, t_arena *arena)
 		while (players)
 		{
 			init_pair((unsigned char)players->nbr, color++, COLOR_BLACK);
-			adr = (MEM_SIZE / arena->number_of_players) * (arena->number_of_players - i);
+			adr = (MEM_SIZE / arena->number_of_players) *
+				(arena->number_of_players - i);
 			refresh_arena(arena, adr, players->file_size, players->nbr);
 			players = players->next;
 			i++;
@@ -55,15 +56,15 @@ void		ft_init_color(t_player *players, t_arena *arena)
 	}
 }
 
-void		waitting()
+void		waitting(void)
 {
-   unsigned int i;
-   unsigned int	max;
+	unsigned int	i;
+	unsigned int	max;
 
-   i = 0;
-   max = 500000;
-   while (i < max)
-	   i++;
+	i = 0;
+	max = 500000;
+	while (i < max)
+		i++;
 }
 
 void		refresh_status(t_arena *arena, int ctd, int finish)
@@ -79,7 +80,8 @@ void		refresh_status(t_arena *arena, int ctd, int finish)
 	mvprintw(y += 2, x, "CYCLE_DELTA : %d", CYCLE_DELTA);
 	mvprintw(y += 2, x, "NBR_LIVE : %-10d", arena->nbr_live);
 	if (finish)
-		mvprintw(y += 2, x, "And the winner is... %s!\n", get_winner(arena->players, arena->winner));
+		mvprintw(y += 2, x, "And the winner is... %s!\n",
+			get_winner(arena->players, arena->winner));
 	refresh();
 	waitting();
 }

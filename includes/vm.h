@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/24 18:32:43 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:56:23 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,8 @@ void					free_arena(t_arena *arena);
 void					refresh_status(t_arena *arena, int ctd, int finish);
 void					free_param(t_param *param);
 void					set_reg_value(int reg, int value, t_process *process);
+void					hardcode_op(t_op *op);
+void					free_process(t_process *process);
+void					free_player(t_player *players);
 
 #endif

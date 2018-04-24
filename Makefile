@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/24 18:26:53 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/04/24 19:56:40 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ ft_file.c
 SRC_VM			= \
 execute_cycle.c\
 fill_players.c\
+free.c\
 ft_add.c\
 ft_aff.c\
 ft_and.c\
@@ -61,6 +62,7 @@ ft_void.c\
 ft_xor.c\
 ft_zjmp.c\
 get_param_value.c\
+hardcode_op.c\
 initialize.c\
 load_params.c\
 ncurses.c\

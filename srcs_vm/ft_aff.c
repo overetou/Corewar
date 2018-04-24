@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 18:55:18 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/18 20:01:30 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 20:06:44 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	print_aff(unsigned int to_write)
 {
 	int c;
 
-    if (to_write)
-    {
-        print_aff((to_write / 256));
-        c = to_write % 256;
+	if (to_write)
+	{
+		print_aff((to_write / 256));
+		c = to_write % 256;
 		ft_printf("%C", c);
-    }
+	}
 	else
 		ft_putstr("Aff: ");
 }

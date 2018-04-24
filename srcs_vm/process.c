@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:23:09 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/18 19:30:58 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:30:27 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void		push_process(t_process **process, t_process *new_process)
 {
-	t_process *temp;
+	t_process	*temp;
+
 	if (!*process)
 		*process = new_process;
 	else

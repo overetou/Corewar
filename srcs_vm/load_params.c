@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:53:59 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/18 16:40:34 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:35:21 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,29 @@ int		cut_ocp(int ocp, int code, int margin)
 	return (ocp ^ code);
 }
 
-int		load_params(t_param *param, unsigned char *board, t_process *process, t_op *ope)
+int		parse_ocp(t_param *param, unsigned char *board, t_process *process)
 {
 	int		ocp_margin;
 	int		ocp;
+
+	ocp = board[get_valide_adr(++(process->next_index))];
+	ocp_margin = 3;
+	while (ocp && ++x <= op.nbr_param)
+	{
+		param->code = extract_bin_code(ocp, ocp_margin, op.ind_option);
+		param->value = extract_param_value(&(param->code), board,
+			&(process->next_index));
+		ocp = cut_ocp(ocp, param->code, ocp_margin--);
+		param = param->next;
+	}
+	if (ocp)
+		x--;
+	return (x);
+}
+
+int		load_params(t_param *param, unsigned char *board, t_process *process,
+	t_op *ope)
+{
 	t_op	op;
 	int		x;
 
@@ -73,24 +92,13 @@ int		load_params(t_param *param, unsigned char *board, t_process *process, t_op 
 	op = ope[(process->opcode)];
 	x = 0;
 	if (op.has_ocp)
-	{
-		ocp = board[get_valide_adr(++(process->next_index))];
-		ocp_margin = 3;
-		while (ocp && ++x <= op.nbr_param)
-		{
-			param->code = extract_bin_code(ocp, ocp_margin, op.ind_option);
-			param->value = extract_param_value(&(param->code), board, &(process->next_index));
-			ocp = cut_ocp(ocp, param->code, ocp_margin--);
-			param = param->next;
-		}
-		if (ocp)
-			x--;
-	}
+		parse_ocp(param, board, process);
 	else if ((process->opcode))
 	{
 		x = 1;
 		param->code = op.hardcode;
-		param->value = extract_param_value(&(param->code), board, &(process->next_index));
+		param->value = extract_param_value(&(param->code), board,
+			&(process->next_index));
 		param = param->next;
 	}
 	while (param)
