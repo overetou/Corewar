@@ -6,13 +6,13 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 16:35:47 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/24 20:14:59 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 20:37:46 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	print_end_debug(int value2, int value3, int index)
+void	print_end_debug(int value2, int value3, int index, t_arena *arena)
 {
 	if (arena->debug)
 		ft_printf("%d %d\n       | -> store to %d + %d = %d (with pc \
@@ -44,6 +44,6 @@ void	ft_sti(t_param *param, t_arena *arena, t_process *process)
 		if (arena->aff == NCURSE)
 			refresh_arena(arena, process->index + ((value2 + value3) % IDX_MOD),
 				4, process->color);
-		print_end_debug(value2, value3, process->index);
+		print_end_debug(value2, value3, process->index, arena);
 	}
 }

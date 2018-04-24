@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 19:55:17 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/24 20:07:26 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 20:37:09 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ void	free_player(t_player *players)
 
 void	free_arena(t_arena *arena)
 {
-	t_process	*tmp_process;
-	t_player	*tmp_player;
-
 	if (!arena)
 		return ;
 	if (arena->board)

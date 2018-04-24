@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 13:26:07 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/24 20:07:41 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 20:43:51 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	ft_usage(char *path, t_arena *arena)
 	if (arena->aff == NCURSE)
 		endwin();
 	ft_printf("Usage: %s [-dump N -degug -v] [-n N] <champ.cor> <...>\n\
-		\t-dump N : Dumps memory after N cycles\n\
-		\t-debug : Print executed operations\n\
-		\t-v: Ncurses visual mode\n\
-		\t-n: Set champ number at N\n", path);
+\t-dump N : Dumps memory after N cycles\n\
+\t-debug : Print executed operations\n\
+\t-v: Ncurses visual mode\n\
+\t-n: Set champ number at N\n", path);
 	free_arena(arena);
 	exit(0);
 }
