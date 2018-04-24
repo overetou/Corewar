@@ -58,13 +58,8 @@ void	execute_process(t_process *process, t_arena *arena)
 			ft_error("Memory could not be allocated", arena);
 		process->nbr_param = load_params(process->param, arena->board, process, arena->op);
 		if(is_valide_param(process, arena->op, process->nbr_param))
-		{
 			((arena->f)[process->opcode])(process->param, arena, process);
-			rintf("EXECUTE : cycles %d => op_code %d (adr %d)\n", arena->cycles, process->opcode, process->index);
-		}
-		
 		process->index = get_valide_adr(process->next_index);
-		printf("after executed op : %d\n", process->opcode);
 	}
 }
 

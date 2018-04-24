@@ -22,7 +22,7 @@ void	ft_fork(t_param *param, t_arena *arena, t_process *process)
 		process->waitting = 800;
 	else
 	{
-		add_process(&(arena->process), dup_process(process));
+		add_process(&(arena->process), dup_process(process, arena));
 		value = get_param_value(param, process, arena, 0);
 		arena->process->index = get_valide_adr(process->index + (value % IDX_MOD));
 		arena->process->nbr = ++arena->nbr_process;
