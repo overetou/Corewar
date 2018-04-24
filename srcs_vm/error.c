@@ -29,7 +29,10 @@ void	free_arena(t_arena *arena)
 	t_process	*tmp_process;
 	t_player	*tmp_player;
 
-	free(arena->board);
+	if (!arena)
+		return ;
+	if (arena->board)
+		free(arena->board);
 	while (arena->process)
 	{
 		tmp_process = arena->process;
@@ -52,6 +55,8 @@ void	free_arena(t_arena *arena)
 
 void	ft_usage(char *path, t_arena *arena)
 {
+	if (arena->aff == NCURSE)
+		endwin();
 	ft_printf("Usage: %s [-dump N -degug -v] [-n N] <champ.cor> <...>\n\
 		\t-dump N : Dumps memory after N cycles\n\
 		\t-debug : Print executed operations\n\
@@ -63,6 +68,8 @@ void	ft_usage(char *path, t_arena *arena)
 
 void	ft_error(char *message, t_arena *arena)
 {
+	if (arena->aff == NCURSE)
+		endwin();
 	ft_printf("Error: %s\n", message);
 	free_arena(arena);
 	exit (0);

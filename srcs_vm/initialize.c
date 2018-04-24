@@ -16,11 +16,24 @@
 t_param	*create_three_params(void)
 {
 	t_param	*new;
+	t_param *old;
+	int		i;
 
-	new = (t_param*)malloc(sizeof(t_param));
-	new->next = (t_param*)malloc(sizeof(t_param));
-	(new->next)->next = (t_param*)malloc(sizeof(t_param));
-	((new->next)->next)->next = NULL;
+	old = NULL;
+	i = 0;
+	while (i != 3)
+	{
+		new = (t_param*)malloc(sizeof(t_param));
+		if (new == NULL)
+		{	
+			if (old)
+				free_param(old);
+			return (NULL);
+		}
+		new->next = old;
+		old = new;
+		i++;
+	}
 	return (new);
 }
 
@@ -106,7 +119,8 @@ t_arena	*new_arena()
 
 	if (!(arena = (t_arena*)malloc(sizeof(t_arena))))
 		exit(ft_printf("ERROR MALLOC ARENA\n"));
-	arena->board = (unsigned char*)malloc(sizeof(unsigned char) * MEM_SIZE);
+	if (!(arena->board = (unsigned char*)malloc(sizeof(unsigned char) * MEM_SIZE)))
+		ft_error("Memory could not be allocated.", arena);
 	bzero(arena->board, MEM_SIZE);
 	arena->cycles = 0;
 	arena->debug = 0;
