@@ -105,7 +105,7 @@ void	fill_players(t_arena *arena)
 		check_numbers(fd, player->file_size);
 		adr = (MEM_SIZE / arena->number_of_players) * (arena->number_of_players - i);
 		write_player(fd, arena, adr, player->file_size);
-		push_process(&(arena->process), new_process(player->nbr, adr));
+		push_process(&(arena->process), new_process(player->nbr, adr, arena));
 		arena->process->nbr = ++arena->nbr_process;
 		arena->process_cpt++;
 		i++;

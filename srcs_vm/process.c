@@ -38,13 +38,13 @@ void		add_process(t_process **process, t_process *new_process)
 	}
 }
 
-t_process	*dup_process(t_process *old_process)
+t_process	*dup_process(t_process *old_process, t_arena *arena)
 {
 	t_process	*process;
 	int			i;
 
 	if (!(process = (t_process*)malloc(sizeof(t_process))))
-		exit(ft_printf("ERROR MALLOC PROCESS\n"));
+		ft_error("Could not allocate a process.\n", arena);
 	i = 0;
 	while (i < REG_NUMBER)
 	{
@@ -65,13 +65,13 @@ t_process	*dup_process(t_process *old_process)
 	return (process);
 }
 
-t_process	*new_process(int player_nbr, int index)
+t_process	*new_process(int player_nbr, int index, t_arena *arena)
 {
 	t_process	*process;
 	int			i;
 
 	if (!(process = (t_process*)malloc(sizeof(t_process))))
-		exit(ft_printf("ERROR MALLOC PROCESS\n"));
+		ft_error("Could not allocate a process.\n", arena);
 	i = 0;
 	process->nbr = 1;
 	process->opcode = 0;

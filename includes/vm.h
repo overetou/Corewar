@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/24 18:25:41 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 18:32:43 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ int						load_params(t_param *param, unsigned char *board,
 							t_process *process, t_op *op);
 void					execute_cycle(t_arena *arena);
 t_arena					*new_arena(void);
-t_process				*new_process(int player_nbr, int index);
-t_process				*dup_process(t_process *old_process);
+t_process				*new_process(int player_nbr, int index, t_arena *arena);
+t_process				*dup_process(t_process *old_process, t_arena *arena);
 void					add_process(t_process **process, t_process *new_proc);
 void					dump_tab(t_arena *arena);
 void					ft_init_color(t_player *players, t_arena *arena);
