@@ -123,7 +123,9 @@ void	do_processes_checks(t_arena *arena, int	*no_nbr_live, int *ctd)
 			getch();
 			endwin();
 		}
-		exit(ft_printf("And the winner is... %s!\n", get_winner(arena->players, arena->winner)));
+		ft_printf("And the winner is... %s!\n", get_winner(arena->players, arena->winner));
+		free_arena(arena);
+		exit(0);
 	}
 	if ((arena->nbr_live) >= NBR_LIVE)
 	{

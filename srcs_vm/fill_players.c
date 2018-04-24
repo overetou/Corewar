@@ -26,6 +26,8 @@ char	*get_name(int fd)
 	char	*name;
 
 	name = ft_strnew(PROG_NAME_LENGTH);
+	if (name == NULL)
+		return (NULL);
 	lseek(fd, 4, SEEK_SET);
 	if (read(fd, name, PROG_NAME_LENGTH) < 0)
 		exit(ft_printf("ERROR GET NAME\n"));
@@ -56,6 +58,8 @@ char	*get_comment(int fd)
 	char	*comment;
 
 	comment = ft_strnew(COMMENT_LENGTH);
+	if (comment == NULL)
+		return (NULL);
 	lseek(fd, 0, PROG_NAME_LENGTH + 12);
 	if (read(fd, comment, COMMENT_LENGTH) < 0)
 		exit(ft_printf("ERROR SECURE COMMENT\n"));
@@ -102,6 +106,8 @@ void	fill_players(t_arena *arena)
 		player->name = get_name(fd);
 		player->file_size = get_file_size(fd);
 		player->comment = get_comment(fd);
+		if (player->name == NULL || player->comment == NULL)
+			ft_error("Could not allocate memory in players.\n", arena);
 		check_numbers(fd, player->file_size);
 		adr = (MEM_SIZE / arena->number_of_players) * (arena->number_of_players - i);
 		write_player(fd, arena, adr, player->file_size);

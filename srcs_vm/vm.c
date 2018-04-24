@@ -50,11 +50,13 @@ int			find_lowest_player_number(t_player *player)
 	return (lowest_number);
 }
 
-t_player	*add_player(t_player *player, char *file_name, char	*player_number)
+t_player	*add_player(t_player *player, char *file_name, char	*player_number, t_arena *arena)
 {
 	t_player	*new;
 
 	new = (t_player*)malloc(sizeof(t_player));
+	if (new == NULL)
+		ft_error("Could not allocate memory for a player.\n", arena);
 	new->file_name = file_name;
 	new->name = NULL;
 	new->comment = NULL;
@@ -105,7 +107,7 @@ void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 				i++;
 			}
 			ft_strendcmp(argv[i], ".cor");
-			arena->players = add_player(arena->players, argv[i], &player_number);
+			arena->players = add_player(arena->players, argv[i], &player_number, arena);
 			arena->number_of_players++;
 		}
 	}
