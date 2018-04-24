@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/24 19:56:40 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/04/24 20:36:30 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ ft_get.c\
 ft_file.c
 
 SRC_VM			= \
+add_player.c\
+check_arg_create_players.c\
 execute_cycle.c\
 fill_players.c\
 free.c\

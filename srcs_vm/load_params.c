@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:53:59 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/24 19:35:21 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 21:02:18 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,14 @@ int		cut_ocp(int ocp, int code, int margin)
 	return (ocp ^ code);
 }
 
-int		parse_ocp(t_param *param, unsigned char *board, t_process *process)
+int		parse_ocp(t_param *param, unsigned char *board, t_process *process,
+	t_op op)
 {
 	int		ocp_margin;
 	int		ocp;
+	int		x;
 
+	x = 0;
 	ocp = board[get_valide_adr(++(process->next_index))];
 	ocp_margin = 3;
 	while (ocp && ++x <= op.nbr_param)
@@ -79,6 +82,12 @@ int		parse_ocp(t_param *param, unsigned char *board, t_process *process)
 	}
 	if (ocp)
 		x--;
+	while (param)
+	{
+		param->code = 0;
+		param->value = 0;
+		param = param->next;
+	}
 	return (x);
 }
 
@@ -92,7 +101,7 @@ int		load_params(t_param *param, unsigned char *board, t_process *process,
 	op = ope[(process->opcode)];
 	x = 0;
 	if (op.has_ocp)
-		parse_ocp(param, board, process);
+		x = parse_ocp(param, board, process, op);
 	else if ((process->opcode))
 	{
 		x = 1;
@@ -100,12 +109,12 @@ int		load_params(t_param *param, unsigned char *board, t_process *process,
 		param->value = extract_param_value(&(param->code), board,
 			&(process->next_index));
 		param = param->next;
-	}
-	while (param)
-	{
-		param->code = 0;
-		param->value = 0;
-		param = param->next;
+		while (param)
+		{
+			param->code = 0;
+			param->value = 0;
+			param = param->next;
+		}
 	}
 	(process->next_index)++;
 	return (x);

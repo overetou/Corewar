@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/24 19:56:23 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 20:47:03 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,11 @@ void					set_reg_value(int reg, int value, t_process *process);
 void					hardcode_op(t_op *op);
 void					free_process(t_process *process);
 void					free_player(t_player *players);
+t_player				*add_player(t_player *player, char *file_name,
+							char *player_number, t_arena *arena);
+void					ft_strendcmp(const char *s1, const char *s2,
+							t_arena *arena);
+void					check_arg_create_players(int argc, char **argv,
+							t_arena *arena);
 
 #endif
