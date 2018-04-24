@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:53:59 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/24 20:40:20 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 21:02:18 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,12 @@ int		parse_ocp(t_param *param, unsigned char *board, t_process *process,
 	}
 	if (ocp)
 		x--;
+	while (param)
+	{
+		param->code = 0;
+		param->value = 0;
+		param = param->next;
+	}
 	return (x);
 }
 
@@ -103,12 +109,12 @@ int		load_params(t_param *param, unsigned char *board, t_process *process,
 		param->value = extract_param_value(&(param->code), board,
 			&(process->next_index));
 		param = param->next;
-	}
-	while (param)
-	{
-		param->code = 0;
-		param->value = 0;
-		param = param->next;
+		while (param)
+		{
+			param->code = 0;
+			param->value = 0;
+			param = param->next;
+		}
 	}
 	(process->next_index)++;
 	return (x);
