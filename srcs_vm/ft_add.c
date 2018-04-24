@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 13:58:33 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/20 16:47:49 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 17:40:54 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ void	ft_add(t_param *param, t_arena *arena, t_process *process)
 		if (arena->debug)
 			ft_printf("r%d ", param->value);
 		param = param->next;
-		process->reg[param->value - 1] = value1 + value2;
-		process->carry = 0;
-		if (!process->reg[param->value - 1])
-			process->carry = 1;
+		set_reg_value(param->value - 1, value1 + value2, process);
 		if (arena->debug)
 			ft_printf("r%d\n", param->value);
 	}

@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:44:00 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/23 16:56:31 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 17:45:24 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_lfork(t_param *param, t_arena *arena, t_process *process)
 		arena->process_cpt++;
 		arena->process->waitting = 0;
 		if (arena->debug)
-			ft_printf("P %4d | lfork %d (%d)\n", process->nbr, param->value, process->index + value);
-		//execute_process(arena->process, arena);
+			ft_printf("P %4d | lfork %d (%d)\n",
+				process->nbr, param->value, process->index + value);
 	}
 }

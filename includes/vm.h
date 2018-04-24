@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/23 19:17:59 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 18:25:41 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,49 +90,54 @@ typedef struct			s_arena
 	int					process_cpt;
 }						t_arena;
 
-void		ft_void(t_param *param, t_arena *arena, t_process *process);
-void		ft_live(t_param *param, t_arena *arena, t_process *process);
-void		ft_ld(t_param *param, t_arena *arena, t_process *process);
-void		ft_st(t_param *param, t_arena *arena, t_process *process);
-void		ft_add(t_param *param, t_arena *arena, t_process *process);
-void		ft_sub(t_param *param, t_arena *arena, t_process *process);
-void		ft_and(t_param *param, t_arena *arena, t_process *process);
-void		ft_or(t_param *param, t_arena *arena, t_process *process);
-void		ft_xor(t_param *param, t_arena *arena, t_process *process);
-void		ft_zjmp(t_param *param, t_arena *arena, t_process *process);
-void		ft_ldi(t_param *param, t_arena *arena, t_process *process);
-void		ft_sti(t_param *param, t_arena *arena, t_process *process);
-void		ft_fork(t_param *param, t_arena *arena, t_process *process);
-void		ft_lld(t_param *param, t_arena *arena, t_process *process);
-void		ft_lldi(t_param *param, t_arena *arena, t_process *process);
-void		ft_lfork(t_param *param, t_arena *arena, t_process *process);
-void		ft_aff(t_param *param, t_arena *arena, t_process *process);
+void					ft_void(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_live(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_ld(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_st(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_add(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_sub(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_and(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_or(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_xor(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_zjmp(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_ldi(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_sti(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_fork(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_lld(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_lldi(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_lfork(t_param *prm, t_arena *arena, t_process *proc);
+void					ft_aff(t_param *prm, t_arena *arena, t_process *proc);
 
-int			load_params(t_param *param, unsigned char *board, t_process *process, t_op *op);
-void		execute_cycle(t_arena *arena);
-t_arena		*new_arena(void);
-t_process	*new_process(int player_nbr, int index);
-t_process	*dup_process(t_process *old_process);
-void		add_process(t_process **process, t_process *new_process);
-void		dump_tab(t_arena *arena);
-void		ft_init_color(t_player *players, t_arena *arena);
-void		refresh_arena(t_arena *arena, int index, int len, unsigned char color);
-void		execute_vm(t_arena *arena);
-int			get_param_value(t_param *param, t_process *process, t_arena *arena, int has_mod);
-int			validate_reg_nbr(t_param *param);
-int			get_adr_value(t_arena *arena, int index, int nbr_oct);
-void		write_tab(unsigned int to_write, t_arena *arena, int adr, int len);
-t_param		*create_three_params(void);
-void		fill_players(t_arena *arena);
-char		*get_winner(t_player *player, int winner);
-void		execute_process(t_process *process, t_arena *arena);
-int			get_valide_adr(int adr);
-void		push_process(t_process **process, t_process *new_process);
-int			validate_all_reg_nbr(t_param *param);
-void		ft_error(char *message, t_arena *arena);
-void		ft_usage(char *path, t_arena *arena);
-void		free_arena(t_arena *arena);
-void		refresh_status(t_arena *arena, int ctd, int finish);
-void		free_param(t_param *param);
+int						load_params(t_param *param, unsigned char *board,
+							t_process *process, t_op *op);
+void					execute_cycle(t_arena *arena);
+t_arena					*new_arena(void);
+t_process				*new_process(int player_nbr, int index);
+t_process				*dup_process(t_process *old_process);
+void					add_process(t_process **process, t_process *new_proc);
+void					dump_tab(t_arena *arena);
+void					ft_init_color(t_player *players, t_arena *arena);
+void					refresh_arena(t_arena *arena, int index, int len,
+							unsigned char color);
+void					execute_vm(t_arena *arena);
+int						get_param_value(t_param *param, t_process *process,
+							t_arena *arena, int has_mod);
+int						validate_reg_nbr(t_param *param);
+int						get_adr_value(t_arena *arena, int index, int nbr_oct);
+void					write_tab(unsigned int to_write, t_arena *arena,
+							int adr, int len);
+t_param					*create_three_params(void);
+void					fill_players(t_arena *arena);
+char					*get_winner(t_player *player, int winner);
+void					execute_process(t_process *process, t_arena *arena);
+int						get_valide_adr(int adr);
+void					push_process(t_process **process, t_process *new_proc);
+int						validate_all_reg_nbr(t_param *param);
+void					ft_error(char *message, t_arena *arena);
+void					ft_usage(char *path, t_arena *arena);
+void					free_arena(t_arena *arena);
+void					refresh_status(t_arena *arena, int ctd, int finish);
+void					free_param(t_param *param);
+void					set_reg_value(int reg, int value, t_process *process);
 
 #endif

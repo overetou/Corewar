@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:42:00 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/20 16:49:16 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 17:47:33 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ void	ft_lld(t_param *param, t_arena *arena, t_process *process)
 			return ;
 		value = get_param_value(param, process, arena, 0);
 		param = param->next;
-		process->reg[param->value - 1] = value;
-		process->carry = 0;
-		if (!process->reg[param->value - 1])
-			process->carry = 1;
+		set_reg_value(param->value - 1, value, process);
 		if (arena->debug)
-			ft_printf("P %4d | lld %d r%d\n", process->nbr, value, param->value);
+			ft_printf("P %4d | lld %d r%d\n",
+				process->nbr, value, param->value);
 	}
 }
