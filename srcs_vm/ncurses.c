@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 15:26:51 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/23 21:03:55 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 17:08:43 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void		refresh_status(t_arena *arena, int ctd, int finish)
 	int x;
 	int y;
 
-	x = 200;
-	y = 4;
+	x = 195;
+	y = 0;
 	mvprintw(y += 2, x, "Cycle : %d", arena->cycles);
 	mvprintw(y += 2, x, "Processes : %-10d", arena->process_cpt);
 	mvprintw(y += 2, x, "CYCLE_TO_DIE : %-4d", ctd);
