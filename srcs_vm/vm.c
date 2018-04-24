@@ -12,21 +12,21 @@
 
 #include <vm.h>
 
-void	ft_strendcmp(const char *s1, const char *s2)
+void	ft_strendcmp(const char *s1, const char *s2, t_arena *arena)
 {
 	int	i;
 
 	i = ft_strlen(s1) - ft_strlen(s2);
 	if (ft_strcmp(s1 + i, s2))
-		exit(ft_printf("ERROR STRENDCMP\n"));
+		ft_error("File unvalid file name.\n", arena);
 }
 
-int		check_availability_player_number(t_player *player, char player_number)
+int		check_availability_player_number(t_player *player, char player_number, t_arena *arena)
 {
 	while(player)
 	{
 		if (player->nbr == player_number)
-			exit(ft_printf("ERROR check_availability_player_number\n"));
+			ft_error("check_availability_player_number\n", arena);
 		player = player->next;
 	}
 	return (player_number);
@@ -67,7 +67,7 @@ t_player	*add_player(t_player *player, char *file_name, char	*player_number, t_a
 		new->nbr = find_lowest_player_number(player) - 1;
 	else
 	{
-		new->nbr = check_availability_player_number(player, *player_number);
+		new->nbr = check_availability_player_number(player, *player_number, arena);
 		*player_number = -1;
 	}
 	return (new);
@@ -81,7 +81,7 @@ void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 	i = 0;
 	player_number = -1;
 	if (argc < 2)
-		exit(ft_printf("ERROR check_arg_create_players 1\n"));
+		ft_error("ERROR check_arg_create_players 1\n", arena);
 	while (argv[++i])
 	{
 		if (!ft_strcmp(argv[i], "-v"))
@@ -92,7 +92,7 @@ void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 		{
 			arena->aff = DUMP;
 			if (!ft_str_is_numeric(argv[++i]) || (arena->end_cycle = ft_atoi(argv[i])) < 0)
-				ft_error("No dump end cycle detected", arena);
+				ft_error("No dump end cycle detected\n", arena);
 		}
 		else if (!ft_strcmp(argv[i], "-debug"))
 			arena->debug = 1;
@@ -101,12 +101,12 @@ void		check_arg_create_players(int argc, char **argv, t_arena *arena)
 			if (!ft_strcmp(argv[i], "-n"))
 			{
 				if (argc <= i + 2)
-					exit(ft_printf("ERROR check_arg_create_players 3\n"));
+					ft_error("ERROR check_arg_create_players 3\n", arena);
 				if (!ft_str_is_numeric(argv[++i]) || (player_number = ft_atoi(argv[i])) <= 0)
-					exit(ft_printf("ERROR check_arg_create_players 4\n"));
+					ft_error("ERROR check_arg_create_players 4\n", arena);
 				i++;
 			}
-			ft_strendcmp(argv[i], ".cor");
+			ft_strendcmp(argv[i], ".cor", arena);
 			arena->players = add_player(arena->players, argv[i], &player_number, arena);
 			arena->number_of_players++;
 		}
