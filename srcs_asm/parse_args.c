@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 19:26:26 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/25 18:47:38 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/25 18:54:11 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	parse_label(t_champ *champ, int index, char *tmp)
 	if (find_label(champ, champ->label, tmp))
 	{
 		free(tmp);
-		ft_error(champ, "ERROR LABEL EXIST");
+		ft_error(champ, "Label already exists");
 	}
 	add_label(&champ->label, new_label(tmp, champ, index));
 	champ->i++;
@@ -45,7 +45,7 @@ void	parse_instruct(t_champ *champ, int *index)
 
 	len = ft_strspn(&champ->file[champ->i], LABEL_CHARS);
 	if (!(tmp = ft_strsub(champ->file, champ->i, len)))
-		ft_error(champ, "MALLOC FAILED");
+		ft_error(champ, "Memory could not be allocated");
 	champ->i += len;
 	if (champ->file[champ->i] == LABEL_CHAR)
 		parse_label(champ, *index, tmp);
@@ -57,7 +57,7 @@ void	parse_instruct(t_champ *champ, int *index)
 	else if (champ->file[champ->i])
 	{
 		free(tmp);
-		ft_error(champ, "OP UNEXIST");
+		ft_error(champ, "Unvalide operation");
 	}
 	ft_strdel(&tmp);
 }
