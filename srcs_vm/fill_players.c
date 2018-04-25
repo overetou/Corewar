@@ -29,7 +29,10 @@ char	*get_name(int fd)
 		return (NULL);
 	lseek(fd, 4, SEEK_SET);
 	if (read(fd, name, PROG_NAME_LENGTH) < 0)
-		exit(ft_printf("ERROR GET NAME\n"));
+	{
+		free(name);
+		name = NULL;
+	}
 	return (name);
 }
 
@@ -61,7 +64,10 @@ char	*get_comment(int fd)
 		return (NULL);
 	lseek(fd, 0, PROG_NAME_LENGTH + 12);
 	if (read(fd, comment, COMMENT_LENGTH) < 0)
-		exit(ft_printf("ERROR SECURE COMMENT\n"));
+	{
+		free(comment);
+		comment = NULL;
+	}
 	return (comment);
 }
 
@@ -76,7 +82,7 @@ void	write_player(int fd, t_arena *arena, int adr, int file_size)
 	read(fd, (arena->board) + adr, file_size);
 }
 
-void	check_numbers(int fd, unsigned int file_size)
+void	check_numbers(int fd, unsigned int file_size, t_arena *arena)
 {
 	unsigned int		count;
 	char				buff[50];
@@ -87,7 +93,7 @@ void	check_numbers(int fd, unsigned int file_size)
 	while ((witness = read(fd, buff, 50)))
 		count += witness;
 	if (count != file_size)
-		exit(ft_printf("ERROR : FILE SIZE DOES NOT MATCH, count = %u, file_size = %u\n", count, file_size));
+		ft_error("ERROR : FILE SIZE DOES NOT MATCH\n", arena);
 }
 
 void	fill_players(t_arena *arena)
@@ -109,7 +115,7 @@ void	fill_players(t_arena *arena)
 		player->comment = get_comment(fd);
 		if (player->name == NULL || player->comment == NULL || player->file_size == -1)
 			ft_error("Player generation failed.\n", arena);
-		check_numbers(fd, player->file_size);
+		check_numbers(fd, player->file_size, arena);
 		adr = (MEM_SIZE / arena->number_of_players) * (arena->number_of_players - i);
 		write_player(fd, arena, adr, player->file_size);
 		push_process(&(arena->process), new_process(player->nbr, adr, arena));

@@ -62,7 +62,7 @@ t_arena		*new_arena(void)
 	t_arena	*arena;
 
 	if (!(arena = (t_arena*)malloc(sizeof(t_arena))))
-		exit(ft_printf("ERROR MALLOC ARENA\n"));
+		ft_error("ERROR MALLOC ARENA\n", arena);
 	if (!(arena->board =
 		(unsigned char*)malloc(sizeof(unsigned char) * MEM_SIZE)))
 		ft_error("Memory could not be allocated.", arena);

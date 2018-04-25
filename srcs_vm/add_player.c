@@ -12,12 +12,12 @@
 
 #include "vm.h"
 
-int		check_availability_player_number(t_player *player, char player_number)
+int		check_availability_player_number(t_player *player, char player_number, t_arena *arena)
 {
 	while(player)
 	{
 		if (player->nbr == player_number)
-			exit(ft_printf("ERROR check_availability_player_number\n"));
+			ft_error("ERROR check_availability_player_number\n", arena);
 		player = player->next;
 	}
 	return (player_number);
@@ -59,7 +59,7 @@ t_player	*add_player(t_player *player, char *file_name, char *player_number,
 		new->nbr = find_lowest_player_number(player) - 1;
 	else
 	{
-		new->nbr = check_availability_player_number(player, *player_number);
+		new->nbr = check_availability_player_number(player, *player_number, arena);
 		*player_number = -1;
 	}
 	return (new);
