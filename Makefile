@@ -71,7 +71,9 @@ ncurses.c\
 process.c\
 set_reg_value.c\
 vm.c\
-write_tab.c
+write_tab.c\
+process_checks.c\
+get_size_name_com.c
 
 LIB_DIR			= libft/
 INC_DIR			= includes/

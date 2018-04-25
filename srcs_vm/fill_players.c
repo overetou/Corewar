@@ -20,57 +20,6 @@ int		secure_open(char *file_name, int code)
 	return (fd);
 }
 
-char	*get_name(int fd)
-{
-	char	*name;
-
-	name = ft_strnew(PROG_NAME_LENGTH);
-	if (name == NULL)
-		return (NULL);
-	lseek(fd, 4, SEEK_SET);
-	if (read(fd, name, PROG_NAME_LENGTH) < 0)
-	{
-		free(name);
-		name = NULL;
-	}
-	return (name);
-}
-
-int		get_file_size(int fd)
-{
-	unsigned char	str_size[4];
-	int		file_size;
-	int		size;
-
-	size = 0;
-	lseek(fd, 4, SEEK_CUR);
-	if (read(fd, str_size, 4) < 0)
-		return (-1);
-	file_size = str_size[0];
-	while (++size < 4)
-	{
-		file_size = file_size << 8;
-		file_size = file_size | str_size[size];
-	}
-	return (file_size);
-}
-
-char	*get_comment(int fd)
-{
-	char	*comment;
-
-	comment = ft_strnew(COMMENT_LENGTH);
-	if (comment == NULL)
-		return (NULL);
-	lseek(fd, 0, PROG_NAME_LENGTH + 12);
-	if (read(fd, comment, COMMENT_LENGTH) < 0)
-	{
-		free(comment);
-		comment = NULL;
-	}
-	return (comment);
-}
-
 void	write_player(int fd, t_arena *arena, int adr, int file_size)
 {
 	int offset;
@@ -98,30 +47,29 @@ void	check_numbers(int fd, unsigned int file_size, t_arena *arena)
 
 void	fill_players(t_arena *arena)
 {
-	t_player	*player;
+	t_player	*plr;
 	int			i;
 	int			adr;
 	int			fd;
 
-	player = arena->players;
+	plr = arena->players;
 	i = 1;
-	while (player)
+	while (plr)
 	{
-		fd = secure_open(player->file_name, O_RDONLY);
-		if (fd < 0)
+		if ((fd = secure_open(plr->file_name, O_RDONLY)) < 0)
 			ft_error("Failed the openning of a file.\n", arena);
-		player->name = get_name(fd);
-		player->file_size = get_file_size(fd);
-		player->comment = get_comment(fd);
-		if (player->name == NULL || player->comment == NULL || player->file_size == -1)
+		plr->name = get_name(fd);
+		plr->file_size = get_file_size(fd);
+		plr->comment = get_comment(fd);
+		if (plr->name == NULL || plr->comment == NULL || plr->file_size == -1)
 			ft_error("Player generation failed.\n", arena);
-		check_numbers(fd, player->file_size, arena);
-		adr = (MEM_SIZE / arena->number_of_players) * (arena->number_of_players - i);
-		write_player(fd, arena, adr, player->file_size);
-		push_process(&(arena->process), new_process(player->nbr, adr, arena));
+		check_numbers(fd, plr->file_size, arena);
+		adr = (MEM_SIZE / arena->nbr_of_playr) * (arena->nbr_of_playr - i);
+		write_player(fd, arena, adr, plr->file_size);
+		push_process(&(arena->process), new_process(plr->nbr, adr, arena));
 		arena->process->nbr = ++arena->nbr_process;
 		arena->process_cpt++;
 		i++;
-		player = player->next;
+		plr = plr->next;
 	}
 }
