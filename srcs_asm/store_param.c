@@ -6,26 +6,11 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 18:51:26 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/12 19:31:44 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/25 18:23:50 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
-
-void	push_param(t_param **param, t_param *new_param)
-{
-	t_param *tmp;
-
-	if (!*param)
-		*param = new_param;
-	else
-	{
-		tmp = *param;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new_param;
-	}
-}
 
 void	set_int_param(char *str, t_param *param, int code, t_champ *champ)
 {
@@ -98,7 +83,7 @@ t_param	*new_param(char *str, t_cmd *cmd, t_champ *champ)
 	param->next = NULL;
 	if (!str || !*str)
 	{
-		 if (str)
+		if (str)
 			free(str);
 		ft_error(champ, "PARAM NULL");
 	}

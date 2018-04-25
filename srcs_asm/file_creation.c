@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:20:09 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/16 13:27:48 by pkeita           ###   ########.fr       */
+/*   Updated: 2018/04/25 18:17:05 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	print_params(t_param *param, t_cmd *cmd, int fd, t_champ *champ)
 
 void	print_cmd(int fd, t_cmd *cmd, t_champ *champ)
 {
-	t_cmd 	*tmp;
+	t_cmd	*tmp;
 
 	tmp = cmd;
 	while (tmp)
