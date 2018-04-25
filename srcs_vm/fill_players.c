@@ -16,8 +16,7 @@ int		secure_open(char *file_name, int code)
 {
 	int fd;
 
-	if ((fd = open(file_name, code)) < 0)
-		exit(ft_printf("ERROR SECURE OPEN\n"));
+	fd = open(file_name, code);
 	return (fd);
 }
 
@@ -43,7 +42,7 @@ int		get_file_size(int fd)
 	size = 0;
 	lseek(fd, 4, SEEK_CUR);
 	if (read(fd, str_size, 4) < 0)
-		exit(ft_printf("ERROR GET FILE SIZE\n"));
+		return (-1);
 	file_size = str_size[0];
 	while (++size < 4)
 	{
@@ -103,11 +102,13 @@ void	fill_players(t_arena *arena)
 	while (player)
 	{
 		fd = secure_open(player->file_name, O_RDONLY);
+		if (fd < 0)
+			ft_error("Failed the openning of a file.\n", arena);
 		player->name = get_name(fd);
 		player->file_size = get_file_size(fd);
 		player->comment = get_comment(fd);
-		if (player->name == NULL || player->comment == NULL)
-			ft_error("Could not allocate memory in players.\n", arena);
+		if (player->name == NULL || player->comment == NULL || player->file_size == -1)
+			ft_error("Player generation failed.\n", arena);
 		check_numbers(fd, player->file_size);
 		adr = (MEM_SIZE / arena->number_of_players) * (arena->number_of_players - i);
 		write_player(fd, arena, adr, player->file_size);
