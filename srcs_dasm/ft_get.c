@@ -43,7 +43,7 @@ void				ft_get_reg(t_env *e, t_cmd *cmd)
 		cmd->param[cmd->index].value > REG_NUMBER)
 		ft_error(e, "Bad reg number");
 	++(cmd->index);
-	ft_iter(e, "test d 1", 0, cmd);
+	ft_iter(e, "Don't fuck with me", 0, cmd);
 }
 
 void				ft_get_dir2(t_env *e, t_cmd *cmd)
@@ -54,10 +54,10 @@ void				ft_get_dir2(t_env *e, t_cmd *cmd)
 	cmd->param[cmd->index].nbr_octet = 2;
 	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 8;
-	ft_iter(e, "test d 1", 1, cmd);
+	ft_iter(e, "Don't fuck with me", 1, cmd);
 	tmp = e->file[e->i];
 	cmd->param[cmd->index++].value += tmp;
-	ft_iter(e, "test d 2", 0, cmd);
+	ft_iter(e, "Don't fuck with me", 0, cmd);
 }
 
 void				ft_get_dir4(t_env *e, t_cmd *cmd)
@@ -68,16 +68,16 @@ void				ft_get_dir4(t_env *e, t_cmd *cmd)
 	cmd->param[cmd->index].nbr_octet = 4;
 	tmp = e->file[e->i];
 	cmd->param[cmd->index].value = tmp << 24;
-	ft_iter(e, "test dir 1", 1, cmd);
+	ft_iter(e, "Don't fuck with me", 1, cmd);
 	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 16;
-	ft_iter(e, "test dir 2", 1, cmd);
+	ft_iter(e, "Don't fuck with me", 1, cmd);
 	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 8;
-	ft_iter(e, "test dir 3", 1, cmd);
+	ft_iter(e, "Don't fuck with me", 1, cmd);
 	tmp = e->file[e->i];
 	cmd->param[cmd->index++].value += tmp;
-	ft_iter(e, "test dir 4", 0, cmd);
+	ft_iter(e, "Don't fuck with me", 0, cmd);
 }
 
 void				ft_get_ind(t_env *e, t_cmd *cmd)
@@ -87,8 +87,8 @@ void				ft_get_ind(t_env *e, t_cmd *cmd)
 	cmd->param[cmd->index].code = IND_CODE;
 	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 8;
-	ft_iter(e, "test ind 1", 1, cmd);
+	ft_iter(e, "Don't fuck with me", 1, cmd);
 	tmp = e->file[e->i];
 	cmd->param[cmd->index++].value += tmp;
-	ft_iter(e, "test ind 2", 0, cmd);
+	ft_iter(e, "Don't fuck with me", 0, cmd);
 }

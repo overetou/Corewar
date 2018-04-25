@@ -20,16 +20,16 @@ void				ft_check_magic(t_env *e)
 	magic = COREWAR_EXEC_MAGIC;
 	tmp = e->file[e->i++];
 	if (!(tmp == magic >> 24) || e->i == e->len)
-		ft_error(e, "BAD COREWAR_EXEC_MAGIC");
+		ft_error(e, "Bad magic number");
 	tmp = e->file[e->i++];
 	if (!(tmp == (magic >> 16 & 0xff)) || e->i == e->len)
-		ft_error(e, "BAD COREWAR_EXEC_MAGIC");
+		ft_error(e, "Bad magic number");
 	tmp = e->file[e->i++];
 	if (!(tmp == (magic >> 8 & 0xff)) || e->i == e->len)
-		ft_error(e, "BAD COREWAR_EXEC_MAGIC");
+		ft_error(e, "Bad magic number");
 	tmp = e->file[e->i++];
 	if (!(tmp == (magic & 0xff)) || e->i == e->len)
-		ft_error(e, "BAD COREWAR_EXEC_MAGIC");
+		ft_error(e, "Bad magic number");
 }
 
 void				ft_get_champ_size(t_env *e)
@@ -45,10 +45,10 @@ void				ft_get_champ_size(t_env *e)
 		tmp = e->file[e->i++];
 		e->champ_size += tmp << shift;
 		shift -= 8;
-		e->i >= e->len ? ft_error(e, "NO ENOUGH INFORMATION") : 0;
+		e->i >= e->len ? ft_error(e, "Not enough information") : 0;
 	}
 	if (e->champ_size > CHAMP_MAX_SIZE || e->champ_size == 0)
-		ft_error(e, "BAD CHAMP SIZE");
+		ft_error(e, "Bad champ size");
 }
 
 void				ft_parse_comment_name_size(t_env *e)
@@ -60,7 +60,7 @@ void				ft_parse_comment_name_size(t_env *e)
 	e->name = ft_strndup(e->file + e->i, e->len - e->i);
 	stop = ft_strlen(e->name);
 	if (stop > PROG_NAME_LENGTH && stop < 1)
-		ft_error(e, "NAME BAD SIZE");
+		ft_error(e, "Bad name");
 	stop = PROG_NAME_LENGTH + 4;
 	while (e->i < e->len && ++i < stop)
 		e->i++;
@@ -68,7 +68,7 @@ void				ft_parse_comment_name_size(t_env *e)
 	e->comment = ft_strndup(e->file + e->i, e->len - e->i);
 	stop = ft_strlen(e->comment);
 	if (stop > COMMENT_LENGTH && stop < 1)
-		ft_error(e, "NAME BAD SIZE");
+		ft_error(e, "Bad name");
 	i = -1;
 	stop = COMMENT_LENGTH + 4;
 	while (e->i < e->len && ++i < stop)

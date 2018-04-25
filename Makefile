@@ -13,6 +13,7 @@
 ASM				= asm
 DASM			= dasm
 VM				= corewar
+CREATOR  		= creator
 
 CC				= gcc
 FLAGS			= -Wall -Wextra -Werror -MMD $(DFLAGS)
@@ -75,26 +76,35 @@ write_tab.c\
 process_checks.c\
 get_size_name_com.c
 
+SRC_CREATOR		= \
+main.c\
+op.c\
+random.c
+
 LIB_DIR			= libft/
 INC_DIR			= includes/
 
 SRC_DIR_ASM		= srcs_asm/
 SRC_DIR_DASM	= srcs_dasm/
 SRC_DIR_VM		= srcs_vm/
+SRC_DIR_CREATOR = creator_src/
 
 OBJ_DIR_ASM		= objs_asm/
 OBJ_DIR_DASM	= objs_dasm/
 OBJ_DIR_VM		= objs_vm/
+OBJ_DIR_CREATOR = creator_obj/
 
 LIBFT_LIB		= $(LIB_DIR)libft.a
 
 SRCS_ASM		= $(addprefix $(SRC_DIR_ASM), $(SRC_ASM))
 SRCS_DASM		= $(addprefix $(SRC_DIR_DASM), $(SRC_DASM))
 SRCS_VM			= $(addprefix $(SRC_DIR_VM), $(SRC_VM))
+SRCS_CREATOR	= $(addprefix $(SRC_DIR_CREATOR), $(SRC_CREATOR))
 
 OBJS_ASM		= $(addprefix $(OBJ_DIR_ASM), $(SRC_ASM:.c=.o))
 OBJS_DASM		= $(addprefix $(OBJ_DIR_DASM), $(SRC_DASM:.c=.o))
 OBJS_VM			= $(addprefix $(OBJ_DIR_VM), $(SRC_VM:.c=.o))
+OBJS_CREATOR	= $(addprefix $(OBJ_DIR_CREATOR), $(SRC_CREATOR:.c=.o))
 
 INC				= $(OBJS_ASM:%.o=%.d) $(OBJS_DASM:%.o=%.d) $(OBJS_VM:%.o=%.d)
 
@@ -115,6 +125,7 @@ all:
 	@make $(ASM)
 	@make $(DASM)
 	@make $(VM)
+	@make $(CREATOR)
 
 $(ASM): $(LIBFT_LIB) $(OBJS_ASM)
 	@$(CC) $(FLAGS) $(OBJS_ASM) $(LLFT) -o $@
@@ -126,6 +137,17 @@ $(OBJ_DIR_ASM):
 $(OBJ_DIR_ASM)%.o: $(SRC_DIR_ASM)%.c | $(OBJ_DIR_ASM)
 	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
 	@printf "\rCompiling %-15s$<\033[K" "[ $(ASM) ]"
+
+$(CREATOR): $(LIBFT_LIB) $(OBJS_CREATOR)
+	@$(CC) $(FLAGS) $(OBJS_CREATOR) $(LLFT) -o $@
+	@printf "\rCompiling %-15s$(OK1)\033[K\n" "[ $@ ]"
+
+$(OBJ_DIR_CREATOR):
+	@mkdir -p $(OBJ_DIR_CREATOR)
+
+$(OBJ_DIR_CREATOR)%.o: $(SRC_DIR_CREATOR)%.c | $(OBJ_DIR_CREATOR)
+	@$(CC) $(FLAGS) $(HEADER) -o $@ -c $<
+	@printf "\rCompiling %-15s$<\033[K" "[ $(CREATOR) ]"
 
 $(DASM): $(LIBFT_LIB) $(OBJS_DASM)
 	@$(CC) $(FLAGS) $(OBJS_DASM) $(LLFT) -o $@
