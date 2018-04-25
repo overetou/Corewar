@@ -3,60 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   store_label.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/21 16:39:17 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/03/26 17:13:41 by ysingaye         ###   ########.fr       */
+/*   Created: 2018/03/21 18:59:30 by ysingaye          #+#    #+#             */
+/*   Updated: 2018/04/12 19:29:48 by kenguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include <asm.h>
 
-t_op	*find_op(t_op *op, char *str)
+t_label	*find_label(t_champ *champ, t_label *label, char *str)
 {
-	int i;
+	t_label *tmp;
 
-	i = 0;
-	while (op && op[i].opcode)
+	tmp = label;
+	while (tmp)
 	{
-		if (ft_strequ(str, op[i].short_name))
-			return (&op[i]);
-		i++;
+		if (tmp->name == NULL)
+		{
+			if (!(tmp->name = ft_strnew(1)))
+			{
+				free(tmp->name);
+				ft_error(champ, "MALLOC FAIL");
+			}
+		}
+		if (!ft_strcmp(str, tmp->name))
+			return (tmp);
+		tmp = tmp->next;
 	}
 	return (NULL);
 }
 
-void	parse_instruct(t_champ *champ)
+t_label	*new_label(char *str, t_champ *champ, int index)
 {
-	int		len;
-	char	*tmp;
-	int 	index;
-	t_op	*op;
+	t_label	*label;
 
-	index = 1;
-	while (champ->file[champ->i])
+	label = NULL;
+	if (!(label = (t_label*)malloc(sizeof(t_label))))
+		ft_error(champ, "ERROR MALLOC LABEL");
+	label->name = NULL;
+	if (!(label->name = ft_strdup(str)))
+		ft_error(champ, "ERROR MALLOC LABEL->NAME");
+	label->index = index;
+	label->cmd = NULL;
+	label->next = NULL;
+	return (label);
+}
+
+void	add_label(t_label **label, t_label *new_label)
+{
+	new_label->next = *label;
+	*label = new_label;
+}
+
+void	valid_labels(t_champ *champ)
+{
+	t_cmd	*cmd;
+	t_param	*param;
+
+	cmd = champ->cmd;
+	while (cmd)
 	{
-		while (ft_isblank(champ->file[champ->i]))
-			champ->i++;
-		if (champ->file[champ->i] == COMMENT_CHAR)
-			store_hash(champ);
-		else
+		param = cmd->param;
+		while (param)
 		{
-			len = ft_strspn(&champ->file[champ->i], LABEL_CHARS);
-			tmp = ft_strsub(champ->file, champ->i, len);
-			champ->i += len;
-			if (champ->file[champ->i] == LABEL_CHAR)
-			{
-				if (find_label(champ->label, tmp))
-					ft_error(champ, "ERROR LABEL EXIST");
-				add_label(&champ->label, new_label(tmp, champ));
-				champ->i++;
-			}
-			else if (ft_isspace(champ->file[champ->i]) && (op = find_op(g_op_tab, tmp)))
-				push_cmd(&champ->cmd, new_cmd(op, champ, index++));
-			else if (champ->file[champ->i])
-				ft_error(champ, "OP UNEXIST");
-			ft_strdel(&tmp);
+			if (param->label && !find_label(champ, champ->label, param->label))
+				ft_error(champ, "ERROR LABEL UNEXIST");
+			champ->file_size += param->nbr_octet;
+			param = param->next;
 		}
+		if (cmd->op->has_ocp)
+			champ->file_size++;
+		champ->file_size++;
+		cmd = cmd->next;
 	}
 }

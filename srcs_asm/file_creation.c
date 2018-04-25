@@ -6,24 +6,28 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:20:09 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/09 11:38:50 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/16 13:27:48 by pkeita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include <asm.h>
 
-int		create_cor_file(char *file_name)
+int		create_cor_file(t_champ *champ, char *file_name)
 {
-    int		fd;
-    char	*name;
-    int		name_size;
+	int		fd;
+	char	*name;
+	int		name_size;
 
 	name_size = ft_strlen(file_name) + 2;
 	name = ft_strnew(name_size);
 	ft_strncpy(name, file_name, name_size - 4);
 	ft_strcpy(name + name_size - 4, ".cor");
-//	fd = open(name, O_TRUNC | O_CREAT | O_RDWR, 0777);
-	fd = open(name, O_TRUNC | O_CREAT | O_WRONLY, S_IRWXU);
+	if ((fd = open(name, O_TRUNC | O_CREAT | O_WRONLY, 0600)) < 0)
+	{
+		free(name);
+		ft_error(champ, "Open fail");
+	}
+	free(name);
 	return (fd);
 }
 
@@ -39,34 +43,47 @@ void	print_header(int fd, t_champ *champ)
 
 void	print_params(t_param *param, t_cmd *cmd, int fd, t_champ *champ)
 {
-	while (param)
+	t_param *tmp;
+
+	tmp = param;
+	while (tmp)
 	{
-		if (param->label)
-			print_label(cmd, param, champ->label, fd);
+		if (tmp->label)
+			print_label(cmd, tmp, champ->label, champ);
 		else
-			write_bin(param->value, fd, param->nbr_octet);
-		param = param->next;
+			write_bin(tmp->value, fd, tmp->nbr_octet);
+		tmp = tmp->next;
 	}
 }
 
 void	print_cmd(int fd, t_cmd *cmd, t_champ *champ)
 {
-	while (cmd)
+	t_cmd 	*tmp;
+
+	tmp = cmd;
+	while (tmp)
 	{
-		ft_putchar_fd(cmd->op->opcode, fd);
-		if (cmd->op->has_ocp)
-			write_bin(assemble_ocp(cmd), fd, 1);
-		print_params(cmd->param, cmd, fd, champ);
-		cmd = cmd->next;
+		ft_putchar_fd(tmp->op->opcode, fd);
+		if (tmp->op->has_ocp)
+			write_bin(assemble_ocp(tmp), fd, 1);
+		print_params(tmp->param, tmp, fd, champ);
+		tmp = tmp->next;
 	}
 }
 
-void	manage_file_creation(t_champ *champ, char *filename)
+void	file_creation(t_champ *champ, char *filename)
 {
-	int	fd;
+	char	*tmp;
 
-	fd = create_cor_file(filename);
-	print_header(fd, champ);
-	print_cmd(fd, champ->cmd, champ);
-	close(fd);
+	champ->fd = create_cor_file(champ, filename);
+	print_header(champ->fd, champ);
+	print_cmd(champ->fd, champ->cmd, champ);
+	tmp = ft_strsub(filename, 0, ft_strlen(filename) - 2);
+	ft_printf("\x1b[32mWriting output program to %s.cor\n\x1b[0m", tmp);
+	free(tmp);
+	if (close(champ->fd) < 0)
+	{
+		free(tmp);
+		ft_error(champ, "CLOSE FAIL");
+	}
 }
