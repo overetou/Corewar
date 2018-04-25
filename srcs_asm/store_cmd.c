@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:11:29 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/12 19:26:10 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/25 18:58:07 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ void	valid_params(t_param *param, t_op *op, t_champ *champ)
 	while (tmp && i < op->param_numbers)
 	{
 		if (tmp->code == REG_CODE && !HAS_REG_PERM(op->perm[i]))
-			ft_error(champ, "ERROR HAS_REG_PERM");
+			ft_error(champ, "This parameter can't be a register");
 		else if (tmp->code == DIR_CODE && !HAS_DIR_PERM(op->perm[i]))
-			ft_error(champ, "ERROR HAS_DIR_PERM");
+			ft_error(champ, "This parameter can't be a direct parameter");
 		else if (tmp->code == IND_CODE && !HAS_IND_PERM(op->perm[i]))
-			ft_error(champ, "ERROR HAS_IND_PERM");
+			ft_error(champ, "This parameter can't be an indirect parameter");
 		i++;
 		tmp = tmp->next;
 	}
 	if (i != op->param_numbers || tmp)
-		ft_error(champ, "ERROR NBR PARAM");
+		ft_error(champ, "The number of parameter is invalid");
 }
 
 void	parse_param(t_cmd *cmd, t_champ *champ)
@@ -75,7 +75,7 @@ void	parse_param(t_cmd *cmd, t_champ *champ)
 	if (len2 < len)
 		len = len2;
 	if (!(tmp = ft_strsub(champ->file, champ->i, len)))
-		ft_error(champ, "MALLOC FAIL");
+		ft_error(champ, "Memory could not be allocated");
 	champ->i += len;
 	push_param(&cmd->param, new_param(ft_strtrim(tmp), cmd, champ));
 	ft_strdel(&tmp);
@@ -99,20 +99,20 @@ void	push_cmd(t_cmd **cmd, t_cmd *new_cmd)
 		tmp->next = new_cmd;
 	}
 }
-// modif while ramplacer # pqr COMMENT_CHAR
+
 t_cmd	*new_cmd(t_op *op, t_champ *champ, int index)
 {
 	t_cmd	*cmd;
 
 	cmd = NULL;
 	if (!(cmd = (t_cmd*)malloc(sizeof(t_cmd))))
-		ft_error(champ, "ERROR MALLOC CMD");
+		ft_error(champ, "Memory could not be allocated");
 	cmd->op = op;
 	cmd->index = index;
 	cmd->next = NULL;
 	cmd->param = NULL;
-	while (champ->file[champ->i] && !ft_strchr(";\n", champ->file[champ->i]) &&
-		champ->file[champ->i] != COMMENT_CHAR)
+	while (champ->file[champ->i] && !ft_strchr(";\n", champ->file[champ->i])
+		&& COMMENT_CHAR != champ->file[champ->i])
 		parse_param(cmd, champ);
 	valid_params(cmd->param, op, champ);
 	if (champ->label && !champ->label->cmd)

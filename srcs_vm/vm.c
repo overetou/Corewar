@@ -21,18 +21,18 @@ void	ft_strendcmp(const char *s1, const char *s2, t_arena *arena)
 		ft_error("Invalide file name", arena);
 }
 
-char		*get_winner(t_player *player, int winner)
+char	*get_winner(t_player *player, int winner)
 {
 	while (player)
 	{
 		if (player->nbr == winner)
-			return(player->name);
+			return (player->name);
 		player = player->next;
 	}
 	return (NULL);
 }
 
-int			main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_arena		*arena;
 

@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 18:59:30 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/12 19:29:48 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:02:51 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_label	*find_label(t_champ *champ, t_label *label, char *str)
 			if (!(tmp->name = ft_strnew(1)))
 			{
 				free(tmp->name);
-				ft_error(champ, "MALLOC FAIL");
+				ft_error(champ, "Memory could not be allocated");
 			}
 		}
 		if (!ft_strcmp(str, tmp->name))
@@ -40,10 +40,10 @@ t_label	*new_label(char *str, t_champ *champ, int index)
 
 	label = NULL;
 	if (!(label = (t_label*)malloc(sizeof(t_label))))
-		ft_error(champ, "ERROR MALLOC LABEL");
+		ft_error(champ, "Memory could not be allocated");
 	label->name = NULL;
 	if (!(label->name = ft_strdup(str)))
-		ft_error(champ, "ERROR MALLOC LABEL->NAME");
+		ft_error(champ, "Memory could not be allocated");
 	label->index = index;
 	label->cmd = NULL;
 	label->next = NULL;
@@ -68,7 +68,7 @@ void	valid_labels(t_champ *champ)
 		while (param)
 		{
 			if (param->label && !find_label(champ, champ->label, param->label))
-				ft_error(champ, "ERROR LABEL UNEXIST");
+				ft_error(champ, "Label unexist");
 			champ->file_size += param->nbr_octet;
 			param = param->next;
 		}

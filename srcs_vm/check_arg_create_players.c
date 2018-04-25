@@ -37,7 +37,7 @@ void		player_param(char **argv, int *i, t_arena *arena, int argc)
 	ft_strendcmp(argv[*i], ".cor", arena);
 	arena->players = add_player(arena->players, argv[*i],
 		&player_number, arena);
-	arena->number_of_players++;
+	arena->nbr_of_playr++;
 }
 
 void		check_arg_create_players(int argc, char **argv, t_arena *arena)

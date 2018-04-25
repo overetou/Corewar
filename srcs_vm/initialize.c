@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:32:48 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/24 20:04:51 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/25 18:53:49 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_arena		*new_arena(void)
 	t_arena	*arena;
 
 	if (!(arena = (t_arena*)malloc(sizeof(t_arena))))
-		ft_error("ERROR MALLOC ARENA\n", arena);
+		ft_error("Memory could not be allocated.\n", arena);
 	if (!(arena->board =
 		(unsigned char*)malloc(sizeof(unsigned char) * MEM_SIZE)))
 		ft_error("Memory could not be allocated.", arena);
@@ -75,7 +75,7 @@ t_arena		*new_arena(void)
 	hardcode_func(arena);
 	arena->aff = 0;
 	arena->end_cycle = 0;
-	arena->number_of_players = 0;
+	arena->nbr_of_playr = 0;
 	arena->nbr_process = 0;
 	arena->nbr_live = 0;
 	arena->process_cpt = 0;

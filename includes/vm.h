@@ -18,9 +18,9 @@
 # include <ncurses.h>
 # include <fcntl.h>
 
-# define HAS_REG_PERM(x) ((x | T_DIR | T_IND) == (T_REG | T_DIR | T_IND))
-# define HAS_DIR_PERM(x) ((T_REG | x | T_IND) == (T_REG | T_DIR | T_IND))
-# define HAS_IND_PERM(x) ((T_REG | T_DIR | x) == (T_REG | T_DIR | T_IND))
+# define REG_PERM(x) ((x | T_DIR | T_IND) == (T_REG | T_DIR | T_IND))
+# define DIR_PERM(x) ((T_REG | x | T_IND) == (T_REG | T_DIR | T_IND))
+# define IND_PERM(x) ((T_REG | T_DIR | x) == (T_REG | T_DIR | T_IND))
 
 # define DIRTWO 2
 # define DIRFOR 4
@@ -85,7 +85,7 @@ typedef struct			s_arena
 	t_op				op[17];
 	int					aff;
 	int					end_cycle;
-	int					number_of_players;
+	int					nbr_of_playr;
 	int					nbr_process;
 	int					process_cpt;
 }						t_arena;
@@ -148,5 +148,10 @@ void					ft_strendcmp(const char *s1, const char *s2,
 							t_arena *arena);
 void					check_arg_create_players(int argc, char **argv,
 							t_arena *arena);
+void					do_processes_checks(t_arena *arena, int *no_nbr_live,
+							int *ctd);
+char					*get_comment(int fd);
+int						get_file_size(int fd);
+char					*get_name(int fd);
 
 #endif
