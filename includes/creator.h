@@ -17,9 +17,8 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "op.h"
-
-#define VOWELS	"aeiouy"
-#define	CONSONANTS "qw rt ps df ghj klz xcvb n m"
+# define VOWELS	"aeiouy"
+# define CONSONANTS "qw rt ps df ghj klz xcvb n m"
 
 typedef struct		s_op
 {
@@ -44,8 +43,8 @@ typedef struct		s_env
 	int				fd;
 }					t_env;
 
-void			ft_random(t_env *env, t_op op, int rand, int i);
-void			ft_name_comment(char str[], int length);
-void			ft_error(char *message);
+void				ft_random(t_env *env, t_op op, int rand, int i);
+void				ft_name_comment(char str[], int length);
+void				ft_error(char *message);
 
 #endif

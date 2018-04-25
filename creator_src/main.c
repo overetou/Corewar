@@ -25,7 +25,7 @@ void		ft_cmd(t_env *env)
 
 	while (env->champ_size + 12 < CHAMP_MAX_SIZE)
 	{
-		ret = 10;
+		ret = random() % 16;
 		op = g_op_tab[ret];
 		op.has_ocp == 1 ? env->champ_size++ : 0;
 		env->champ_size++;

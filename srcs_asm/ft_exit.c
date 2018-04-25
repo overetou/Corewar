@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <asm.h>
+
 void	free_param(t_param *param)
 {
 	t_param *tmp;
@@ -58,16 +59,16 @@ void	free_champ(t_champ *champ)
 	}
 }
 
-void	ft_error(t_champ *champ, char *message)
+void	ft_error(t_champ *champ, char *m)
 {
-	int 	i;
+	int		i;
 	int		nb_line;
-	int 	coll;
+	int		coll;
 
-	i = 0;
+	i = -1;
 	nb_line = 0;
 	coll = 0;
-	while (i < champ->i)
+	while (++i < champ->i)
 	{
 		coll++;
 		if (champ->file[i] == '\n')
@@ -75,7 +76,6 @@ void	ft_error(t_champ *champ, char *message)
 			coll = 0;
 			nb_line++;
 		}
-		i++;
 	}
 	while (i > 0 && champ->file[i - 1] != '\n' && champ->file[i - 1] != ' ' &&
 		champ->file[i - 1] != '\t')
@@ -84,7 +84,6 @@ void	ft_error(t_champ *champ, char *message)
 		coll--;
 	}
 	free_champ(champ);
-	ft_printf("Syntax error at  Line %d column %d :%s\n", nb_line,
-		coll, message);
+	ft_printf("Syntax error at  Line %d column %d :%s\n", nb_line, coll, m);
 	exit(EXIT_FAILURE);
 }

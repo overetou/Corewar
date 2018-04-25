@@ -173,12 +173,12 @@ $(OBJ_DIR_VM)%.o: $(SRC_DIR_VM)%.c | $(OBJ_DIR_VM)
 
 clean:
 	@make -C $(LIB_DIR) clean
-	@rm -rf $(OBJ_DIR_ASM) $(OBJ_DIR_DASM) $(OBJ_DIR_VM)
+	@rm -rf $(OBJ_DIR_ASM) $(OBJ_DIR_DASM) $(OBJ_DIR_VM) $(OBJ_DIR_CREATOR)
 	@printf "%-25s$(OK2)\n" "Cleaning  [ corewar ]"
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean
-	@rm -f $(ASM) $(DASM) $(VM)
+	@rm -f $(ASM) $(DASM) $(VM) $(CREATOR)
 	@printf "%-25s$(OK2)\n" "Delete    [ corewar ]"
 
 re: fclean
