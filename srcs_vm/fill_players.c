@@ -72,7 +72,7 @@ void	write_player(int fd, t_arena *arena, int adr, int file_size)
 
 	offset = lseek(fd, 0, SEEK_END) - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
 	if (offset != file_size)
-		ft_error("ERROR WRITE PLAYER\n", arena));
+		ft_error("ERROR WRITE PLAYER\n", arena);
 	lseek(fd, PROG_NAME_LENGTH + COMMENT_LENGTH + 16, SEEK_SET);
 	read(fd, (arena->board) + adr, file_size);
 }
