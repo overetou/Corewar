@@ -75,7 +75,7 @@ t_arena		*new_arena(void)
 	hardcode_func(arena);
 	arena->aff = 0;
 	arena->end_cycle = 0;
-	arena->number_of_players = 0;
+	arena->nbr_of_playr = 0;
 	arena->nbr_process = 0;
 	arena->nbr_live = 0;
 	arena->process_cpt = 0;

@@ -41,14 +41,14 @@ void		ft_init_color(t_player *players, t_arena *arena)
 	start_color();
 	refresh_arena(arena, 0, MEM_SIZE, 0);
 	i = 1;
-	if (arena->number_of_players < 7)
+	if (arena->nbr_of_playr < 7)
 	{
 		color = 1;
 		while (players)
 		{
 			init_pair((unsigned char)players->nbr, color++, COLOR_BLACK);
-			adr = (MEM_SIZE / arena->number_of_players) *
-				(arena->number_of_players - i);
+			adr = (MEM_SIZE / arena->nbr_of_playr) *
+				(arena->nbr_of_playr - i);
 			refresh_arena(arena, adr, players->file_size, players->nbr);
 			players = players->next;
 			i++;
