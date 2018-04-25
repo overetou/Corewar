@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 14:41:32 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/18 21:05:38 by pkeita           ###   ########.fr       */
+/*   Updated: 2018/04/25 18:25:41 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_asm(t_champ *champ)
 	valid_labels(champ);
 }
 
-void		read_file(t_champ *champ, char *file_name)
+void	read_file(t_champ *champ, char *file_name)
 {
 	int		fd;
 
@@ -44,11 +44,12 @@ void		read_file(t_champ *champ, char *file_name)
 	if (close(fd) < 0)
 		ft_error(champ, "CLOSE FAIL");
 }
+
 int		main(int argc, char **argv)
 {
 	t_champ	champ;
 	int		arg;
-	int 	len;
+	int		len;
 
 	arg = 0;
 	if (argc < 2)

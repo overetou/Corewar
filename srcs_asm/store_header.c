@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 19:26:01 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/12 19:37:29 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/25 18:20:02 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		store_header(t_champ *champ)
 			ft_strlen(COMMENT_CMD_STRING)))
 			store_comment(champ);
 		else if (champ->file[champ->i] == COMMENT_CHAR ||
-			champ->file[champ->i]== ';')
+			champ->file[champ->i] == ';')
 			store_hash(champ);
 		else
 			ft_error(champ, "bug on parse header");

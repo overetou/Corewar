@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   push_param.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/21 13:26:07 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/03/26 17:30:20 by ysingaye         ###   ########.fr       */
+/*   Created: 2018/04/25 18:23:44 by ysingaye          #+#    #+#             */
+/*   Updated: 2018/04/25 18:23:59 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include <asm.h>
 
-void	ft_error(t_champ *champ, char *message)
+void	push_param(t_param **param, t_param *new_param)
 {
-	int line;
-	int i;
+	t_param *tmp;
 
-	line = 0;
-	i = 0;
-	if (champ)
+	if (!*param)
+		*param = new_param;
+	else
 	{
-		line++;
-		while (i < champ->i)
-		{
-			if (champ->file[i] == '\n')
-				line++;
-			i++;
-		}
+		tmp = *param;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_param;
 	}
-	ft_printf("Syntax error at line %d: \"%s\"\n", line, message);
-	exit (0);
 }
