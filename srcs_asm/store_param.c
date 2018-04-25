@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 18:51:26 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/25 18:23:50 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:08:18 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	set_int_param(char *str, t_param *param, int code, t_champ *champ)
 		i++;
 	while (ft_isdigit(str[i]))
 		i++;
-	i < 1 ? ft_error(champ, "SYNTAX ERROR 6") : 0;
-	str[i - 1] == '-' ? ft_error(champ, "SYNTAX ERROR 7") : 0;
+	i < 1 ? ft_error(champ, "Invalid parameter") : 0;
+	str[i - 1] == '-' ? ft_error(champ, "Invalid parameter") : 0;
 	if (str[i])
-		ft_error(champ, "SYNTAX ERROR 1");
+		ft_error(champ, "Invalid parameter");
 	param->value = ft_atoi(str);
 	param->code = code;
 	param->label = NULL;
@@ -36,7 +36,7 @@ void	set_label_param(char *str, t_param *param, int code, t_champ *champ)
 
 	i = ft_strspn(str, LABEL_CHARS);
 	if (str[i])
-		ft_error(champ, "SYNTAX ERROR2");
+		ft_error(champ, "Invalid parameter");
 	param->value = 0;
 	param->code = code;
 	param->label = str;
@@ -59,13 +59,13 @@ void	set_registre_param(char *str, t_param *param, t_champ *champ)
 	i = 0;
 	while (ft_isdigit(str[i]))
 		i++;
-	i < 1 ? ft_error(champ, "SYNTAX ERROR 4") : 0;
-	str[i - 1] == '-' ? ft_error(champ, "SYNTAX ERROR 5") : 0;
+	i < 1 ? ft_error(champ, "Invalid parameter") : 0;
+	str[i - 1] == '-' ? ft_error(champ, "Invalid parameter") : 0;
 	if (str[i])
-		ft_error(champ, "SYNTAX ERROR 3");
+		ft_error(champ, "Invalid parameter");
 	param->value = ft_atoi(str);
 	if (param->value > REG_NUMBER)
-		ft_error(champ, "ERROR REG_NUMBER1");
+		ft_error(champ, "Invalid regiter number");
 	param->code = REG_CODE;
 	param->nbr_octet = 1;
 	param->label = NULL;
@@ -77,7 +77,7 @@ t_param	*new_param(char *str, t_cmd *cmd, t_champ *champ)
 
 	param = NULL;
 	if (!(param = (t_param*)malloc(sizeof(t_param))))
-		ft_error(champ, "ERROR MALLOC PARAM");
+		ft_error(champ, "Memory could not be allocated");
 	param->label = NULL;
 	param->nbr_octet = 2;
 	param->next = NULL;
@@ -85,7 +85,7 @@ t_param	*new_param(char *str, t_cmd *cmd, t_champ *champ)
 	{
 		if (str)
 			free(str);
-		ft_error(champ, "PARAM NULL");
+		ft_error(champ, "Invalid parameter");
 	}
 	if (str[0] == 'r')
 		set_registre_param(&str[1], param, champ);

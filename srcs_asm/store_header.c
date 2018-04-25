@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 19:26:01 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/25 18:20:02 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:01:33 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void		store_name(t_champ *champ)
 	while (ft_isspace(champ->file[champ->i]))
 		champ->i++;
 	if (champ->file[champ->i] != '"')
-		ft_error(champ, "bug name 1");
+		ft_error(champ, "The name must be enclosed in double quotes");
 	if (!ft_strchr(&champ->file[++champ->i], '"'))
-		ft_error(champ, "bug name 2");
+		ft_error(champ, "The name must be enclosed in double quotes");
 	tmp = ft_strcspn(&champ->file[champ->i], "\"");
 	champ->name = ft_strsub(champ->file, champ->i, tmp);
 	if (ft_strlen(champ->name) > PROG_NAME_LENGTH)
-		ft_error(champ, "bug on length prog");
+		ft_error(champ, "The name is too long");
 	champ->i += tmp;
 }
 
@@ -38,13 +38,13 @@ void		store_comment(t_champ *champ)
 	while (ft_isspace(champ->file[champ->i]))
 		champ->i++;
 	if (champ->file[champ->i] != '"')
-		ft_error(champ, "bug on comment 1");
+		ft_error(champ, "The comment must be enclosed in double quotes");
 	if (!ft_strchr(&champ->file[++champ->i], '"'))
-		ft_error(champ, "bug on comment 2");
+		ft_error(champ, "The comment must be enclosed in double quotes");
 	tmp = ft_strcspn(&champ->file[champ->i], "\"");
 	champ->comment = ft_strsub(champ->file, champ->i, tmp);
 	if (ft_strlen(champ->comment) > COMMENT_LENGTH)
-		ft_error(champ, "bug on length comment");
+		ft_error(champ, "The comment is too long");
 	champ->i += tmp;
 }
 
@@ -70,7 +70,7 @@ void		store_header(t_champ *champ)
 			champ->file[champ->i] == ';')
 			store_hash(champ);
 		else
-			ft_error(champ, "bug on parse header");
+			ft_error(champ, "Missing name or comment");
 		champ->i++;
 	}
 }
