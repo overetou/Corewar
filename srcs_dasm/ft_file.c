@@ -55,7 +55,7 @@ void		ft_creat_fill_file(t_env *e, char *file_name, int len, int arg)
 	mkdir("dasm_champion", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	file_name[len - 2] = 's';
 	len = ft_strlen(file_name + i) + 11;
-	if (!(new_file_name = ft_strnew(len)))
+	if (!(new_file_name = ft_strnew(len	+ 50)))
 		ft_error(e, "FAIL MALLOC");
 	new_file_name = ft_strcat(new_file_name, "dasm_champion/");
 	new_file_name = ft_strncat(new_file_name, file_name + i, len - 13);

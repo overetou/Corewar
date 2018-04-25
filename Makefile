@@ -15,8 +15,8 @@ DASM			= dasm
 VM				= corewar
 
 CC				= gcc
-FLAGS			= -Wall -Wextra -Werror -MMD #$(DFLAGS)
-DFLAGS			= -g3 -fsanitize=address
+FLAGS			= -Wall -Wextra -Werror -MMD $(DFLAGS)
+DFLAGS			= -g -g3
 
 SRC_ASM			= \
 file_creation.c\

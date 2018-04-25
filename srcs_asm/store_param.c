@@ -95,5 +95,6 @@ t_param	*new_param(char *str, t_cmd *cmd, t_champ *champ)
 		set_label_param(&str[1], param, IND_CODE, champ);
 	else
 		set_int_param(str, param, IND_CODE, champ);
+	free(str);
 	return (param);
 }
