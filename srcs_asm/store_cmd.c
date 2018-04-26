@@ -45,11 +45,11 @@ void	valid_params(t_param *param, t_op *op, t_champ *champ)
 	tmp = param;
 	while (tmp && i < op->param_numbers)
 	{
-		if (tmp->code == REG_CODE && !HAS_REG_PERM(op->perm[i]))
+		if (tmp->code == REG_CODE && (op->perm[i] & T_REG) == 0)
 			ft_error(champ, "This parameter can't be a register");
-		else if (tmp->code == DIR_CODE && !HAS_DIR_PERM(op->perm[i]))
+		else if (tmp->code == DIR_CODE && (op->perm[i] & T_DIR) == 0)
 			ft_error(champ, "This parameter can't be a direct parameter");
-		else if (tmp->code == IND_CODE && !HAS_IND_PERM(op->perm[i]))
+		else if (tmp->code == IND_CODE && (op->perm[i] & T_IND) == 0)
 			ft_error(champ, "This parameter can't be an indirect parameter");
 		i++;
 		tmp = tmp->next;

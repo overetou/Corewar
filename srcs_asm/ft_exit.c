@@ -48,15 +48,15 @@ void	free_champ(t_champ *champ)
 	ft_strdel(&(champ->name));
 	ft_strdel(&(champ->comment));
 	free_cmd(champ->cmd);
+	
 	while (champ->label)
 	{
 		tmp = champ->label->next;
-		free_cmd(champ->label->cmd);
 		if (champ->label->name)
 			ft_strdel(&(champ->label->name));
 		free(champ->label);
 		champ->label = tmp;
-	}
+	}	
 }
 
 void	ft_error(t_champ *champ, char *m)
