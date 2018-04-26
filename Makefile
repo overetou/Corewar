@@ -17,7 +17,7 @@ CREATOR  		= creator
 
 CC				= gcc
 FLAGS			= -Wall -Wextra -Werror -MMD $(DFLAGS)
-DFLAGS			= -g -g3
+DFLAGS			= -g -g3 -fsanitize=address
 
 SRC_ASM			= \
 file_creation.c\

@@ -80,7 +80,6 @@ void		refresh_status(t_arena *arena, int ctd, int finish)
 	mvprintw(y += 2, x, "CYCLE_TO_DIE : %-4d", ctd);
 	mvprintw(y += 2, x, "CYCLE_DELTA : %d", CYCLE_DELTA);
 	mvprintw(y += 2, x, "NBR_LIVE : %-10d", arena->nbr_live);
-
 	player = arena->players;
 	if (has_colors() != FALSE)
 			attron(COLOR_PAIR((unsigned char)player->nbr));

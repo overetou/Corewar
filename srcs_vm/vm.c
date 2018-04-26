@@ -17,6 +17,8 @@ void	ft_strendcmp(const char *s1, const char *s2, t_arena *arena)
 	int	i;
 
 	i = ft_strlen(s1) - ft_strlen(s2);
+	if (i < 1)
+		ft_error("Invalide file name", arena);
 	if (ft_strcmp(s1 + i, s2))
 		ft_error("Invalide file name", arena);
 }
@@ -29,7 +31,7 @@ char	*get_winner(t_player *player, int winner)
 			return (player->name);
 		player = player->next;
 	}
-	return (NULL);
+	return ("Nope, Nobody wins...\nYou fucking noob...");
 }
 
 int		main(int argc, char **argv)

@@ -13,7 +13,7 @@
 NAME	= libft.a
 
 CC		= gcc
-FLAGS	= -Wall -Wextra -Werror -MMD -g -g3
+FLAGS	= -Wall -Wextra -Werror -MMD -g -g3 -fsanitize=address
 
 SRC_BASE = \
 char/ft_charcspn.c\
