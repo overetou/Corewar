@@ -23,19 +23,18 @@ int		is_valide_param(t_process *prcss, t_op *op, int nbr_param)
 	op[prcss->opcode].nbr_param != nbr_param)
 		return (0);
 	prm = prcss->param;
-	i = 0;
-	while (i < nbr_param)
+	i = -1;
+	while (++i < nbr_param)
 	{
-		if (!prm->code)
+		if (!prm->code || prm->code == REG_CODE &&
+			(op[prcss->opcode].perm[i] & T_REG) == 0)
 			return (0);
-		else if (prm->code == REG_CODE && !REG_PERM(op[prcss->opcode].perm[i]))
-			return (0);
-		else if (prm->code == IND_CODE && !IND_PERM(op[prcss->opcode].perm[i]))
+		else if (prm->code == IND_CODE &&
+			(op[prcss->opcode].perm[i] & T_IND) == 0)
 			return (0);
 		else if ((prm->code == DIRTWO || prm->code == DIRFOR) &&
-		!DIR_PERM(op[prcss->opcode].perm[i]))
+		(op[prcss->opcode].perm[i] & T_DIR) == 0)
 			return (0);
-		i++;
 		prm = prm->next;
 	}
 	return (1);

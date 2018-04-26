@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/creator.h"
+#include "creator.h"
 
 void		ft_ind(t_env *env, t_op op, int param_nb)
 {

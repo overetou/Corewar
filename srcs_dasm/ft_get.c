@@ -20,13 +20,13 @@ void				ft_check_ocp(t_env *e, t_cmd *cmd)
 	while (i < cmd->op->param_numbers && i < 4)
 	{
 		if (cmd->param[i].code == REG_CODE &&
-			!HAS_REG_PERM(cmd->op->perm[i]))
+			(cmd->op->perm[i] & T_REG) == 0)
 			ft_error(e, "ERROR HAS_REG_PERM");
 		else if (cmd->param[i].code == DIR_CODE &&
-			!HAS_DIR_PERM(cmd->op->perm[i]))
+			(cmd->op->perm[i] & T_DIR) == 0)
 			ft_error(e, "ERROR HAS_DIR_PERM");
 		else if (cmd->param[i].code == IND_CODE &&
-			!HAS_IND_PERM(cmd->op->perm[i]))
+			(cmd->op->perm[i] & T_IND) == 0)
 			ft_error(e, "ERROR HAS_IND_PERM");
 		i++;
 	}

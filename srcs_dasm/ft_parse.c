@@ -47,8 +47,8 @@ void				ft_get_champ_size(t_env *e)
 		shift -= 8;
 		e->i >= e->len ? ft_error(e, "Not enough information") : 0;
 	}
-	if (e->champ_size > CHAMP_MAX_SIZE || e->champ_size == 0)
-		ft_error(e, "Bad champ size");
+	if (e->champ_size == 0)
+		ft_error(e, "size 0 rly ?");
 }
 
 void				ft_parse_comment_name_size(t_env *e)

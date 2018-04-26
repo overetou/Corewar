@@ -6,11 +6,11 @@
 /*   By: pkeita <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 01:17:26 by pkeita            #+#    #+#             */
-/*   Updated: 2018/04/23 01:17:57 by pkeita           ###   ########.fr       */
+/*   Updated: 2018/04/26 17:07:59 by pkeita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/creator.h"
+#include "creator.h"
 
 void		ft_error(char *message)
 {
@@ -23,7 +23,7 @@ void		ft_cmd(t_env *env)
 	int		ret;
 	t_op	op;
 
-	while (env->champ_size + 12 < CHAMP_MAX_SIZE)
+	while (env->champ_size + 100 < CHAMP_MAX_SIZE)
 	{
 		ret = random() % 16;
 		op = g_op_tab[ret];
@@ -40,6 +40,7 @@ void		ft_file(t_env *env)
 	ft_dprintf(env->fd, ".name           \"%s\"\n.comment        \"%s\"\n\n",
 		env->name, env->comment);
 	ft_cmd(env);
+	ft_printf("\x1b[32mSuccesfully created: |%s.s|\n\x1b[0m", env->name);
 }
 
 void		ft_creator(t_env *env)
@@ -57,6 +58,8 @@ void		ft_creator(t_env *env)
 				0644)) < 0))
 		ft_error("Open failed");
 	ft_file(env);
+	if (close(env->fd) < 0)
+		ft_error("Close failed");
 }
 
 int			main(int ac, char **av)
