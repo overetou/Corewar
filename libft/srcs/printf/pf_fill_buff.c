@@ -27,6 +27,6 @@ void	fill_sbuff(const char *str, t_pf_env *e)
 
 void	print_buff(t_pf_env *e)
 {
-		e->ret += write(e->fd, e->buff, e->b);
-		e->b = 0;
+	e->ret += write(e->fd, e->buff, e->b);
+	e->b = 0;
 }

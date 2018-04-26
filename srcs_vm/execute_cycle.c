@@ -26,8 +26,8 @@ int		is_valide_param(t_process *prcss, t_op *op, int nbr_param)
 	i = -1;
 	while (++i < nbr_param)
 	{
-		if (!prm->code || prm->code == REG_CODE &&
-			(op[prcss->opcode].perm[i] & T_REG) == 0)
+		if (!prm->code || (prm->code == REG_CODE &&
+			(op[prcss->opcode].perm[i] & T_REG) == 0))
 			return (0);
 		else if (prm->code == IND_CODE &&
 			(op[prcss->opcode].perm[i] & T_IND) == 0)
@@ -105,6 +105,7 @@ void	execute_vm(t_arena *arena)
 	if (arena->aff == NCURSE)
 	{
 		initscr();
+		curs_set(0);
 		ft_init_color(arena->players, arena);
 	}
 	vm_loop(arena, ctd, no_nbr_live);

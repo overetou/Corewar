@@ -39,6 +39,10 @@ int		main(int argc, char **argv)
 	arena = new_arena();
 	check_arg_create_players(argc, argv, arena);
 	fill_players(arena);
+	if (arena->process_cpt > MAX_PLAYERS)
+		ft_error("Too many champ", arena);
+	else if (arena->process_cpt <= 0)
+		ft_usage(argv[0], arena);
 	execute_vm(arena);
 	ft_printf("And the winner is... %s!\n", get_winner(arena->players,
 		arena->winner));
