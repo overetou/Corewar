@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/25 18:25:06 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/04/27 17:34:44 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CREATOR  		= creator
 
 CC				= gcc
 FLAGS			= -Wall -Wextra -Werror -MMD $(DFLAGS)
-DFLAGS			= -g -g3 -fsanitize=address
+DFLAGS			= -g -g3
 
 SRC_ASM			= \
 file_creation.c\

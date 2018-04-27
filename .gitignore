@@ -5,6 +5,7 @@
 objs_asm
 objs_dasm
 objs_vm
+creator_obj
 asm
 dasm
 corewar
