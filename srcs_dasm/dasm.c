@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 20:12:44 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/18 21:52:55 by pkeita           ###   ########.fr       */
+/*   Updated: 2018/04/27 18:56:51 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void		ft_free_everything(t_env *e)
 {
 	t_cmd	*tmp;
 
+	if (!e)
+		return ;
 	if (e->file)
 		ft_strdel(&(e->file));
 	if (e->name)
@@ -39,7 +41,7 @@ void		ft_error(t_env *e, char *message)
 	i = 0;
 	nb_line = 0;
 	coll = 0;
-	while (i < e->i)
+	while (e && i < e->i)
 	{
 		coll++;
 		if (e->file[i] == '\n')
@@ -94,8 +96,8 @@ int			main(int argc, char **argv)
 	int		arg;
 	int		len;
 
-	if (argc < 1)
-		ft_error(&e, "Usage : ./dasm *.cor ...\n");
+	if (argc < 2)
+		ft_error(NULL, "Usage : ./dasm *.cor ...");
 	arg = 0;
 	while (++arg < argc)
 	{

@@ -30,9 +30,7 @@ ressources/tests/testasm42
 ressources/tests/testasm
 ressources/tests/asm
 ressources/tests/leaks.txt
-ressources/tests/asm.dSYM/Contents/Info.plist
-ressources/tests/asm.dSYM/Contents/Resources/DWARF/asm
+*.dSYM
 ex.s
-corewar.dSYM/Contents/Info.plist
 generated_champion
 dasm_champion
