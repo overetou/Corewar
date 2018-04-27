@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 16:35:47 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/24 20:37:46 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:19:40 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_end_debug(int value2, int value3, int index, t_arena *arena)
 {
 	if (arena->debug)
 		ft_printf("%d %d\n       | -> store to %d + %d = %d (with pc \
-			and mod %d)\n", value2, value3, value2, value3, value2 + value3,
+and mod %d)\n", value2, value3, value2, value3, value2 + value3,
 			index + ((value2 + value3) % IDX_MOD));
 }
 
