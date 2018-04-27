@@ -68,7 +68,7 @@ void	valid_labels(t_champ *champ)
 		while (param)
 		{
 			if (param->label && !find_label(champ, champ->label, param->label))
-				ft_error(champ, "Label unexist");
+				ft_error_label(champ, "Label unexist", param->label);
 			champ->file_size += param->nbr_octet;
 			param = param->next;
 		}

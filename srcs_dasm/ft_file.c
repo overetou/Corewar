@@ -15,29 +15,29 @@
 void		ft_fill_cmd(t_env *e, int fd)
 {
 	int		i;
-	t_cmd	*tmp;
+	t_cmd	*t;
 
-	tmp = e->cmd;
-	while (tmp)
+	t = e->cmd;
+	ft_dprintf(fd, ".name           \"%s\"\n.comment        \"%s\"\n\n",
+		e->name, e->comment);
+	while (t)
 	{
 		i = 0;
-		ft_dprintf(fd, "\t%s\t", tmp->op->short_name);
-		while (i < tmp->index)
+		ft_dprintf(fd, "\t%s\t", t->op->short_name);
+		while (i < t->index)
 		{
-			if (tmp->param[i].code == REG_CODE)
-				ft_dprintf(fd, "r%d", tmp->param[i].value);
-			else if (tmp->param[i].code == DIR_CODE &&
-				tmp->param[i].nbr_octet == 2)
-				ft_dprintf(fd, "%c%hd", DIRECT_CHAR, tmp->param[i].value);
-			else if (tmp->param[i].code == DIR_CODE &&
-				tmp->param[i].nbr_octet == 4)
-				ft_dprintf(fd, "%c%d", DIRECT_CHAR, tmp->param[i].value);
-			else if (tmp->param[i].code == IND_CODE)
-				ft_dprintf(fd, "%hd", tmp->param[i].value);
-			++i != tmp->index ? write(fd, ", ", 2) : 0;
+			if (t->param[i].code == REG_CODE)
+				ft_dprintf(fd, "r%d", t->param[i].value);
+			else if (t->param[i].code == DIR_CODE && t->param[i].nbr_octet == 2)
+				ft_dprintf(fd, "%c%hd", DIRECT_CHAR, t->param[i].value);
+			else if (t->param[i].code == DIR_CODE && t->param[i].nbr_octet == 4)
+				ft_dprintf(fd, "%c%d", DIRECT_CHAR, t->param[i].value);
+			else if (t->param[i].code == IND_CODE)
+				ft_dprintf(fd, "%hd", t->param[i].value);
+			++i != t->index ? write(fd, ", ", 2) : 0;
 		}
 		write(fd, "\n", 1);
-		tmp = tmp->next;
+		t = t->next;
 	}
 }
 
@@ -55,17 +55,15 @@ void		ft_creat_fill_file(t_env *e, char *file_name, int len, int arg)
 	mkdir("dasm_champion", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	file_name[len - 2] = 's';
 	len = ft_strlen(file_name + i) + 11;
-	if (!(new_file_name = ft_strnew(len)))
-		ft_error(e, "FAIL MALLOC");
+	if (!(new_file_name = ft_strnew(len + 1)))
+		ft_error(e, "Malloc failed");
 	new_file_name = ft_strcat(new_file_name, "dasm_champion/");
 	new_file_name = ft_strncat(new_file_name, file_name + i, len - 13);
-	if ((fd = open(new_file_name, O_CREAT | O_WRONLY, 0644)) < 0)
-		ft_error(e, "FAIL OPEN");
-	ft_dprintf(fd, ".name           \"%s\"\n.comment        \"%s\"\n\n",
-		e->name, e->comment);
+	if ((fd = open(new_file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644)) < 0)
+		ft_error(e, "Open failed");
 	ft_fill_cmd(e, fd);
 	if (close(fd))
-		ft_error(e, "FAIL CLOSE");
-	ft_printf("%d Succefully created %s\n", arg, new_file_name);
+		ft_error(e, "Close failed");
+	ft_printf("%d: Succefully created %s\n", arg, new_file_name);
 	free(new_file_name);
 }

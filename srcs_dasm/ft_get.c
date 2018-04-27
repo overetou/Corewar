@@ -20,13 +20,13 @@ void				ft_check_ocp(t_env *e, t_cmd *cmd)
 	while (i < cmd->op->param_numbers && i < 4)
 	{
 		if (cmd->param[i].code == REG_CODE &&
-			!HAS_REG_PERM(cmd->op->perm[i]))
+			(cmd->op->perm[i] & T_REG) == 0)
 			ft_error(e, "ERROR HAS_REG_PERM");
 		else if (cmd->param[i].code == DIR_CODE &&
-			!HAS_DIR_PERM(cmd->op->perm[i]))
+			(cmd->op->perm[i] & T_DIR) == 0)
 			ft_error(e, "ERROR HAS_DIR_PERM");
 		else if (cmd->param[i].code == IND_CODE &&
-			!HAS_IND_PERM(cmd->op->perm[i]))
+			(cmd->op->perm[i] & T_IND) == 0)
 			ft_error(e, "ERROR HAS_IND_PERM");
 		i++;
 	}
@@ -43,7 +43,7 @@ void				ft_get_reg(t_env *e, t_cmd *cmd)
 		cmd->param[cmd->index].value > REG_NUMBER)
 		ft_error(e, "Bad reg number");
 	++(cmd->index);
-	ft_iter(e, "test d 1", 0, cmd);
+	ft_iter(e, "Don't fuck with me", 0, cmd);
 }
 
 void				ft_get_dir2(t_env *e, t_cmd *cmd)
@@ -54,10 +54,10 @@ void				ft_get_dir2(t_env *e, t_cmd *cmd)
 	cmd->param[cmd->index].nbr_octet = 2;
 	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 8;
-	ft_iter(e, "test d 1", 1, cmd);
+	ft_iter(e, "Don't fuck with me", 1, cmd);
 	tmp = e->file[e->i];
 	cmd->param[cmd->index++].value += tmp;
-	ft_iter(e, "test d 2", 0, cmd);
+	ft_iter(e, "Don't fuck with me", 0, cmd);
 }
 
 void				ft_get_dir4(t_env *e, t_cmd *cmd)
@@ -68,16 +68,16 @@ void				ft_get_dir4(t_env *e, t_cmd *cmd)
 	cmd->param[cmd->index].nbr_octet = 4;
 	tmp = e->file[e->i];
 	cmd->param[cmd->index].value = tmp << 24;
-	ft_iter(e, "test dir 1", 1, cmd);
+	ft_iter(e, "Don't fuck with me", 1, cmd);
 	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 16;
-	ft_iter(e, "test dir 2", 1, cmd);
+	ft_iter(e, "Don't fuck with me", 1, cmd);
 	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 8;
-	ft_iter(e, "test dir 3", 1, cmd);
+	ft_iter(e, "Don't fuck with me", 1, cmd);
 	tmp = e->file[e->i];
 	cmd->param[cmd->index++].value += tmp;
-	ft_iter(e, "test dir 4", 0, cmd);
+	ft_iter(e, "Don't fuck with me", 0, cmd);
 }
 
 void				ft_get_ind(t_env *e, t_cmd *cmd)
@@ -87,8 +87,8 @@ void				ft_get_ind(t_env *e, t_cmd *cmd)
 	cmd->param[cmd->index].code = IND_CODE;
 	tmp = e->file[e->i];
 	cmd->param[cmd->index].value += tmp << 8;
-	ft_iter(e, "test ind 1", 1, cmd);
+	ft_iter(e, "Don't fuck with me", 1, cmd);
 	tmp = e->file[e->i];
 	cmd->param[cmd->index++].value += tmp;
-	ft_iter(e, "test ind 2", 0, cmd);
+	ft_iter(e, "Don't fuck with me", 0, cmd);
 }

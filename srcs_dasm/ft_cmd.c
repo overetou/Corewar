@@ -45,9 +45,9 @@ void				ft_parse_param1(t_env *e, t_cmd *cmd)
 	int				i;
 
 	ocp = e->file[e->i];
-	ft_iter(e, "test 1", 1, cmd);
+	ft_iter(e, "Command needs parameter", 1, cmd);
 	if ((ocp & 3) != 0)
-		ft_error(e, "BAD little byte ocp");
+		ft_error(e, "ocp must have his 2 smallers bit at 0");
 	i = -1;
 	while (++i < cmd->nb_params && i < 4)
 	{
@@ -60,9 +60,7 @@ void				ft_parse_param1(t_env *e, t_cmd *cmd)
 		else if (((ocp >> (6 - (i * 2))) & 3) == 3)
 			ft_get_ind(e, cmd);
 		else if (((ocp >> (6 - (i * 2))) & 3) == 0)
-			ft_error(e, "BAD OCP");
-		else
-			ft_error(e, "\n\nWUT,?\n\n");
+			ft_error(e, "Bad ocp bro");
 	}
 	ft_check_ocp(e, cmd);
 }
@@ -74,8 +72,6 @@ void				ft_parse_param2(t_env *e, t_cmd *cmd)
 	else if (cmd->op->opcode == 9 || cmd->op->opcode == 12 ||
 		cmd->op->opcode == 15)
 		ft_get_dir2(e, cmd);
-	else
-		ft_error(e, "WTF dude");
 }
 
 t_cmd				*creat_cmd(t_env *e)
@@ -85,10 +81,10 @@ t_cmd				*creat_cmd(t_env *e)
 
 	cmd = NULL;
 	if (!(cmd = (t_cmd*)malloc(sizeof(t_cmd))))
-		ft_error(e, "ERROR MALLOC CMD");
+		ft_error(e, "Malloc failed");
 	bzero(cmd, sizeof(*cmd));
 	op_code = e->file[e->i];
-	ft_iter(e, "no param", 1, cmd);
+	ft_iter(e, "Command needs parameter", 1, cmd);
 	if (!(op_code > 0 && op_code < 17))
 		ft_error(e, "BAD OP_CODE1");
 	cmd->op = &g_op_tab[op_code - 1];

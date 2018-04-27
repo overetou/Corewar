@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 20:12:44 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/09 11:34:24 by kenguyen         ###   ########.fr       */
+/*   Updated: 2018/04/18 21:52:55 by pkeita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ void		ft_free_everything(t_env *e)
 {
 	t_cmd	*tmp;
 
-	ft_strdel(&(e->file));
-	ft_strdel((&e->name));
-	ft_strdel((&e->comment));
+	if (e->file)
+		ft_strdel(&(e->file));
+	if (e->name)
+		ft_strdel((&e->name));
+	if (e->comment)
+		ft_strdel((&e->comment));
 	while (e->cmd)
 	{
 		tmp = e->cmd->next;
@@ -29,19 +32,25 @@ void		ft_free_everything(t_env *e)
 
 void		ft_error(t_env *e, char *message)
 {
-	int 	i;
-	int		count;
+	int		i;
+	int		nb_line;
+	int		coll;
 
 	i = 0;
-	count = 0;
-	ft_free_everything(e);
+	nb_line = 0;
+	coll = 0;
 	while (i < e->i)
 	{
+		coll++;
 		if (e->file[i] == '\n')
-			count++;
+		{
+			coll = 0;
+			nb_line++;
+		}
 		i++;
 	}
-	ft_printf("Line %d :%s\n", count, message);
+	ft_free_everything(e);
+	ft_printf("%s\n", message);
 	exit(EXIT_FAILURE);
 }
 
@@ -57,7 +66,7 @@ void		ft_iter(t_env *e, char *message, int check, t_cmd *cmd)
 	if (e->j == e->champ_size || e->i == e->len)
 	{
 		check == 1 ? ft_error(e, message) : 0;
-		cmd->index != cmd->nb_params ? ft_error(e, "Don't fuck with me") : 0;
+		cmd->index != cmd->nb_params ? ft_error(e, "Don't fuck with me !") : 0;
 		i != e->len ? ft_error(e, message) : 0;
 		e->i != e->len ? ft_error(e, message) : 0;
 		e->j != e->champ_size ? ft_error(e, message) : 0;
@@ -69,13 +78,13 @@ void		store_file(t_env *e, char *file_name)
 	int		fd;
 
 	if ((fd = open(file_name, O_RDONLY)) < 0)
-		ft_error(e, "BUG OPEN FILE");
+		ft_error(e, "Open failed");
 	e->len = lseek(fd, 0, SEEK_END);
 	if (!(e->file = ft_strnew(e->len)))
-		ft_error(e, "MALLOC FAIL");
+		ft_error(e, "Malloc failed");
 	lseek(fd, 0, SEEK_SET);
 	if (read(fd, e->file, e->len) < 0)
-		ft_error(e, "READ FAIL");
+		ft_error(e, "Read failed");
 	close(fd);
 }
 
@@ -95,6 +104,7 @@ int			main(int argc, char **argv)
 			argv[arg][len - 2] == 'c' && argv[arg][len - 3] == '.')
 		{
 			ft_bzero(&e, sizeof(e));
+			free(e.cmd);
 			ft_printf("%s\n", argv[arg]);
 			store_file(&e, argv[arg]);
 			ft_parse(&e);

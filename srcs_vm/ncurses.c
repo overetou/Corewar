@@ -69,8 +69,9 @@ void		waitting(void)
 
 void		refresh_status(t_arena *arena, int ctd, int finish)
 {
-	int x;
-	int y;
+	int			x;
+	int			y;
+	t_player	*player;
 
 	x = 195;
 	y = 0;
@@ -79,6 +80,21 @@ void		refresh_status(t_arena *arena, int ctd, int finish)
 	mvprintw(y += 2, x, "CYCLE_TO_DIE : %-4d", ctd);
 	mvprintw(y += 2, x, "CYCLE_DELTA : %d", CYCLE_DELTA);
 	mvprintw(y += 2, x, "NBR_LIVE : %-10d", arena->nbr_live);
+	player = arena->players;
+	if (has_colors() != FALSE)
+			attron(COLOR_PAIR((unsigned char)player->nbr));
+	mvprintw(y += 2, x, "%s", player->name);
+	if (has_colors() != FALSE)
+			attroff(COLOR_PAIR((unsigned char)player->nbr));
+	while ((player = player->next))
+	{
+		mvprintw(y += 1, x, "vs");
+		if (has_colors() != FALSE)
+			attron(COLOR_PAIR((unsigned char)player->nbr));
+		mvprintw(y += 1, x, "%s", player->name);
+		if (has_colors() != FALSE)
+			attroff(COLOR_PAIR((unsigned char)player->nbr));
+	}
 	if (finish)
 		mvprintw(y += 2, x, "And the winner is... %s!\n",
 			get_winner(arena->players, arena->winner));
@@ -92,7 +108,7 @@ void		refresh_arena(t_arena *arena, int adr, int len, unsigned char color)
 	int y;
 
 	adr = get_valide_adr(adr);
-	x = (adr + len - 1) * 3;
+	x = get_valide_adr(adr + len - 1) * 3;
 	y = x / 192;
 	if (len)
 	{

@@ -39,7 +39,7 @@ void	set_label_param(char *str, t_param *param, int code, t_champ *champ)
 		ft_error(champ, "Invalid parameter");
 	param->value = 0;
 	param->code = code;
-	param->label = str;
+	param->label = ft_strdup(str);
 }
 
 void	set_direct_param(char *str, t_param *param, t_cmd *cmd, t_champ *champ)
@@ -95,5 +95,6 @@ t_param	*new_param(char *str, t_cmd *cmd, t_champ *champ)
 		set_label_param(&str[1], param, IND_CODE, champ);
 	else
 		set_int_param(str, param, IND_CODE, champ);
+	free(str);
 	return (param);
 }

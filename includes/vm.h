@@ -18,10 +18,6 @@
 # include <ncurses.h>
 # include <fcntl.h>
 
-# define REG_PERM(x) ((x | T_DIR | T_IND) == (T_REG | T_DIR | T_IND))
-# define DIR_PERM(x) ((T_REG | x | T_IND) == (T_REG | T_DIR | T_IND))
-# define IND_PERM(x) ((T_REG | T_DIR | x) == (T_REG | T_DIR | T_IND))
-
 # define DIRTWO 2
 # define DIRFOR 4
 # define NCURSE 1
@@ -73,7 +69,7 @@ typedef struct			s_op
 
 typedef struct			s_arena
 {
-	unsigned char*		board;
+	unsigned char		*board;
 	char				debug;
 	int					cycles;
 	int					executed_cycles;

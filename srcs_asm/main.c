@@ -66,7 +66,7 @@ int		main(int argc, char **argv)
 			read_file(&champ, argv[arg]);
 			ft_asm(&champ);
 			file_creation(&champ, argv[arg]);
-			// free_champ(&champ);
+			free_champ(&champ);
 		}
 		else
 			ft_printf("File %d is invalid\n", arg);

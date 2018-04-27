@@ -15,6 +15,7 @@
 void		store_name(t_champ *champ)
 {
 	int tmp;
+	int len;
 
 	champ->i += ft_strlen(NAME_CMD_STRING);
 	while (ft_isspace(champ->file[champ->i]))
@@ -25,8 +26,9 @@ void		store_name(t_champ *champ)
 		ft_error(champ, "The name must be enclosed in double quotes");
 	tmp = ft_strcspn(&champ->file[champ->i], "\"");
 	champ->name = ft_strsub(champ->file, champ->i, tmp);
-	if (ft_strlen(champ->name) > PROG_NAME_LENGTH)
-		ft_error(champ, "The name is too long");
+	len = ft_strlen(champ->name);
+	if (len > PROG_NAME_LENGTH || len == 0)
+		ft_error(champ, "Name size is invalid");
 	champ->i += tmp;
 }
 

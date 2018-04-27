@@ -18,10 +18,6 @@
 # include <fcntl.h>
 # include "op.h"
 
-# define HAS_REG_PERM(x) ((x | T_DIR | T_IND) == (T_REG | T_DIR | T_IND))
-# define HAS_DIR_PERM(x) ((T_REG | x | T_IND) == (T_REG | T_DIR | T_IND))
-# define HAS_IND_PERM(x) ((T_REG | T_DIR | x) == (T_REG | T_DIR | T_IND))
-
 typedef struct		s_op
 {
 	char			*short_name;
