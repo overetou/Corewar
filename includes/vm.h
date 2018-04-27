@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/24 20:47:03 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/27 18:28:37 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct			s_player
 	char				*name;
 	char				*comment;
 	int					last_live;
+	int					nbr_live;
 	int					file_size;
 	struct s_player		*next;
 }						t_player;
