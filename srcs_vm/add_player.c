@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 20:20:40 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/27 18:29:02 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 20:22:15 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_player	*add_player(t_player *player, char *file_name, char *player_number,
 	new->name = NULL;
 	new->comment = NULL;
 	new->last_live = 0;
-	new->nbr_live = 0;
 	new->file_size = 0;
 	new->next = player;
 	if (*player_number < 0)

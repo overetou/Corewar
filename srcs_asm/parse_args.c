@@ -28,6 +28,8 @@ t_op	*find_op(t_op *op, char *str)
 
 void	parse_label(t_champ *champ, int index, char *tmp)
 {
+	if (ft_strlen(tmp) < 1)
+		ft_error(champ, "Label needs name");
 	if (find_label(champ, champ->label, tmp))
 	{
 		free(tmp);

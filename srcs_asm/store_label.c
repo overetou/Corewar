@@ -17,6 +17,8 @@ t_label	*find_label(t_champ *champ, t_label *label, char *str)
 	t_label *tmp;
 
 	tmp = label;
+	if (ft_strlen(str) < 1)
+		return (NULL);
 	while (tmp)
 	{
 		if (tmp->name == NULL)
@@ -68,7 +70,7 @@ void	valid_labels(t_champ *champ)
 		while (param)
 		{
 			if (param->label && !find_label(champ, champ->label, param->label))
-				ft_error_label(champ, "Label unexist", param->label);
+				ft_error_label(champ, "Label is invalid", param->label);
 			champ->file_size += param->nbr_octet;
 			param = param->next;
 		}

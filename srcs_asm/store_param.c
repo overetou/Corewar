@@ -64,7 +64,7 @@ void	set_registre_param(char *str, t_param *param, t_champ *champ)
 	if (str[i])
 		ft_error(champ, "Invalid parameter");
 	param->value = ft_atoi(str);
-	if (param->value > REG_NUMBER)
+	if (param->value > REG_NUMBER || param->value < 1)
 		ft_error(champ, "Invalid regiter number");
 	param->code = REG_CODE;
 	param->nbr_octet = 1;

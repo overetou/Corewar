@@ -64,6 +64,7 @@ void		ft_creat_fill_file(t_env *e, char *file_name, int len, int arg)
 	ft_fill_cmd(e, fd);
 	if (close(fd))
 		ft_error(e, "Close failed");
-	ft_printf("%d: Succefully created %s\n", arg, new_file_name);
+	ft_printf("\x1b[32m%d: Succefully created :%s\n\x1b[0m",
+				arg, new_file_name);
 	free(new_file_name);
 }

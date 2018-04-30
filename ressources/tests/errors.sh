@@ -1,6 +1,6 @@
 #!/bin/bash
 
-make -C ../../ && cp ../../asm .
+make -C ../../asm_srcs && cp ../../asm_srcs/asm .
 
 echo "\nUnknown instruction-------"
 ./asm ../champs/errors/unknown_instruction.s

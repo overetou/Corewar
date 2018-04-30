@@ -58,7 +58,7 @@ void	fill_players(t_arena *arena)
 	{
 		if ((fd = secure_open(plr->file_name, O_RDONLY)) < 0)
 			ft_error("Failed the openning of a file.\n", arena);
-		plr->name = get_name(fd);
+		plr->name = get_name(fd, arena);
 		plr->file_size = get_file_size(fd);
 		plr->comment = get_comment(fd);
 		if (plr->name == NULL || plr->comment == NULL || plr->file_size == -1)

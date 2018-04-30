@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 15:56:40 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/27 18:16:36 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 20:46:31 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,11 @@ char	*get_winner(t_player *player, int winner)
 	return ("Nope, Nobody wins...\nYou fucking noob...");
 }
 
-void	print_players(t_player *player)
-{
-	while (player)
-	{
-		ft_printf("* Player %d: \"%s\" (\"%s\")\n",
-			player->nbr, player->name, player->comment);
-		player = player->next;
-	}
-}
-
 int		main(int argc, char **argv)
 {
 	t_arena		*arena;
 
+	ft_bzero(&arena, sizeof(arena));
 	arena = new_arena();
 	check_arg_create_players(argc, argv, arena);
 	fill_players(arena);
@@ -55,7 +46,6 @@ int		main(int argc, char **argv)
 		ft_error("Too many champ", arena);
 	else if (arena->process_cpt <= 0)
 		ft_usage(argv[0], arena);
-	print_players(arena->players);
 	execute_vm(arena);
 	ft_printf("And the winner is... %s!\n", get_winner(arena->players,
 		arena->winner));

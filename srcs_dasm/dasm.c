@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 20:12:44 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/27 18:56:51 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/18 21:52:55 by pkeita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void		ft_free_everything(t_env *e)
 {
 	t_cmd	*tmp;
 
-	if (!e)
-		return ;
 	if (e->file)
 		ft_strdel(&(e->file));
 	if (e->name)
@@ -34,23 +32,6 @@ void		ft_free_everything(t_env *e)
 
 void		ft_error(t_env *e, char *message)
 {
-	int		i;
-	int		nb_line;
-	int		coll;
-
-	i = 0;
-	nb_line = 0;
-	coll = 0;
-	while (e && i < e->i)
-	{
-		coll++;
-		if (e->file[i] == '\n')
-		{
-			coll = 0;
-			nb_line++;
-		}
-		i++;
-	}
 	ft_free_everything(e);
 	ft_printf("%s\n", message);
 	exit(EXIT_FAILURE);
@@ -96,8 +77,8 @@ int			main(int argc, char **argv)
 	int		arg;
 	int		len;
 
-	if (argc < 2)
-		ft_error(NULL, "Usage : ./dasm *.cor ...");
+	if (argc < 1)
+		ft_error(&e, "Usage : ./dasm *.cor ...\n");
 	arg = 0;
 	while (++arg < argc)
 	{
@@ -107,7 +88,6 @@ int			main(int argc, char **argv)
 		{
 			ft_bzero(&e, sizeof(e));
 			free(e.cmd);
-			ft_printf("%s\n", argv[arg]);
 			store_file(&e, argv[arg]);
 			ft_parse(&e);
 			ft_creat_fill_file(&e, argv[arg], len, arg);

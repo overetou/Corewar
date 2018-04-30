@@ -1,6 +1,6 @@
 #!/bin/bash
 
-make -C ../../ && cp ../../asm .
+make -C ../../asm_srcs && cp ../../asm_srcs/asm .
 
 echo "\nUnknown instruction-------"
 valgrind ./asm ../champs/errors/unknown_instruction.s
@@ -73,7 +73,7 @@ N=`echo ../champs/while_fork` S=`echo $N.s` COR=`echo $N.cor` && valgrind ./asm 
 N=`echo ../champs/youforkmytralala` S=`echo $N.s` COR=`echo $N.cor` && valgrind ./asm $S
 N=`echo ../champs/zork` S=`echo $N.s` COR=`echo $N.cor` && valgrind ./asm $S
 
-# sh leaks.sh 2> leaks.txt
+ sh leaks.sh 2> leaks.txt
 # grep -r "indirectly" leaks.txt
 # grep -r "definitely" leaks.txt
 

@@ -49,8 +49,11 @@ void		ft_creator(t_env *env)
 
 	length = (random() % 42) + 5;
 	ft_name_comment(env->name, length);
+	env->name[0] == ' ' ? env->name[0] = VOWELS[random() % 6] : 0;
 	length = (random() % 85) + 15;
+	ft_str_replace(env->name, ' ', '_');
 	ft_name_comment(env->comment, length);
+	env->comment[0] == ' ' ? env->comment[0] = VOWELS[random() % 6] : 0;
 	ft_strcat(env->file_name, "generated_champion/");
 	ft_strcat(env->file_name, env->name);
 	ft_strcat(env->file_name, ".s");
@@ -68,16 +71,16 @@ int			main(int ac, char **av)
 	int		nb_champ;
 
 	nb_champ = 1;
-	bzero(&env, sizeof(env));
 	srandom(time(NULL));
+	bzero(&env, sizeof(env));
 	if (ac == 2)
 	{
-		av[1][0] != '-' ? ft_error("bad arg") : 0;
-		if ((nb_champ = ft_atoi(av[1] + 1)) < 1)
-			ft_error("What do you want my nigga ?\n");
+		ft_str_is_numeric(av[1]) == 0 ? ft_error("Usage: ./creator [nb]") : 0;
+		if ((nb_champ = ft_atoi(av[1])) < 1)
+			ft_error("What do you want my nigga ?");
 	}
 	else if (ac > 2)
-		ft_error("Usage ./champ_creator [-x]\n");
+		ft_error("Usage: ./creator [nb]");
 	mkdir("generated_champion", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	while (nb_champ > 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: ysingaye <ysingaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 19:26:23 by ysingaye          #+#    #+#             */
-/*   Updated: 2018/04/27 18:28:09 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 17:45:42 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	ft_live(t_param *param, t_arena *arena, t_process *process)
 			{
 				arena->winner = param->value;
 				player->last_live = arena->cycles;
-				player->nbr_live++;
 				break ;
 			}
 			player = player->next;

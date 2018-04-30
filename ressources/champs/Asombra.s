@@ -20,7 +20,7 @@ st r2, -302
 sub r11, r12, r11
 zjmp %:fork
 ld %0, r16
-zjmp %:sdlkfjsd
+zjmp %:shield
 
 go:
 ld %0, r16

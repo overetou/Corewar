@@ -12,23 +12,32 @@
 
 #include <vm.h>
 
-char	*get_name(int fd)
+char				*get_name(int fd, t_arena *arena)
 {
-	char	*name;
+	char			*name;
+	unsigned char	magic_buff[4];
+	unsigned int	magic;
 
 	name = ft_strnew(PROG_NAME_LENGTH);
 	if (name == NULL)
 		return (NULL);
-	lseek(fd, 4, SEEK_SET);
+	if (read(fd, &magic_buff, 4) < 0)
+		ft_error("Read failed", arena);
+	magic = magic_buff[0];
+	magic = magic << 8;
+	magic += magic_buff[1];
+	magic = magic << 8;
+	magic += magic_buff[2];
+	magic = magic << 8;
+	magic += magic_buff[3];
+	if (magic != COREWAR_EXEC_MAGIC)
+		ft_error("Bad COREWAR_EXEC_MAGIC", arena);
 	if (read(fd, name, PROG_NAME_LENGTH) < 0)
-	{
-		free(name);
-		name = NULL;
-	}
+		ft_strdel(&name);
 	return (name);
 }
 
-int		get_file_size(int fd)
+int					get_file_size(int fd)
 {
 	unsigned char	str_size[4];
 	int				file_size;
@@ -47,9 +56,9 @@ int		get_file_size(int fd)
 	return (file_size);
 }
 
-char	*get_comment(int fd)
+char				*get_comment(int fd)
 {
-	char	*comment;
+	char			*comment;
 
 	comment = ft_strnew(COMMENT_LENGTH);
 	if (comment == NULL)

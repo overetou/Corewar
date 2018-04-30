@@ -6,14 +6,14 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/27 17:34:53 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/04/09 10:50:36 by kenguyen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libft.a
 
 CC		= gcc
-FLAGS	= -Wall -Wextra -Werror -MMD -g -g3
+FLAGS	= -Wall -Wextra -Werror
 
 SRC_BASE = \
 char/ft_charcspn.c\
@@ -28,7 +28,7 @@ char/ft_tolower.c\
 char/ft_toupper.c\
 convert/ft_atoi.c\
 convert/ft_itoa.c \
-convert/ft_itoa_base.c \
+convert/ft_itoa_base.c\
 convert/ft_ltoa.c\
 convert/ft_ltoa_base.c\
 convert/ft_uitoa.c\
@@ -107,7 +107,9 @@ str/ft_strspn.c\
 str/ft_strstr.c\
 str/ft_strsub.c\
 str/ft_strtrim_space.c\
-str/ft_strtrim.c
+str/ft_strtrim.c\
+str/ft_str_replace.c\
+str/ft_epurstr.c
 
 CUR_DIR	= libft/
 SRC_DIR	= srcs/

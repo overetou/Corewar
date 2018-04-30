@@ -6,7 +6,7 @@
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 18:27:55 by overetou          #+#    #+#             */
-/*   Updated: 2018/04/27 18:32:49 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/25 18:27:57 by overetou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,6 @@ void	end_execution(t_arena *ar, int *ctd)
 	exit(0);
 }
 
-void	reset_players_nbr_live(t_player *player)
-{
-	while (player)
-	{
-		player->nbr_live = 0;
-		player = player->next;
-	}
-}
-
 void	do_processes_checks(t_arena *arena, int *no_nbr_live, int *ctd)
 {
 	kill_unlively_processes(arena);
@@ -92,7 +83,6 @@ void	do_processes_checks(t_arena *arena, int *no_nbr_live, int *ctd)
 	{
 		*ctd -= CYCLE_DELTA;
 		*no_nbr_live = 0;
-		reset_players_nbr_live(arena->players);
 	}
 	else
 		(*no_nbr_live)++;
@@ -100,7 +90,6 @@ void	do_processes_checks(t_arena *arena, int *no_nbr_live, int *ctd)
 	{
 		*ctd -= CYCLE_DELTA;
 		*no_nbr_live = 0;
-		reset_players_nbr_live(arena->players);
 	}
 	arena->executed_cycles = 0;
 	arena->nbr_live = 0;

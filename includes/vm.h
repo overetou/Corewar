@@ -6,7 +6,7 @@
 /*   By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:17:59 by kenguyen          #+#    #+#             */
-/*   Updated: 2018/04/27 18:28:37 by ysingaye         ###   ########.fr       */
+/*   Updated: 2018/04/24 20:47:03 by ysingaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct			s_player
 	char				*name;
 	char				*comment;
 	int					last_live;
-	int					nbr_live;
 	int					file_size;
 	struct s_player		*next;
 }						t_player;
@@ -116,6 +115,8 @@ void					dump_tab(t_arena *arena);
 void					ft_init_color(t_player *players, t_arena *arena);
 void					refresh_arena(t_arena *arena, int index, int len,
 							unsigned char color);
+void					refresh_status2(int *x, int *y, t_player *player);
+
 void					execute_vm(t_arena *arena);
 int						get_param_value(t_param *param, t_process *process,
 							t_arena *arena, int has_mod);
@@ -149,6 +150,6 @@ void					do_processes_checks(t_arena *arena, int *no_nbr_live,
 							int *ctd);
 char					*get_comment(int fd);
 int						get_file_size(int fd);
-char					*get_name(int fd);
+char					*get_name(int fd, t_arena *arena);
 
 #endif

@@ -26,7 +26,9 @@ t_param		*create_three_params(void)
 		if (new == NULL)
 		{
 			if (old)
+			{
 				free_param(old);
+			}
 			return (NULL);
 		}
 		new->next = old;

@@ -27,9 +27,9 @@ void	ft_usage(char *path, t_arena *arena)
 
 void	ft_error(char *message, t_arena *arena)
 {
-	if (arena->aff == NCURSE)
+	if (arena && arena->aff == NCURSE)
 		endwin();
 	ft_printf("Error: %s\n", message);
 	free_arena(arena);
-	exit(0);
+	exit(EXIT_FAILURE);
 }

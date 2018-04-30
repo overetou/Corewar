@@ -6,7 +6,7 @@
 #    By: kenguyen <kenguyen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 15:33:20 by kenguyen          #+#    #+#              #
-#    Updated: 2018/04/27 17:34:44 by ysingaye         ###   ########.fr        #
+#    Updated: 2018/04/25 18:25:06 by ysingaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,7 @@ VM				= corewar
 CREATOR  		= creator
 
 CC				= gcc
-FLAGS			= -Wall -Wextra -Werror -MMD $(DFLAGS)
-DFLAGS			= -g -g3
+FLAGS			= -Wall -Wextra -Werror
 
 SRC_ASM			= \
 file_creation.c\
@@ -69,6 +68,7 @@ hardcode_op.c\
 initialize.c\
 load_params.c\
 ncurses.c\
+ft_ncurses2.c\
 process.c\
 set_reg_value.c\
 vm.c\
