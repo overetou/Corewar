@@ -13,7 +13,7 @@
 NAME	= libft.a
 
 CC		= gcc
-FLAGS	= -Wall -Wextra -Werror
+FLAGS	= -Wall -Wextra -Werror -MMD
 
 SRC_BASE = \
 char/ft_charcspn.c\
