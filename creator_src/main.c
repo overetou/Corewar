@@ -72,7 +72,7 @@ int			main(int ac, char **av)
 
 	nb_champ = 1;
 	srandom(time(NULL));
-	bzero(&env, sizeof(env));
+	ft_bzero(&env, sizeof(env));
 	if (ac == 2)
 	{
 		ft_str_is_numeric(av[1]) == 0 ? ft_error("Usage: ./creator [nb]") : 0;
@@ -85,7 +85,7 @@ int			main(int ac, char **av)
 	while (nb_champ > 0)
 	{
 		ft_creator(&env);
-		bzero(&env, sizeof(env));
+		ft_bzero(&env, sizeof(env));
 		--nb_champ;
 	}
 	return (0);
