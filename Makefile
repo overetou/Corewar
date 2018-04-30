@@ -121,7 +121,7 @@ OK1				= $(C_GREEN)✔$(C_NO)
 OK2				= $(C_RED)✔$(C_NO)
 
 all:
-	@make -j -C $(LIB_DIR)
+	@make -C $(LIB_DIR)
 	@make $(ASM)
 	@make $(DASM)
 	@make $(VM)

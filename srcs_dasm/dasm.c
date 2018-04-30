@@ -77,8 +77,9 @@ int			main(int argc, char **argv)
 	int		arg;
 	int		len;
 
-	if (argc < 1)
-		ft_error(&e, "Usage : ./dasm *.cor ...\n");
+	ft_bzero(&e, sizeof(e));
+	if (argc < 2)
+		ft_error(&e, "Usage : ./dasm *.cor ...");
 	arg = 0;
 	while (++arg < argc)
 	{
@@ -87,7 +88,6 @@ int			main(int argc, char **argv)
 			argv[arg][len - 2] == 'c' && argv[arg][len - 3] == '.')
 		{
 			ft_bzero(&e, sizeof(e));
-			free(e.cmd);
 			store_file(&e, argv[arg]);
 			ft_parse(&e);
 			ft_creat_fill_file(&e, argv[arg], len, arg);
