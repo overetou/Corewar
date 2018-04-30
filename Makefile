@@ -16,7 +16,7 @@ VM				= corewar
 CREATOR  		= creator
 
 CC				= gcc
-FLAGS			= -Wall -Wextra -Werror
+FLAGS			= -Wall -Wextra -Werror -MMD
 
 SRC_ASM			= \
 file_creation.c\
